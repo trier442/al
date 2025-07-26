@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박인로, 「독락당」 - 작품 해설</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 스타일 및 폰트 설정 */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        /* 활성화된 탭 스타일 */
+        .tab-active { border-bottom-color: #4f46e5; color: #4f46e5; font-weight: 700; }
+        .prose-lg p { margin-bottom: 1rem; }
+        /* 퀴즈 정답/오답 피드백 스타일 */
+        .answer-correct { background-color: #dcfce7; border-left: 4px solid #22c55e; }
+        .answer-incorrect { background-color: #fee2e2; border-left: 4px solid #ef4444; }
+        /* 스크롤 마진 설정 (고정 헤더 때문) */
+        section { scroll-margin-top: 200px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- 고정 헤더 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <!-- 상단 카테고리 메뉴 -->
+        <div class="border-b border-gray-200">
+            <div class="container mx-auto px-6 h-14 flex items-center justify-center md:justify-start">
+                <div class="flex items-center space-x-6">
+                    <a href="https://eduking1978.tistory.com/category/%EB%AC%B8%ED%95%99%EC%9D%98%20%EB%AA%A8%EB%93%A0%20%EA%B2%83/2026%20%EC%88%98%EB%8A%A5%ED%8A%B9%EA%B0%95%20%EB%AC%B8%ED%95%99%20%EC%9E%91%ED%92%88%20%ED%95%B4%EC%84%A4%20%EB%B0%8F%20%EB%AC%B8%EC%A0%9C" class="text-gray-600 hover:text-indigo-600 text-sm font-medium" target="_blank">2026 수능특강 &lt;문학&gt; 전 작품</a>
+                    <a href="https://eduking1978.tistory.com/category/%EB%AC%B8%ED%95%99%EC%9D%98%20%EB%AA%A8%EB%93%A0%20%EA%B2%83/2026%20%EC%88%98%EB%8A%A5%EC%99%84%EC%84%B1%20%EB%AC%B8%ED%95%99%20%EC%9E%91%ED%92%88%20%ED%95%B4%EC%84%A4%20%EB%B0%8F%20%EB%AC%B8%EC%A0%9C" class="text-gray-600 hover:text-indigo-600 text-sm font-medium" target="_blank">2026 수능완성 &lt;문학&gt; 전 작품</a>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="pt-6 pb-4">
+                <h1 class="text-3xl font-bold text-center text-gray-900">박인로, 「독락당(獨樂堂)」</h1>
+            </div>
+            <!-- 탭 네비게이션 -->
+            <nav id="tab-nav" class="flex justify-center flex-wrap border-t border-gray-200">
+                <a href="#section-1" class="tab-link py-3 px-5 block hover:text-indigo-600 focus:outline-none border-b-2 border-transparent tab-active text-sm sm:text-base">개괄 및 해설</a>
+                <a href="#section-2" class="tab-link py-3 px-5 block hover:text-indigo-600 focus:outline-none border-b-2 border-transparent text-sm sm:text-base">핵심 분석</a>
+                <a href="#section-3" class="tab-link py-3 px-5 block hover:text-indigo-600 focus:outline-none border-b-2 border-transparent text-sm sm:text-base">표현법</a>
+                <a href="#section-4" class="tab-link py-3 px-5 block hover:text-indigo-600 focus:outline-none border-b-2 border-transparent text-sm sm:text-base">출제포인트 10</a>
+                <a href="#section-5" class="tab-link py-3 px-5 block hover:text-indigo-600 focus:outline-none border-b-2 border-transparent text-sm sm:text-base">실전테스트</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <div class="work-container">
+            <!-- 섹션 1: 개괄 및 해설 -->
+            <section id="section-1" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-gray-800">개괄적 해설</h2>
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-700">작품 소개</h3>
+                    <ul class="space-y-3 text-lg">
+                        <li><strong>작가</strong>: 박인로(朴仁老)</li>
+                        <li><strong>갈래</strong>: 가사(歌辭)</li>
+                        <li><strong>성격</strong>: 예찬적, 유교적, 흠모적</li>
+                        <li><strong>주제</strong>: 회재 이언적의 학문과 덕행에 대한 흠모와 예찬</li>
+                        <li><strong>해제</strong>: 이 작품은 조선 시대의 문인 박인로가 대유학자인 회재 이언적이 학문을 닦고 머물던 '독락당'을 찾아가 지은 가사입니다. 화자는 독락당 주변의 아름다운 자연 경관을 묘사하고, 그곳에 깃든 이언적의 높은 학문과 덕행, 그리고 청렴한 삶의 자세를 떠올리며 깊은 흠모와 예찬의 정서를 드러내고 있습니다. 자연의 아름다움과 선현에 대한 존경심을 결합하여 유학자로서의 이상적인 삶의 모습을 노래한 작품입니다.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 섹션 2: 핵심 분석 -->
+            <section id="section-2" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-gray-800">핵심 분석</h2>
+                <div class="bg-white p-8 rounded-lg shadow-md prose-lg max-w-none space-y-8">
+                    <div>
+                        <h4 class="font-bold text-xl text-indigo-600">공간의 의미: '독락당(獨樂堂)'</h4>
+                        <p><code>독락당</code>은 '홀로 즐기는 집'이라는 뜻으로, 이언적이 속세를 떠나 자연 속에서 학문 수양에 정진했던 공간입니다. 화자에게 이곳은 단순히 아름다운 경치를 지닌 곳을 넘어, 존경하는 선현인 <strong>이언적의 정신과 덕행이 깃들어 있는 성스러운 공간</strong>입니다. 화자는 독락당의 여러 장소(양진암, 관어대, 영귀대 등)를 둘러보며 그곳에 담긴 이언적의 삶의 자세와 학문적 깊이를 떠올리고 감탄합니다.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl text-indigo-600">화자의 태도: 선현에 대한 흠모와 계승 의지</h4>
+                        <p>화자 박인로는 후대의 유학자로서 선배 학자인 이언적에 대해 깊은 존경과 흠모의 태도를 보입니다. 그는 이언적의 삶을 '소박하고 청렴한 삶(단사표음)', '자연과 하나 되는 삶(물아일체)', '고요함 속에서 진리를 탐구하는 삶(정중동)'으로 파악하고 이를 예찬합니다. 나아가 '이런 경지를 내 분수로는 가히 알 수 없다'고 겸손해하면서도, '그분의 도는 지극히 높으니 따르고자 하나 미치지 못할까 두렵다'고 말하며 <strong>이언적의 학문과 덕을 본받고 계승하려는 의지</strong>를 드러냅니다.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl text-indigo-600">자연의 역할</h4>
+                        <p>이 작품에서 자연은 단순한 배경이 아니라, <strong>이언적의 높은 인품과 덕성을 드러내는 매개체</strong>로 기능합니다. 맑은 시냇물(청계)은 그의 깨끗한 마음을, 굳건한 바위(기암)는 그의 변치 않는 지조를 상징합니다. 화자는 자연물을 통해 이언적의 정신세계를 감각적으로 느끼고, 자연과 학문이 조화를 이루는 유학자의 이상적인 삶의 모습을 발견합니다.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 섹션 3: 표현법 -->
+            <section id="section-3" class="mb-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-bold text-xl mb-2 text-indigo-600">설의법과 영탄법</h4>
+                        <p>'뉘라서 그려낸고', '그 뜻을 알리로다', '그 아니 장할시고' 등 설의적, 영탄적 표현을 반복 사용하여 독락당의 아름다운 경치와 이언적의 높은 덕행에 대한 화자의 감탄과 예찬의 정서를 강하게 드러냅니다.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-bold text-xl mb-2 text-indigo-600">고사 인용</h4>
+                        <p>'기산영수'(소부와 허유의 고사), '무이구곡'(주자의 고사) 등 중국의 고사를 인용하여, 이언적의 삶을 옛 성현들의 삶과 견주어 그 격을 높이고, 화자가 말하고자 하는 바를 효과적으로 전달합니다.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-bold text-xl mb-2 text-indigo-600">문답법</h4>
+                        <p>'어떤 사람이 이 집의 주인인가? / 아, 회재 선생이 바로 이곳의 주인이로다'와 같이 스스로 묻고 답하는 형식을 사용하여, 독락당에 깃든 이언적의 정신을 발견하는 과정을 극적으로 보여주고 독자의 주의를 환기합니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 4: 출제포인트 10 -->
+            <section id="section-4" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-gray-800">출제포인트 10</h2>
+                <div class="bg-white p-8 rounded-lg shadow-md space-y-4">
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>1. 창작 동기</strong>: 화자가 존경하는 선현인 이언적의 자취가 남은 '독락당'을 방문한 감회를 노래하기 위함임을 알아야 합니다.</p>
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>2. 화자의 태도</strong>: 이언적의 학문과 덕행을 흠모하고 예찬하며, 그의 삶을 본받으려는 태도를 파악해야 합니다.</p>
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>3. '독락당'의 공간적 의미</strong>: 이언적의 정신과 덕이 깃든 이상적인 공간이자, 화자가 흠모하는 공간임을 이해해야 합니다.</p>
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>4. 자연물의 기능</strong>: 자연의 아름다움이 이언적의 인품을 드러내는 매개체로 기능함을 파악해야 합니다.</p>
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>5. 고사 인용의 효과</strong>: 이언적을 옛 성현에 비견하여 그의 학문적 경지를 높이고, 작품의 격조를 높이는 효과를 알아야 합니다.</p>
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>6. 화자가 본받고자 하는 삶의 자세</strong>: 자연 속에서 학문에 정진하며 청렴하고 소박하게 살아가는 유학자의 삶을 파악해야 합니다.</p>
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>7. '양진암'과 '관어대'의 의미</strong>: 각각 '어짊을 기르는 곳', '물고기를 보며 자연의 이치를 깨닫는 곳'이라는 이름의 의미를 통해 이언적의 학문 수양 태도를 이해해야 합니다.</p>
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>8. 설의법, 영탄법의 효과</strong>: 화자의 감탄과 예찬의 정서를 강조하는 효과를 파악해야 합니다.</p>
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>9. 가사(歌辭)의 형식적 특징</strong>: 3(4)·4조, 4음보 연속체의 율격과 마지막 행이 시조의 종장과 유사한 정격 가사의 특징을 이해해야 합니다.</p>
+                    <p class="text-lg p-4 bg-indigo-50 rounded-md"><strong>10. '정중동(靜中動)'의 의미</strong>: 고요함 속에서도 진리를 탐구하는 생동감이 있다는 의미로, 이언적의 학문하는 자세를 나타내는 말임을 알아야 합니다.</p>
+                </div>
+            </section>
+
+            <!-- 섹션 5: 실전테스트 -->
+            <section id="section-5">
+                <h2 class="text-3xl font-bold mb-8 text-gray-800">실전테스트</h2>
+                <form id="quiz-form" class="bg-white p-8 rounded-lg shadow-md space-y-10">
+                    <div id="q1" class="question-block">
+                        <p class="font-bold text-lg mb-4">1. 이 작품에 대한 설명으로 가장 적절한 것은?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q1" value="1" class="mr-2"> ① 임과의 이별로 인한 슬픔을 노래한 연정 가사이다.</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q1" value="2" class="mr-2"> ② 선현의 자취를 찾아가 그의 덕행을 예찬하는 기행 가사이다.</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q1" value="3" class="mr-2"> ② 전쟁의 참상을 고발하고 평화를 기원하는 전란 가사이다.</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q1" value="4" class="mr-2"> ④ 농촌의 소박한 삶의 모습을 그린 전원 가사이다.</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q1" value="5" class="mr-2"> ⑤ 유배지에서 임금을 그리워하는 유배 가사이다.</label>
+                        </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div id="q2" class="question-block">
+                        <p class="font-bold text-lg mb-4">2. 화자가 '독락당'을 찾아간 주된 이유는 무엇인가?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q2" value="1" class="mr-2"> ① 아름다운 자연 경치를 감상하기 위해</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q2" value="2" class="mr-2"> ② 존경하는 학자 이언적의 삶과 정신을 느끼기 위해</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q2" value="3" class="mr-2"> ③ 잃어버린 가족을 찾기 위해</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q2" value="4" class="mr-2"> ④ 임금의 명령을 수행하기 위해</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q2" value="5" class="mr-2"> ⑤ 자신의 학문적 성취를 과시하기 위해</label>
+                        </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div id="q3" class="question-block">
+                        <p class="font-bold text-lg mb-4">3. 화자가 '양진암'과 '관어대'를 보며 떠올린 이언적의 삶의 자세는?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q3" value="1" class="mr-2"> ① 부귀영화를 누리는 풍류적인 삶</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q3" value="2" class="mr-2"> ② 백성들을 교화하는 목민관의 삶</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q3" value="3" class="mr-2"> ③ 자연 속에서 학문에 정진하는 구도자의 삶</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q3" value="4" class="mr-2"> ④ 나라를 위해 목숨을 바치는 무인의 삶</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q3" value="5" class="mr-2"> ⑤ 현실 정치에 적극적으로 참여하는 정치가의 삶</label>
+                            </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div id="q4" class="question-block">
+                        <p class="font-bold text-lg mb-4">4. 이 작품에서 자연물이 하는 역할로 가장 적절한 것은?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q4" value="1" class="mr-2"> ① 화자의 슬픈 감정을 이입하는 대상</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q4" value="2" class="mr-2"> ② 인간의 유한함과 대비되는 영원한 존재</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q4" value="3" class="mr-2"> ③ 이언적의 높은 인품과 덕성을 드러내는 매개체</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q4" value="4" class="mr-2"> ④ 화자가 극복해야 할 시련과 고난</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q4" value="5" class="mr-2"> ⑤ 화자의 내적 갈등을 심화시키는 존재</label>
+                        </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div id="q5" class="question-block">
+                        <p class="font-bold text-lg mb-4">5. 이 작품에 대한 설명으로 적절하지 않은 것은?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q5" value="1" class="mr-2"> ① 4음보 연속체의 율격이 나타난다.</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q5" value="2" class="mr-2"> ② 중국의 고사를 인용하여 시적 의미를 심화한다.</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q5" value="3" class="mr-2"> ③ 영탄적 표현을 통해 화자의 감정을 표출한다.</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q5" value="4" class="mr-2"> ④ 공간의 이동에 따라 시상이 전개되고 있다.</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q5" value="5" class="mr-2"> ⑤ 자연과 속세의 갈등 속에서 고뇌하는 모습을 보인다.</label>
+                        </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div id="q6" class="question-block">
+                        <p class="font-bold text-lg mb-4">6. 화자가 '그분의 도는 지극히 높으니 따르고자 하나 미치지 못할까 두렵다'고 말한 이유는?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q6" value="1" class="mr-2"> ① 이언적의 학문이 너무 어려워 이해할 수 없기 때문에</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q6" value="2" class="mr-2"> ② 이언적의 높은 경지에 대한 경외심과 자신의 부족함에 대한 겸손함 때문에</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q6" value="3" class="mr-2"> ③ 이언적을 따르다가 조정의 미움을 받을까 두렵기 때문에</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q6" value="4" class="mr-2"> ④ 이언적처럼 되기 위해서는 세속적 즐거움을 포기해야 하기 때문에</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q6" value="5" class="mr-2"> ⑤ 이언적의 후손들이 자신을 받아주지 않을까 걱정되기 때문에</label>
+                        </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div id="q7" class="question-block">
+                        <p class="font-bold text-lg mb-4">7. 화자가 '무이구곡'을 떠올린 이유로 가장 적절한 것은?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q7" value="1" class="mr-2"> ① 독락당의 경치가 무이구곡보다 훨씬 아름답다고 생각해서</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q7" value="2" class="mr-2"> ② 이언적의 학문적 경지가 주자와 버금간다고 생각해서</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q7" value="3" class="mr-2"> ③ 독락당의 지형이 무이구곡과 똑같이 생겨서</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q7" value="4" class="mr-2"> ④ 이언적이 직접 무이구곡을 그림으로 그렸기 때문에</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q7" value="5" class="mr-2"> ⑤ 무이구곡에 대한 슬픈 전설을 떠올렸기 때문에</label>
+                        </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div id="q8" class="question-block">
+                        <p class="font-bold text-lg mb-4">8. 이 작품의 어조로 가장 적절한 것은?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q8" value="1" class="mr-2"> ① 대상을 예찬하고 흠모하는 어조</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q8" value="2" class="mr-2"> ② 현실을 비판하고 풍자하는 어조</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q8" value="3" class="mr-2"> ③ 자신의 처지를 한탄하는 애상적 어조</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q8" value="4" class="mr-2"> ④ 객관적인 사실을 담담하게 전달하는 어조</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q8" value="5" class="mr-2"> ⑤ 미래에 대한 희망을 노래하는 낙관적 어조</label>
+                        </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div id="q9" class="question-block">
+                        <p class="font-bold text-lg mb-4">9. '정중동(靜中動)'의 의미를 통해 알 수 있는 이언적의 학문 태도는?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q9" value="1" class="mr-2"> ① 고요한 자연 속에서도 진리를 향한 치열한 탐구 정신을 잃지 않음</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q9" value="2" class="mr-2"> ② 몸은 움직이지 않고 오직 정신 수양에만 집중함</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q9" value="3" class="mr-2"> ③ 정적인 것과 동적인 것의 조화를 통해 예술적 영감을 얻음</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q9" value="4" class="mr-2"> ④ 세상의 변화에 흔들리지 않는 굳건한 마음</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q9" value="5" class="mr-2"> ⑤ 때로는 조용히, 때로는 활발하게 행동하는 유연한 처세술</label>
+                        </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div id="q10" class="question-block">
+                        <p class="font-bold text-lg mb-4">10. 이 작품과 유사한 창작 동기를 가진 작품으로 가장 적절한 것은?</p>
+                        <div class="space-y-2">
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q10" value="1" class="mr-2"> ① 정철, 「사미인곡」 - 유배지에서 임금을 그리워하며 지음</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q10" value="2" class="mr-2"> ② 윤선도, 「어부사시사」 - 벼슬을 버리고 자연에 은거하며 지음</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q10" value="3" class="mr-2"> ③ 정약용, 「보리타작」 - 농민들의 건강한 노동을 보고 지음</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q10" value="4" class="mr-2"> ④ 이황, 「도산십이곡」 - 후학들에게 학문의 길을 가르치기 위해 지음</label>
+                            <label class="block p-3 rounded-md border border-gray-200 hover:bg-gray-100"><input type="radio" name="q10" value="5" class="mr-2"> ⑤ 정철, 「관동별곡」 - 관찰사로 부임하여 금강산과 관동팔경을 유람하며 지음</label>
+                        </div>
+                        <div class="result-feedback hidden mt-3 p-4 rounded-md text-sm"></div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 transition-colors text-lg">제출하기</button>
+                    </div>
+                </form>
+                <div id="quiz-result" class="hidden mt-8 text-center bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-gray-800">채점 결과</h3>
+                    <p id="score" class="text-4xl font-bold my-4 text-indigo-600"></p>
+                    <p id="score-message" class="text-lg text-gray-600"></p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // 탭 네비게이션 스크립트
+        const tabLinks = document.querySelectorAll('.tab-link');
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                tabLinks.forEach(item => item.classList.remove('tab-active'));
+                e.target.classList.add('tab-active');
+            });
+        });
+
+        // 퀴즈 정답 및 해설 데이터
+        const quizData = {
+            'q1': { correct: '2', explanation: "이 작품은 화자가 이언적의 유적인 '독락당'을 찾아가(기행) 그곳의 풍경과 그곳에 깃든 이언적의 덕행을 예찬하는 기행 가사의 성격을 지닙니다." },
+            'q2': { correct: '2', explanation: "화자는 독락당의 아름다운 경치에 감탄하지만, 그보다 더 중요한 방문 목적은 그곳에 깃든 대유학자 이언적의 삶의 자취와 높은 정신을 느끼고 흠모하기 위함입니다." },
+            'q3': { correct: '3', explanation: "'양진암(어짊을 기르는 암자)'과 '관어대(물고기를 보며 이치를 깨닫는 곳)'라는 이름에서 알 수 있듯이, 이언적이 자연 속에서 학문에 정진하며 진리를 탐구하는 구도자적인 삶을 살았음을 엿볼 수 있습니다." },
+            'q4': { correct: '3', explanation: "화자는 '맑은 시내'에서 이언적의 깨끗한 마음을, '우뚝 솟은 기이한 바위'에서 그의 굳건한 지조를 떠올립니다. 이처럼 자연물은 이언적의 인품과 덕성을 상징하고 드러내는 매개체로 기능합니다." },
+            'q5': { correct: '5', explanation: "이 작품의 화자는 속세의 명리를 멀리하고 자연 속에서 학문에 정진하는 이언적의 삶을 예찬하고 본받으려 합니다. 자연과 속세 사이에서 갈등하는 모습은 나타나지 않습니다." },
+            'q6': { correct: '2', explanation: "이 말은 이언적의 학문과 덕행이 너무나 높은 경지에 있어, 자신이 그것을 본받고 싶지만 자신의 능력이 부족하여 그 경지에 이르지 못할까 두렵다는 의미입니다. 이는 이언적에 대한 깊은 경외심과 자신에 대한 겸손함을 동시에 보여주는 표현입니다." },
+            'q7': { correct: '2', explanation: "'무이구곡'은 중국 성리학의 대학자인 주자가 머물며 학문을 닦던 곳입니다. 화자는 독락당의 경치와 그곳에 깃든 이언적의 정신이 주자의 그것과 버금간다고 생각하여 무이구곡을 떠올린 것입니다." },
+            'q8': { correct: '1', explanation: "화자는 '그 아니 장할시고', '지극하구나 선생의 뜻이여' 등 영탄적 표현을 반복하며, 이언적의 삶과 독락당의 경치에 대해 감탄하고 예찬하는 어조를 일관되게 유지하고 있습니다." },
+            'q9': { correct: '1', explanation: "'정중동'은 '고요한 가운데 움직임이 있다'는 뜻입니다. 이는 이언적이 고요한 자연 속에서 안주한 것이 아니라, 그 속에서도 끊임없이 진리를 탐구하는 치열한 학문 정신을 지녔음을 의미합니다." },
+            'q10': { correct: '5', explanation: "「관동별곡」은 작가가 강원도 관찰사로 부임하여 자신의 관할 지역인 금강산과 관동팔경을 유람하며 쓴 기행 가사라는 점에서, 특정 공간을 방문한 경험을 바탕으로 쓴 이 작품과 창작 동기가 가장 유사합니다." }
+        };
+
+        // 퀴즈 제출 스크립트
+        const quizForm = document.getElementById('quiz-form');
+        quizForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let score = 0;
+            const totalQuestions = Object.keys(quizData).length;
+
+            for (const qId in quizData) {
+                const questionBlock = document.getElementById(qId);
+                const feedbackDiv = questionBlock.querySelector('.result-feedback');
+                const selected = questionBlock.querySelector(`input[name="${qId}"]:checked`);
+                
+                feedbackDiv.classList.remove('hidden', 'answer-correct', 'answer-incorrect');
+
+                if (selected) {
+                    if (selected.value === quizData[qId].correct) {
+                        score++;
+                        feedbackDiv.classList.add('answer-correct');
+                        feedbackDiv.innerHTML = '<strong>정답입니다!</strong> ' + quizData[qId].explanation;
+                    } else {
+                        feedbackDiv.classList.add('answer-incorrect');
+                        feedbackDiv.innerHTML = `<strong>오답입니다.</strong> 정답은 ${quizData[qId].correct}번입니다. <br><strong>해설:</strong> ${quizData[qId].explanation}`;
+                    }
+                } else {
+                    feedbackDiv.classList.add('answer-incorrect');
+                    feedbackDiv.textContent = '답을 선택해주세요.';
+                }
+            }
+
+            // 결과 표시
+            const resultDiv = document.getElementById('quiz-result');
+            const scoreEl = document.getElementById('score');
+            const messageEl = document.getElementById('score-message');
+            
+            scoreEl.textContent = `${score} / ${totalQuestions}`;
+            if (score === totalQuestions) {
+                messageEl.textContent = '완벽합니다! 모든 문제를 맞히셨어요.';
+            } else if (score >= totalQuestions / 2) {
+                messageEl.textContent = '잘하셨어요! 조금만 더 복습해 보세요.';
+            } else {
+                messageEl.textContent = '아쉬워요. 해설을 다시 한번 꼼꼼히 읽어보세요.';
+            }
+            resultDiv.classList.remove('hidden');
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
