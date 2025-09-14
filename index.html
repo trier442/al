@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문학의 모든 것: 수능 문학 총정리</title>
+    <title>국어의 모든 것</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,11 +14,6 @@
         }
         .hero-bg {
             background-color: #f8fafc;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-                url('https://placehold.co/1920x1080/a3b18a/ffffff?text=%EC%A0%84%ED%86%B5+%EB%AC%B8%EC%96%91');
-            background-size: cover;
-            background-position: center;
         }
         .card-hover {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -27,22 +22,38 @@
             transform: translateY(-8px);
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
+        .grade-section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+        .grade-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: #111827;
+        }
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-100 text-gray-800">
 
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gray-900">
-                문학의 모든 것
+            <a href="index.html" class="text-2xl font-bold text-gray-900">
+                국어의 모든 것
             </a>
             <div class="hidden md:flex items-center space-x-6">
-                <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-full font-bold hover:bg-indigo-700 transition-colors text-sm">EBS연계문학</a>
-                <a href="#" class="text-gray-600 hover:text-indigo-600">시대별</a>
-                <a href="#" class="text-gray-600 hover:text-indigo-600">갈래별</a>
-                <a href="#" class="text-gray-600 hover:text-indigo-600">핵심 개념</a>
-                <a href="#" class="text-gray-600 hover:text-indigo-600">기출 문제</a>
+                <a href="#g1" class="text-gray-600 hover:text-indigo-600 font-medium">고1</a>
+                <a href="#g2" class="text-gray-600 hover:text-indigo-600 font-medium">고2</a>
+                <a href="#g3" class="text-gray-600 hover:text-indigo-600 font-medium">고3 / N수</a>
             </div>
             <button class="md:hidden flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,149 +68,131 @@
         <!-- Hero Section -->
         <section class="hero-bg py-16 sm:py-24">
             <div class="container mx-auto px-6 text-center">
-                <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">문학 작품, 완벽하게 정복하세요</h1>
-                <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-                    작품명, 작가명으로 모든 문학 작품의 핵심 정리와 해설을 즉시 찾아보세요.
+                <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">내신부터 수능까지, 국어 완전 정복</h1>
+                <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
+                    학년별, 과목별로 체계적으로 정리된 학습 자료로 국어 실력을 완성하세요.
                 </p>
-                <div class="max-w-xl mx-auto">
-                    <div class="relative">
-                        <input type="search" placeholder="예: 관동별곡, 김소월" class="w-full p-4 pl-12 text-lg border-2 border-gray-300 rounded-full focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none shadow-lg">
-                        <svg class="w-6 h-6 text-gray-400 absolute top-1/2 left-4 transform -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+            </div>
+        </section>
+
+        <!-- 고1 Section -->
+        <section id="g1" class="grade-section bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="grade-title">고등학교 1학년</h2>
+                
+                <div class="mb-12">
+                    <h3 class="category-title">공통국어 1 (출판사별)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- 미래엔 -->
+                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
+                            <h4 class="font-bold text-lg text-gray-800">미래엔</h4>
+                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
+                        </a>
+                        <!-- 비상 -->
+                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
+                            <h4 class="font-bold text-lg text-gray-800">비상</h4>
+                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
+                        </a>
+                        <!-- 천재 -->
+                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
+                            <h4 class="font-bold text-lg text-gray-800">천재</h4>
+                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
+                        </a>
+                         <!-- 신사고 -->
+                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
+                            <h4 class="font-bold text-lg text-gray-800">신사고</h4>
+                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="category-title">공통국어 2 (출판사별)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- 비상(박영민) -->
+                        <a href="vpg2.html" class="block p-6 bg-blue-50 rounded-lg card-hover">
+                            <h4 class="font-bold text-lg text-blue-800">비상 (박영민)</h4>
+                            <p class="text-blue-700 mt-1">자료 보러가기 →</p>
+                        </a>
+                        <!-- 비상(강호영) -->
+                        <a href="vkg2.html" class="block p-6 bg-green-50 rounded-lg card-hover">
+                            <h4 class="font-bold text-lg text-green-800">비상 (강호영)</h4>
+                            <p class="text-green-700 mt-1">자료 보러가기 →</p>
+                        </a>
+                        <!-- 천재(박) -->
+                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
+                            <h4 class="font-bold text-lg text-gray-800">천재 (박)</h4>
+                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
+                        </a>
+                        <!-- 미래엔 -->
+                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
+                            <h4 class="font-bold text-lg text-gray-800">미래엔</h4>
+                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- EBS Section -->
-        <section class="py-12 bg-white">
+        <!-- 고2 Section -->
+        <section id="g2" class="grade-section bg-gray-50">
             <div class="container mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <h2 class="grade-title">고등학교 2학년</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <a href="#" class="block p-8 bg-white rounded-xl shadow-lg card-hover text-center">
+                        <div class="text-5xl mb-4">📜</div>
+                        <h3 class="font-bold text-xl text-gray-900">문학</h3>
+                        <p class="text-gray-600 mt-2">개념, 작품 분석, 문제 풀이</p>
+                    </a>
+                    <a href="#" class="block p-8 bg-white rounded-xl shadow-lg card-hover text-center">
+                        <div class="text-5xl mb-4">📖</div>
+                        <h3 class="font-bold text-xl text-gray-900">독서</h3>
+                        <p class="text-gray-600 mt-2">독해 원리, 지문 분석, 유형별 전략</p>
+                    </a>
+                    <a href="#" class="block p-8 bg-white rounded-xl shadow-lg card-hover text-center">
+                        <div class="text-5xl mb-4">🗣️</div>
+                        <h3 class="font-bold text-xl text-gray-900">화법과 작문</h3>
+                        <p class="text-gray-600 mt-2">발표, 토론, 글쓰기 전략</p>
+                    </a>
+                    <a href="#" class="block p-8 bg-white rounded-xl shadow-lg card-hover text-center">
+                        <div class="text-5xl mb-4">✍️</div>
+                        <h3 class="font-bold text-xl text-gray-900">언어와 매체</h3>
+                        <p class="text-gray-600 mt-2">문법 개념, 매체 언어 분석</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 고3 Section -->
+        <section id="g3" class="grade-section bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="grade-title">고3 / N수</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     <!-- 수능특강 Card -->
-                    <a href="2026st.html" class="block rounded-xl card-hover">
-                        <div class="bg-gray-50 rounded-xl p-8 flex items-center space-x-6 h-full">
-                            <div class="text-5xl">📚</div>
-                            <div>
-                                <h3 class="font-bold text-xl text-gray-900 mb-1">2026 EBS 수능특강</h3>
-                                <p class="text-gray-600">수록된 모든 문학 작품을 탐구해보세요.</p>
-                            </div>
+                    <a href="2026st.html" class="block bg-indigo-50 rounded-xl p-8 card-hover flex items-center space-x-6">
+                        <div class="text-5xl">📚</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-indigo-900 mb-1">2026 수능특강 문학</h3>
+                            <p class="text-indigo-700">수록된 모든 문학 작품을 탐구해보세요.</p>
                         </div>
                     </a>
                     <!-- 수능완성 Card -->
-                     <a href="2026sw.html" class="block rounded-xl card-hover">
-                        <div class="bg-gray-50 rounded-xl p-8 flex items-center space-x-6 h-full">
-                            <div class="text-5xl">📖</div>
-                            <div>
-                                <h3 class="font-bold text-xl text-gray-900 mb-1">2026 EBS 수능완성</h3>
-                                <p class="text-gray-600">수록된 모든 문학 작품을 탐구해보세요.</p>
-                            </div>
+                    <a href="2026sw.html" class="block bg-emerald-50 rounded-xl p-8 card-hover flex items-center space-x-6">
+                        <div class="text-5xl">📖</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-emerald-900 mb-1">2026 수능완성 문학</h3>
+                            <p class="text-emerald-700">수록된 모든 문학 작품을 탐구해보세요.</p>
                         </div>
                     </a>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Features/Categories Section -->
-        <section class="pt-16 md:pt-24 pb-16 md:pb-24 bg-white">
-            <div class="container mx-auto px-6">
-                
-                <!-- 오늘의 작품 -->
-                <div class="mb-16">
-                    <h2 class="text-3xl font-bold text-center mb-2">오늘의 작품</h2>
-                    <p class="text-center text-gray-600 mb-8">매일 새로운 작품을 만나며 문학적 감수성을 키워보세요.</p>
-                    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:flex card-hover cursor-pointer">
-                        <div class="md:w-1/3">
-                             <img class="h-48 w-full object-cover md:h-full" src="https://placehold.co/400x300/52796f/ffffff?text=%EC%98%A4%EB%8A%98%EC%9D%98+%EC%9E%91%ED%92%88" alt="[오늘의 작품 이미지]">
-                        </div>
-                        <div class="p-8 md:w-2/3">
-                            <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">현대시</div>
-                            <a href="#" class="block mt-1 text-2xl leading-tight font-bold text-black hover:underline">진달래꽃</a>
-                            <p class="mt-2 text-gray-600">김소월</p>
-                            <p class="mt-4 text-gray-500">나 보기가 역겨워 가실 때에는 말없이 고이 보내 드리우리다...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 시대별 문학 -->
-                <div class="mb-16">
-                    <h2 class="text-3xl font-bold text-center mb-8">시대별 문학 탐구</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
-                        <div class="p-6 bg-gray-100 rounded-xl card-hover cursor-pointer">
-                            <div class="text-4xl mb-3">📜</div>
-                            <h3 class="font-bold">고대가요 ~ 향가</h3>
-                        </div>
-                        <div class="p-6 bg-gray-100 rounded-xl card-hover cursor-pointer">
-                            <div class="text-4xl mb-3">🏯</div>
-                            <h3 class="font-bold">고려가요 ~ 경기체가</h3>
-                        </div>
-                        <div class="p-6 bg-gray-100 rounded-xl card-hover cursor-pointer">
-                             <div class="text-4xl mb-3">👑</div>
-                            <h3 class="font-bold">악장 ~ 시조/가사</h3>
-                        </div>
-                        <div class="p-6 bg-gray-100 rounded-xl card-hover cursor-pointer">
-                            <div class="text-4xl mb-3">💡</div>
-                            <h3 class="font-bold">개화기 ~ 일제강점기</h3>
-                        </div>
-                        <div class="p-6 bg-gray-100 rounded-xl card-hover cursor-pointer">
-                             <div class="text-4xl mb-3">🕊️</div>
-                            <h3 class="font-bold">광복 직후 ~ 1950년대</h3>
-                        </div>
-                        <div class="p-6 bg-gray-100 rounded-xl card-hover cursor-pointer">
-                             <div class="text-4xl mb-3">🏢</div>
-                            <h3 class="font-bold">1960년대 이후</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 갈래별 문학 -->
-                <div>
-                    <h2 class="text-3xl font-bold text-center mb-8">갈래별 문학 탐구</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <!-- Card 1: 운문 문학 -->
-                        <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                            <h3 class="font-bold text-xl mb-4">운문 문학</h3>
-                            <ul class="space-y-3 text-gray-600">
-                                <li class="hover:text-indigo-600 cursor-pointer">・ 현대시</li>
-                                <li class="hover:text-indigo-600 cursor-pointer">・ 고전 시가</li>
-                                <li class="hover:text-indigo-600 cursor-pointer">・ 시조 / 가사</li>
-                            </ul>
-                        </div>
-                        <!-- Card 2: 산문 문학 -->
-                        <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                            <h3 class="font-bold text-xl mb-4">산문 문학</h3>
-                            <ul class="space-y-3 text-gray-600">
-                                <li class="hover:text-indigo-600 cursor-pointer">・ 현대 소설</li>
-                                <li class="hover:text-indigo-600 cursor-pointer">・ 고전 소설</li>
-                                <li class="hover:text-indigo-600 cursor-pointer">・ 판소리계 소설</li>
-                            </ul>
-                        </div>
-                        <!-- Card 3: 극/수필 -->
-                        <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                            <h3 class="font-bold text-xl mb-4">극 / 수필</h3>
-                            <ul class="space-y-3 text-gray-600">
-                                <li class="hover:text-indigo-600 cursor-pointer">・ 희곡 / 시나리오</li>
-                                <li class="hover:text-indigo-600 cursor-pointer">・ 현대 수필</li>
-                                <li class="hover:text-indigo-600 cursor-pointer">・ 고전 수필</li>
-                            </ul>
-                        </div>
-                         <!-- Card 4: 핵심 개념 -->
-                        <div class="bg-indigo-600 text-white rounded-xl shadow-lg p-8 card-hover flex flex-col justify-center items-center">
-                            <h3 class="font-bold text-xl mb-2">핵심 개념어 사전</h3>
-                            <p class="text-center text-indigo-200 mb-4">수능 문학 필수 개념들을 확인해보세요.</p>
-                            <a href="#" class="bg-white text-indigo-600 font-bold py-2 px-4 rounded-full">바로가기</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="py-12">
-        <div class="container mx-auto px-6 text-center text-gray-500">
-            <p>&copy; 2024 문학의 모든 것. All Rights Reserved.</p>
+    <footer class="py-12 bg-gray-200">
+        <div class="container mx-auto px-6 text-center text-gray-600">
+            <p>&copy; 2024 국어의 모든 것. All Rights Reserved.</p>
         </div>
     </footer>
 
