@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-1. 서경별곡</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #6366f1; /* Indigo color for this unit */
+            color: #3730a3;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #eef2ff;
+            border-color: #a5b4fc;
+        }
+        .quiz-option.selected {
+            background-color: #e0e7ff;
+            border-color: #818cf8;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-indigo-700">4-1. 사랑, 그 속에 담긴 아픔</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 서경별곡 (작자 미상)</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 작품 전문 -->
+            <section class="exam-section">
+                <h4>1. 작품 전문</h4>
+                <div class="p-4 bg-indigo-50 rounded-lg text-gray-700 leading-relaxed text-center space-y-2">
+                    <p>서경(西京)이 아즐가 서경(西京)이 셔울히 마르는<br>위 두어렁셩 두어렁셩 다링디리<br>닷곤대 아즐가 닷곤대 쇼셩경(小聖京) 고요히 마르는<br>여므론 아즐가 여므론 질삼뵈 바리시고<br>위 두어렁셩 두어렁셩 다링디리<br>괴시란대 아즐가 괴시란대 우러곰 좃니노이다</p>
+                    <p>구스리 아즐가 구스리 바회예 디신달<br>위 두어렁셩 두어렁셩 다링디리<br>긴히딴 아즐가 긴히딴 그츠리잇가 나난<br>즈믄 를 아즐가 즈믄 를 외오곰 여신달<br>위 두어렁셩 두어렁셩 다링디리<br>신(信)잇단 아즐가 신(信)잇단 그츠리잇가 나난</p>
+                    <p>대동강(大同江) 아즐가 대동강(大同江) 너븐디 몰라셔<br>위 두어렁셩 두어렁셩 다링디리<br>배 내여 아즐가 배 내여 노다 샤공아<br>네 가시 아즐가 네 가시 럼난디 몰라셔<br>위 두어렁셩 두어렁셩 다링디리<br>녈 배예 아즐가 녈 배예 연즌다 샤공아<br>대동강(大同江) 아즐가 대동강(大同江) 건넌편 고즐여<br>위 두어렁셩 두어렁셩 다링디리<br>배 타 들면 아즐가 배 타 들면 것고리이다 나난</p>
+                </div>
+            </section>
+
+            <!-- 2. 연별 상세 해설 -->
+            <section class="exam-section">
+                <h4>2. 연별 상세 해설</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-indigo-500">
+                        <p class="font-bold text-lg text-indigo-800">[1연] 이별의 거부와 임을 따르려는 의지</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>서경이 셔울히 마르는 ~ 쇼셩경 고요히 마르는:</strong> '서경(평양)'이 서울이지만, 새로 닦은 작은 서울인 이곳을 사랑하지만. 화자는 '서경'이라는 삶의 터전을 매우 사랑하고 있음을 먼저 밝힙니다.</li>
+                            <li><strong>여므론 질삼뵈 바리시고:</strong> (임과) 이별하기보다는 길쌈하던 베도 버리고. '길쌈베'는 당시 여성의 중요한 생계 수단이자 삶의 기반입니다. 이를 버리겠다는 것은 자신의 모든 것을 포기하겠다는 의미로, 이별을 거부하는 화자의 강한 의지를 보여줍니다.</li>
+                            <li><strong>괴시란대 우러곰 좃니노이다:</strong> 사랑만 해주신다면 울면서라도 (임을) 따르겠습니다. 임에 대한 사랑만 변치 않는다면, 모든 것을 버리고 따르는 힘든 길이라도 감수하겠다는 적극적이고 능동적인 태도가 드러납니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-indigo-500">
+                        <p class="font-bold text-lg text-indigo-800">[2연] 영원한 사랑에 대한 맹세</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>구스리 바회예 디신달 긴히딴 그츠리잇가:</strong> 구슬이 바위에 떨어진들 (구슬을 꿴) 끈이야 끊어지겠습니까? '구슬'은 시련, '바위'는 더 큰 시련이나 장애물을, '끈'은 임과의 사랑 또는 믿음을 상징합니다. 설의법을 통해 어떤 시련이 닥쳐도 임과의 사랑과 믿음은 절대 변치 않을 것이라고 맹세합니다.</li>
+                             <li><strong>즈믄 를 외오곰 여신달 신(信)잇단 그츠리잇가:</strong> 천 년을 외롭게 살아간들 믿음이야 끊어지겠습니까? 앞 구절의 내용을 반복, 심화하여 시간의 흐름 속에서도 임에 대한 믿음은 영원할 것임을 다시 한번 강조합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-indigo-500">
+                        <p class="font-bold text-lg text-indigo-800">[3연] 임과 사공에 대한 원망과 불신</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>대동강 너븐디 몰라셔 배 내여 노다 샤공아:</strong> 대동강이 넓은 줄 몰라서 배를 내어 놓았느냐, 사공아. '대동강'은 임과 나의 사이를 가로막는 장애물, 이별의 공간입니다. 화자는 이별의 상황을 만든 사공에게 책임을 전가하며 원망하고 있습니다.</li>
+                            <li><strong>네 가시 럼난디 몰라셔 녈 배예 연즌다 샤공아:</strong> 네 아내가 바람난 줄도 모르고 가는 배에 (나의 임을) 태우느냐, 사공아. 사공에 대한 원망이 극에 달해 인신공격적인 발언까지 하며 임이 떠나는 것을 막으려는 절박한 심정을 솔직하고 직설적으로 표현합니다.</li>
+                             <li><strong>대동강 건넌편 고즐여 배 타 들면 것고리이다:</strong> 대동강 건너편 꽃을, 배를 타면 (임이) 꺾을 것입니다. '건너편 꽃'은 임이 만나게 될 새로운 여인을 상징합니다. 임이 떠나면 마음이 변할 것이라는 질투와 불신을 드러내며 이별의 슬픔을 표출합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 주요 개념 정리 -->
+            <section class="exam-section">
+                <h4>3. 주요 개념 정리</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>갈래:</strong> 고려가요</li>
+                    <li><strong>성격:</strong> 이별의 정한, 적극적, 직설적, 남성적 어조(일부)</li>
+                    <li><strong>주제:</strong> 이별을 거부하는 적극적인 사랑과 의지</li>
+                    <li><strong>화자:</strong> 이별의 상황에 놓인 여성</li>
+                    <li><strong>특징:</strong>
+                        <ul class="list-decimal list-inside ml-6 mt-1">
+                            <li>이별을 거부하는 적극적이고 능동적인 여성 화자의 목소리가 특징적임.</li>
+                            <li>비유와 설의를 통해 임에 대한 영원한 사랑을 맹세함.</li>
+                            <li>'위 두어렁셩~'과 같은 의미 없는 후렴구(조흥구)가 있어 연을 나누고 운율을 형성함.</li>
+                            <li>화자의 감정을 솔직하고 직설적으로 표현함.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 노래에 대한 설명으로 적절하지 않은 것은?", options: ["고려 시대에 불린 노래로, 고려가요에 속한다.", "이별의 상황에서 느끼는 슬픔을 노래하고 있다.", "후렴구가 사용되어 연을 나누고 리듬감을 형성한다.", "임과의 이별을 운명으로 받아들이는 체념적 태도가 나타난다.", "화자의 감정을 솔직하고 적극적으로 표현하고 있다."], answer: 3, explanation: "이 노래의 화자는 '질삼뵈 바리시고'라도 임을 '우러곰 좃니노이다'라고 말하며 이별을 적극적으로 거부하고 있습니다. 체념적 태도와는 거리가 멉니다." },
+            { question: "화자가 '질삼뵈'를 버리겠다고 말한 이유로 가장 적절한 것은?", options: ["길쌈에 더 이상 흥미를 느끼지 못해서", "임이 길쌈하는 것을 싫어하기 때문에", "임과 이별하느니 삶의 기반마저 포기하겠다는 의지를 보여주기 위해", "더 좋은 직업을 구하기 위해 서경을 떠나려고", "길쌈보다 더 돈을 많이 버는 일이 생겨서"], answer: 2, explanation: "'길쌈베'는 당시 여성의 중요한 생계 수단이자 삶의 터전 그 자체를 상징합니다. 이를 버리겠다는 것은 임과의 사랑을 지키기 위해 자신의 모든 것을 희생할 수 있다는 강한 의지를 표현하는 것입니다." },
+            { question: "'구스리 바회예 디신달 / 긴히딴 그츠리잇가'에 대한 설명으로 적절하지 않은 것은?", options: ["'구슬'은 시련, '끈'은 사랑과 믿음을 상징한다.", "설의적 표현을 통해 화자의 의지를 강조하고 있다.", "임과의 사랑은 시련에도 변치 않을 것임을 노래한다.", "임과의 이별을 기정사실로 받아들이고 있다.", "비유적인 표현으로 화자의 정서를 효과적으로 드러낸다."], answer: 3, explanation: "이 구절은 '끈이야 끊어지겠습니까?'라고 물으며 '절대 끊어지지 않는다'는 의미를 강조합니다. 이는 이별의 상황을 받아들이는 것이 아니라, 어떤 시련 속에서도 사랑과 믿음은 변치 않을 것이라는 강한 맹세를 나타냅니다." },
+            { question: "화자가 '샤공'을 원망하는 이유로 가장 타당한 것은?", options: ["사공이 자신을 무시했기 때문에", "사공이 임을 이별의 공간인 강 건너로 데려다주기 때문에", "사공이 뱃삯을 너무 비싸게 불렀기 때문에", "사공이 자신의 험담을 하고 다녔기 때문에", "사공이 임을 다른 여인에게 소개해주었기 때문에"], answer: 1, explanation: "'대동강'은 이별의 공간이며, 사공은 임을 그곳으로 데려가는 직접적인 행위자입니다. 따라서 화자는 임이 떠나는 것을 막고 싶은 절박한 마음에 사공에게 원망을 표출하고 있는 것입니다." },
+            { question: "화자가 '대동강 건넌편 고즐여'를 임이 '것고리이다'라고 생각하는 데서 드러나는 심리는?", options: ["임에 대한 절대적인 믿음", "새로운 사랑에 대한 기대", "임의 변심에 대한 불안과 질투", "사공에 대한 연민의 감정", "자신의 처지에 대한 체념"], answer: 2, explanation: "'건너편 꽃'은 임이 강을 건너가면 만나게 될 새로운 여인을 상징합니다. 임이 그 꽃을 꺾을 것이라는 생각은, 임이 떠나면 다른 사람을 만나 마음이 변할 것이라는 화자의 불안감과 질투심을 직접적으로 보여줍니다." },
+            { question: "이 노래의 후렴구('위 두어렁셩~')의 기능으로 보기 어려운 것은?", options: ["연을 구분하는 역할", "음악적 흥겨움을 더하는 역할", "시 전체의 통일감을 부여하는 역할", "화자의 슬픈 감정을 고조시키는 역할", "고려가요의 형식적 특징을 보여주는 역할"], answer: 3, explanation: "후렴구는 북 소리를 흉내 낸 의성어로, 내용상의 슬픔과는 달리 경쾌하고 밝은 느낌을 줍니다. 따라서 화자의 슬픈 감정을 고조시키기보다는 오히려 분위기를 반전시키는 역할을 합니다." },
+            { question: "이 노래의 화자와 <가시리>의 화자를 비교한 설명으로 가장 적절한 것은?", options: ["<서경별곡>의 화자는 <가시리>의 화자보다 더 소극적이다.", "<서경별곡>의 화자는 이별을 수용하고, <가시리>의 화자는 거부한다.", "두 화자 모두 임에 대한 원망을 전혀 드러내지 않는다.", "<서경별곡>의 화자는 <가시리>의 화자보다 더 적극적이고 능동적이다.", "두 화자 모두 자신의 희생을 감수하지 않으려 한다."], answer: 3, explanation: "<가시리>의 화자가 '잡사와 두어리마나는' 하면서도 결국 임을 보내주는 소극적인 태도를 보이는 반면, <서경별곡>의 화자는 삶의 터전도 버리고 임을 따르겠다고 말하며 이별을 거부하는 적극적이고 능동적인 태도를 보입니다." },
+            { question: "이 노래의 공간적 배경인 '서경'과 '대동강'의 기능에 대한 설명으로 가장 적절한 것은?", options: ["'서경'은 사랑의 공간, '대동강'은 이별의 공간으로 기능한다.", "'서경'은 이별의 공간, '대동강'은 사랑의 공간으로 기능한다.", "두 공간 모두 화자에게 희망을 주는 긍정적인 공간이다.", "두 공간 모두 화자에게 절망을 주는 부정적인 공간이다.", "두 공간은 화자의 정서와 아무런 관련이 없다."], answer: 0, explanation: "'서경'은 화자가 사랑하는 삶의 터전이지만 임과 함께하기에 버릴 수 있는 공간이며, '대동강'은 임과의 사이를 가로막는 장애물이자 이별이 구체화되는 공간으로 기능하여 대조를 이룹니다." },
+            { question: "이 노래에 나타난 고려 시대 사람들의 정서로 가장 적절한 것은?", options: ["체면을 중시하고 감정을 절제하는 모습", "자신의 감정을 솔직하고 거침없이 표현하는 모습", "자연에 귀의하여 세속을 벗어나려는 모습", "불교적 윤회 사상에 기대어 현실을 극복하려는 모습", "엄격한 유교적 규범에 얽매여 있는 모습"], answer: 1, explanation: "사공에게 욕설에 가까운 원망을 하고, 임의 변심을 노골적으로 의심하는 등, 화자는 자신의 슬픔, 원망, 질투와 같은 감정을 매우 솔직하고 직설적으로 표현하고 있습니다. 이는 당시 민중들의 진솔한 감정 표현 방식을 보여줍니다." },
+            { question: "이 노래의 3연에서 화자의 어조가 가장 강하게 드러나는 대상은?", options: ["서경", "구슬", "임", "사공", "건너편 꽃"], answer: 3, explanation: "화자는 '샤공아'라고 직접 부르며, '배를 내어 놓았느냐', '네 아내가 바람났다' 등 원망과 비난의 말을 직접적으로 쏟아내고 있습니다. 따라서 사공이 가장 강한 어조의 대상이 됩니다." },
+            { question: "다음 중 시어의 상징적 의미가 나머지 넷과 다른 하나는?", options: ["질삼뵈", "구슬", "바회", "대동강", "건너편 꽃"], answer: 0, explanation: "'구슬', '바위', '대동강', '건너편 꽃'은 모두 이별의 상황과 관련된 시련, 장애물, 불안 요소 등 부정적인 의미를 내포합니다. 반면 '질삼뵈'는 화자의 삶의 기반을 상징하며, 이를 버린다는 점에서 임에 대한 사랑의 깊이를 보여주는 소재입니다." },
+            { question: "이 노래의 화자가 궁극적으로 바라는 것은?", options: ["임이 자신을 위해 모든 것을 버리는 것", "임이 사공을 혼내주는 것", "임이 대동강을 건너지 않고 자신과 함께 머무는 것", "임이 강을 건너가서 성공하여 돌아오는 것", "자신이 길쌈의 명인이 되는 것"], answer: 2, explanation: "화자가 삶의 터전을 버리겠다고 하고, 사공을 원망하며, 임의 변심을 걱정하는 모든 행동은 결국 '임과의 이별'이라는 상황을 막기 위함입니다. 따라서 임이 떠나지 않고 자신과 함께 있어 주기를 바라는 것이 가장 궁극적인 소망입니다." },
+            { question: "'즈믄 를 외오곰 여신달 / 신(信)잇단 그츠리잇가'에 나타난 화자의 태도를 가장 잘 표현한 한자성어는?", options: ["전전긍긍(戰戰兢兢)", "오매불망(寤寐不忘)", "일편단심(一片丹心)", "자포자기(自暴自棄)", "견원지간(犬猿之間)"], answer: 2, explanation: "천 년을 외롭게 살아도 믿음은 끊어지지 않을 것이라는 이 구절은 임을 향한 변치 않는 마음을 의미합니다. '일편단심'은 한 조각의 붉은 마음이라는 뜻으로, 변치 않는 충성심이나 사랑을 의미하므로 가장 적절합니다." },
+            { question: "이 노래가 구전되다가 후대에 기록되었을 가능성을 보여주는 근거로 가장 적절한 것은?", options: ["화자의 목소리가 매우 적극적이다.", "3음보의 율격이 규칙적으로 나타난다.", "작자 미상의 평민 문학이다.", "2연의 내용이 정석가 6연과 동일하다.", "사랑과 이별이라는 보편적 주제를 다룬다."], answer: 3, explanation: "다른 작품인 <정석가> 6연의 내용과 <서경별곡> 2연의 내용이 거의 동일하다는 점은, 당시 유행하던 구절이 여러 노래에 삽입되며 구전되었을 가능성을 강력하게 시사합니다." },
+            { question: "이 노래의 화자가 보여주는 여성상과 가장 가까운 것은?", options: ["순종적이고 인내하는 여성", "운명에 순응하며 자신을 희생하는 여성", "자신의 감정을 솔직하게 표현하고 사랑을 쟁취하려는 여성", "지적이고 이성적인 판단을 중시하는 여성", "가부장적 사회 질서에 순응하는 여성"], answer: 2, explanation: "이별을 거부하고, 삶의 터전을 버리고서라도 임을 따르겠다고 말하며, 자신의 감정을 직설적으로 표출하는 모습은 자신의 사랑과 삶을 주체적으로 이끌어가려는 적극적인 여성상을 보여줍니다." },
+            { question: "이 노래에서 화자의 정서가 '이별 거부' → '사랑 맹세' → '원망과 불신'으로 변화한다고 볼 때, 각 정서가 주로 나타나는 연을 바르게 짝지은 것은?", options: ["1연 - 2연 - 3연", "2연 - 1연 - 3연", "3연 - 2연 - 1연", "1연 - 3연 - 2연", "2연 - 3연 - 1연"], answer: 0, explanation: "1연에서는 '질삼뵈 버리고 따르겠다'며 이별을 거부하고, 2연에서는 '끈이야 끊어지겠냐'며 영원한 사랑을 맹세하며, 3연에서는 '사공'과 '임'에 대한 원망과 불신을 드러냅니다." },
+            { question: "이 노래의 표현상 특징으로 적절하지 않은 것은?", options: ["AABA 구조를 통해 리듬감을 형성하고 있다.", "설의법을 사용하여 화자의 다짐을 강조하고 있다.", "자연물을 통해 화자의 정서를 비유적으로 드러내고 있다.", "시간의 흐름에 따라 화자의 내면 변화를 그리고 있다.", "반어적 표현을 통해 이별의 슬픔을 극대화하고 있다."], answer: 4, explanation: "이 노래는 화자의 감정을 매우 솔직하고 직설적으로 표현하고 있으며, 속마음과 반대로 말하는 반어적 표현은 나타나지 않습니다. 반어법은 김소월의 <진달래꽃>에서 두드러지게 나타나는 특징입니다." },
+            { question: "이 노래의 후렴구와 <청산별곡>의 후렴구('얄리얄리 얄랑셩 얄라리 얄라')의 공통점으로 가장 적절한 것은?", options: ["화자의 애상적인 정서를 심화시킨다.", "임에 대한 화자의 그리움을 표현한다.", "특별한 의미 없이 음악적 효과를 위해 사용된다.", "각 연의 내용을 요약하여 전달한다.", "자연과의 합일을 소망하는 마음을 담고 있다."], answer: 2, explanation: "고려가요의 후렴구는 대부분 '얄리얄리 얄라셩'이나 '위 두어렁셩'처럼 특별한 의미 없이 소리를 흉내 내거나 흥을 돋우는 역할을 합니다. 이를 조흥구 또는 여음구라고 하며, 주된 기능은 음악적 효과(운율 형성, 흥취 고조)와 연 구분입니다." },
+            { question: "이 노래를 감상한 학생의 반응으로 가장 적절하지 않은 것은?", options: ["'고려 시대에도 이렇게 자기감정을 솔직하게 표현하는 사람이 있었구나.'", "'임을 너무 사랑해서 모든 걸 버리겠다는 마음이 절절하게 느껴져.'", "'후렴구가 경쾌해서 슬픈 내용과 어울리지 않는 느낌이 드네.'", "'임이 떠나는 것을 모두 자신의 탓으로 돌리며 자책하는 모습이 안타까워.'", "'임이 마음이 변할까 봐 불안해하는 모습이 현실적이어서 공감이 가.'"], answer: 3, explanation: "이 노래의 화자는 임이 떠나는 것을 자신의 탓으로 돌리지 않습니다. 오히려 이별의 상황을 만든 '사공'을 원망하고, 마음이 변할지 모르는 '임'을 의심하는 등, 이별의 원인을 외부에서 찾으려는 태도를 보입니다." },
+            { question: "이 노래의 1연과 3연의 화자가 다른 사람이라는 '화자 교체설'의 근거로 가장 적절한 것은?", options: ["1연의 화자는 남성이고, 3연의 화자는 여성이기 때문에", "1연은 이별을 거부하는데, 3연은 이별을 받아들이고 있기 때문에", "1연의 화자는 임을 믿는데, 3연의 화자는 임을 불신하고 있기 때문에", "1연은 서경을 배경으로 하고, 3연은 대동강을 배경으로 하기 때문에", "1연은 운문체이고, 3연은 산문체이기 때문에"], answer: 2, explanation: "1연의 화자는 임에 대한 강한 믿음을 바탕으로 모든 것을 버리고 따르겠다고 말하는 반면, 3연의 화자는 임이 강을 건너면 바로 변심할 것이라고 말하며 강한 불신을 드러냅니다. 이렇게 상반된 정서가 한 노래에 나타나기 때문에, 원래는 다른 노래였던 것이 합쳐졌거나 화자가 교체되었다는 주장이 제기됩니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

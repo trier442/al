@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-3. 봄봄</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #c2410c; /* Orange color for this unit */
+            color: #7c2d12;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #fff7ed;
+            border-color: #fdba74;
+        }
+        .quiz-option.selected {
+            background-color: #ffedd5;
+            border-color: #fb923c;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-orange-800">4-3. 웃음, 그 속에 담긴 현실</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 봄봄 (김유정)</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-orange-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-orange-800">■ 갈래:</strong> 단편 소설, 농촌 소설</p>
+                    <p><strong class="text-orange-800">■ 성격:</strong> 해학적, 풍자적, 향토적</p>
+                    <p><strong class="text-orange-800">■ 배경:</strong> 1930년대 어느 농촌</p>
+                    <p><strong class="text-orange-800">■ 시점:</strong> 1인칭 주인공 시점</p>
+                    <p><strong class="text-orange-800">■ 주제:</strong> 순박한 데릴사위와 교활한 장인 사이의 희극적 갈등</p>
+                    <p><strong class="text-orange-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>어수룩한 주인공 '나'의 시선으로 사건을 서술하여 웃음을 유발함 (해학성).</li>
+                        <li>'점순이의 키'를 핑계로 혼례를 미루고 노동력을 착취하는 장인의 모습을 통해 당시의 사회상을 비판함 (풍자성).</li>
+                        <li>비속어와 방언을 사용하여 향토성과 사실감을 높임.</li>
+                        <li>현재-과거-현재의 역순행적 구성을 통해 인물 간의 갈등 원인을 효과적으로 제시함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 줄거리 및 인물 소개 -->
+            <section class="exam-section">
+                <h4>2. 줄거리 및 인물 소개</h4>
+                <div class="space-y-4 text-sm sm:text-base">
+                    <p><strong>■ 전체 줄거리:</strong> 어수룩한 '나'는 점순이와 혼인시켜 준다는 말에 3년 7개월째 장인 밑에서 무보수로 머슴살이를 하는 데릴사위이다. '나'는 점순이의 키가 작다는 핑계로 계속 혼례를 미루는 장인에게 불만을 품고 틈만 나면 성례를 시켜달라고 조르지만, 교활한 장인은 번번이 '나'를 따돌린다. 점순이의 충동질에 힘을 얻은 '나'는 장인에게 대들다가 결국 장인과 우스꽝스러운 싸움을 벌이지만, 점순이가 장인 편을 드는 바람에 상황은 어이없이 끝나고 만다.</p>
+                    <p><strong>■ 인물 소개:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>나:</strong> 어수룩하고 순박한 1인칭 서술자. 점순이와의 혼인을 위해 궂은일을 마다하지 않지만, 교활한 장인의 계략에 계속 당한다.</li>
+                        <li><strong>장인(봉필):</strong> 욕심 많고 교활한 인물. 딸의 키를 핑계로 '나'의 노동력을 착취한다. 해학적 갈등의 중심에 있다.</li>
+                        <li><strong>점순:</strong> '나'와 장인 사이에서 갈등을 부추기는 적극적인 성격의 인물. 은근히 '나'의 편을 들어주면서도 결정적인 순간에는 아버지 편에 서서 상황을 희극적으로 만든다.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. 장면별 상세 해설 -->
+            <section class="exam-section">
+                <h4>3. 장면별 상세 해설 (발단-전개-위기-절정-결말)</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-orange-500">
+                        <p class="font-bold text-lg text-orange-800">[발단] '나'와 장인의 갈등</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>'나'는 장인에게 또다시 성례 문제를 제기하지만, 장인은 점순이의 키가 아직 덜 자랐다는 핑계로 거절한다. 이 과정에서 '나'의 어수룩함과 장인의 교활함이 드러나며 인물 간의 갈등이 제시된다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-orange-500">
+                        <p class="font-bold text-lg text-orange-800">[전개] 과거 회상과 갈등의 심화</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>(과거 회상) 3년 7개월 전, '나'가 데릴사위로 들어오게 된 경위와 그동안 장인에게 속아 무보수로 일해 온 사연이 제시된다.</li>
+                             <li>점순이는 '나'에게 성례를 조르라고 충동질하며 갈등을 부추긴다. '나'는 점순이의 응원에 힘입어 장인에게 다시 대들어 보지만, 번번이 실패하며 갈등이 반복되고 심화된다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-orange-500">
+                        <p class="font-bold text-lg text-orange-800">[위기] 장인에 대한 '나'의 반항</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>'나'는 꾀병을 부리며 소극적으로 저항해 보지만, 장인에게 들켜 매만 맞는다.</li>
+                            <li>점순이가 또다시 충동질하자, '나'는 이번에는 작대기를 들고 일터로 나가 장인에게 정면으로 대들며 갈등이 최고조에 이른다.</li>
+                        </ul>
+                    </div>
+                     <div class="p-4 bg-gray-50 rounded-md border-l-4 border-orange-500">
+                        <p class="font-bold text-lg text-orange-800">[절정] '나'와 장인의 희극적 싸움</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>'나'는 장인의 샅을 붙잡고 늘어지며 성례를 시켜달라고 요구한다. 장인은 '나'의 약점인 구레나룻을 잡아당기며 맞선다.</li>
+                             <li>두 사람의 싸움은 심각하기보다는 매우 우스꽝스럽고 희극적으로 묘사된다. 이는 작품의 해학성을 극대화하는 부분이다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-orange-500">
+                        <p class="font-bold text-lg text-orange-800">[결말] 갈등의 일시적 봉합</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>'나'가 유리한 상황에서, 점순이가 장인 편을 들며 '나'를 나무라자 '나'는 힘이 빠져 장인에게 맞고 쓰러진다.</li>
+                            <li>장인은 '나'를 일으켜 흙을 털어주며 올가을에는 성례를 시켜주겠다고 약속한다. 갈등이 근본적으로 해결되지는 않았지만, 희극적으로 마무리되며 앞으로도 비슷한 갈등이 반복될 것을 암시한다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 소설에 대한 설명으로 가장 적절한 것은?", options: ["비극적인 사건을 통해 독자의 연민을 자아낸다.", "역사적 인물의 일대기를 사실적으로 그리고 있다.", "어수룩한 서술자의 시선을 통해 해학적인 분위기를 조성한다.", "도시 노동자의 비참한 삶을 고발하고 있다.", "인물 간의 대화 없이 서술자의 내면 독백으로만 이루어져 있다."], answer: 2, explanation: "이 소설의 가장 큰 특징은 어수룩하고 순박한 1인칭 주인공 '나'의 시점에서 사건을 서술한다는 것입니다. 이로 인해 독자는 상황을 객관적으로 파악하며 '나'의 어리석은 행동에 웃음을 터뜨리게 되는 해학적 효과가 발생합니다." },
+            { question: "장인이 '나'와의 혼례를 계속 미루는 표면적인 이유는?", options: ["'나'의 키가 너무 작아서", "'나'가 일을 게을리해서", "점순이의 키가 아직 덜 자라서", "더 많은 지참금을 요구하기 위해", "점순이가 혼인을 원하지 않아서"], answer: 2, explanation: "장인은 '나'가 성례를 시켜달라고 조를 때마다 '점순이의 키가 아직 자라지 않았다'는 핑계를 댑니다. 이것이 혼례를 미루는 표면적인 이유입니다." },
+            { question: "장인이 혼례를 미루는 진짜 이유(내면적 의도)로 가장 적절한 것은?", options: ["딸인 점순이를 진심으로 아끼기 때문에", "사위인 '나'를 아들처럼 생각하기 때문에", "'나'의 노동력을 무보수로 계속 이용하기 위해", "마을 사람들의 평판을 중요하게 생각하기 때문에", "'나'에게 진정한 사랑의 의미를 깨닫게 해주기 위해"], answer: 2, explanation: "장인의 진짜 속셈은 점순이와의 혼인을 빌미로 어수룩한 '나'를 머슴처럼 부리며 노동력을 착취하는 것입니다. 이는 당시 농촌의 가난과 교활한 지주 계층의 모습을 풍자적으로 보여줍니다." },
+            { question: "이 소설의 갈등 양상으로 가장 적절한 것은?", options: ["개인과 사회의 갈등", "인간과 자연의 갈등", "인물과 인물의 갈등", "한 인물의 내적 갈등", "집단과 집단의 갈등"], answer: 2, explanation: "이 소설의 핵심 갈등은 성례를 치르고 싶은 '나'와 이를 미루며 노동력을 착취하려는 '장인' 사이의 갈등, 즉 인물과 인물 간의 갈등입니다." },
+            { question: "이 소설의 시점에 대한 설명으로 옳은 것은?", options: ["작품 밖의 서술자가 모든 인물의 심리를 서술하고 있다.", "주인공인 '나'가 자신의 이야기를 직접 서술하고 있다.", "작품 속 관찰자가 주인공의 행동을 서술하고 있다.", "여러 인물이 번갈아 가며 자신의 입장을 서술하고 있다.", "카메라처럼 객관적인 시선으로 사건만을 전달하고 있다."], answer: 1, explanation: "이 소설은 작품 속 주인공인 '나'가 자신의 경험과 생각을 직접 독자에게 이야기하는 '1인칭 주인공 시점'을 취하고 있습니다." },
+            { question: "다음 중 '나'의 어수룩하고 순박한 성격을 가장 잘 보여주는 행동은?", options: ["장인의 멱살을 잡고 성례를 시켜달라고 요구하는 행동", "장인의 말을 곧이곧대로 믿고 3년 넘게 일하는 행동", "점순이의 충동질에 넘어가 장인에게 대드는 행동", "꾀병을 부리며 일을 하지 않으려는 행동", "장인과의 싸움에서 구레나룻을 잡히는 행동"], answer: 1, explanation: "교활한 장인의 속셈을 전혀 눈치채지 못하고, '점순이 키가 자라면 성례시켜 준다'는 말을 곧이곧대로 믿으며 3년 7개월 동안 무보수로 일하는 모습에서 '나'의 어수룩하고 순박한 성격이 가장 잘 드러납니다." },
+            { question: "점순이가 '나'와 장인의 갈등에서 하는 역할로 가장 적절한 것은?", options: ["두 사람의 갈등을 말리고 화해시키는 중재자 역할", "장인의 편에 서서 '나'를 일방적으로 비난하는 역할", "'나'를 충동질하여 장인과의 갈등을 유발하고 심화시키는 역할", "두 사람의 갈등에 무관심하게 방관하는 역할", "자신의 이익을 위해 두 사람을 이간질하는 역할"], answer: 2, explanation: "점순이는 '나'에게 '성례시켜 달라구 왜 말을 못 해!'라고 말하며 '나'가 장인에게 대들도록 충동질합니다. 이는 '나'와 장인 사이의 갈등을 촉발하고 심화시키는 역할을 합니다." },
+            { question: "이 소설의 결말에 대한 설명으로 가장 적절한 것은?", options: ["모든 갈등이 완전히 해소되고 행복한 결말을 맞는다.", "주인공 '나'가 장인을 이기고 원하는 바를 성취한다.", "갈등이 일시적으로 봉합되지만, 앞으로도 반복될 것을 암시한다.", "비극적인 사건으로 마무리되며 독자에게 슬픔을 준다.", "열린 결말로 독자의 상상에 맡기고 있다."], answer: 2, explanation: "장인이 올가을에 성례를 시켜주겠다고 약속하지만, 그 약속이 지켜질지는 미지수입니다. 갈등이 근본적으로 해결된 것이 아니라 잠시 봉합된 상태로, 앞으로도 비슷한 희극적 갈등이 반복될 것임을 암시하며 소설이 끝납니다." },
+            { question: "이 소설에서 '해학성(웃음)'을 유발하는 주된 요인으로 보기 어려운 것은?", options: ["서술자인 '나'의 어수룩한 생각과 행동", "상황에 맞지 않는 인물들의 과장된 몸짓", "'나'와 장인의 우스꽝스러운 싸움 장면", "점순이의 이중적인 태도와 행동", "장인의 교활한 계략과 노동력 착취"], answer: 4, explanation: "장인의 교활한 계략과 노동력 착취는 웃음의 대상이라기보다는 비판의 대상입니다. 이는 작품의 '풍자성'과 관련된 요소로, 독자는 이를 통해 1930년대 농촌 사회의 모순을 엿보게 됩니다." },
+            { question: "이 소설의 구성 방식인 '역순행적 구성'의 효과로 가장 적절한 것은?", options: ["사건의 긴박감을 높여 독자의 몰입을 유도한다.", "시간의 흐름을 왜곡하여 환상적인 분위기를 조성한다.", "현재의 갈등 상황에 대한 원인을 효과적으로 설명해 준다.", "여러 인물의 시점을 보여주어 사건을 입체적으로 구성한다.", "결말을 예측할 수 없게 하여 독자의 궁금증을 유발한다."], answer: 2, explanation: "이 소설은 현재('나'와 장인의 갈등)에서 시작하여 과거(데릴사위가 된 사연)를 회상한 뒤 다시 현재로 돌아옵니다. 이러한 역순행적 구성은 현재 벌어지고 있는 갈등의 원인이 무엇인지를 독자에게 자연스럽게 설명해 주는 효과가 있습니다." },
+            { question: "다음 중 이 소설의 배경인 1930년대 농촌 사회의 모습을 엿볼 수 있는 제도는?", options: ["과거 제도", "신분 제도", "데릴사위 제도", "음서 제도", "조혼 풍습"], answer: 2, explanation: "주인공 '나'는 가난 때문에 돈 없이 몸으로 일하며 장가를 드는 '데릴사위'입니다. 이는 당시 가난한 농촌에서 행해지던 혼인 풍습 중 하나로, 작품의 중요한 배경이 됩니다." },
+            { question: "장인과의 싸움에서 점순이가 장인 편을 든 이유로 가장 타당한 추리는?", options: ["'나'가 진심으로 미워서", "'나'보다 아버지를 더 사랑해서", "자신의 혼사가 완전히 틀어질까 봐 걱정돼서", "싸움 구경이 재미있어서", "마을 사람들의 시선을 의식해서"], answer: 2, explanation: "점순이는 '나'가 장인에게 이겨서 혼사가 성사되기를 바라지만, '나'가 장인을 너무 심하게 몰아붙여 일이 완전히 틀어질 것을 걱정했을 가능성이 높습니다. 상황을 자신에게 유리하게 조절하려는 점순이의 영악한 면모를 보여주는 행동입니다." },
+            { question: "이 소설에 사용된 방언(사투리)의 효과로 적절하지 않은 것은?", options: ["작품의 사실성을 높인다.", "향토적인 분위기를 조성한다.", "인물의 성격을 생생하게 드러낸다.", "작품의 해학성을 더해준다.", "표준어를 사용하여 교훈적인 느낌을 준다."], answer: 4, explanation: "방언의 사용은 표준어와는 다른, 토속적이고 구수한 느낌을 줍니다. 이는 작품의 사실성과 향토성을 높이고 인물의 성격을 생생하게 보여주며, 특히 이 소설에서는 해학적인 분위기를 조성하는 데 크게 기여합니다. 교훈적인 느낌과는 거리가 멉니다." },
+            { question: "이 소설의 제목인 '봄봄'이 상징하는 의미로 가장 적절한 것은?", options: ["인물 간의 갈등이 해소되는 계절", "주인공 '나'가 간절히 기다리는 혼인과 사랑의 계절", "농사가 가장 바빠서 힘든 계절", "장인의 교활함이 최고조에 이르는 계절", "모든 사건이 시작되는 비극적인 계절"], answer: 1, explanation: "'봄'은 만물이 생동하고 사랑이 싹트는 계절입니다. 제목 '봄봄'은 주인공 '나'가 간절하게 기다리는 점순이와의 사랑과 혼인이 이루어지기를 바라는 마음을 상징적으로 나타냅니다." },
+            { question: "이 소설을 통해 작가가 비판하고자 하는 대상으로 가장 적절한 것은?", options: ["사랑을 믿지 않는 젊은 세대", "일확천금을 노리는 투기꾼", "자신의 이익을 위해 남을 이용하는 교활한 지주 계층", "전통적인 가치관을 무시하는 신세대", "무능하고 나태한 농민들"], answer: 2, explanation: "장인은 딸과의 혼인을 빌미로 '나'의 노동력을 착취하는 이기적이고 교활한 인물입니다. 작가는 장인의 모습을 통해 당시 농촌 사회에 만연했던 지주나 마름의 부당한 착취를 풍자하고 비판하고 있습니다." },
+            { question: "다음 중 '나'의 심리를 표현한 말로 가장 적절한 것은?", options: ["'장인어른의 깊은 뜻을 이제야 알겠습니다.'", "'일을 안 하면 점순이와 결혼할 수 없으니 답답하네.'", "'점순이만 아니었으면 벌써 이 집을 나갔을 텐데.'", "'장인어른은 왜 자꾸 내 키가 작다고 하실까?'", "'점순이는 도대체 누구 편인지 모르겠네.'"], answer: 4, explanation: "점순이는 '나'를 충동질하여 장인과 싸우게 만들다가도, 결정적인 순간에는 장인 편을 듭니다. 이러한 점순이의 이중적인 행동에 '나'는 어리둥절해하며 혼란스러워합니다." },
+            { question: "이 소설의 갈등이 희극적으로 느껴지는 이유로 가장 적절한 것은?", options: ["갈등의 원인이 매우 심각하고 비극적이기 때문에", "인물들이 서로를 죽이려고 하기 때문에", "어수룩한 주인공의 시선으로 그려져 심각성이 완화되기 때문에", "갈등이 전혀 해결될 기미를 보이지 않기 때문에", "모든 인물이 악의 없이 순수하기 때문에"], answer: 2, explanation: "성례라는 심각한 문제를 둘러싼 갈등임에도 불구하고, 독자는 상황을 제대로 파악하지 못하는 어수룩한 서술자 '나'의 시선을 통해 사건을 접하게 됩니다. 이로 인해 인물들의 행동이 우스꽝스럽게 보이고, 갈등의 심각성이 완화되어 희극적인 느낌을 받게 됩니다." },
+            { question: "장인이 '나'의 구레나룻을 잡아채는 행동이 반복되는 것의 효과는?", options: ["장인의 괴팍한 성격을 보여준다.", "반복적인 희극적 상황을 통해 웃음을 유발한다.", "두 인물 간의 갈등이 돌이킬 수 없음을 보여준다.", "당시 농촌의 폭력적인 실상을 고발한다.", "두 사람의 화해를 암시하는 복선이다."], answer: 1, explanation: "장인이 위기에 처할 때마다 '나'의 구레나룻을 잡아채는 행동은 반복적으로 나타나는 희극적인 장면입니다. 이는 독자에게 웃음을 유발하는 동시에, 장인이 자신의 위기를 모면하는 교활한 방식을 보여줍니다." },
+            { question: "이 소설을 읽은 독자의 반응으로 적절하지 않은 것은?", options: ["'주인공이 너무 답답해서 속이 터질 것 같아.'", "'장인의 뻔뻔한 행동이 웃기면서도 씁쓸하네.'", "'점순이의 행동 때문에 갈등이 더 재미있어지는 것 같아.'", "'1930년대 농촌의 현실이 얼마나 힘들었을지 짐작이 가.'", "'주인공이 결국 장인을 이기고 행복하게 사는 모습이 감동적이야.'"], answer: 4, explanation: "이 소설은 주인공 '나'가 장인을 완전히 이기고 행복하게 사는 결말이 아닙니다. 갈등이 일시적으로 봉합될 뿐, 근본적인 문제는 해결되지 않은 채로 끝납니다. 따라서 감동적인 해피엔딩으로 보기는 어렵습니다." },
+            { question: "이 소설의 문체적 특징으로 가장 적절한 것은?", options: ["간결하고 건조한 문체", "화려하고 수식어가 많은 문체", "관념적이고 철학적인 문체", "토속적이고 해학적인 문체", "객관적이고 보도적인 문체"], answer: 3, explanation: "이 소설은 강원도 방언과 비속어를 적극적으로 사용하여 토속적인 분위기를 자아내며, 어수룩한 서술자의 시선과 우스꽝스러운 상황 묘사를 통해 독특한 해학성을 만들어냅니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

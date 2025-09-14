@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-2. 창의성의 오해와 진실</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #16a34a; /* Green color for this unit */
+            color: #14532d;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #f0fdf4;
+            border-color: #86efac;
+        }
+        .quiz-option.selected {
+            background-color: #dcfce7;
+            border-color: #22c55e;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-green-700">1-2. 사회적 대화로서의 글 읽기</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 창의성의 오해와 진실 (박종하)</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-green-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-green-800">■ 갈래:</strong> 논설문</p>
+                    <p><strong class="text-green-800">■ 성격:</strong> 설득적, 비판적, 논증적</p>
+                    <p><strong class="text-green-800">■ 주제:</strong> 창의성에 대한 일반적인 오해를 비판하고, 창의성의 진정한 의미와 발현 방법을 제시함.</p>
+                    <p><strong class="text-green-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>'통념(오해) 제시 → 반박 → 대안(진실) 제시'의 구조를 반복하여 주장을 명료하게 전개함.</li>
+                        <li>뉴턴, 스티브 잡스, 『어린 왕자』 등 독자에게 친숙한 예시를 활용하여 이해를 돕고 설득력을 높임.</li>
+                        <li>비유적 표현을 사용하여 추상적인 개념을 구체적으로 설명함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 문단별 상세 해설 -->
+            <section class="exam-section">
+                <h4>2. 문단별 상세 해설</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">[서론] 창의성은 천재적 발상이 아닌 '생각의 노동'</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>통념 제시:</strong> 뉴턴이 사과를 보고 만유인력의 법칙을 발견했다는 일화를 소개하며, 창의성이 '천재의 번뜩이는 영감'에서 나온다는 일반적인 오해를 제시합니다.</li>
+                            <li><strong>반박 및 주장:</strong> 뉴턴의 발견은 사실 엄청난 양의 계산과 미적분 고안 등 치열한 '생각의 노동'의 결과물임을 밝힙니다. 이를 통해 창의성은 천재적 발상이 아니라, 생각이 오래 쌓이고 숙성되어 나타나는 것임을 주장합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">[본론 1] 창의성은 특별한 사람이 아닌 누구나 발휘 가능</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>통념 제시:</strong> 창의적 발상을 하는 사람이 따로 있다는 오해를 제시합니다.</li>
+                             <li><strong>반박 및 주장:</strong> 스티브 잡스의 말을 인용하여 창의성은 '연결하는 능력'임을 강조합니다. 즉, 세상에 없던 것을 창조하는 것이 아니라, 기존의 아이디어를 '변형'하고 '연결'하는 것이 창의성의 본질이라고 설명합니다. 따라서 '경험이 남다른 사람'은 있을 수 있어도 '천재'는 없다고 말하며, 다양한 경험과 생각의 중요성을 역설합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">[본론 2] 창의성은 '안정'이 아닌 '새로움'을 향한 도전</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>문제점 지적:</strong> 사람들이 새로움의 중요성을 알면서도 현실에서는 기존의 방식을 따르는 '안전'을 추구하는 경향이 있음을 지적합니다.</li>
+                            <li><strong>주장:</strong> 안정을 추구하는 것은 결국 더 치열한 경쟁으로 이어질 뿐이며, 새로움이 주는 즐거움을 놓치게 한다고 비판합니다. 따라서 창의성을 발휘하려면 두려움을 극복하고 '남과 다른 선택', 즉 '새로움으로 나아가는 도전'을 해야 한다고 주장합니다.</li>
+                        </ul>
+                    </div>
+                     <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">[결론] 주관적 생각과 '동화적 상상력'의 필요성</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>예시 활용:</strong> 『어린 왕자』의 '코끼리를 삼킨 보아뱀' 그림을 예로 들어, 사람들이 자신의 지식이라는 틀에 갇혀 대상을 본다고 설명합니다.</li>
+                            <li><strong>주장 및 제언:</strong> 창의성을 발휘하려면 사실 관계 확인을 넘어선 '동화적 상상력'이 필요하다고 말합니다. 이 상상력은 엉뚱한 생각이 아니라, 사실에 대한 '새롭고 주관적인 생각'이며, 이러한 주관적 생각과 경험을 쌓아 '자신의 답'을 만드는 과정에서 창의성이 길러진다고 제언하며 글을 마무리합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 주요 개념 및 글쓰기 전략 -->
+            <section class="exam-section">
+                <h4>3. 주요 개념 및 글쓰기 전략</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>글쓴이의 주장(창의성의 진실):</strong>
+                        <ul class="list-decimal list-inside ml-6 mt-1">
+                            <li>창의성은 '생각의 노동'의 결과물이다.</li>
+                            <li>창의성은 기존의 것을 '연결'하고 '변형'하는 능력이다.</li>
+                            <li>창의성은 '새로움'을 향한 도전을 통해 발현된다.</li>
+                            <li>창의성은 '주관적인 생각'과 '상상력'을 통해 길러진다.</li>
+                        </ul>
+                    </li>
+                    <li><strong>글쓰기 전략:</strong>
+                        <ul class="list-decimal list-inside ml-6 mt-1">
+                            <li><strong>예시 활용:</strong> 독자의 이해를 돕고 주장을 뒷받침하기 위해 뉴턴(과학), 스티브 잡스(경영), 『어린 왕자』(문학) 등 다양한 분야의 친숙한 예를 사용함.</li>
+                            <li><strong>인용:</strong> 스티브 잡스의 말을 직접 인용하여 주장의 신뢰성을 높임.</li>
+                            <li><strong>비유:</strong> '생각이 숙성된다', '음식이 숙성되는 과정' 등 비유를 통해 추상적 개념을 쉽게 설명함.</li>
+                            <li><strong>대조:</strong> '오해'와 '진실', '안정'과 '새로움' 등 대조적인 개념을 통해 주장을 선명하게 부각함.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 글의 서술 방식으로 가장 적절한 것은?", options: ["시간의 흐름에 따라 사건을 서술하고 있다.", "대상의 장단점을 객관적으로 비교 및 대조하고 있다.", "일반적인 통념을 제시하고 이를 반박하며 주장을 전개하고 있다.", "중심 화재의 변화 과정을 단계별로 분석하고 있다.", "다양한 이론을 나열한 뒤 하나의 이론을 선택하고 있다."], answer: 2, explanation: "이 글은 '창의성은 천재의 번뜩이는 영감'이라는 통념(오해)을 먼저 제시한 뒤, '사실은 생각의 노동'이라고 반박하는 방식으로 주장을 효과적으로 전개하고 있습니다." },
+            { question: "글쓴이가 '뉴턴의 일화'를 언급한 주된 의도는?", options: ["뉴턴의 천재성을 강조하기 위해", "사과가 창의성에 미치는 영향을 설명하기 위해", "창의성이란 치열한 사고 과정의 결과임을 주장하기 위해", "미적분과 만유인력의 관계를 증명하기 위해", "동화 같은 이야기가 대중에게 인기 있는 이유를 분석하기 위해"], answer: 2, explanation: "글쓴이는 뉴턴이 사과를 보고 영감을 얻었다는 통념을 반박하며, 그의 발견이 실제로는 엄청난 계산과 연구, 즉 '생각의 노동'의 산물이었음을 강조합니다. 이를 통해 창의성의 본질에 대한 자신의 주장을 뒷받침하고 있습니다." },
+            { question: "글쓴이가 인용한 스티브 잡스의 말을 통해 강조하려는 창의성의 핵심 속성은?", options: ["무에서 유를 창조하는 능력", "기존의 것들을 새롭게 연결하는 능력", "오랜 시간 홀로 사색하는 능력", "천재적인 직관으로 본질을 꿰뚫는 능력", "복잡한 수식을 계산하는 능력"], answer: 1, explanation: "글쓴이는 스티브 잡스의 '창의력이란 연결하는 능력이다'라는 말을 인용하여, 창의성이란 완전히 새로운 것을 만드는 것이 아니라 '서로 관련 없어 보이는 것을 연결해 새롭게 만드는 능력'임을 강조하고 있습니다." },
+            { question: "이 글의 내용과 일치하지 않는 것은?", options: ["창의적 아이디어는 생각의 노동에서 얻어진다.", "창의성을 발휘하려면 남과 다른 선택을 할 필요가 있다.", "경험이 남다른 사람은 창의성을 발휘하기에 유리할 수 있다.", "『어린 왕자』의 그림은 사람들의 고정관념을 보여주는 예시이다.", "창의성을 기르려면 주관적 생각보다 객관적 사실 관계 확인이 더 중요하다."], answer: 4, explanation: "글쓴이는 결론 부분에서 '창의성을 발휘하려면 지식이나 사실 관계의 확인만이 아닌 동화적인 상상력 또한 필요하다'고 말하며, 사실에 대한 '새롭고 주관적인 생각'의 중요성을 강조했습니다." },
+            { question: "글쓴이가 현실의 사람들이 '새로움'보다 '기존의 생각'을 따르려고 하는 이유로 지적한 것은?", options: ["새로운 것을 배울 시간이 부족하기 때문에", "기존의 방식이 더 효율적이라고 믿기 때문에", "새로운 도전에 대한 두려움이 없기 때문에", "기존의 방식이 더 안전할 것이라고 생각하기 때문에", "다른 사람들의 아이디어를 존중하기 때문에"], answer: 3, explanation: "본문에서 '왜냐하면 그것이 더 안전할 것이라고 생각하기 때문이다.'라고 명시적으로 언급하며, 사람들이 변화에 따르는 위험보다 현재의 안정성을 선호하는 경향이 있음을 지적합니다." },
+            { question: "㉠'코끼리를 삼킨 보아뱀' 그림을 '모자'로만 보는 사람들의 사고방식의 문제점으로 가장 적절한 것은?", options: ["상상력이 부족하여 다양한 가능성을 보지 못한다.", "예술 작품에 대한 기본적인 지식이 부족하다.", "다른 사람의 의견을 무시하는 독단적인 태도를 보인다.", "지나치게 감성적이어서 논리적 판단을 하지 못한다.", "사물을 지나치게 세밀하게 분석하려 한다."], answer: 0, explanation: "이 예시는 사람들이 자신이 아는 지식과 경험의 틀 안에서만 사물을 해석하려는 경향, 즉 고정관념에 사로잡혀 있음을 보여줍니다. 이는 결국 상상력의 부재로 이어져 그림의 다른 가능성(코끼리를 삼킨 보아뱀)을 보지 못하게 합니다." },
+            { question: "이 글에서 글쓴이가 궁극적으로 독자에게 제안하는 '창의성을 기르는 방법'으로 가장 적절한 것은?", options: ["유명한 천재들의 전기를 읽고 그대로 따라하기", "자신만의 주관적 생각과 경험을 꾸준히 쌓아가기", "안전하고 검증된 방법만을 선택하여 실수를 줄이기", "하나의 분야에만 집중하여 최고의 전문가가 되기", "다른 사람의 아이디어를 비판 없이 수용하기"], answer: 1, explanation: "글의 마지막 부분에서 '이렇게 주관적인 생각과 경험을 쌓으며 자신의 답을 만드는 과정에서 창의성은 길러진다.'라고 명확하게 제안하며, 자신만의 관점을 형성하는 것의 중요성을 강조합니다." },
+            { question: "이 글의 글쓰기 전략으로 사용되지 않은 것은?", options: ["질문을 던져 독자의 관심을 유도한다.", "권위 있는 인물의 말을 인용하여 신뢰도를 높인다.", "구체적인 수치를 제시하여 주장을 객관화한다.", "친숙한 문학 작품의 예를 들어 이해를 돕는다.", "대조적인 개념을 사용하여 주장을 선명하게 한다."], answer: 2, explanation: "이 글은 뉴턴, 스티브 잡스, 어린 왕자 등의 예시와 인용을 사용하지만, '몇 %'나 '몇 명'과 같은 구체적인 통계 수치를 제시하여 주장을 객관화하는 방식은 사용하지 않았습니다." },
+            { question: "글쓴이가 '천재는 없다. 하지만 경험이 남다른 사람은 있을 수 있다.'라고 말한 의도로 가장 적절한 것은?", options: ["천재가 되기 위해서는 남다른 경험이 필수적임을 강조하기 위해", "창의성은 타고나는 것이 아니라 다양한 경험을 통해 길러질 수 있음을 강조하기 위해", "경험이 많은 사람과 천재는 본질적으로 다르다는 것을 설명하기 위해", "천재에 대한 사람들의 지나친 환상을 비판하기 위해", "경험만 많고 창의성이 없는 사람들을 경계하기 위해"], answer: 1, explanation: "이 말은 창의성이 소수의 '천재'에게만 주어진 특별한 능력이 아니라는 점을 분명히 하고, 대신 누구나 '다양한 경험'을 통해 생각을 연결하고 변형함으로써 창의성을 발휘할 수 있다는 가능성을 열어주기 위함입니다." },
+            { question: "이 글의 관점에서 <보기>의 A학생에게 해줄 조언으로 가장 적절한 것은? <보기> A학생: '나는 아이디어가 잘 떠오르지 않아. 역시 창의성은 타고나는 건가 봐.'", options: ["'맞아, 창의적인 사람은 따로 정해져 있는 것 같아.'", "'창의성은 훈련으로 기를 수 있으니, 다양한 생각을 연결하는 연습을 해봐.'", "'훌륭한 아이디어는 어느 날 갑자기 떠오르는 거니까 그냥 기다려봐.'", "'창의적이려면 일단 IQ부터 높여야 해.'", "'남들과 다른 생각을 하는 건 위험하니까 안전한 길을 택하는 게 좋아.'"], answer: 1, explanation: "이 글은 창의성이 타고나는 것이 아니라 생각의 노동, 연결, 경험, 도전을 통해 길러진다고 주장합니다. 따라서 A학생에게는 창의성은 훈련이 가능하며, 다양한 생각을 연결하는 연습이 필요하다고 조언하는 것이 가장 적절합니다." },
+            { question: "글쓴이가 '창의성에 대한 가장 큰 오해'라고 지적한 것은?", options: ["창의성은 연결하는 능력이라는 생각", "창의성은 천재적인 발상에 있다는 생각", "창의성은 생각의 노동에서 얻어진다는 생각", "창의성은 새로움을 추구해야 한다는 생각", "창의성은 경험이 중요하다는 생각"], answer: 1, explanation: "서론에서 '이렇듯 창의성에 대한 가장 큰 오해는 ‘천재적인 발상에 있다’는 생각이다.'라고 명확하게 지적하고 있습니다." },
+            { question: "이 글에 나타난 '창의성'의 속성과 가장 거리가 먼 것은?", options: ["숙성", "연결", "안정", "도전", "상상력"], answer: 2, explanation: "글쓴이는 창의성이 '생각의 숙성', '연결', '새로움으로의 도전', '상상력' 등을 통해 발현된다고 주장합니다. 반면 '안정'은 새로움을 추구하는 창의적 태도와 대립되는 개념으로 제시됩니다." },
+            { question: "이 글의 제목으로 가장 적절한 것은?", options: ["뉴턴과 스티브 잡스의 성공 비결", "창의성을 가로막는 사회적 장벽", "생각의 노동: 창의성의 숨겨진 진실", "어린 왕자가 우리에게 주는 교훈", "안전한 삶을 위한 지혜"], answer: 2, explanation: "이 글은 창의성에 대한 통념을 '오해'로 규정하고, 그 이면에 있는 '생각의 노동', '연결', '경험' 등을 '진실'로 제시하고 있습니다. 따라서 글 전체의 내용을 가장 잘 포괄하는 제목입니다." },
+            { question: "글쓴이가 '음식이 숙성되는 과정'에 생각을 비유한 이유로 가장 적절한 것은?", options: ["창의적인 생각은 맛있는 음식처럼 즐거움을 준다는 것을 강조하기 위해", "좋은 아이디어는 여러 재료(생각)가 결합하고 시간이 지나야 나온다는 것을 설명하기 위해", "창의적인 생각을 너무 많이 하면 머리가 아프다는 것을 경고하기 위해", "음식과 생각 모두 돈을 벌기 위한 중요한 수단임을 보여주기 위해", "생각을 하는 과정이 요리처럼 복잡하고 어렵다는 것을 비유하기 위해"], answer: 1, explanation: "음식이 여러 재료가 어우러져 시간을 거쳐 독특한 맛을 내는 것처럼, 창의적인 아이디어 역시 다양한 생각(재료)들이 결합하고 충분히 고민하는 시간(숙성)을 거쳐야만 나올 수 있다는 점을 효과적으로 설명하기 위한 비유입니다." },
+            { question: "이 글의 논지 전개 방식에 대한 설명으로 옳은 것은?", options: ["문제 상황을 제시하고 그에 대한 해결책을 모색하고 있다.", "두 대상의 공통점을 중심으로 내용을 서술하고 있다.", "시간 순서에 따라 대상의 변화 과정을 설명하고 있다.", "대상을 여러 기준으로 나누어 종류별로 분석하고 있다.", "주장을 먼저 제시하고 구체적인 예시로 뒷받침하고 있다."], answer: 0, explanation: "이 글은 '창의성은 ~라는 오해가 있다. 하지만 실제로는 ~이다.'라는 구조를 통해, 창의성에 대한 문제점(오해)을 제시하고 그에 대한 올바른 인식(해결책)을 제시하는 방식으로 논지를 전개하고 있습니다." },
+            { question: "이 글을 통해 알 수 있는 글쓴이의 가치관으로 가장 적절한 것은?", options: ["결과보다는 과정을 중시한다.", "타고난 재능을 가장 중요하게 생각한다.", "전통과 기존의 질서를 존중한다.", "소수의 엘리트가 사회를 이끌어야 한다고 믿는다.", "추상적인 사유보다 구체적인 행동을 강조한다."], answer: 0, explanation: "글쓴이는 창의성이 '번뜩이는 영감'(결과)이 아니라 '생각의 노동'(과정)의 산물이라고 강조하며, 주관적인 생각과 경험을 '쌓는 과정'에서 창의성이 길러진다고 말합니다. 이를 통해 과정의 중요성을 강조하는 가치관을 엿볼 수 있습니다." },
+            { question: "이 글의 '창의성'과 정재승의 <창의적인 사람들의 뇌에서는... >의 '창의성'에 대한 설명의 공통점으로 가장 적절한 것은?", options: ["창의성은 뇌의 특정 부분에서만 발현된다.", "창의성은 지능 지수와 정비례한다.", "창의성은 훈련과 경험을 통해 길러질 수 있다.", "창의성은 동화적 상상력과 아무 관련이 없다.", "창의성은 다른 사람과의 교류 없이 혼자 완성된다."], answer: 2, explanation: "두 글 모두 창의성이 타고난 천재성보다는 '훈련'(1만 시간의 법칙, 생각의 노동)과 '다양한 경험'(사람 만나기, 여행, 독서)을 통해 길러질 수 있는 능력이라는 점을 공통적으로 강조하고 있습니다." },
+            { question: "글쓴이가 '두려움을 극복하고 새로움으로 나아가야 한다'고 말한 이유로 가장 적절한 것은?", options: ["안정을 추구하는 것은 결국 더 치열한 경쟁을 유발하기 때문에", "새로운 도전은 항상 성공을 보장하기 때문에", "두려움을 느끼는 것은 나약하다는 증거이기 때문에", "기존의 방식은 모두 잘못된 것이기 때문에", "정부에서 새로운 도전을 장려하고 있기 때문에"], answer: 0, explanation: "본문에서 '똑같이 안정을 추구하는 사람들과 치열하게 경쟁하다가는 안정도 빼앗길 수 있다'고 언급하며, 모두가 택하는 안전한 길은 결국 더 큰 경쟁을 낳을 뿐이라는 점을 지적합니다. 따라서 이를 벗어나기 위해 새로운 도전을 해야 한다고 주장합니다." },
+            { question: "이 글의 서술자에 대한 설명으로 가장 적절한 것은?", options: ["자신의 개인적인 경험을 중심으로 주장을 펼치고 있다.", "객관적인 관찰자의 입장에서 현상을 전달하고 있다.", "독자에게 질문을 던지고 함께 답을 찾아가는 방식을 취하고 있다.", "자신의 주장을 단정적인 어조로 강하게 내세우고 있다.", "다양한 자료를 근거로 들어 자신의 견해를 논리적으로 설득하고 있다."], answer: 4, explanation: "이 글은 논설문으로, 글쓴이는 뉴턴, 스티브 잡스, 어린 왕자 등 다양한 근거를 제시하며 '창의성이란 무엇인가'에 대한 자신의 견해를 논리적으로 주장하고 독자를 설득하고 있습니다." },
+            { question: "이 글을 읽은 독자가 창의성을 기르기 위해 할 활동으로 적절하지 않은 것은?", options: ["평소 관심 없던 분야의 다큐멘터리를 시청한다.", "친구들과 독서 토론 모임을 만들어 정기적으로 활동한다.", "미술관에 가서 그림을 보고 나만의 감상평을 써본다.", "성공한 사람의 결과물을 그대로 따라 만드는 연습에만 집중한다.", "일상 속 사물을 보고 '왜 그럴까?'라는 질문을 스스로 던져본다."], answer: 3, explanation: "이 글은 창의성이 단순히 결과물을 모방하는 것이 아니라, 기존의 것을 '변형'하고 '연결'하며 '주관적인 생각'을 더하는 것이라고 강조합니다. 따라서 결과물을 그대로 따라 만드는 것에만 집중하는 것은 글의 주장과 맞지 않습니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

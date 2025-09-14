@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-2. 강호사시가</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #1d4ed8; /* Blue color for this unit */
+            color: #1e3a8a;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #eef2ff;
+            border-color: #a5b4fc;
+        }
+        .quiz-option.selected {
+            background-color: #e0e7ff;
+            border-color: #818cf8;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-blue-700">4-2. 자연, 그 속의 여유로움</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 강호사시가 (맹사성)</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 작품 전문 -->
+            <section class="exam-section">
+                <h4>1. 작품 전문</h4>
+                <div class="p-4 bg-blue-50 rounded-lg text-gray-700 leading-relaxed space-y-4">
+                   <p class="text-center"><strong>[춘사(春詞)]</strong><br>강호(江湖)에 봄이 드니 미친 흥(興)이 절로 난다.<br>탁료계변(濁醪溪邊)에 금린어(錦鱗魚)ㅣ 안주로라.<br>이 몸이 한가(閑暇)옴도 역군은(亦君恩)이샷다.</p>
+                   <p class="text-center"><strong>[하사(夏詞)]</strong><br>강호(江湖)에 여름이 드니 초당(草堂)에 일이 없다.<br>유신(有信)한 강파(江波)는 보내느니 바람이로다.<br>이 몸이 서늘옴도 역군은(亦君恩)이샷다.</p>
+                   <p class="text-center"><strong>[추사(秋詞)]</strong><br>강호(江湖)에 가을이 드니 고기마다 살져 있다.<br>소정(小艇)에 그물 시러 흘리 띄워 더져 두고,<br>이 몸이 소일(消日)옴도 역군은(亦君恩)이샷다.</p>
+                   <p class="text-center"><strong>[동사(冬詞)]</strong><br>강호(江湖)에 겨울이 드니 눈 깊이 자히 남다.<br>삿갓 빗기 쓰고 뉘역으로 옷을 삼아,<br>이 몸이 춥지 아니옴도 역군은(亦君恩)이샷다.</p>
+                </div>
+            </section>
+
+            <!-- 2. 수별 상세 해설 -->
+            <section class="exam-section">
+                <h4>2. 수별 상세 해설</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">[제1수 - 춘사(春詞)] 봄의 흥취</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>초장:</strong> 강호(자연)에 봄이 오니 주체할 수 없는 흥이 절로 일어난다. -> 자연을 즐기는 '풍류'의 모습이 드러납니다.</li>
+                            <li><strong>중장:</strong> 시냇가에서 막걸리를 마시는데, 쏘가리가 안주로다. -> '탁료계변(막걸리와 시냇가)', '금린어(쏘가리)'는 소박한 음식을 나타내며, 자연 속에서 안분지족하는 삶의 태도를 보여줍니다.</li>
+                            <li><strong>종장:</strong> 이 몸이 이렇게 한가롭게 지내는 것도 역시 임금님의 은혜이시도다. -> 자연 속 한가로움을 임금의 은혜로 돌리며 유교적 충의 사상(연군지정)을 드러냅니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">[제2수 - 하사(夏詞)] 여름의 한가로움</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>초장:</strong> 강호에 여름이 오니 초당(초가집)에 할 일이 없다. -> 세속적인 일에서 벗어난 탈속적인 삶과 한가로움을 보여줍니다.</li>
+                             <li><strong>중장:</strong> 믿음직스러운 강 물결은 (나에게) 보내는 것이 바람이로구나. -> '유신한 강파'는 자연물을 의인화한 표현으로, 자연과 내가 하나가 되는 물아일체의 경지를 보여줍니다.</li>
+                             <li><strong>종장:</strong> 이 몸이 이렇게 서늘하게 지내는 것도 역시 임금님의 은혜이시도다. -> 여름의 시원함마저 임금의 은혜 덕분이라고 여기며 연군지정을 드러냅니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">[제3수 - 추사(秋詞)] 가을의 풍요로움</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>초장:</strong> 강호에 가을이 오니 고기마다 살이 쪄 있다. -> 가을의 풍요로움을 시각적으로 제시합니다.</li>
+                            <li><strong>중장:</strong> 작은 배에 그물을 실어 (물결에) 흘려 띄워 던져 두고. -> 고기잡이 자체에 목적을 두기보다는 그 과정을 즐기는 유유자적한 모습을 보여줍니다.</li>
+                             <li><strong>종장:</strong> 이 몸이 이렇게 소일하며 지내는 것도 역시 임금님의 은혜이시도다. -> 소박한 일상을 보내는 즐거움 또한 임금의 은혜 덕분이라고 노래합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">[제4수 - 동사(冬詞)] 겨울의 소박한 삶</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>초장:</strong> 강호에 겨울이 오니 눈 깊이가 한 자가 넘는다. -> 겨울의 계절감을 시각적으로 제시합니다.</li>
+                            <li><strong>중장:</strong> 삿갓을 비스듬히 쓰고 도롱이로 옷을 삼아. -> '삿갓'과 '뉘역(도롱이)'은 가난하지만 소박한 삶을 상징하는 소재(안빈낙도)입니다.</li>
+                             <li><strong>종장:</strong> 이 몸이 춥지 않게 지내는 것도 역시 임금님의 은혜이시도다. -> 추운 겨울을 따뜻하게 보내는 것마저 임금의 은혜로 돌리며 작품을 마무리합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 주요 개념 정리 -->
+            <section class="exam-section">
+                <h4>3. 주요 개념 정리</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>갈래:</strong> 연시조, 평시조 (총 4수)</li>
+                    <li><strong>성격:</strong> 강호 한정가, 자연 친화적, 유교적</li>
+                    <li><strong>주제:</strong> 자연 속에서의 사계절의 흥취와 임금의 은혜에 대한 감사</li>
+                    <li><strong>특징:</strong>
+                        <ul class="list-decimal list-inside ml-6 mt-1">
+                            <li>계절의 흐름(춘→하→추→동)에 따라 시상을 전개함.</li>
+                            <li>각 수의 종장이 '역군은이샷다'라는 유사한 형태로 반복되어 통일성과 안정감을 줌.</li>
+                            <li>자연을 즐기는 '풍류'와 '안빈낙도'의 삶, 임금을 향한 '연군지정'이 조화롭게 나타남.</li>
+                            <li>'강호가도'의 초기 작품으로, 후대 강호 시가에 많은 영향을 줌.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 노래에 대한 설명으로 가장 적절한 것은?", options: ["시간의 흐름과 관계없이 자유롭게 시상을 전개하고 있다.", "계절의 변화에 따라 자연의 흥취를 노래하고 있다.", "속세에 대한 미련과 그리움을 중심으로 노래하고 있다.", "자연과 인간의 대립을 통해 주제를 부각하고 있다.", "이별한 임에 대한 슬픔을 애절하게 표현하고 있다."], answer: 1, explanation: "이 노래는 '춘사-하사-추사-동사'의 순서로, 봄, 여름, 가을, 겨울의 계절 변화에 따른 자연의 모습과 그 속에서 느끼는 흥취를 노래하는 연시조입니다." },
+            { question: "각 수의 종장에 반복되는 '역군은이샷다'에 담긴 화자의 태도는?", options: ["연군지정(戀君之情)", "우국지정(憂國之情)", "맥수지탄(麥秀之嘆)", "풍수지탄(風樹之嘆)", "인생무상(人生無常)"], answer: 0, explanation: "'역군은이샷다'는 '역시 임금의 은혜이시도다'라는 뜻입니다. 자연 속에서 누리는 모든 즐거움을 임금의 은혜로 돌리는 것으로, 임금을 그리워하고 충성을 다하려는 마음, 즉 '연군지정'을 나타냅니다." },
+            { question: "화자의 '안빈낙도(安貧樂道)'하는 삶의 태도가 가장 잘 드러나는 시어끼리 짝지어진 것은?", options: ["강호, 강파", "금린어, 소정", "초당, 삿갓", "미친 흥, 그물", "눈, 바람"], answer: 2, explanation: "'초당(초가집)'과 '삿갓'은 화려함과는 거리가 먼 소박한 삶의 모습을 보여주는 대표적인 시어입니다. 이러한 소박한 생활 속에서 만족하며 살아가는 태도를 '안빈낙도'라고 합니다." },
+            { question: "이 노래의 시상 전개 방식의 특징으로 가장 적절한 것은?", options: ["선경후정의 방식을 통해 감정을 절제하고 있다.", "계절의 순환에 따라 각 계절의 풍경과 흥취를 노래하고 있다.", "수미상관의 구조를 활용하여 시적 안정감을 주고 있다.", "의식의 흐름 기법을 사용하여 화자의 복잡한 내면을 드러내고 있다.", "점층적 표현을 통해 화자의 슬픔을 고조시키고 있다."], answer: 1, explanation: "이 시는 봄(춘사), 여름(하사), 가을(추사), 겨울(동사) 순으로 계절의 변화에 따라 시상을 전개하며, 각 계절에 맞는 자연의 모습과 화자의 흥취를 노래하는 전형적인 '강호사시가'의 구조를 보입니다." },
+            { question: "[하사]의 '유신(有信)한 강파(江波)는 보내느니 바람이로다.'에 대한 설명으로 가장 적절한 것은?", options: ["자연의 무심함에 대한 화자의 원망이 드러난다.", "자연을 믿을 수 없는 대상으로 여기고 있다.", "자연과 화자가 교감하는 물아일체의 경지를 보여준다.", "속세로 돌아가고 싶은 화자의 내적 갈등이 나타난다.", "자연의 변화무쌍함에 대한 경외심을 표현한다."], answer: 2, explanation: "화자는 강 물결('강파')이 믿음직스럽게('유신한') 자신에게 바람을 보내준다고 표현하고 있습니다. 이는 자연을 인격적인 존재로 여기며 교감하는 모습으로, 자연과 내가 하나가 되는 '물아일체'의 경지를 보여줍니다." },
+            { question: "이 노래의 화자를 가장 잘 설명한 것은?", options: ["농사를 지으며 힘겹게 살아가는 농민", "속세의 부귀영화를 좇는 야심가", "자연에 묻혀 한가로운 삶을 즐기는 사대부", "전쟁터에서 나라를 걱정하는 무인", "이별한 임을 그리워하는 여인"], answer: 2, explanation: "자연(강호) 속에서 풍류를 즐기면서도, 그 모든 것을 임금의 은혜로 돌리는 '연군지정'의 태도를 보이는 것으로 보아, 관직에서 물러나 자연에 은거하며 살아가는 조선 시대 사대부의 모습을 전형적으로 보여줍니다." },
+            { question: "[추사]에서 '소정(小艇)에 그물 시러 흘리 띄워 더져 두고'라는 행동에 담긴 화자의 태도는?", options: ["고기를 많이 잡으려는 생계 목적의 어업 활동", "자연을 정복하려는 인간의 의지", "고기잡이 자체보다 그 과정을 즐기는 유유자적한 태도", "자신의 뛰어난 낚시 실력을 과시하려는 마음", "할 일이 없어 느끼는 무료함과 권태감"], answer: 2, explanation: "그물을 던져두고 고기가 잡히는 것에 연연하지 않는 모습은, 결과(고기)에 집착하기보다는 자연 속에서 한가롭게 시간을 보내는 과정 자체를 즐기는 '유유자적'한 태도를 보여줍니다." },
+            { question: "이 노래의 형식적 특징에 대한 설명으로 적절하지 않은 것은?", options: ["평시조가 여러 수 이어진 연시조이다.", "각 수는 3장 6구, 45자 내외의 정형성을 보인다.", "각 수의 종장 첫 구는 3음절로 고정되어 있다.", "봄, 여름, 가을, 겨울의 4수로 구성되어 있다.", "각 수마다 후렴구가 반복되어 음악성을 높이고 있다."], answer: 4, explanation: "이 노래는 고려가요가 아닌 조선 시대의 시조입니다. 따라서 연을 나누거나 음악성을 높이는 후렴구가 나타나지 않습니다. 후렴구는 고려가요의 대표적인 형식적 특징입니다." },
+            { question: "이 노래에 나타난 '자연(강호)'의 기능으로 가장 적절한 것은?", options: ["화자가 극복해야 할 시련과 고난의 공간", "화자가 벗어나고 싶어 하는 속박의 공간", "화자가 풍류를 즐기며 만족감을 느끼는 공간", "치열한 삶의 경쟁이 벌어지는 투쟁의 공간", "임과의 이별로 인해 슬픔을 느끼는 공간"], answer: 2, explanation: "화자는 '강호'에서 봄의 흥취, 여름의 한가로움, 가을의 풍요, 겨울의 소박함을 느끼며 만족스러운 삶을 살아갑니다. 따라서 '강호'는 화자에게 풍류와 안식을 주는 긍정적인 공간입니다." },
+            { question: "다음 중 이 노래의 주제 의식과 가장 관련 깊은 한자성어는?", options: ["결초보은(結草報恩)", "안빈낙도(安貧樂道)", "백척간두(百尺竿頭)", "전전반측(輾轉反側)", "사면초가(四面楚歌)"], answer: 1, explanation: "'안빈낙도'는 가난한 생활 속에서도 편안한 마음으로 도를 즐긴다는 뜻으로, 소박한 음식과 옷차림에도 만족하며 자연 속에서 한가롭게 살아가는 화자의 삶의 태도를 가장 잘 나타냅니다." },
+            { question: "화자가 '이 몸이 ~옴도 역군은이샷다'라는 구절을 반복하는 궁극적인 이유는?", options: ["자신이 벼슬을 하지 못하는 것에 대한 불만을 드러내기 위해", "자신이 자연에 묻혀 사는 것이 임금의 뜻임을 강조하기 위해", "자연 속에서의 즐거움이 속세의 삶보다 못함을 인정하기 위해", "자신이 사대부로서의 본분(충의)을 잊지 않고 있음을 드러내기 위해", "임금에게 다시 관직에 등용해달라고 요청하기 위해"], answer: 3, explanation: "사대부에게 자연에서의 삶(도)과 임금에 대한 충성(충)은 모두 중요한 가치입니다. 화자는 자연을 즐기면서도 그 즐거움의 근원을 임금의 은혜로 돌림으로써, 자연에 은거하고 있지만 신하로서의 본분인 '충'을 잊지 않았음을 드러내고 있습니다." },
+            { question: "[동사]에서 '삿갓'과 '뉘역'이 상징하는 바로 가장 적절한 것은?", options: ["부유하고 화려한 삶", "전쟁의 비극성", "자연과의 단절", "소박하고 검소한 삶", "신선과 같은 초월적 삶"], answer: 3, explanation: "'삿갓'과 '뉘역(도롱이)'은 비나 눈을 피하기 위해 입는 간단한 복장으로, 화려한 의복과는 거리가 멉니다. 이는 화자가 추구하는 가난하지만 만족스러운, 즉 소박하고 검소한 삶을 상징합니다." },
+            { question: "이 노래의 화자와 <보기>의 화자가 공통적으로 추구하는 가치는? <보기> 십 년(十年)을 경영(經營)하여 초려삼간(草廬三間) 지어 내니 / 나 한 칸 달 한 칸에 청풍(淸風) 한 칸 맡겨 두고 / 강산(江山)은 들일 데 없으니 둘러 두고 보리라.", options: ["부국강병", "입신양명", "자연 친화", "수신제가", "실사구시"], answer: 2, explanation: "두 작품의 화자 모두 자연(강호, 강산) 속에서 소박한 집(초당, 초려삼간)을 짓고 자연과 더불어 살아가는 삶을 추구합니다. 이는 자연과 가까이하며 조화롭게 살아가려는 '자연 친화' 사상을 공통적으로 보여줍니다." },
+            { question: "이 노래가 후대 '강호 시가' 문학에 미친 영향으로 가장 적절한 것은?", options: ["이별의 정한이라는 새로운 주제를 개척했다.", "자연에서의 삶과 연군지정을 결합하는 전형을 마련했다.", "평민들의 일상 언어를 사용하여 시조의 저변을 확대했다.", "현실의 부조리를 날카롭게 비판하는 경향을 낳았다.", "한글이 아닌 한문으로만 시를 짓는 전통을 세웠다."], answer: 1, explanation: "이 작품은 자연 속에서의 한가로운 삶을 노래하면서도, 그 모든 것을 임금의 은혜로 돌리는 구조를 통해 '자연 친화'와 '연군지정'이라는 두 가치를 조화롭게 결합했습니다. 이는 이후 많은 사대부들의 강호 시가에서 반복적으로 나타나는 전형적인 모습이 되었습니다." },
+            { question: "다음 중 이 노래의 계절적 배경과 소재의 연결이 바르지 않은 것은?", options: ["봄 - 탁료계변, 금린어", "여름 - 초당, 강파", "가을 - 소정, 그물", "겨울 - 눈, 삿갓", "봄 - 눈, 바람"], answer: 4, explanation: "'눈'과 '바람'은 각각 겨울과 여름의 계절감을 나타내는 소재입니다. 봄의 소재로는 '미친 흥', '금린어' 등이 제시되었습니다." },
+            { question: "[춘사]의 '미친 흥'이 의미하는 바로 가장 적절한 것은?", options: ["임금에 대한 그리움으로 인한 괴로움", "속세에 대한 미련으로 인한 내적 갈등", "봄의 생동감 넘치는 자연을 보며 느끼는 주체할 수 없는 즐거움", "지나친 음주로 인해 이성을 잃은 상태", "자신의 처지에 대한 분노와 좌절감"], answer: 2, explanation: "'미친 흥'은 봄이 되어 만물이 생동하는 자연의 모습을 보며, 화자의 내면에서 솟아나는 억누를 수 없는 즐거움과 흥취를 과장되게 표현한 것입니다." },
+            { question: "이 노래의 전체적인 분위기로 가장 적절한 것은?", options: ["비장하고 긴장감이 넘치는 분위기", "한가롭고 여유로운 분위기", "슬프고 애상적인 분위기", "해학적이고 풍자적인 분위기", "신비롭고 환상적인 분위기"], answer: 1, explanation: "화자는 자연 속에서 '한가롭게', '일 없이', '소일하며' 지내는 모습을 노래합니다. 이는 속세의 번잡함에서 벗어나 자연을 즐기는 한가롭고 여유로운 분위기를 형성합니다." },
+            { question: "이 노래의 각 연이 유기적인 통일성을 갖게 하는 가장 중요한 요소는?", options: ["화자의 감정 변화", "공간의 이동", "종장의 유사한 구절 반복", "각 연의 길이가 동일함", "등장인물 간의 대화"], answer: 2, explanation: "각 연은 계절에 따라 다른 내용을 노래하지만, 종장이 모두 '이 몸이 ~옴도 역군은이샷다'라는 유사한 구절로 마무리됩니다. 이 반복되는 종장은 각 연을 하나로 묶어주며 작품 전체에 통일성과 안정감을 부여하는 핵심적인 역할을 합니다." },
+            { question: "이 노래를 읽은 독자의 감상으로 적절하지 않은 것은?", options: ["'자연 속에서 저렇게 여유롭게 사는 삶이 부럽다.'", "'모든 것을 임금의 은혜로 돌리는 모습에서 당시 사대부의 가치관을 엿볼 수 있어.'", "'계절마다 다른 즐거움을 찾는 모습이 인상 깊어.'", "'화자가 자연을 즐기면서도 속세의 정치 현실을 완전히 잊지는 못한 것 같아.'", "'가난한 삶에 대한 화자의 불만과 고통이 절절하게 느껴져.'"], answer: 4, explanation: "이 노래의 화자는 '탁료(막걸리)', '초당(초가집)', '삿갓' 등 소박한 삶의 모습에 만족하며 즐거움을 느끼는 '안빈낙도'의 태도를 보입니다. 가난에 대한 불만이나 고통은 드러나지 않습니다." },
+            { question: "이 노래와 같은 '강호가도' 문학이 조선 시대 사대부들에게 인기가 있었던 이유로 가장 적절한 것은?", options: ["자연을 통해 현실 정치의 부조리를 우회적으로 비판할 수 있었기 때문에", "자연에 은거하는 삶과 임금에 대한 충성심이라는 두 가지 가치를 동시에 충족시킬 수 있었기 때문에", "자연의 아름다움을 노래하는 것이 입신양명의 가장 빠른 길이었기 때문에", "당시 평민들 사이에서 유행하던 노래를 사대부들이 따라 불렀기 때문에", "농업 기술의 발달을 장려하려는 국가적 정책의 일환이었기 때문에"], answer: 1, explanation: "조선 시대 사대부들은 치열한 정치 현실에서 벗어나 자연에 은거하며 정신적 안정을 찾고자 하는 욕구와, 그럼에도 신하로서 임금에 대한 충성을 다해야 한다는 의무감을 동시에 가지고 있었습니다. 강호가도 문학은 이 두 가지 상반된 가치를 조화롭게 표현할 수 있는 훌륭한 수단이었습니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

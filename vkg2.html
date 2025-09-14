@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공통국어 2 학습 - 비상(강호영)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .chapter-link {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .chapter-link:hover {
+            color: #2563eb; /* Tailwind's blue-600 */
+            font-weight: 500;
+        }
+        .dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .dropdown-item {
+            padding-left: 1.5rem; /* Indentation */
+        }
+        .has-dropdown:hover .dropdown {
+            max-height: 500px; /* Max height when expanded */
+        }
+        .dropdown-toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        .has-dropdown:hover .dropdown-toggle-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="app" class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-800">공통국어 2 학습</h1>
+            <p class="text-lg text-gray-600 mt-2">비상(강호영) 자습서 기반</p>
+        </header>
+
+        <!-- Main Menu (Table of Contents) -->
+        <main>
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-700">학습 목차</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Unit 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-blue-700 mb-4 border-b-2 border-blue-200 pb-2">1. 시야를 넓히는 말과 글</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+인공+지능을+보는+다양한+관점', '_blank');">01 인공 지능을 보는 다양한 관점</li>
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+생각을+나누는+독서와+발표', '_blank');">02 생각을 나누는 독서와 발표</li>
+                    </ul>
+                </div>
+
+                <!-- Unit 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-green-700 mb-4 border-b-2 border-green-200 pb-2">2. 우리 삶을 비추는 한국 문학</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="has-dropdown">
+                            <div class="flex justify-between items-center chapter-link">
+                                <span>01 고전 시가</span>
+                                <svg class="w-4 h-4 dropdown-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <ul class="dropdown mt-2 space-y-2 text-sm">
+                                <li class="chapter-link dropdown-item" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+청산별곡', '_blank');">- 청산별곡</li>
+                                <li class="chapter-link dropdown-item" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+십+년을+경영하여', '_blank');">- 십 년을 경영하여</li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                             <div class="flex justify-between items-center chapter-link">
+                                <span>02 고전 문학의 계승</span>
+                                <svg class="w-4 h-4 dropdown-toggle-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <ul class="dropdown mt-2 space-y-2 text-sm">
+                                <li class="chapter-link dropdown-item" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+속미인곡', '_blank');">- 속미인곡</li>
+                                <li class="chapter-link dropdown-item" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+진달래꽃', '_blank');">- 진달래꽃</li>
+                            </ul>
+                        </li>
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+춘향전', '_blank');">03 춘향전</li>
+                    </ul>
+                </div>
+
+                <!-- Unit 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-teal-700 mb-4 border-b-2 border-teal-200 pb-2">3. 생각하고 표현하는 우리</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+영화+업+비평문', '_blank');">01 영화 '업(UP)' 비평문</li>
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+복합양식으로+짜인+글과+자료', '_blank');">02 복합양식으로 짜인 글과 자료</li>
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+함께+쓰는+보고서', '_blank');">03 함께 쓰는 보고서</li>
+                    </ul>
+                </div>
+
+                <!-- Unit 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-4 border-b-2 border-indigo-200 pb-2">4. 살아 숨 쉬는 국어와 매체</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+변화하는+국어와+매체', '_blank');">01 변화하는 국어와 매체</li>
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+한글+맞춤법과+국어생활', '_blank');">02 한글 맞춤법과 국어생활</li>
+                    </ul>
+                </div>
+
+                <!-- Unit 5 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-orange-700 mb-4 border-b-2 border-orange-200 pb-2">5. 문제를 해결하는 지혜</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+함께하는+협상과+소통', '_blank');">01 함께하는 협상과 소통</li>
+                        <li class="chapter-link" onclick="window.open('https://search.naver.com/search.naver?query=공통국어2+비상+강호영+논증하는+글+쓰기', '_blank');">02 논증하는 글 쓰기</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

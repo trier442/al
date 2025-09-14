@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-3. 흥보전</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #dc2626; /* Red color for this unit */
+            color: #991b1b;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #fee2e2;
+            border-color: #fca5a5;
+        }
+        .quiz-option.selected {
+            background-color: #fecaca;
+            border-color: #f87171;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-red-800">4-3. 웃음, 그 속에 담긴 현실</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 흥보전 (작자 미상)</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-red-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-red-800">■ 갈래:</strong> 판소리계 소설, 고전 소설</p>
+                    <p><strong class="text-red-800">■ 성격:</strong> 해학적, 풍자적, 교훈적, 권선징악적</p>
+                    <p><strong class="text-red-800">■ 배경:</strong> 조선 후기</p>
+                    <p><strong class="text-red-800">■ 시점:</strong> 전지적 작가 시점</p>
+                    <p><strong class="text-red-800">■ 주제:</strong> 형제간의 우애와 권선징악</p>
+                    <p><strong class="text-red-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>해학과 풍자를 통해 웃음과 비판 의식을 동시에 드러냄.</li>
+                        <li>선한 흥보와 악한 놀보의 대립을 통해 주제를 선명하게 보여줌.</li>
+                        <li>판소리의 영향을 받아 운문체와 산문체가 섞여 있고, 리듬감이 느껴지는 문체가 특징임.</li>
+                        <li>'착한 사람은 복을 받고 악한 사람은 벌을 받는다'는 권선징악의 전형적인 주제를 따름.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 줄거리 및 인물 소개 -->
+            <section class="exam-section">
+                <h4>2. 줄거리 및 인물 소개</h4>
+                <div class="space-y-4 text-sm sm:text-base">
+                    <p><strong>■ 전체 줄거리:</strong> 착한 동생 흥보는 욕심 많은 형 놀보에게 부모의 유산을 모두 빼앗기고 쫓겨나 가난하게 산다. 어느 날 흥보는 구렁이에게 쫓기던 제비의 다리를 고쳐주고, 이듬해 봄 제비는 보은의 의미로 박씨 하나를 물어다 준다. 흥보 부부가 그 박씨를 심어 얻은 박을 타자, 그 속에서 온갖 금은보화가 쏟아져 나와 큰 부자가 된다. 이 소식을 들은 놀보는 일부러 제비 다리를 부러뜨리고 억지로 고쳐준 뒤 박씨를 얻는다. 하지만 놀보가 얻은 박 속에서는 도깨비, 상인, 장수 등이 나와 놀보의 재산을 모두 빼앗고 벌을 준다. 모든 것을 잃고 잘못을 뉘우친 놀보를 흥보가 용서하고 재산을 나눠주며 함께 행복하게 산다.</p>
+                    <p><strong>■ 인물 소개:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>흥보:</strong> 착하고 정이 많으며 형제간의 우애를 중시하는 인물. 선(善)을 대표하며, 비현실적일 정도로 착한 인물로 그려짐.</li>
+                        <li><strong>놀보:</strong> 욕심 많고 심술궂으며, 돈을 위해서라면 비인간적인 행동도 서슴지 않는 인물. 악(惡)을 대표하며, 풍자의 대상이 됨.</li>
+                        <li><strong>흥보 아내:</strong> 남편을 위하고 마음씨가 고우나, 극심한 가난에 힘들어하는 현실적인 모습을 보이기도 함.</li>
+                        <li><strong>제비:</strong> 흥보에게는 은혜를 갚고 놀보에게는 벌을 내리는 초월적 존재. 권선징악의 주제를 실현하는 매개체 역할을 함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. 장면별 상세 해설 -->
+            <section class="exam-section">
+                <h4>3. 장면별 상세 해설</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">[발단] 흥보의 수난</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>놀보는 부모의 유산을 독차지하고 동생 흥보 부부를 내쫓는다. 흥보는 온갖 궂은일을 하지만 가난에서 벗어나지 못하고, 놀보에게 양식을 구하러 갔다가 매만 맞고 돌아오는 등 수난을 겪는다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">[전개] 흥보의 선행과 보상</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>흥보는 구렁이에게 쫓겨 다리가 부러진 제비를 발견하고 정성껏 치료해준다.</li>
+                             <li>이듬해 돌아온 제비는 흥보의 은혜에 보답하기 위해 박씨를 물어다 준다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">[위기] 흥보의 발복(發福)</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>흥보 부부가 박씨를 심어 열린 거대한 박을 타자, 그 속에서 금은보화와 온갖 귀한 물건들이 쏟아져 나와 하루아침에 큰 부자가 된다. (전기적 요소)</li>
+                        </ul>
+                    </div>
+                     <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">[절정] 놀보의 악행과 응보</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>흥보가 부자가 된 소식을 들은 놀보는 배가 아파 똑같이 따라 하기로 한다. 놀보는 일부러 제비 다리를 부러뜨리고 대충 고쳐준 뒤 박씨를 얻는다.</li>
+                             <li>놀보가 탐욕에 가득 차 박을 타자, 박 속에서는 도깨비, 상인, 장수, 기생 등이 나와 놀보의 재산을 모두 빼앗고 놀보를 벌한다. (전기적 요소)</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">[결말] 놀보의 개과천선과 형제애의 회복</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>알거지가 된 놀보는 자신의 잘못을 뉘우친다.</li>
+                            <li>흥보는 그런 놀보를 용서하고 자신의 재산을 나누어 주며, 형제는 우애를 회복하고 함께 행복하게 산다. (권선징악 주제 실현)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 소설에 대한 설명으로 가장 적절한 것은?", options: ["역사적 인물의 영웅적인 일생을 다루고 있다.", "선한 인물과 악한 인물의 대비를 통해 주제를 드러낸다.", "인물 간의 심리 묘사를 중심으로 사건을 전개한다.", "비극적인 결말을 통해 삶의 무상함을 보여준다.", "자연의 아름다움을 예찬하는 것을 주된 목적으로 한다."], answer: 1, explanation: "이 소설은 선량하고 착한 '흥보'와 욕심 많고 심술궂은 '놀보'라는 두 인물을 극명하게 대비시켜, '착한 일을 하면 복을 받고 악한 일을 하면 벌을 받는다'는 권선징악의 주제를 선명하게 보여줍니다." },
+            { question: "이 소설의 서술상 특징으로 적절하지 않은 것은?", options: ["판소리 사설의 영향을 받아 율동적인 문체가 나타난다.", "서술자가 인물의 심리나 사건의 전말을 모두 알고 서술한다.", "인물의 행동을 과장되고 우스꽝스럽게 묘사하여 웃음을 유발한다.", "작품 속 주인공이 자신의 이야기를 직접 전달하는 방식을 취한다.", "장면의 극대화를 통해 특정 장면을 길게 늘여 서술하기도 한다."], answer: 3, explanation: "이 소설은 서술자가 작품 밖에 있으면서 모든 인물과 사건을 알고 설명하는 '전지적 작가 시점'입니다. 작품 속 주인공이 직접 서술하는 '1인칭 주인공 시점'이 아닙니다." },
+            { question: "흥보가 부자가 되는 결정적인 계기는?", options: ["성실하게 일하여 많은 돈을 벌었다.", "형 놀보에게 유산을 나누어 받았다.", "다리를 고쳐준 제비가 물어다 준 박씨 덕분이다.", "우연히 땅속에서 금은보화를 발견했다.", "자식들을 부잣집에 팔아 돈을 마련했다."], answer: 2, explanation: "흥보의 선행(제비 다리 치료)에 대한 보상으로 제비가 박씨를 물어다 주고, 그 박에서 보물이 나와 부자가 됩니다. 이는 착한 행실이 복을 가져온다는 권선징악의 주제를 보여주는 핵심 사건입니다." },
+            { question: "놀보의 성격을 가장 잘 드러내는 행동은?", options: ["동생 흥보를 가엾게 여겨 재산을 나누어 준다.", "다친 제비를 발견하고 정성껏 치료해 준다.", "박에서 나온 재물을 이웃과 함께 나눈다.", "복을 받기 위해 일부러 제비 다리를 부러뜨린다.", "자신의 잘못을 깨닫고 흥보에게 먼저 용서를 구한다."], answer: 3, explanation: "자신의 이익(박씨)을 위해 살아있는 생명의 다리를 일부러 부러뜨리는 행동은, 목적을 위해 수단과 방법을 가리지 않는 놀보의 비인간적이고 탐욕스러운 성격을 극단적으로 보여주는 예입니다." },
+            { question: "이 소설에서 '제비'가 수행하는 역할로 가장 적절한 것은?", options: ["흥보와 놀보의 갈등을 중재하는 역할", "선한 인물에게는 상을, 악한 인물에게는 벌을 내리는 역할", "조선 후기 농촌의 실상을 고발하는 역할", "두 형제의 과거사를 설명해주는 역할", "작품에 비극적인 분위기를 더하는 역할"], answer: 1, explanation: "제비는 흥보의 선행에는 박씨로 보답하고, 놀보의 악행에는 벌을 내리는 초월적인 존재로 기능합니다. 즉, 권선징악의 주제를 실현하는 핵심적인 매개체 역할을 합니다." },
+            { question: "이 소설의 주제 의식을 가장 잘 나타내는 한자성어는?", options: ["결초보은(結草報恩)", "자업자득(自業自得)", "형설지공(螢雪之功)", "권선징악(勸善懲惡)", "새옹지마(塞翁之馬)"], answer: 3, explanation: "'권선징악'은 착한 일을 권하고 악한 일을 벌한다는 뜻으로, 착한 흥보가 복을 받고 악한 놀보가 벌을 받는 이 소설의 핵심 주제를 가장 잘 나타내는 한자성어입니다." },
+            { question: "다음 중 '해학'과 '풍자'에 대한 설명으로 옳은 것은?", options: ["해학은 공격적 웃음, 풍자는 동정적 웃음이다.", "해학은 비판의식, 풍자는 연민을 바탕으로 한다.", "해학은 대상을 긍정적으로 감싸는 웃음, 풍자는 대상을 비판하는 웃음이다.", "해학은 지배층, 풍자는 피지배층을 대상으로 한다.", "해학과 풍자는 웃음을 유발하지 않는다는 공통점이 있다."], answer: 2, explanation: "해학은 대상에 대한 연민과 동정을 바탕으로 하는 따뜻하고 포용적인 웃음(흥보의 행동)을, 풍자는 대상의 부정적인 면을 비판하고 공격하기 위한 날카로운 웃음(놀보의 행동)을 의미합니다." },
+            { question: "이 소설이 '판소리계 소설'임을 짐작하게 하는 근거로 적절하지 않은 것은?", options: ["운문체와 산문체가 섞여서 나타난다.", "서술자가 직접 개입하여 인물이나 상황을 논평하는 부분이 있다.", "비속어나 방언이 사용되어 생동감을 준다.", "인물의 내면 심리를 중심으로 사건이 전개된다.", "장면의 극대화를 통해 특정 장면이 길게 서술된다."], answer: 3, explanation: "판소리계 소설은 판소리 광대가 청중 앞에서 공연하던 것을 바탕으로 하므로, 인물의 내면 심리를 치밀하게 묘사하기보다는 행동과 대화, 그리고 서술자의 개입을 중심으로 사건을 흥미진진하게 전개하는 특징이 있습니다." },
+            { question: "놀보가 박을 탔을 때 나온 것이 아닌 것은?", options: ["금은보화", "상인들", "초라니와 몽둥이", "송사하는 사람들", "놀보를 벌하는 장수"], answer: 0, explanation: "금은보화는 흥보의 박에서 나온 것입니다. 놀보의 박에서는 놀보를 벌주고 재산을 빼앗아가는 부정적인 존재들이 나왔습니다." },
+            { question: "이 소설의 결말이 주는 교훈으로 가장 적절한 것은?", options: ["부자가 되려면 운이 따라야 한다.", "형제간에는 경쟁을 통해 발전해야 한다.", "악한 행동은 결국 자신에게 불행으로 돌아온다.", "가난은 개인의 나태함 때문에 발생하는 것이다.", "자연을 소중히 여기지 않으면 벌을 받는다."], answer: 2, explanation: "놀보가 자신의 악행으로 인해 벌을 받고 모든 것을 잃는 결말은, '자신이 저지른 일의 결과를 스스로 받는다'는 '자업자득'과 '악한 행동은 벌을 받는다'는 '권선징악'의 교훈을 명확하게 보여줍니다." },
+            { question: "이 소설의 배경인 '조선 후기'의 사회상으로 추리하기 어려운 것은?", options: ["부의 축적을 최우선으로 여기는 물질 만능주의의 대두", "농업 생산력의 발달로 새로운 부농 계층의 등장", "기존의 신분 질서가 흔들리는 모습", "모든 백성이 평등하게 대우받는 이상 사회", "가난한 농민들의 비참한 생활상"], answer: 3, explanation: "놀보가 부를 축적하고 흥보가 가난에 시달리는 모습, 유산 상속을 둘러싼 갈등 등은 당시의 물질 만능주의와 신분 질서의 동요를 보여줍니다. 모든 백성이 평등한 이상 사회의 모습과는 거리가 멉니다." },
+            { question: "서술자가 직접 개입하는 부분(편집자적 논평)에 해당하는 것은?", options: ["흥보가 다친 제비를 불쌍히 여겨 집으로 데려왔다.", "놀보 놈 심술 보소. 저러다 큰 코 다칠 줄을 모르는가.", "박 속에서는 눈부신 광채와 함께 금덩이가 쏟아졌다.", "놀보는 제비 다리를 일부러 부러뜨렸다.", "흥보는 형님을 용서하고 재산을 나누어 주었다."], answer: 1, explanation: "'놀보 놈 심술 보소.'와 같이 서술자가 이야기의 흐름을 잠시 멈추고 자신의 생각이나 감정을 직접 드러내어 인물을 평가하는 부분을 '편집자적 논평'이라고 합니다. 이는 판소리계 소설의 대표적인 특징입니다." },
+            { question: "흥보와 놀보의 성격을 가장 잘 보여주는 대립적 가치관은?", options: ["전통 vs 현대", "개인주의 vs 집단주의", "물질적 가치 vs 정신적 가치", "이성 vs 감성", "운명론 vs 자유의지"], answer: 2, explanation: "놀보는 돈과 재물이라는 '물질적 가치'를 인생의 최고 목표로 삼는 반면, 흥보는 가난 속에서도 형제간의 우애와 선량함이라는 '정신적 가치'를 지키며 살아갑니다." },
+            { question: "이 소설에 나타난 '웃음'의 기능으로 적절하지 않은 것은?", options: ["독자의 흥미를 유발하고 작품에 몰입하게 한다.", "등장인물의 비극성을 강조하여 슬픔을 극대화한다.", "부정적인 현실과 인물을 비판하는 풍자의 수단이 된다.", "인물의 어리석음을 드러내어 해학적인 분위기를 조성한다.", "작품의 주제를 무겁지 않고 재미있게 전달한다."], answer: 1, explanation: "이 소설의 웃음(해학, 풍자)은 인물의 비극성을 강조하기보다는, 오히려 비판해야 할 대상을 우스꽝스럽게 만들어 독자가 가벼운 마음으로 비판에 동참하게 하는 역할을 합니다. 슬픔을 극대화하는 것과는 거리가 멉니다." },
+            { question: "이 작품의 근원 설화로 알려진 이야기는?", options: ["콩쥐팥쥐 설화", "바보 온달 설화", "방이 설화", "선녀와 나무꾼 설화", "단군 신화"], answer: 2, explanation: "<흥보전>은 형제간의 갈등과 동물을 통한 보은이라는 점에서 '방이 설화'와 유사한 구조를 가지고 있어, '방이 설화'가 근원 설화 중 하나로 알려져 있습니다." },
+            { question: "놀보 아내가 밥주걱으로 흥보의 뺨을 때리는 장면에 대한 설명으로 가장 적절한 것은?", options: ["놀보 부부의 비정하고 인색한 성격을 단적으로 보여준다.", "흥보의 게으른 성격을 비판하는 장면이다.", "당시 농촌의 식량 부족 문제를 상징적으로 보여준다.", "두 인물 간의 갈등이 해소되는 계기가 된다.", "작품 전체에서 가장 비극적인 장면이다."], answer: 0, explanation: "밥을 얻으러 온 동생의 뺨을 밥이 붙은 주걱으로 때리는 행위는, 인정과 도덕성마저 상실한 놀보 부부의 극단적인 인색함과 비정함을 해학적으로 보여주는 대표적인 장면입니다." },
+            { question: "이 소설의 결말이 '권선징악'이라는 주제를 실현하면서도 현실적인 측면을 보여준다고 할 때, 그 근거는?", options: ["놀보가 자신의 잘못을 전혀 뉘우치지 않기 때문에", "흥보가 놀보를 끝까지 용서하지 않기 때문에", "놀보가 벌을 받은 후에도 부자가 되기 때문에", "흥보가 놀보에게 재산을 나누어 주며 형제애를 회복하기 때문에", "제비가 다시 나타나 놀보를 벌하기 때문에"], answer: 3, explanation: "단순히 놀보가 벌을 받는 것에서 끝나지 않고, 흥보가 그를 용서하고 재산을 나누어주며 함께 살아가는 결말은, '권선징악'을 실현하면서도 무너진 공동체(가족)의 질서를 회복하고 화합을 추구하는 당시 민중들의 현실적인 바람을 반영한 것으로 볼 수 있습니다." },
+            { question: "이 소설의 서술 방식이 독자에게 미치는 영향으로 가장 적절한 것은?", options: ["객관적인 거리 유지를 통해 냉철한 판단을 유도한다.", "서술자의 직접적인 평가를 통해 인물에 대한 고정관념을 형성한다.", "여러 가능성을 제시하여 결말을 예측하기 어렵게 만든다.", "치밀한 심리 묘사를 통해 인물의 내면에 깊이 공감하게 한다.", "감각적인 묘사를 통해 배경의 아름다움을 느끼게 한다."], answer: 1, explanation: "전지적 서술자가 '놀보 놈 심술 보소'와 같이 직접 인물을 평가하고 사건에 개입하기 때문에, 독자는 서술자가 제시하는 방향에 따라 인물을 파악하고 사건을 이해하게 됩니다. 이는 독자의 자유로운 상상을 제한하는 측면도 있습니다." },
+            { question: "이 소설을 읽은 독자의 반응으로 적절하지 않은 것은?", options: ["'놀보의 행동이 얄밉지만, 우스꽝스럽게 벌받는 모습에 통쾌했어.'", "'흥보가 너무 착하기만 해서 답답하게 느껴지기도 했어.'", "'판소리로 들으면 얼마나 더 재미있을까 궁금해져.'", "'흥보가 부자가 된 것은 순전히 운이 좋았기 때문이야.'", "'조선 후기 사람들은 형제간의 우애를 중요하게 생각했구나.'"], answer: 3, explanation: "흥보가 부자가 된 것은 단순히 운이 좋아서가 아니라, 그의 '선행'에 대한 보상이라는 인과 관계를 가지고 있습니다. 이는 작품의 핵심 주제인 '권선징악'과 직결되는 부분이므로, 운으로만 치부하는 것은 적절하지 않은 감상입니다." },
+            { question: "이 소설에 나타난 '박'의 기능으로 가장 적절한 것은?", options: ["인물의 선악을 시험하는 도구", "조선 후기 농업 기술의 발전을 상징", "흥보와 놀보의 갈등을 유발하는 원인", "선과 악을 판단하고 상벌을 내리는 장치", "자연의 풍요로움과 아름다움을 상징"], answer: 3, explanation: "박은 그 자체로 선악을 판단하는 것이 아니라, 제비가 가져다준 박씨에서 열린 것입니다. 박을 통해 흥보는 상을 받고 놀보는 벌을 받게 되므로, 박은 인물의 선악에 따라 상과 벌을 내리는, 즉 권선징악의 주제를 실현하는 초현실적인 장치라고 할 수 있습니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

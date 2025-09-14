@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-3. 논증하는 글 쓰기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e11d48;
+            color: #881337;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #fff1f2;
+            border-color: #fda4af;
+        }
+        .quiz-option.selected {
+            background-color: #ffe4e6;
+            border-color: #fb7185;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-rose-800">5-3. 논증하는 글 쓰기</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 논증의 방법과 실제</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-rose-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-rose-800">■ 갈래:</strong> 설명문 (작문 이론)</p>
+                    <p><strong class="text-rose-800">■ 성격:</strong> 분석적, 절차적, 논리적</p>
+                    <p><strong class="text-rose-800">■ 주제:</strong> 논증하는 글의 특성을 이해하고, 올바른 절차에 따라 설득력 있는 글 쓰기</p>
+                    <p><strong class="text-rose-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>'논증'의 개념을 주장과 근거의 관계로 설명하고, 타당한 근거의 중요성을 강조함.</li>
+                        <li>글쓰기 과정을 계획하기-내용 생성 및 조직하기-초고 쓰기-고쳐쓰기의 단계로 나누어 체계적으로 설명함.</li>
+                        <li>예상 독자 분석, 개요 작성, 반론 고려 등 설득력을 높이기 위한 구체적인 전략을 제시함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 논증하는 글쓰기의 단계별 상세 해설 -->
+            <section class="exam-section">
+                <h4>2. 논증하는 글쓰기의 단계별 상세 해설</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-rose-500">
+                        <p class="font-bold text-lg text-rose-800">[1단계] 계획하기</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>문제 상황 및 주제 선정:</strong> 사회적 쟁점이 되거나 해결이 필요한 문제 상황을 인식하고, 찬반 논란의 여지가 있는 구체적인 주제를 선정합니다. (예: '청소년의 SNS 사용, 이대로 괜찮은가?')</li>
+                            <li><strong>목적 및 예상 독자 분석:</strong> 글을 쓰는 목적(설득, 정보 제공 등)을 명확히 하고, 글을 읽게 될 독자의 연령, 지식수준, 가치관 등을 분석합니다. 독자의 입장을 고려해야 설득력을 높일 수 있습니다.</li>
+                            <li><strong>자신의 관점 정하기:</strong> 선정한 주제에 대해 찬성 또는 반대의 명확한 자신의 관점(주장)을 결정합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-rose-500">
+                        <p class="font-bold text-lg text-rose-800">[2단계] 내용 생성 및 조직하기</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>주장과 근거 마련:</strong> 자신의 주장을 뒷받침할 타당하고 신뢰성 있는 근거를 수집합니다. (예: 통계 자료, 전문가 의견, 연구 결과, 구체적인 사례 등)</li>
+                             <li><strong>예상 반론 및 재반박 준비:</strong> 내 주장과 반대되는 의견(예상 반론)을 미리 생각해보고, 그에 대해 다시 반박할 내용을 준비합니다. 이는 글의 논리적 깊이를 더하고 설득력을 크게 높입니다.</li>
+                             <li><strong>개요 작성:</strong> 서론-본론-결론의 구조에 맞춰 수집한 내용을 체계적으로 배열하여 글의 뼈대를 만듭니다.
+                                <ul class="list-decimal list-inside ml-6 mt-1">
+                                    <li><strong>서론:</strong> 문제 제기, 주제 선정 동기, 글의 방향 제시</li>
+                                    <li><strong>본론:</strong> 타당한 근거를 들어 자신의 주장을 논리적으로 전개, 예상 반론 및 재반박 제시</li>
+                                    <li><strong>결론:</strong> 본론의 내용을 요약 및 강조, 주장을 다시 한번 확인, 전망 제시</li>
+                                </ul>
+                             </li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-rose-500">
+                        <p class="font-bold text-lg text-rose-800">[3단계] 초고 쓰기 및 고쳐쓰기</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>초고 쓰기:</strong> 작성한 개요에 따라 글을 씁니다. 처음부터 완벽하게 쓰려 하기보다 내용 전달에 집중하여 빠르게 작성하는 것이 좋습니다.</li>
+                            <li><strong>고쳐쓰기:</strong> 완성된 초고를 여러 번 읽으며 수정하고 보완합니다.
+                                <ul class="list-decimal list-inside ml-6 mt-1">
+                                    <li><strong>글 전체 수준:</strong> 주제에서 벗어난 내용은 없는가? 글의 구조는 논리적인가?</li>
+                                    <li><strong>문단 수준:</strong> 각 문단의 중심 내용이 명확한가? 문단 간의 연결은 자연스러운가?</li>
+                                    <li><strong>문장 수준:</strong> 문법에 맞고 의미가 명확하게 전달되는가? 어색하거나 불필요한 표현은 없는가?</li>
+                                    <li><strong>단어 수준:</strong> 맞춤법, 띄어쓰기는 올바른가? 맥락에 맞는 적절한 단어를 사용했는가?</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 주요 개념 정리 -->
+            <section class="exam-section">
+                <h4>3. 주요 개념 정리</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>논증(Argumentation):</strong> 타당한 근거를 들어 자신의 주장이 참임을 증명하는 과정. 주장과 근거로 이루어짐.</li>
+                    <li><strong>주장(Claim):</strong> 글쓴이가 독자에게 믿게 하려는 핵심적인 생각이나 의견.</li>
+                    <li><strong>근거(Data/Warrant):</strong> 주장을 뒷받침하는 구체적인 사실, 자료, 이론 등. (객관성, 신뢰성, 타당성이 중요)</li>
+                    <li><strong>추론(Inference):</strong> 이미 알고 있는 판단(근거)을 바탕으로 새로운 판단(주장)을 이끌어 내는 사고 과정. (연역, 귀납, 유비 추론 등)</li>
+                    <li><strong>반론(Counterargument):</strong> 상대방의 주장이나 근거에 대해 반대하는 의견. 논증의 설득력을 높이기 위해 예상 반론을 고려하고 재반박하는 과정이 필요함.</li>
+                </ul>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "논증하는 글에 대한 설명으로 가장 적절한 것은?", options: ["개인의 감상을 자유롭게 표현하는 것을 목적으로 한다.", "객관적인 정보를 정확하게 전달하는 것을 목적으로 한다.", "타당한 근거를 들어 자신의 주장을 내세워 독자를 설득하는 것을 목적으로 한다.", "상상력을 바탕으로 허구의 세계를 창조하는 것을 목적으로 한다.", "대상의 특징을 그림처럼 생생하게 묘사하는 것을 목적으로 한다."], answer: 2, explanation: "논증하는 글(논설문)의 핵심 목적은 타당하고 신뢰성 있는 근거를 제시하여 자신의 주장이 옳다는 것을 증명하고, 이를 통해 독자의 생각이나 행동의 변화를 유도하는, 즉 '설득'하는 것입니다." },
+            { question: "논증의 3요소에 해당하지 않는 것은?", options: ["주장", "근거", "추론", "상상", "주장, 근거, 추론 모두 해당된다."], answer: 3, explanation: "논증은 '주장'과 이를 뒷받침하는 '근거', 그리고 근거로부터 주장을 이끌어내는 과정인 '추론'으로 구성됩니다. '상상'은 문학적 글쓰기에는 중요하지만, 논리적 증명을 요구하는 논증의 필수 요소는 아닙니다." },
+            { question: "논증하는 글의 '계획하기' 단계에서 할 일로 적절하지 않은 것은?", options: ["주제 정하기", "예상 독자 분석하기", "글쓰기 목적 정하기", "자신의 관점 정하기", "본문의 내용 요약하기"], answer: 4, explanation: "본문의 내용을 요약하는 것은 글을 다 쓴 후 '결론' 부분을 작성하거나, 글 전체를 '고쳐쓰기' 할 때 하는 활동입니다. '계획하기' 단계에서는 글의 방향과 틀을 설정합니다." },
+            { question: "주장을 뒷받침하는 '근거'가 갖추어야 할 조건으로 거리가 먼 것은?", options: ["주장과 긴밀하게 관련되어야 한다. (타당성)", "객관적인 사실이나 검증된 자료여야 한다. (객관성)", "믿을 만한 출처에서 나온 것이어야 한다. (신뢰성)", "독자의 감성에 호소할 수 있어야 한다. (감성)", "주장을 충분히 뒷받침할 수 있어야 한다. (충분성)"], answer: 3, explanation: "논증에서 근거는 논리적이고 이성적인 판단의 기반이 되어야 합니다. 감성에 호소하는 것은 설득 전략의 일부일 수는 있으나, 근거 자체가 갖추어야 할 필수 조건은 아닙니다. 오히려 지나친 감성적 호소는 논리적 오류를 낳을 수 있습니다." },
+            { question: "논증하는 글의 '본론'에 반드시 포함되어야 할 내용은?", options: ["흥미를 유발하는 일화", "주장에 대한 타당한 근거 제시", "글 전체 내용의 요약", "주제 선정 동기", "앞으로의 과제와 전망"], answer: 1, explanation: "본론은 논증의 핵심 부분으로, 서론에서 제시한 주장을 구체적이고 타당한 근거를 들어 논리적으로 증명하는 내용이 반드시 포함되어야 합니다." },
+            { question: "글의 설득력을 높이기 위해 '예상되는 반론과 그에 대한 재반박'을 제시하는 이유로 가장 적절한 것은?", options: ["글의 분량을 늘리기 위해", "독자를 혼란스럽게 만들기 위해", "자신의 주장이 가진 약점을 인정하기 위해", "자신의 주장이 여러 관점을 고려한 균형 잡힌 주장임을 보여주기 위해", "상대방의 주장을 무조건 비난하기 위해"], answer: 3, explanation: "예상되는 반론을 미리 언급하고 그것을 논리적으로 반박하면, 독자는 글쓴이가 한쪽 입장만 고수하는 것이 아니라 다양한 관점을 충분히 고려했다고 생각하게 됩니다. 이는 글 전체의 공정성과 설득력을 크게 높여줍니다." },
+            { question: "논증하는 글의 '서론'의 역할로 적절하지 않은 것은?", options: ["독자의 흥미를 유발하고 문제 상황을 제시한다.", "글을 쓰게 된 동기나 목적을 밝힌다.", "앞으로 전개될 내용의 순서나 범위를 안내한다.", "주장을 뒷받침하는 구체적인 근거를 상세히 나열한다.", "글의 중심 화제나 핵심 개념을 소개한다."], answer: 3, explanation: "구체적이고 상세한 근거를 나열하는 것은 '본론'의 역할입니다. 서론에서는 독자의 관심을 끌고 글의 전체적인 방향을 안내하는 역할을 합니다." },
+            { question: "다음은 어떤 추론 방식에 대한 설명인가? <보기> 구체적이고 개별적인 사례들(근거)을 종합하여 일반적인 원리나 법칙(주장)을 이끌어 내는 방식", options: ["연역 추론", "귀납 추론", "유비 추론", "변증법적 추론", "삼단 논법"], answer: 1, explanation: "개별 사례(소크라테스는 죽었다, 플라톤은 죽었다)에서 '모든 인간은 죽는다'는 일반적인 결론을 이끌어내는 방식이 '귀납 추론'입니다." },
+            { question: "논증하는 글을 '고쳐쓰기' 할 때, 글 전체 수준에서 점검해야 할 사항은?", options: ["맞춤법과 띄어쓰기가 올바른가?", "문장의 호응 관계가 자연스러운가?", "문단의 중심 내용이 명확한가?", "글의 내용이 주제에서 벗어나지 않았는가?", "어휘의 선택이 적절한가?"], answer: 3, explanation: "글 전체 수준의 고쳐쓰기는 글의 통일성, 즉 모든 내용이 하나의 주제를 향해 긴밀하게 연결되어 있는지를 점검하는 것입니다. 나머지는 문단, 문장, 단어 수준에서 점검할 사항입니다." },
+            { question: "다음 중 논증하는 글의 주제로 가장 적절한 것은?", options: ["나의 어린 시절 추억", "우리 동네 맛집 소개", "인공 지능의 발달 과정", "청소년의 화장, 허용해야 하는가?", "가을 하늘의 아름다움"], answer: 3, explanation: "논증하는 글의 주제는 찬성과 반대의 의견이 나뉠 수 있는 '쟁점'이 있는 것이어야 합니다. '청소년 화장 허용'은 찬반 논쟁이 가능한 주제이므로 논증하는 글의 주제로 적절합니다." },
+            { question: "주장에 대한 근거로 '전문가의 의견'을 사용할 때의 장점은?", options: ["글의 객관성과 공정성을 높일 수 있다.", "글의 전문성과 신뢰성을 높일 수 있다.", "글의 감성적인 측면을 강화할 수 있다.", "글을 더 재미있고 흥미롭게 만들 수 있다.", "글의 분량을 쉽게 늘릴 수 있다."], answer: 1, explanation: "해당 분야의 권위 있는 전문가의 의견을 인용하면, 내 주장이 개인적인 생각이 아니라 전문적인 지식에 기반하고 있음을 보여줄 수 있어 글의 신뢰도를 크게 높일 수 있습니다." },
+            { question: "논증하는 글의 개요를 작성하는 단계는 글쓰기의 어느 과정에 속하는가?", options: ["계획하기", "내용 생성하기", "내용 조직하기", "초고 쓰기", "고쳐쓰기"], answer: 2, explanation: "개요 작성은 수집한 내용(자료)들을 글의 구조(서론-본론-결론)에 맞게 체계적으로 배열하는 활동이므로 '내용 조직하기' 단계에 해당합니다." },
+            { question: "다음 중 논리적 오류를 범하고 있을 가능성이 가장 높은 주장은?", options: ["'통계청 자료에 따르면 청년 실업률이 증가했다.'", "'유명한 배우가 광고하는 화장품이니 분명 효과가 좋을 것이다.'", "'이 문제에 대해 전문가들은 대체로 비슷한 의견을 보였다.'", "'역사적 기록을 볼 때, 그 사건은 실제로 일어났다고 볼 수 있다.'", "'실험 결과, A물질이 B물질보다 효과가 뛰어난 것으로 나타났다.'"], answer: 1, explanation: "유명인이 광고한다는 사실이 그 제품의 품질을 보증하는 논리적인 근거가 될 수는 없습니다. 이는 권위에 호소하는 오류(잘못된 권위에의 호소)에 해당할 수 있습니다." },
+            { question: "논증하는 글의 '결론'에서 할 역할로 적절하지 않은 것은?", options: ["본론의 내용을 요약하고 강조하기", "자신의 주장을 다시 한번 확인하기", "글에서 미처 다루지 못한 점이나 앞으로의 전망 제시하기", "독자에게 감동을 주기 위해 새로운 일화 소개하기", "독자에게 실천을 촉구하거나 당부하기"], answer: 3, explanation: "결론은 글을 마무리하는 단락이므로, 본론에서 다루지 않은 새로운 내용이나 일화를 제시하는 것은 글의 완결성을 해칠 수 있습니다. 새로운 정보는 본론에서 제시해야 합니다." },
+            { question: "다음 <보기>의 논증 방식을 바르게 설명한 것은? <보기> 모든 사람은 죽는다. (대전제) / 소크라테스는 사람이다. (소전제) / 그러므로 소크라테스는 죽는다. (결론)", options: ["구체적인 사례에서 일반적인 원리를 이끌어내는 귀납이다.", "일반적인 원리에서 구체적인 사례의 결론을 이끌어내는 연역이다.", "두 대상의 유사성을 바탕으로 결론을 이끌어내는 유비 추론이다.", "정(正)-반(反)-합(合)의 과정을 거치는 변증법이다.", "원인과 결과를 분석하는 인과적 논증이다."], answer: 1, explanation: "이는 '모든 사람은 죽는다'는 일반적인 원리(대전제)를 바탕으로 '소크라테스'라는 구체적인 사례에 대한 결론을 이끌어내는 대표적인 연역 추론(삼단 논법)의 예입니다." },
+            { question: "논증하는 글쓰기에서 '예상 독자 분석'이 중요한 이유는?", options: ["독자의 수준에 맞춰 눈높이를 조절해야 설득력을 높일 수 있기 때문에", "독자의 신상 정보를 파악하여 글에 활용하기 위해", "독자의 수에 따라 글의 길이를 조절해야 하기 때문에", "독자의 경제적 수준을 파악하여 책값을 정하기 위해", "독자의 반론을 원천적으로 차단하기 위해"], answer: 0, explanation: "독자의 지식 수준, 가치관, 예상되는 반론 등을 미리 고려하여 그에 맞는 근거를 제시하고 표현 방식을 조절해야 독자를 효과적으로 설득할 수 있습니다." },
+            { question: "다음 중 타당한 근거로 사용하기에 가장 적절한 것은?", options: ["'내 친구가 그러는데 그게 맞대.'", "'인터넷 댓글을 보니 다들 그렇게 생각하더라.'", "'어젯밤 꿈에서 신이 그렇게 하라고 계시했어.'", "'2023년 OECD 발표 자료에 따르면 ~라고 한다.'", "'왠지 내 느낌에 그럴 것 같아.'"], answer: 3, explanation: "OECD와 같은 공신력 있는 기관에서 발표한 통계 자료는 객관성과 신뢰성이 높아 논증의 근거로 사용하기에 가장 적절합니다. 나머지는 개인적인 의견이나 출처가 불분명한 정보입니다." },
+            { question: "글의 논리적 흐름을 자연스럽게 하기 위해 문단과 문단을 연결하는 역할을 하는 것은?", options: ["주제문", "뒷받침 문장", "접속 표현", "인용", "각주"], answer: 2, explanation: "'그러나', '그리고', '따라서', '한편' 등과 같은 접속 표현은 앞뒤 문단이나 문장의 논리적 관계(역접, 순접, 인과 등)를 명확히 보여주어 글의 흐름을 자연스럽게 만들어 줍니다." },
+            { question: "논증하는 글을 읽는 바람직한 태도는?", options: ["글쓴이의 주장을 비판 없이 그대로 수용한다.", "글쓴이의 모든 주장을 일단 의심하고 본다.", "주장과 근거의 타당성을 따져보며 비판적으로 읽는다.", "글의 내용보다는 문장의 표현 방식에만 집중한다.", "자신의 기존 생각과 다른 내용은 무시하고 읽지 않는다."], answer: 2, explanation: "논증하는 글을 읽을 때는 글쓴이의 주장이 무엇인지, 그 주장을 뒷받침하는 근거가 타당하고 신뢰할 만한지, 주장과 근거의 연결이 논리적인지를 꼼꼼히 따져보는 비판적인 읽기 태도가 필요합니다." },
+            { question: "다음 중 논증이 반드시 필요한 상황은?", options: ["친구에게 자신의 하루 일과를 설명할 때", "여행지의 아름다운 풍경을 묘사할 때", "새로 나온 스마트폰의 사용법을 안내할 때", "학급 회의에서 '두발 자유화'에 대한 자신의 의견을 발표할 때", "어머니께 사랑한다는 내용의 편지를 쓸 때"], answer: 3, explanation: "'두발 자유화'는 찬성과 반대 의견이 나뉘는 쟁점이므로, 자신의 의견을 다른 사람에게 설득하기 위해서는 타당한 근거를 들어 논리적으로 증명하는 '논증'의 과정이 반드시 필요합니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

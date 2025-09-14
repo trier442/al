@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-1. 매체를 보는 다양한 시선 (심화판)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #e11d48; /* Rose color for this unit */
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #be123c;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f43f5e; /* Rose color for this unit */
+            color: #881337;
+        }
+        .exam-section h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #be123c;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .explanation-box {
+            background-color: #fff1f2;
+            border-left: 4px solid #fda4af;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+        }
+        .explanation-box p {
+            margin-bottom: 0.5rem;
+        }
+        .explanation-box strong {
+            color: #881337;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #fff1f2;
+            border-color: #fca5a5;
+        }
+        .quiz-option.selected {
+            background-color: #ffe4e6;
+            border-color: #f87171;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #f0fdf4;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-rose-700">3-1. 매체를 보는 다양한 시선 (심화판)</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 세상과 지혜롭게 소통하는 힘</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-rose-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-rose-800">■ 제재:</strong> (가) 인터넷 신문 기사, (나) 공익 광고</p>
+                    <p><strong class="text-rose-800">■ 성격:</strong> 분석적, 비평적, 설득적, 시사적</p>
+                    <p><strong class="text-rose-800">■ 주제:</strong> 매체 자료에 담긴 관점과 의도를 비판적으로 수용하고 자신의 관점을 담아 표현하는 태도</p>
+                    <p><strong class="text-rose-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>문자, 사진, 영상 등 여러 양식이 결합된 '복합양식' 자료의 특성을 이해함.</li>
+                        <li>매체 자료를 내용의 타당성, 정보의 신뢰성, 표현 방법의 적절성 측면에서 평가함.</li>
+                        <li>자신의 관점을 담아 매체 비평 자료를 제작하는 활동으로 학습을 심화함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 내용 상세 해설 (심화) -->
+            <section class="exam-section">
+                <h4>2. 제재별 심층 분석</h4>
+                
+                <div>
+                    <h5 class="text-xl font-bold text-rose-800 mb-4">[Part 1] 인터넷 신문 기사: 「인공지능 그림 ... 1위 논란」</h5>
+                    
+                    <h5>1. 글쓴이의 관점 및 의도</h5>
+                    <div class="explanation-box">
+                        <p><strong>- 관점:</strong> 글쓴이는 인공지능 그림에 대한 찬반 양론을 공정하게 소개하며 어느 한쪽에 치우치지 않는 <strong>중립적, 객관적 태도</strong>를 보입니다.</p>
+                        <p><strong>- 의도:</strong> 인공지능 기술의 발전이라는 사회적 변화 속에서 '예술의 본질은 무엇인가?', '인간의 역할은 무엇인가?'와 같은 근본적인 질문을 독자에게 던지고, <strong>인공지능과의 공존을 위한 사회적 논의와 성찰이 필요함</strong>을 강조하고자 합니다.</p>
+                    </div>
+
+                    <h5>2. 표현 방법 및 효과</h5>
+                    <div class="explanation-box">
+                        <p><strong>- 표제와 부제:</strong></p>
+                        <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>인용 활용:</strong> "악마의 영감을 받은 느낌"이라는 수상자의 말을 직접 인용하여 독자의 <strong>호기심을 자극</strong>합니다.</li>
+                            <li><strong>대조 활용:</strong> '예술의 죽음' 대 '예술의 개념 확장'과 같이 상반된 견해를 나란히 제시하여 기사의 <strong>핵심 쟁점을 명확히</strong> 보여줍니다.</li>
+                        </ul>
+                    </div>
+                     <div class="explanation-box">
+                        <p><strong>- 본문 서술 방식:</strong></p>
+                        <ul class="list-disc list-inside ml-4 text-sm">
+                             <li><strong>구체적 사례 제시:</strong> 제이슨 앨런의 수상 사건을 구체적으로 소개해 내용의 <strong>사실성과 현장감</strong>을 높입니다.</li>
+                             <li><strong>과거 사례와 유추:</strong> 카메라 발명 당시 화가들의 반발을 언급하며, 기술 발전에 따른 예술계의 논쟁이 반복되는 역사적 현상임을 보여주어 <strong>독자의 이해를 돕고 설득력을 강화</strong>합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="explanation-box">
+                        <p><strong>- 복합양식 자료 활용:</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>사진 및 영상:</strong> 인공지능이 만든 그림 '스페이스 오페라 극장' 사진과 관련 동영상을 제시하여, 인공지능 기술 수준에 대한 <strong>독자의 구체적인 이해</strong>를 돕습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="text-xl font-bold text-rose-800 mb-4 mt-10">[Part 2] 공익 광고: 「존중과 배려가 우리를 하나로 이어 줍니다」</h5>
+                    <h5>1. 제작자의 관점 및 의도</h5>
+                    <div class="explanation-box">
+                        <p><strong>- 관점:</strong> '존중과 배려'는 특정인만 실천하는 것이 아니라, 사회 구성원 모두가 서로에게 베풀어야 할 <strong>보편적이고 선순환적인 가치</strong>라고 봅니다.</p>
+                        <p><strong>- 의도:</strong> 시청자들이 광고를 통해 존중과 배려의 중요성을 깨닫고, <strong>일상생활에서 이를 적극적으로 실천하도록 유도</strong>하는 데 목적이 있습니다.</p>
+                    </div>
+
+                    <h5>2. 표현 방법 및 효과</h5>
+                    <div class="explanation-box">
+                        <p><strong>- 연출 방식 (장면 구성):</strong></p>
+                        <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>연쇄적 구성:</strong> 한 장면에서 도움을 받은 인물이 다음 장면에서 다른 사람을 돕는 인물로 역할이 전환됩니다. 이는 '존중과 배려'라는 가치가 <strong>계속해서 이어지고 확산되는 모습(선순환)</strong>을 시각적으로 효과적이게 보여줍니다.</li>
+                        </ul>
+                    </div>
+                     <div class="explanation-box">
+                        <p><strong>- 자막 및 문구:</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>반복과 대구:</strong> "모르는 <strong>사이지만</strong> 배려를 <strong>이어 가고</strong>", "문화는 <strong>다르지만</strong> 도움을 <strong>이어 가고</strong>" 와 같이 유사한 문장 구조를 반복하여 <strong>운율감을 형성하고 주제를 강력하게 강조</strong>합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="explanation-box">
+                        <p><strong>- 등장인물 설정:</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>다양성:</strong> 다양한 세대, 성별, 인종의 인물을 등장시켜, 존중과 배려는 <strong>모든 사회 구성원에게 해당되는 보편적 가치</strong>임을 효과적으로 전달합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제 (20문항)</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "인터넷 신문 기사 「인공지능 그림 ... 논란」의 글쓴이가 궁극적으로 전달하려는 메시지는?", options: ["인공지능 그림은 예술이 될 수 없다.", "인공지능 기술을 예술 창작에 적극 활용해야 한다.", "인공지능 시대에 예술의 본질과 인간의 역할에 대한 고민이 필요하다.", "과거의 예술가들은 새로운 기술에 지나치게 배타적이었다.", "미술전의 심사 기준을 더욱 강화해야 한다."], answer: 2, explanation: "글쓴이는 찬반 양론을 소개한 뒤, 결론에서 '예술을 예술답게 만드는 본질은 무엇이며, 인공 지능 시대에 인간의 역할은 무엇일까?'라는 질문을 던지며 사회적 성찰을 촉구하고 있습니다." },
+            { question: "기사의 표제와 부제에 사용된 표현 전략으로 적절하지 않은 것은?", options: ["수상자의 말을 직접 인용하여 흥미를 유발한다.", "상반된 견해를 대조하여 핵심 쟁점을 보여준다.", "통계 자료를 제시하여 내용의 신뢰성을 높인다.", "'논란'이라는 단어를 사용하여 기사의 성격을 암시한다.", "앞으로 다룰 내용을 요약하여 제시한다."], answer: 2, explanation: "표제와 부제에서는 인용, 대조, 핵심어 제시 등의 방법을 사용했지만, 구체적인 수치를 담은 통계 자료는 제시되지 않았습니다. 통계 자료는 주로 본문에서 신뢰성을 높이기 위해 사용됩니다." },
+            { question: "기사에서 '카메라 발명 당시 화가들의 비난'을 언급한 주된 이유는?", options: ["인공지능 기술이 카메라보다 더 뛰어나다는 것을 강조하기 위해", "과거 화가들의 생각이 틀렸음을 증명하기 위해", "샤를 보들레르의 비평가적 안목을 칭찬하기 위해", "새로운 기술의 등장에 따른 예술계의 논쟁이 역사적으로 반복되었음을 보여주기 위해", "사진 기술이 예술의 가장 치명적인 적임을 알리기 위해"], answer: 3, explanation: "과거의 유사한 사례(카메라 발명)를 끌어와 현재의 논쟁(AI 그림)이 특별하거나 갑작스러운 현상이 아님을 보여줌으로써, 독자들이 문제를 더 넓은 역사적 관점에서 이해하도록 돕는 유추의 방식을 사용했습니다." },
+            { question: "공익 광고 「존중과 배려가...」에서 사용된 표현 방법과 그 효과의 연결이 잘못된 것은?", options: ["연쇄적 장면 구성 - 선한 영향력의 확산과 순환을 시각화", "유사한 문장 구조 반복 - 주제 강조 및 운율감 형성", "다양한 인물 등장 - 존중과 배려의 보편적 가치 부각", "따뜻한 배경 음악 - 광고의 감성적 분위기 조성", "직설적인 명령형 문구 - 신속한 행동 변화 촉구"], answer: 4, explanation: "이 광고는 '~이어 갑니다'와 같은 서술형 문구를 사용하여 부드럽고 감성적으로 메시지를 전달하며 시청자의 자발적인 공감과 실천을 유도합니다. '지금 당장 실천하라'와 같은 직설적인 명령형 문구는 사용되지 않았습니다." },
+            { question: "다음 중 매체 자료를 비판적으로 수용하는 태도로 가장 거리가 먼 것은?", options: ["자료에 담긴 제작자의 숨은 의도를 파악하려 노력한다.", "제시된 정보가 사실인지, 믿을 만한 출처인지 확인한다.", "자신의 기존 생각과 다른 관점은 일단 배척하고 본다.", "표현 방법이 주제를 전달하는 데 효과적인지 평가한다.", "내용이 특정 집단에 대한 편견을 담고 있지는 않은지 살펴본다."], answer: 2, explanation: "매체를 비판적으로 수용한다는 것은 다양한 관점을 접하고 자신의 생각을 넓히는 과정입니다. 자신의 생각과 다르다고 무조건 배척하는 것은 비판적 수용이 아닌 편협한 태도입니다." },
+            { question: "하나의 매체에서 문자, 이미지, 영상, 소리 등이 결합하여 의미를 구성하는 특성을 무엇이라고 하는가?", options: ["쌍방향성", "신속성", "복합양식성", "객관성", "상업성"], answer: 2, explanation: "복합양식성(Multimodality)은 현대 매체의 중요한 특징으로, 다양한 기호 양식(문자, 이미지 등)이 함께 사용되어 의미를 풍부하고 효과적으로 전달하는 것을 말합니다." },
+            { question: "인공지능 그림을 옹호하는 측의 핵심 논리로 가장 적절한 것은?", options: ["인공지능이 인간보다 더 뛰어난 창의성을 가지고 있다.", "원하는 그림을 얻기 위해 정확한 문구를 입력하는 과정에 인간의 창의성이 개입된다.", "예술은 본래 인간의 영역이 아니므로 기계가 만들어도 상관없다.", "인공지능 그림은 제작 비용이 저렴하여 대중적이다.", "모든 종류의 기술은 예술로 인정받아야 한다."], answer: 1, explanation: "기사 본문에서 옹호하는 측은 '원하는 그림을 얻기 위해서는 정확한 문구를 입력해야' 하며 '이것이야말로 기계가 아니라 인간 고유의 영역'이라고 주장합니다. 즉, 인공지능을 창의적인 도구로 활용하는 인간의 역할에 주목합니다." },
+            { question: "공익 광고에서 '돈쭐 내러 왔어요'라는 대사를 사용한 효과로 가장 적절한 것은?", options: ["광고의 상업적인 목적을 명확히 드러낸다.", "기성세대에게 익숙한 표현으로 공감대를 형성한다.", "최신 유행어(신조어)를 사용하여 젊은 세대의 관심과 공감을 유도한다.", "경제적인 용어를 사용하여 광고의 전문성을 높인다.", "폭력적인 단어를 사용하여 시청자에게 충격을 준다."], answer: 2, explanation: "'돈쭐'은 '돈으로 혼쭐을 내준다'는 의미의 신조어로, 선한 영향력을 보여준 가게의 물건을 팔아준다는 긍정적인 의미로 사용됩니다. 이를 활용하여 젊은 시청자들의 흥미와 공감을 이끌어내고 있습니다." },
+            { question: "매체 비평 자료를 작성할 때 고려할 사항으로 적절하지 않은 것은?", options: ["자신의 주관적인 감상만을 길게 나열한다.", "매체 자료의 내용과 표현 방식을 분석한다.", "자신의 관점을 뒷받침할 타당한 근거를 제시한다.", "다른 사람의 비평을 참고하여 관점을 넓힌다.", "긍정적인 측면과 부정적인 측면을 균형 있게 살핀다."], answer: 0, explanation: "매체 비평은 단순히 '좋았다', '싫었다'는 식의 감상문이 아닙니다. 작품에 대한 분석을 바탕으로 자신의 관점을 논리적인 근거를 들어 평가하는 글입니다." },
+            { question: "인터넷 신문 기사의 특징으로 보기 어려운 것은?", options: ["독자가 댓글을 통해 즉각적으로 반응하고 소통할 수 있다.", "하이퍼링크를 통해 관련된 다른 기사로 쉽게 이동할 수 있다.", "기사가 한번 발행되면 내용을 수정하거나 삭제할 수 없다.", "사진, 동영상 등 다양한 복합양식 자료를 활용할 수 있다.", "해시태그(#)를 이용해 핵심 내용을 요약하여 제시할 수 있다."], answer: 2, explanation: "인터넷 신문 기사는 인쇄된 신문과 달리, 오타를 수정하거나 새로운 정보가 발생했을 때 내용을 쉽게 수정하고 업데이트할 수 있다는 특징이 있습니다." },
+            { question: "공익 광고의 주된 목적으로 가장 알맞은 것은?", options: ["특정 상품의 판매 촉진", "기업의 긍정적 이미지 제고", "정치적 이념의 선전", "사회 문제에 대한 공감대 형성 및 행동 변화 유도", "오락적 정보 제공을 통한 즐거움 추구"], answer: 3, explanation: "공익 광고는 상업적, 정치적 목적이 아닌, 사회 전체의 이익을 위해 환경 보호, 생명 존중, 차별 해소 등과 같은 사회 문제에 대한 사람들의 인식을 개선하고 바람직한 행동을 유도하는 것을 목적으로 합니다." },
+            { question: "인공지능 그림에 대해 '예술의 죽음'이라고 비판하는 사람들이 우려하는 바로 가장 적절한 것은?", options: ["인공지능 그림의 가격이 너무 비싸다는 점", "인간 예술가의 노력과 고유한 창작 과정의 가치가 훼손된다는 점", "인공지능이 인간의 일자리를 모두 빼앗을 것이라는 점", "그림을 그리는 데 시간이 너무 오래 걸린다는 점", "인공지능 프로그램 사용법이 너무 복잡하다는 점"], answer: 1, explanation: "'예술의 죽음'이라는 표현은, 예술을 인간의 고유한 정신 활동과 노력의 산물로 볼 때, 기계가 손쉽게 만들어내는 결과물이 그 가치를 위협하고 훼손할 수 있다는 우려를 담고 있습니다." },
+            { question: "공익 광고의 마지막 문구 '존중과 배려가 우리를 하나로 이어 줍니다'의 기능은?", options: ["광고에 등장한 인물들을 소개한다.", "광고 제작에 참여한 사람들에게 감사함을 표한다.", "광고의 핵심 메시지를 요약하고 주제를 명확히 전달한다.", "다음 광고 시리즈를 예고한다.", "광고에 사용된 배경 음악의 제목을 알린다."], answer: 2, explanation: "이 문구는 광고 전체의 내용을 아우르는 핵심 주제를 마지막에 명시적으로 제시함으로써, 제작자가 전달하고자 하는 메시지를 시청자에게 분명하게 각인시키는 역할을 합니다." },
+            { question: "매체 자료를 평가할 때 '내용의 공정성'을 판단하는 기준으로 적절한 것은?", options: ["정보의 출처가 명확하게 제시되었는가?", "글쓴이의 주관적인 의견이 전혀 없는가?", "다양한 관점을 균형 있게 다루고 있는가?", "최신 정보를 담고 있는가?", "재미있고 흥미로운 소재를 사용했는가?"], answer: 2, explanation: "공정성은 특정 사안에 대해 한쪽 입장만 대변하지 않고, 관련된 여러 관점이나 상반된 입장을 치우침 없이 균형 있게 제시했는지를 평가하는 기준입니다." },
+            { question: "다음 중 매체 비평의 대상이 되기에 가장 거리가 먼 것은?", options: ["최신 개봉 영화", "인기 있는 유튜브 채널의 콘텐츠", "사회적 논란이 된 신문 사설", "친구가 보내온 개인적인 안부 문자 메시지", "새로 방영을 시작한 드라마"], answer: 3, explanation: "매체 비평은 기본적으로 불특정 다수에게 공개되어 사회적, 문화적 영향력을 미치는 공적인 매체 자료를 대상으로 합니다. 개인 간의 사적인 소통 내용은 비평의 대상이 되기 어렵습니다." },
+            { question: "인터넷 신문 기사의 댓글 기능이 갖는 가장 큰 의의는?", options: ["기사의 내용을 요약해준다.", "기사에 대한 신뢰도를 보증한다.", "독자와 기자 간의 쌍방향 소통을 가능하게 한다.", "기자의 개인 정보를 제공한다.", "기사의 오탈자를 자동으로 수정해준다."], answer: 2, explanation: "댓글은 기존의 일방향적 정보 전달 매체와 달리, 독자가 기사에 대한 자신의 의견을 즉각적으로 표현하고 다른 독자나 기자와 소통할 수 있는 '쌍방향성'을 구현하는 핵심적인 기능입니다." },
+            { question: "공익 광고에서 '외국인'과 '어르신'을 등장시킨 이유는?", options: ["특정 상품을 홍보하기 위해", "우리 사회가 함께 배려해야 할 다양한 구성원이 있음을 보여주기 위해", "배우들의 연기력을 보여주기 위해", "광고 제작 비용을 절감하기 위해", "재미있는 상황을 연출하기 위해"], answer: 1, explanation: "이 광고는 문화적 배경이 다른 '외국인'과 디지털 기기 사용에 익숙하지 않은 '어르신'을 등장시켜, 우리 사회가 존중하고 배려해야 할 대상이 다양함을 보여주고, 포용적인 사회의 중요성을 강조합니다." },
+            { question: "매체 자료를 읽을 때 글쓴이의 '관점'을 파악한다는 것은 무엇을 의미하는가?", options: ["글에 사용된 맞춤법 오류를 찾아내는 것", "글쓴이가 사물이나 현상을 바라보는 특정한 시각이나 입장을 이해하는 것", "글에 나온 모든 정보가 사실인지 확인하는 것", "글의 전체 분량을 측정하는 것", "글에 사용된 어휘의 수준을 평가하는 것"], answer: 1, explanation: "'관점'은 글쓴이가 특정 주제에 대해 가지고 있는 기본적인 태도나 입장, 세상을 바라보는 시각을 의미합니다. 이를 파악하는 것은 매체를 비판적으로 이해하는 첫걸음입니다." },
+            { question: "인공지능 그림이 미술전에서 1위를 한 사건이 '논란'이 된 근본적인 이유는?", options: ["그림의 주제가 너무 난해해서", "그림의 색감이 조화롭지 못해서", "작품의 가격이 너무 비싸서", "'창작'이라는 행위의 주체를 인간으로 한정할 수 있는가에 대한 질문을 던졌기 때문에", "수상자가 인공지능 프로그램의 출처를 밝히지 않아서"], answer: 3, explanation: "이 사건은 단순히 잘 그린 그림 한 점의 문제가 아니라, '예술 창작은 인간 고유의 영역인가?', '기계가 만든 것을 예술로 볼 수 있는가?'와 같은 예술의 본질과 창작의 주체에 대한 근본적인 질문을 촉발했기 때문에 큰 논란이 되었습니다." },
+            { question: "다음 중 매체 비평문을 작성하는 올바른 순서는? <보기> ㄱ. 자신의 관점과 근거 제시 ㄴ. 비평할 매체 자료 선정 ㄷ. 내용 및 표현 방식 분석 ㄹ. 다른 비평 자료 참고", options: ["ㄱ-ㄴ-ㄷ-ㄹ", "ㄴ-ㄷ-ㄹ-ㄱ", "ㄴ-ㄱ-ㄹ-ㄷ", "ㄷ-ㄴ-ㄱ-ㄹ", "ㄹ-ㄷ-ㄴ-ㄱ"], answer: 1, explanation: "일반적으로 매체 비평은 먼저 비평할 대상(ㄴ)을 정하고, 그 자료의 내용과 표현 방식 등을 꼼꼼히 분석(ㄷ)합니다. 이후 시야를 넓히기 위해 다른 사람들의 비평(ㄹ)을 참고한 뒤, 이를 종합하여 자신의 관점과 근거를 담은 비평문(ㄱ)을 작성하는 순서로 진행됩니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            if (!quizContainer) return;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                let finalQuestionHTML;
+                if (item.question.includes('<보기>')) {
+                    const parts = item.question.split('<보기>');
+                    const viewParts = parts[1].split('</보기>');
+                    const viewContent = viewParts[0];
+                    const restOfQuestion = viewParts[1];
+                    
+                    finalQuestionHTML = `<p class="font-semibold mb-3">${index + 1}. ${parts[0]}</p>` +
+                                   `<div class="p-3 my-2 border rounded-md bg-gray-50 text-sm">${viewContent.replace(/\n/g, '<br>')}</div>`;
+
+                    if (restOfQuestion) {
+                        finalQuestionHTML += `<p class="font-semibold mb-3">${restOfQuestion}</p>`;
+                    }
+                } else {
+                    finalQuestionHTML = `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                }
+                
+                let optionsHTML = '';
+                item.options.forEach((option, optionIndex) => {
+                    optionsHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+
+                quizHTML += `<div class="quiz-item" id="q${index}">` +
+                            finalQuestionHTML +
+                            `<div class="options-container space-y-2">${optionsHTML}</div>` +
+                            `<div class="quiz-result" id="result-${index}"></div>` +
+                            `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                if (!resultContainer) return;
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            if (totalResultContainer) {
+                totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+                totalResultContainer.classList.remove('hidden');
+                totalResultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

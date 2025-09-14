@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공통국어 2 학습 - 메인</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .chapter-link {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .chapter-link:hover {
+            color: #2563eb;
+            font-weight: 500;
+        }
+        .dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .dropdown-item {
+            padding-left: 1.5rem; /* 들여쓰기 */
+        }
+        .has-dropdown:hover .dropdown {
+            max-height: 500px; /* 펼쳐질 최대 높이 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="app" class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+        <!-- 헤더 -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-bold text-gray-800">공통국어 2 학습</h1>
+            <p class="text-lg text-gray-600 mt-2">비상(박영민) 자습서 기반</p>
+        </header>
+
+        <!-- 메인 메뉴 (목차) -->
+        <main>
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-700">학습 목차</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- 대단원 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-blue-700 mb-4 border-b-2 border-blue-200 pb-2">1. 나, 너, 우리가 만나는 길</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="has-dropdown">
+                            <div class="flex justify-between items-center chapter-link">
+                                <span>01 문학의 해석과 생활화</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <ul class="dropdown mt-2 space-y-2 text-sm">
+                                <li class="chapter-link dropdown-item" onclick="location.href='unit1-1-1_han_geurium.html'">- 한 그리움이 다른 그리움에게</li>
+                                <li class="chapter-link dropdown-item" onclick="alert('한용운 - 나의 꿈 페이지로 이동합니다. (구현 예정)')">- 나의 꿈</li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                             <div class="flex justify-between items-center chapter-link">
+                                <span>02 사회적 대화로서의 글 읽기</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                             <ul class="dropdown mt-2 space-y-2 text-sm">
+                                <li class="chapter-link dropdown-item" onclick="alert('정재승 - 창의적인 사람들의 뇌... 페이지로 이동합니다. (구현 예정)')">- 창의적인 사람들의 뇌...</li>
+                                <li class="chapter-link dropdown-item" onclick="alert('박종하 - 창의성의 오해와 진실 페이지로 이동합니다. (구현 예정)')">- 창의성의 오해와 진실</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 대단원 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-green-700 mb-4 border-b-2 border-green-200 pb-2">2. 미래로 이어지는 국어의 발자취</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="chapter-link" onclick="alert('01. 국어와 매체의 변화 페이지로 이동합니다. (구현 예정)')">01 국어와 매체의 변화</li>
+                        <li class="chapter-link" onclick="alert('02. 한글 맞춤법과 국어 생활 페이지로 이동합니다. (구현 예정)')">02 한글 맞춤법과 국어 생활</li>
+                    </ul>
+                </div>
+
+                <!-- 대단원 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-teal-700 mb-4 border-b-2 border-teal-200 pb-2">3. 세상과 지혜롭게 소통하는 힘</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="chapter-link" onclick="alert('01. 매체를 보는 다양한 시선 페이지로 이동합니다. (구현 예정)')">01 매체를 보는 다양한 시선</li>
+                        <li class="chapter-link" onclick="alert('02. 보고하는 글 함께 쓰기 페이지로 이동합니다. (구현 예정)')">02 보고하는 글 함께 쓰기</li>
+                    </ul>
+                </div>
+
+                <!-- 대단원 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-4 border-b-2 border-indigo-200 pb-2">4. 삶 속에 흐르는 한국 문학</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="has-dropdown">
+                            <div class="flex justify-between items-center chapter-link">
+                                <span>01 사랑, 그 속에 담긴 아픔</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            <ul class="dropdown mt-2 space-y-2 text-sm">
+                                <li class="chapter-link dropdown-item" onclick="alert('서경별곡 페이지로 이동합니다. (구현 예정)')">- 서경별곡</li>
+                                <li class="chapter-link dropdown-item" onclick="alert('제망매가 페이지로 이동합니다. (구현 예정)')">- 제망매가</li>
+                                <li class="chapter-link dropdown-item" onclick="alert('진달래꽃 페이지로 이동합니다. (구현 예정)')">- 진달래꽃</li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <div class="flex justify-between items-center chapter-link">
+                                <span>02 자연, 그 속의 여유로움</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                             <ul class="dropdown mt-2 space-y-2 text-sm">
+                                <li class="chapter-link dropdown-item" onclick="alert('강호사시가 페이지로 이동합니다. (구현 예정)')">- 강호사시가</li>
+                                <li class="chapter-link dropdown-item" onclick="alert('상춘곡 페이지로 이동합니다. (구현 예정)')">- 상춘곡</li>
+                                <li class="chapter-link dropdown-item" onclick="alert('논밭 갈아 김 매고 페이지로 이동합니다. (구현 예정)')">- 논밭 갈아 김 매고</li>
+                            </ul>
+                        </li>
+                        <li class="has-dropdown">
+                            <div class="flex justify-between items-center chapter-link">
+                                <span>03 웃음, 그 속에 담긴 현실</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                             <ul class="dropdown mt-2 space-y-2 text-sm">
+                                <li class="chapter-link dropdown-item" onclick="alert('봄봄 페이지로 이동합니다. (구현 예정)')">- 봄봄</li>
+                                <li class="chapter-link dropdown-item" onclick="alert('홍보전 페이지로 이동합니다. (구현 예정)')">- 홍보전</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 대단원 5 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-bold text-orange-700 mb-4 border-b-2 border-orange-200 pb-2">5. 서로 다른 시선, 함께 찾아가는 삶</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="has-dropdown">
+                            <div class="flex justify-between items-center chapter-link">
+                                <span>01 주제 통합적 읽기</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                             <ul class="dropdown mt-2 space-y-2 text-sm">
+                                <li class="chapter-link dropdown-item" onclick="alert('윤리적 소비 페이지로 이동합니다. (구현 예정)')">- 윤리적 소비</li>
+                                <li class="chapter-link dropdown-item" onclick="alert('합리적 소비의 기준 페이지로 이동합니다. (구현 예정)')">- 합리적 소비의 기준</li>
+                                <li class="chapter-link dropdown-item" onclick="alert('아무것도 사지 않는 날 페이지로 이동합니다. (구현 예정)')">- 아무것도 사지 않는 날</li>
+                            </ul>
+                        </li>
+                        <li class="chapter-link" onclick="alert('02. 협상을 통한 문제 해결 페이지로 이동합니다. (구현 예정)')">02 협상을 통한 문제 해결</li>
+                        <li class="chapter-link" onclick="alert('03. 논증하는 글 쓰기 페이지로 이동합니다. (구현 예정)')">03 논증하는 글 쓰기</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

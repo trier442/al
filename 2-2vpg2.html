@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-2. 한글 맞춤법과 국어 생활 (심화판)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #059669; /* Emerald color for this unit */
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #047857;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #10b981; /* Emerald color for this unit */
+            color: #065f46;
+        }
+        .exam-section h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #047857;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .explanation-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #6ee7b7;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+        }
+        .explanation-box p {
+            margin-bottom: 0.5rem;
+        }
+        .explanation-box strong {
+            color: #065f46;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #ecfdf5;
+            border-color: #a7f3d0;
+        }
+        .quiz-option.selected {
+            background-color: #d1fae5;
+            border-color: #6ee7b7;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #f0fdf4;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-emerald-700">2-2. 한글 맞춤법과 국어 생활 (심화판)</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 미래로 이어지는 국어의 발자취</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-emerald-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-emerald-800">■ 성격:</strong> 규범적, 원리적, 실용적</p>
+                    <p><strong class="text-emerald-800">■ 주제:</strong> 한글 맞춤법의 주요 규정과 원리를 이해하고 바르게 사용하는 태도</p>
+                    <p><strong class="text-emerald-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>한글 맞춤법의 기본 원리(표준어, 표음주의, 표의주의, 띄어쓰기)를 제시함.</li>
+                        <li>형태, 소리, 띄어쓰기와 관련된 구체적인 조항과 예시를 통해 이해를 돕고 있음.</li>
+                        <li>일상생활에서 자주 틀리는 표기를 중심으로 올바른 국어 생활의 중요성을 강조함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 내용 상세 해설 (심화) -->
+            <section class="exam-section">
+                <h4>2. 한글 맞춤법 핵심 원리 및 규정</h4>
+                
+                <div>
+                    <h5 class="text-xl font-bold text-emerald-800 mb-4">[Part 1] 한글 맞춤법의 기본 원리</h5>
+                    <div class="explanation-box">
+                        <p><strong>제1항: 표준어를 소리대로 적되, 어법에 맞도록 함을 원칙으로 한다.</strong></p>
+                        <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>소리대로 적는다 (표음주의):</strong> 발음과 표기가 일치하는 경우. (예: 하늘, 너무, 구름)</li>
+                            <li><strong>어법에 맞도록 함 (표의주의):</strong> 발음과 표기가 다르더라도, 단어의 원래 형태(원형)를 밝혀 적어 뜻을 쉽게 파악하도록 함. (예: 꽃이[꼬치], 밥만[밤만], 깎다[깍따])</li>
+                        </ul>
+                    </div>
+                     <div class="explanation-box">
+                        <p><strong>제2항: 문장의 각 단어는 띄어 씀을 원칙으로 한다.</strong></p>
+                        <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>단어:</strong> 뜻을 가진 최소의 자립 형식. 띄어쓰기의 기본 단위.</li>
+                            <li><strong>예외:</strong> 조사는 단어이지만 자립성이 없어 앞말에 붙여 쓴다. (예: 꽃<strong>이</strong>, 나<strong>는</strong>, 너<strong>처럼</strong>)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="text-xl font-bold text-emerald-800 mb-4 mt-10">[Part 2] 주요 맞춤법 규정 탐구</h5>
+                    
+                    <h5>1. 형태에 관한 것</h5>
+                    <div class="explanation-box">
+                        <p><strong>제19항: 어간에 '-이'나 '-음/-ㅁ'이 붙어 명사/부사가 된 것은 원형을 밝혀 적는다.</strong></p>
+                        <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>원리:</strong> 단어의 본래 뜻이 유지되므로 어간의 원형을 밝혀 표의주의를 따름.</li>
+                            <li><strong>명사 파생:</strong> 길이(길-+-이), 믿음(믿-+-음), 앎(알-+-ㅁ)</li>
+                            <li><strong>부사 파생:</strong> 같이(같-+-이), 많이(많-+-이), 익히(익-+-히)</li>
+                        </ul>
+                    </div>
+                    <div class="explanation-box">
+                        <p><strong>제35항: 모음 'ㅗ, ㅜ' 뒤에 '-아/어'가 어울려 줄어들 땐 준 대로 적는다.</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>원리:</strong> 발음의 편의성을 표기에 반영한 표음주의적 규정.</li>
+                            <li><strong>예시:</strong> 보+아 → 봐, 주+어 → 줘, 되+어 → 돼 (매우 중요!), 두+었다 → 뒀다</li>
+                        </ul>
+                    </div>
+
+                    <h5>2. 소리에 관한 것</h5>
+                     <div class="explanation-box">
+                        <p><strong>제5항: 한 단어 안에서 까닭 없는 된소리는 된소리로 적는다. (단, 'ㄱ, ㅂ' 받침 뒤 제외)</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>된소리로 적는 경우:</strong> 두 모음 사이 (어깨, 오빠), 'ㄴ,ㄹ,ㅁ,ㅇ' 받침 뒤 (산뜻, 살짝)</li>
+                            <li><strong>된소리로 적지 않는 경우:</strong> 'ㄱ, ㅂ' 받침 뒤 (국수[국쑤], 깍두기[깍뚜기], 법석[법썩])</li>
+                        </ul>
+                    </div>
+                     <div class="explanation-box">
+                        <p><strong>제11항: 한자음 '렬, 률'은 모음이나 'ㄴ' 받침 뒤에서 '열, 율'로 적는다. (두음법칙)</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>'열, 율'로 적는 경우:</strong> 나<strong>열</strong>, 비<strong>율</strong>, 선<strong>율</strong>, 백분<strong>율</strong></li>
+                            <li><strong>'렬, 률'로 적는 경우:</strong> 치<strong>렬</strong>, 합격<strong>률</strong>, 성공<strong>률</strong></li>
+                        </ul>
+                    </div>
+
+                    <h5>3. 띄어쓰기에 관한 것</h5>
+                     <div class="explanation-box">
+                        <p><strong>제41~43항: 조사는 붙여 쓰고, 의존 명사와 단위 명사는 띄어 쓴다.</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>조사 (붙여쓰기):</strong> 너<strong>뿐</strong>이다, 집<strong>처럼</strong>, 공부<strong>만</strong> 한다.</li>
+                            <li><strong>의존 명사 (띄어쓰기):</strong> 아는 <strong>것</strong>, 할 <strong>수</strong> 있다, 떠난 <strong>지</strong>, 먹을 <strong>만큼</strong>.</li>
+                             <li><strong>단위 명사 (띄어쓰기):</strong> 차 한 <strong>대</strong>, 옷 한 <strong>벌</strong>, 소 한 <strong>마리</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제 (20문항)</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "한글 맞춤법 제1항의 '어법에 맞도록 함'의 원리가 적용된 예는?", options: ["바다", "어깨", "가을", "먹다", "구름"], answer: 3, explanation: "'먹다'는 [먹따]로 발음되지만, 어간 '먹-'의 원형을 밝혀 '먹다'로 적습니다. 이는 어법에 맞도록(표의주의) 적는 원리가 적용된 것입니다. 나머지는 소리대로(표음주의) 적은 예입니다." },
+            { question: "다음 중 띄어쓰기가 올바른 문장은?", options: ["나도 할수있다.", "아는것이 힘이다.", "꽃이 예쁘게 피었다.", "사과 한개만 주세요.", "그가 떠난지가 오래다."], answer: 2, explanation: "조사 '이'는 앞말 '꽃'에 붙여 쓰고, 나머지 단어들은 각각 띄어 쓰는 것이 맞습니다. '할 수 있다', '아는 것이', '한 개', '떠난 지가'로 띄어 써야 합니다." },
+            { question: "밑줄 친 부분의 표기가 잘못된 것은?", options: ["김치<u>찌개</u>가 맛있다.", "그는 약속을 <u>반드시</u> 지킨다.", "<u>깍두기</u> 좀 더 주세요.", "어머니는 <u>설겆이</u>를 하셨다.", "<u>오뚝이</u>처럼 다시 일어섰다."], answer: 3, explanation: "'설거지'가 표준어이므로 '설거지'로 적어야 합니다. '설겆이'는 잘못된 표기입니다." },
+            { question: "다음 중 '되/돼'의 쓰임이 올바른 것은?", options: ["그러면 안 되.", "이따가 학교에서 봐도 돼.", "그렇게 하면 않되요.", "내일은 날씨가 좋아야 될텐데.", "선생님이 되고 싶다."], answer: 1, explanation: "'돼'는 '되어'의 준말입니다. '봐도 돼'는 '봐도 되어'가 자연스러우므로 올바른 표기입니다. 나머지는 '안 돼', '안 돼요', '돼야 할 텐데', '되고'로 고쳐야 합니다." },
+            { question: "한자어 '률/율'의 표기가 바르게 짝지어진 것은?", options: ["성공률, 백분률", "경쟁율, 합격률", "비율, 능률", "출산율, 명중률", "실패율, 법률"], answer: 4, explanation: "모음이나 'ㄴ' 받침 뒤에서는 '율'로, 그 외의 받침 뒤에서는 '률'로 적습니다. '법률'은 'ㅂ' 받침 뒤이므로 '법률'이 맞고, '실패율'은 모음 뒤이므로 '실패율'이 맞습니다." },
+            { question: "다음 문장의 괄호 안에 들어갈 말로 적절한 것은? <보기> 어찌 된 일인지 모르겠다. → (     )인지 모르겠다.", options: ["왠일", "웬일", "웬 일", "왠 일", "왠일"], answer: 1, explanation: "'어찌 된'의 의미를 가진 관형사는 '웬'입니다. 따라서 '웬일'로 붙여 쓰는 것이 맞습니다. '왠'은 '왜인지'의 준말로, '왠지'의 형태로만 사용됩니다." },
+            { question: "밑줄 친 부분의 표기가 옳은 것은?", options: ["<u>오랫만에</u> 친구를 만났다.", "그는 <u>오뚜기</u>처럼 일어났다.", "<u>곰곰히</u> 생각에 잠겼다.", "일을 <u>깨끗이</u> 처리했다.", "<u>틈틈히</u> 공부해야 한다."], answer: 3, explanation: "부사의 끝음절이 분명히 '이'로 소리 나는 것은 '이'로 적습니다. '깨끗이'는 [깨끄시]로 발음되므로 '이'로 적는 것이 맞습니다. '오랜만에', '오뚝이', '곰곰이', '틈틈이'가 올바른 표기입니다." },
+            { question: "다음 중 '-데/-대'의 쓰임이 잘못된 것은?", options: ["그 영화 정말 재미있데.", "친구가 그러는데, 시험이 어렵대.", "그 사람은 노래를 잘 부르데.", "어제 보니 날씨가 꽤 춥데.", "선생님께서 내일 소풍 간대."], answer: 0, explanation: "'-데'는 직접 경험한 사실을 말할 때 씁니다. '그 영화 정말 재미있더라'의 의미이므로 올바릅니다. 반면, 남에게 들은 말을 전할 때는 '-대'('~다고 해'의 준말)를 씁니다." },
+            { question: "띄어쓰기가 필요한 의존 명사가 아닌 것은?", options: ["너뿐이야", "아는 대로", "할 수", "한 잔", "먹은 지"], answer: 0, explanation: "'뿐'이 체언(너) 뒤에 붙을 때는 조사이므로 앞말에 붙여 씁니다. '먹었을 뿐이다'처럼 용언의 관형사형 뒤에 올 때는 의존 명사이므로 띄어 씁니다." },
+            { question: "된소리 표기 규정에 따라 표기가 잘못된 것은?", options: ["살짝", "싹둑", "듬뿍", "오빠", "법석"], answer: 1, explanation: "'ㄱ, ㅂ' 받침 뒤에서 나는 된소리는 된소리로 적지 않는 것이 원칙입니다. '싹둑'은 [싹뚝]으로 발음되지만 'ㄱ' 받침 뒤이므로 '싹둑'으로 적어야 합니다." },
+            { question: "'안'과 '않'의 쓰임이 바르지 않은 것은?", options: ["숙제를 아직 안 했다.", "오늘은 기분이 좋지 않다.", "그렇게 하면 안 된다.", "비가 와서 길이 미끄럽지 않다.", "나는 그 영화를 않 봤다."], answer: 4, explanation: "'안'은 용언 앞에 쓰여 부정을 나타내는 부사이고, '않-'은 용언의 어간 뒤에 붙어 부정을 나타내는 보조용언입니다. '않 봤다'는 틀린 표현이며 '안 봤다'로 써야 합니다." },
+            { question: "다음 밑줄 친 표현 중 어법에 맞는 것은?", options: ["먼저 <u>일어날께요</u>.", "<u>어따</u> 대고 반말이야?", "이따가 <u>뵈요</u>.", "그렇게 하는 게 <u>나을꺼야</u>.", "이 문제는 <u>어떻게</u> 풀어야 해?"], answer: 4, explanation: "'어떻게'는 '어떠하게'의 준말로 올바른 표현입니다. 나머지는 '일어날게요', '얻다', '봬요(뵈어요)', '나을 거야'로 고쳐야 합니다." },
+            { question: "다음 중 명사형 어미 '-음/-ㅁ'이 사용된 단어는?", options: ["아름다움", "주검", "마중", "고름", "무덤"], answer: 0, explanation: "'아름다움'은 형용사 '아름답-'의 어간에 명사형 어미 '-움'이 결합하여 만들어진 명사입니다. 나머지는 어간의 본뜻과 멀어져 원형을 밝혀 적지 않는 경우입니다." },
+            { question: "두 말을 이어 주거나 열거할 때 쓰는 말의 띄어쓰기가 바른 것은?", options: ["국장겸과장", "열 내지 스물", "청군대백군", "책상, 걸상등", "사과, 배, 귤들"], answer: 1, explanation: "두 말을 이어 주거나 열거할 때 쓰는 '겸', '내지', '대' 등은 띄어 씁니다. 따라서 '열 내지 스물'이 올바른 띄어쓰기입니다. '등', '들'은 앞말에 붙여 씁니다." },
+            { question: "다음 중 준말의 표기가 올바르지 않은 것은?", options: ["보았다 → 봤다", "가지었다 → 가졌다", "생각하건대 → 생각컨대", "흔하지 않다 → 흔치 않다", "말하지 아니하다 → 말하지 않다"], answer: 1, explanation: "'가지었다'의 준말은 '가졌다'입니다. '가지다'의 어간 '가지-'에 '-었-'이 결합한 형태입니다." },
+            { question: "밑줄 친 부분의 품사가 나머지와 다른 하나는?", options: ["노력한 <u>만큼</u> 대가를 얻는다.", "소문은 들었을 <u>뿐</u>이다.", "그는 아는 <u>체</u>를 했다.", "집채 <u>만 한</u> 파도가 밀려왔다.", "나<u>대로의</u> 방식이 있다."], answer: 4, explanation: "①, ②, ③, ④의 '만큼', '뿐', '체', '만'은 모두 의존 명사입니다. 반면 ⑤의 '대로'는 체언 '나' 뒤에 붙은 조사입니다." },
+            { question: "다음 중 어문 규정에 맞는 표기를 모두 고른 것은? <보기> ㄱ. 어의없다 ㄴ. 오랫동안 ㄷ. 육개장 ㄹ. 통채로", options: ["ㄱ, ㄴ", "ㄴ, ㄷ", "ㄷ, ㄹ", "ㄱ, ㄷ, ㄹ", "ㄴ, ㄷ, ㄹ"], answer: 1, explanation: "'어이없다', '오랫동안', '육개장', '통째로'가 올바른 표기입니다. 따라서 ㄴ과 ㄷ이 맞습니다." },
+            { question: "보조 용언의 띄어쓰기가 잘못된 것은?", options: ["비가 올 듯하다.", "그는 잘난 체를 한다.", "불이 꺼져간다.", "이 책은 읽어 볼 만하다.", "그가 올듯도 하다."], answer: 1, explanation: "앞말에 조사 '를'이 붙었으므로, 뒤에 오는 보조 용언 '한다'는 반드시 띄어 써야 합니다. '꺼져 간다(붙여 씀 허용)', '읽어 볼 만하다(붙여 씀 허용)'는 원칙적으로 띄어 쓰지만 붙여 쓰는 것도 허용됩니다. '올 듯도 하다'는 중간에 조사 '도'가 들어가 반드시 띄어 씁니다." },
+            { question: "다음 중 '-(으)로서'와 '-(으)로써'의 쓰임이 바른 것은?", options: ["그는 교사로써 학생들을 가르친다.", "말로써 천 냥 빚을 갚는다.", "이것은 쌀로서 만든 떡이다.", "그것은 대화로써 해결할 문제가 아니다.", "사람은 생각함으로서 동물과 구별된다."], answer: 1, explanation: "'-(으)로써'는 도구나 수단을 나타내고, '-(으)로서'는 지위나 신분, 자격을 나타냅니다. '말'은 수단이므로 '말로써'가 맞습니다. 나머지는 '교사로서', '쌀로써', '대화로써', '생각함으로써'로 고쳐야 합니다." },
+            { question: "바른 국어 생활을 위한 태도로 적절하지 않은 것은?", options: ["헷갈리는 표기는 국어사전을 찾아본다.", "글을 쓴 뒤 반드시 맞춤법 검사를 한다.", "친구와의 대화에서는 맞춤법을 무시해도 된다.", "자신의 언어 습관을 성찰하고 개선하려 노력한다.", "상황과 대상에 맞는 언어 표현을 사용한다."], answer: 2, explanation: "친구와의 대화와 같은 비공식적 상황에서도 원활한 의사소통과 바람직한 언어 문화 형성을 위해 기본적인 맞춤법을 지키려는 노력이 필요합니다. 무조건 무시하는 태도는 바람직하지 않습니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            if (!quizContainer) return;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                let finalQuestionHTML;
+                if (item.question.includes('<보기>')) {
+                    const parts = item.question.split('<보기>');
+                    const viewParts = parts[1].split('</보기>');
+                    const viewContent = viewParts[0];
+                    const restOfQuestion = viewParts[1];
+                    
+                    finalQuestionHTML = `<p class="font-semibold mb-3">${index + 1}. ${parts[0]}</p>` +
+                                   `<div class="p-3 my-2 border rounded-md bg-gray-50 text-sm">${viewContent.replace(/\n/g, '<br>')}</div>`;
+
+                    if (restOfQuestion) {
+                        finalQuestionHTML += `<p class="font-semibold mb-3">${restOfQuestion}</p>`;
+                    }
+                } else {
+                    finalQuestionHTML = `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                }
+                
+                let optionsHTML = '';
+                item.options.forEach((option, optionIndex) => {
+                    optionsHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+
+                quizHTML += `<div class="quiz-item" id="q${index}">` +
+                            finalQuestionHTML +
+                            `<div class="options-container space-y-2">${optionsHTML}</div>` +
+                            `<div class="quiz-result" id="result-${index}"></div>` +
+                            `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                if (!resultContainer) return;
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            if (totalResultContainer) {
+                totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+                totalResultContainer.classList.remove('hidden');
+                totalResultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-2. 협상을 통한 문제 해결</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #0ea5e9; /* Sky color for this unit */
+            color: #0c4a6e;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #f0f9ff;
+            border-color: #7dd3fc;
+        }
+        .quiz-option.selected {
+            background-color: #e0f2fe;
+            border-color: #38bdf8;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-sky-800">5-2. 협상을 통한 문제 해결</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 협상의 원리와 절차</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-sky-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-sky-800">■ 갈래:</strong> 설명문</p>
+                    <p><strong class="text-sky-800">■ 성격:</strong> 정보 전달적, 분석적, 절차적</p>
+                    <p><strong class="text-sky-800">■ 주제:</strong> 성공적인 협상의 원리와 절차를 이해하고 실제 문제 해결에 적용하기</p>
+                    <p><strong class="text-sky-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>'가사실 사용'이라는 구체적이고 현실적인 갈등 상황을 예시로 들어 협상의 과정을 보여줌.</li>
+                        <li>성공적인 협상의 기본 원칙과 절차(시작-조정-해결)를 단계적으로 설명함.</li>
+                        <li>상호 이익을 추구하는 '윈윈(win-win) 전략'의 중요성을 강조함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 협상의 단계별 상세 해설 -->
+            <section class="exam-section">
+                <h4>2. 협상의 단계별 상세 해설</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-sky-500">
+                        <p class="font-bold text-lg text-sky-800">[시작 단계] 문제 확인 및 입장 파악</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>문제의 객관적 확인:</strong> 갈등의 원인이 되는 문제를 감정적으로 대하지 않고, 사실에 근거하여 객관적으로 확인합니다. (예: "요리 동아리와 댄스 동아리 모두 축제 연습을 위해 가사실을 사용하고 싶어 하는구나.")</li>
+                            <li><strong>서로의 입장 확인:</strong> 각자가 표면적으로 주장하는 '입장(position)'이 무엇인지 명확히 밝히고 확인합니다. (예: 요리 동아리 - "우리가 먼저 신청했으니 우리가 써야 한다." / 댄스 동아리 - "우리는 소음 때문에 가사실밖에 쓸 곳이 없다.")</li>
+                            <li><strong>기본 원칙:</strong> 이 단계에서는 '사람과 문제를 분리'하는 것이 중요합니다. 상대방에 대한 비난이나 감정적인 공격을 피하고, 해결해야 할 '문제' 자체에 집중해야 합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-sky-500">
+                        <p class="font-bold text-lg text-sky-800">[조정 단계] 숨은 요구 파악 및 대안 탐색</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>숨은 요구(이해관계) 파악:</strong> 표면적인 '입장' 이면에 숨어 있는 진짜 '요구(interest)'나 필요가 무엇인지 파악하는 핵심 단계입니다. (예: 요리 동아리의 진짜 요구 - '축제 메뉴를 미리 연습할 충분한 시간 확보' / 댄스 동아리의 진짜 요구 - '소음 걱정 없이 자유롭게 춤 연습을 할 공간 확보')</li>
+                             <li><strong>다양한 대안 탐색:</strong> 양측의 숨은 요구를 모두 충족시킬 수 있는 창의적이고 다양한 해결 방안(대안)을 자유롭게 제시하고 탐색합니다. (예: 시간대 나누기, 요일 나누기, 다른 장소 함께 찾아보기 등)</li>
+                             <li><strong>기본 원칙:</strong> '입장이 아닌 이해관계에 초점'을 맞추고, '상호 이익을 위한 다양한 가능성'을 모색하는 것이 중요합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-sky-500">
+                        <p class="font-bold text-lg text-sky-800">[해결 단계] 최선의 해결책 선택 및 합의</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>최선의 해결책 선택:</strong> 탐색한 여러 대안 중에서 양측 모두에게 가장 이익이 되고 실현 가능한 최선의 해결책을 선택합니다. 이때 객관적인 기준(교칙, 선례 등)을 활용하면 공정한 합의에 도움이 됩니다.</li>
+                            <li><strong>합의 및 구체화:</strong> 선택된 해결책에 대해 양측이 최종적으로 동의하고, 합의 내용을 구체적인 계획으로 만듭니다. (예: "월, 수는 요리 동아리가, 화, 목은 댄스 동아리가 오후 5시부터 7시까지 사용하기로 한다.")</li>
+                             <li><strong>기본 원칙:</strong> '객관적 기준에 근거한 해결책'을 모색하여 공정성을 확보하고, 양측 모두가 승리하는 '윈윈(win-win) 결과'를 도출하는 것이 목표입니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 주요 개념 정리 -->
+            <section class="exam-section">
+                <h4>3. 주요 개념 정리</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>협상:</strong> 둘 이상의 주체가 서로의 이익을 조정하여 갈등을 해결하고 합의에 이르는 의사소통 과정.</li>
+                    <li><strong>입장(Position):</strong> 겉으로 드러나는 표면적인 주장이나 요구. (예: "가사실을 우리가 써야 한다.")</li>
+                    <li><strong>이해관계(Interest):</strong> 입장에 숨어 있는 근본적인 욕구나 필요. (예: "연습할 공간/시간이 필요하다.")</li>
+                    <li><strong>윈윈 전략(Win-Win Strategy):</strong> 어느 한쪽의 승리나 패배로 끝나지 않고, 양측 모두가 만족할 만한 결과를 얻는 것을 목표로 하는 협상 전략.</li>
+                    <li><strong>BATNA (Best Alternative To a Negotiated Agreement):</strong> '협상이 결렬되었을 때 선택할 수 있는 최상의 대안'. 자신의 배트나를 알고 있으면 협상에서 유리한 위치를 차지할 수 있다.</li>
+                </ul>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "협상에 대한 설명으로 가장 적절한 것은?", options: ["한쪽이 자신의 주장을 관철시켜 승리하는 과정이다.", "갈등 상황에서 법적인 판단을 통해 시비를 가리는 과정이다.", "대화와 타협을 통해 상호 만족스러운 해결책을 찾는 과정이다.", "상대방의 약점을 이용하여 최대한의 이익을 얻어내는 과정이다.", "갈등의 해결을 포기하고 현 상태를 유지하는 과정이다."], answer: 2, explanation: "협상은 경쟁이나 싸움이 아니라, 대화와 타협을 통해 갈등을 해결하고 양측 모두에게 이익이 되는 합의점을 찾아가는 '공동의 문제 해결 과정'입니다." },
+            { question: "성공적인 협상의 기본 원칙으로 적절하지 않은 것은?", options: ["사람과 문제를 분리하여 감정적인 대응을 피한다.", "표면적인 입장이 아닌 그 이면에 있는 이해관계에 초점을 맞춘다.", "상대방의 제안을 무조건 수용하여 갈등을 신속히 끝낸다.", "상호 이익을 얻을 수 있는 다양한 가능성을 탐색한다.", "객관적인 기준에 근거하여 공정한 해결책을 찾는다."], answer: 2, explanation: "상대방의 제안을 무조건 수용하는 것은 자신의 이익을 포기하는 '패배' 전략입니다. 성공적인 협상은 자신의 이익과 상대의 이익을 모두 고려하여 최선의 합의점을 찾는 것을 목표로 합니다." },
+            { question: "협상의 '시작 단계'에서 해야 할 가장 중요한 활동은?", options: ["다양한 대안을 제시하고 평가한다.", "최종 합의문에 서명한다.", "상대방의 숨겨진 욕구를 파악한다.", "해결해야 할 문제를 객관적으로 확인하고 서로의 입장을 파악한다.", "협상 결렬 시를 대비한 최상의 대안(BATNA)을 준비한다."], answer: 3, explanation: "협상의 '시작 단계'에서는 본격적인 논의에 앞서, 갈등의 원인이 되는 문제가 무엇인지 객관적으로 정의하고, 각자가 표면적으로 무엇을 원하는지(입장)를 명확히 하는 것이 가장 중요합니다." },
+            { question: "협상에서 '입장(Position)'과 '이해관계(Interest)'의 차이를 바르게 설명한 것은?", options: ["입장은 숨겨진 욕구이고, 이해관계는 표면적인 주장이다.", "입장은 객관적 사실이고, 이해관계는 주관적 감정이다.", "입장은 협상의 목표이고, 이해관계는 협상의 절차이다.", "입장은 겉으로 내세우는 요구이고, 이해관계는 그 요구의 근본적인 이유이다.", "입장은 개인의 이익이고, 이해관계는 집단의 이익이다."], answer: 3, explanation: "예를 들어, 창문을 열어달라는 '입장'의 이면에는 '신선한 공기를 마시고 싶다'는 '이해관계'가 숨어 있을 수 있습니다. 성공적인 협상은 표면적인 입장에 매몰되지 않고, 근본적인 이해관계를 파악하는 데서 시작됩니다." },
+            { question: "다음 대화가 협상의 어느 단계에 해당하는가? <보기> A: '저희는 소음 때문에 다른 곳에서는 연습이 불가능해요.' B: '그렇군요. 저희는 재료 준비 때문에 넓은 조리대가 꼭 필요하고요. 그럼 시간을 나누어 쓰는 건 어떨까요?'", options: ["시작 단계", "조정 단계", "해결 단계", "준비 단계", "평가 단계"], answer: 1, explanation: "양측이 각자의 숨겨진 요구(소음 문제, 조리대 필요)를 파악하고, 이를 해결하기 위한 구체적인 대안('시간을 나누어 쓰는 것')을 탐색하고 있습니다. 이는 협상의 핵심 단계인 '조정 단계'에 해당합니다." },
+            { question: "'사람과 문제를 분리하라'는 원칙의 의미로 가장 적절한 것은?", options: ["문제 해결에 감정이 섞이지 않도록 주의해야 한다.", "문제와 관련된 사람은 협상에서 배제해야 한다.", "사람의 감정보다는 문제의 심각성을 우선해야 한다.", "협상 상대방을 인격적으로 존중하고, 문제 자체에 집중해야 한다.", "어려운 문제는 피하고 사람이 해결할 수 있는 문제만 다뤄야 한다."], answer: 3, explanation: "이 원칙은 상대방을 공격하거나 비난하지 말고, 인격적으로 존중하는 태도를 유지하라는 의미입니다. 동시에, 해결해야 할 문제는 감정적으로 대하지 말고 객관적이고 이성적으로 접근해야 한다는 뜻을 담고 있습니다." },
+            { question: "협상의 '해결 단계'에서 합의점을 찾기 위해 '객관적 기준'을 활용하는 이유는?", options: ["협상 시간을 단축하기 위해", "한쪽의 일방적인 주장이 아닌 공정한 근거로 합의하기 위해", "상대방의 주장이 틀렸음을 증명하기 위해", "협상의 결과를 예측할 수 없게 만들기 위해", "협상의 모든 책임을 제3자에게 넘기기 위해"], answer: 1, explanation: "교칙, 법규, 선례, 전문가의 의견 등 양측 모두가 인정할 수 있는 '객관적 기준'을 활용하면, 어느 한쪽의 억지 주장이 아닌 공정하고 합리적인 근거에 따라 해결책을 마련할 수 있어 합의에 이르기 쉽습니다." },
+            { question: "성공적인 협상을 통해 얻을 수 있는 결과로 가장 적절한 것은?", options: ["제로섬(Zero-sum) 결과", "윈루즈(Win-lose) 결과", "루즈루즈(Lose-lose) 결과", "윈윈(Win-win) 결과", "경쟁적 결과"], answer: 3, explanation: "성공적인 협상은 어느 한쪽만 이익을 보는 것이 아니라, 양측 모두가 자신의 중요한 요구를 충족시키고 만족하는 '윈윈(Win-win)' 결과를 목표로 합니다." },
+            { question: "다음 중 협상 참여자의 바람직한 태도로 보기 어려운 것은?", options: ["상대방의 말을 경청하고 그의 입장을 이해하려고 노력한다.", "자신의 주장만 고집하지 않고 유연한 자세를 유지한다.", "감정적인 비난 대신 문제 해결에 집중한다.", "상대방을 반드시 이겨야 할 경쟁 상대로 인식한다.", "상호 이익이 되는 창의적인 해결책을 찾으려고 노력한다."], answer: 3, explanation: "협상은 상대방을 이겨야 할 적이나 경쟁 상대로 보는 순간 실패할 가능성이 높습니다. 상대방을 문제 해결을 위한 '파트너'로 인식하고 협력적인 태도를 보이는 것이 중요합니다." },
+            { question: "협상의 '조정 단계'에서 가장 중요한 활동은?", options: ["서로의 첫인상을 파악하는 것", "협상 장소와 시간을 정하는 것", "숨겨진 이해관계를 파악하고 다양한 대안을 탐색하는 것", "최종 합의 내용을 문서로 작성하는 것", "협상 결과를 평가하고 반성하는 것"], answer: 2, explanation: "'조정 단계'는 표면적인 주장에서 벗어나 양측의 진짜 욕구를 파악하고, 그 욕구를 모두 만족시킬 수 있는 창의적인 해결책(대안)을 만들어내는, 협상의 가장 핵심적이고 창의적인 단계입니다." },
+            { question: "다음 대화에서 A가 B의 '이해관계'를 파악하기 위해 던져야 할 질문으로 가장 적절한 것은? <보기> A: '왜 그렇게 창가 자리를 고집하시죠?' B: '제 입장은 확고합니다. 무조건 창가 자리에 앉아야겠습니다.'", options: ["'창가 자리가 그렇게 비싼가요?'", "'혹시 창가 자리에 앉으려는 특별한 이유가 있으신가요?'", "'제가 먼저 왔으니 양보해 주시죠.'", "'창가 자리에 대한 당신의 주장은 비합리적입니다.'", "'그럼 가위바위보로 정하는 게 어떨까요?'"], answer: 1, explanation: "B의 '입장'(창가 자리에 앉겠다)에 숨겨진 '이해관계'(예: 바깥 풍경을 보고 싶어서, 멀미가 나서 등)를 파악하기 위해서는 그 이유를 묻는 개방적인 질문을 던지는 것이 효과적입니다." },
+            { question: "협상이 결렬될 가능성에 대비하여 미리 준비해 두는 '차선책'을 무엇이라고 하는가?", options: ["이해관계(Interest)", "입장(Position)", "윈윈 전략(Win-Win Strategy)", "최상의 대안(BATNA)", "객관적 기준(Objective Criteria)"], answer: 3, explanation: "BATNA(Best Alternative To a Negotiated Agreement)는 '협상이 결렬되었을 때 내가 선택할 수 있는 가장 좋은 대안'을 의미합니다. 좋은 BATNA를 가지고 있으면 협상 결렬을 두려워하지 않고 더 자신감 있게 협상에 임할 수 있습니다." },
+            { question: "다음 중 성격이 다른 하나는?", options: ["타협", "설득", "명령", "조정", "합의"], answer: 2, explanation: "타협, 설득, 조정, 합의는 모두 협상의 과정에서 나타나는 수평적이고 협력적인 의사소통 방식입니다. 반면 '명령'은 한쪽이 다른 쪽에 일방적으로 지시하는 수직적인 의사소통 방식이므로 협상과는 거리가 멉니다." },
+            { question: "성공적인 협상가의 특징으로 적절하지 않은 것은?", options: ["상대방의 말을 잘 듣는 경청 능력", "자신의 감정을 잘 통제하는 자기 관리 능력", "창의적인 해결책을 제시하는 문제 해결 능력", "자신의 입장만 끝까지 고수하는 강한 추진력", "상대방의 입장을 이해하는 공감 능력"], answer: 3, explanation: "성공적인 협상가는 자신의 입장만 고수하는 것이 아니라, 상대방의 이해관계를 고려하며 상호 이익이 되는 지점을 찾아가는 유연성을 발휘합니다. 자신의 입장만 고수하는 것은 협상을 결렬시키는 지름길입니다." },
+            { question: "협상이 필요한 상황으로 가장 적절한 것은?", options: ["선생님께서 학생들에게 숙제를 내주시는 상황", "친구가 나에게 생일 선물을 주는 상황", "국가 간에 무역 조건을 정하는 상황", "의사가 환자에게 처방전을 발급하는 상황", "내가 혼자서 오늘 저녁 메뉴를 정하는 상황"], answer: 2, explanation: "협상은 둘 이상의 주체 사이에 이해관계가 달라 갈등이 발생했을 때 필요합니다. 국가 간 무역 협상은 각국의 이익이 첨예하게 대립하므로 협상이 반드시 필요한 대표적인 상황입니다." },
+            { question: "다음 중 협상의 결과를 기록한 '합의문'에 반드시 포함되어야 할 내용으로 보기 어려운 것은?", options: ["합의에 참여한 당사자", "구체적인 합의 내용", "각 당사자가 이행해야 할 역할과 의무", "합의가 이루어진 날짜", "협상 과정에서의 감정적인 소모"], answer: 4, explanation: "합의문은 협상의 결과를 공식적으로 확인하는 문서이므로, 누가, 언제, 무엇을, 어떻게 하기로 했는지를 명확하고 객관적으로 기록해야 합니다. 협상 과정에서의 주관적인 감정은 포함되지 않습니다." },
+            { question: "협상에서 '상호 이익'을 추구해야 하는 이유로 가장 적절한 것은?", options: ["상대방을 기분 좋게 만들기 위해", "협상 결과가 지속적으로 지켜지게 하기 위해", "내가 손해를 보는 것처럼 보이기 위해", "협상 과정을 더 복잡하게 만들기 위해", "법적으로 정해진 의무이기 때문에"], answer: 1, explanation: "어느 한쪽만 이익을 보는 협상은 상대방의 불만을 낳아 결국 합의가 지켜지지 않을 가능성이 높습니다. 양측 모두가 만족하고 이익을 얻었다고 느껴야 합의 사항을 성실히 이행하게 되고, 장기적으로 긍정적인 관계를 유지할 수 있습니다." },
+            { question: "다음 대화에서 나타난 문제점은? <보기> A: '너는 항상 약속 시간에 늦어. 정말 이기적이야.' B: '뭐? 너야말로 맨날 불평만 하잖아.'", options: ["사람과 문제를 분리하지 못하고 있다.", "이해관계가 아닌 입장에만 집중하고 있다.", "상호 이익을 위한 대안을 탐색하지 않고 있다.", "객관적인 기준을 사용하지 않고 있다.", "위의 모든 문제점이 나타나고 있다."], answer: 0, explanation: "A와 B는 '약속 시간에 늦는 문제' 자체를 해결하려 하기보다, '너는 이기적이야', '너는 불평만 한다' 와 같이 상대방을 인신공격하고 있습니다. 이는 '사람과 문제를 분리'하라는 협상의 기본 원칙을 어긴 것입니다." },
+            { question: "협상에서 '창의성'이 가장 중요하게 요구되는 단계는?", options: ["시작 단계", "조정 단계", "해결 단계", "준비 단계", "평가 단계"], answer: 1, explanation: "'조정 단계'에서는 양측의 다양한 이해관계를 모두 만족시킬 수 있는, 기존에는 생각하지 못했던 새로운 해결 방안(대안)을 만들어내야 합니다. 이 과정에서 창의적인 사고가 가장 중요하게 요구됩니다." },
+            { question: "이 글을 통해 알 수 있는 '협상'의 궁극적인 목표는?", options: ["갈등의 완전한 소멸", "상대방에 대한 완벽한 승리", "관계를 유지하며 문제를 해결하는 것", "자신의 이익을 극대화하는 것", "갈등의 책임을 명확히 가리는 것"], answer: 2, explanation: "협상은 단순히 문제를 없애는 것을 넘어, 갈등을 겪었던 상대방과의 관계를 훼손하지 않고 오히려 더 긍정적인 관계로 발전시키면서 문제를 함께 해결해 나가는 것을 궁극적인 목표로 합니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

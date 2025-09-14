@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-2. 보고하는 글 함께 쓰기 (심화판)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #0891b2; /* Cyan color for this unit */
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0e7490;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #22d3ee; /* Cyan color for this unit */
+            color: #155e75;
+        }
+        .exam-section h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0e7490;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .explanation-box {
+            background-color: #ecfeff;
+            border-left: 4px solid #67e8f9;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+        }
+        .explanation-box p {
+            margin-bottom: 0.5rem;
+        }
+        .explanation-box strong {
+            color: #164e63;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #ecfeff;
+            border-color: #a5f3fc;
+        }
+        .quiz-option.selected {
+            background-color: #cffafe;
+            border-color: #67e8f9;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #f0fdf4;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-cyan-700">3-2. 보고하는 글 함께 쓰기 (심화판)</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 세상과 지혜롭게 소통하는 힘</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-cyan-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-cyan-800">■ 갈래:</strong> 설명문 (보고서 쓰기 안내)</p>
+                    <p><strong class="text-cyan-800">■ 성격:</strong> 절차적, 협동적, 윤리적</p>
+                    <p><strong class="text-cyan-800">■ 주제:</strong> 작문 관습과 쓰기 윤리를 준수하며 공동 보고서를 작성하는 과정과 방법</p>
+                    <p><strong class="text-cyan-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>'계획하기 → 내용 생성하기 → 내용 조직하기 → 초고 쓰기 및 고쳐 쓰기'의 작문 과정을 단계별로 제시함.</li>
+                        <li>'공연 관련 직업 조사 보고서'라는 구체적인 사례를 통해 각 단계별 활동을 보여줌.</li>
+                        <li>공동 작문 상황에서 책임감 있는 태도와 쓰기 윤리의 중요성을 강조함.</li>
+                        <li>보고서라는 글의 작문 관습(형식, 내용, 표현)을 이해하고 적용하는 방법을 안내함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 내용 상세 해설 (심화) -->
+            <section class="exam-section">
+                <h4>2. 보고서 쓰기 핵심 원리 및 과정</h4>
+                
+                <div>
+                    <h5 class="text-xl font-bold text-cyan-800 mb-4">[Part 1] 보고서의 작문 관습과 쓰기 윤리</h5>
+                    
+                    <h5>1. 보고서의 작문 관습</h5>
+                    <div class="explanation-box">
+                        <p><strong>- 작문 관습이란?</strong> 글을 쓸 때 특정 언어 공동체가 공유하는 형식, 내용, 표현 방식, 규칙 등을 의미합니다. 보고서는 정보를 정확하고 객관적으로 전달해야 하는 글이므로 다음과 같은 관습을 따릅니다.</p>
+                        <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>형식적 관습:</strong> '조사 동기 및 목적 - 조사 계획 - 조사 결과 및 소감 - 참고 자료'와 같은 일정한 목차와 구조를 가집니다.</li>
+                            <li><strong>내용적 관습:</strong> 주관적인 감상이나 의견을 배제하고, 조사한 내용을 바탕으로 한 <strong>객관적인 사실</strong>을 중심으로 서술해야 합니다.</li>
+                            <li><strong>표현적 관습:</strong> 문장은 <strong>명료하고 간결하게</strong> 작성하여 독자가 내용을 쉽게 이해할 수 있도록 해야 합니다.</li>
+                        </ul>
+                    </div>
+
+                    <h5>2. 글쓰기의 책임과 윤리</h5>
+                    <div class="explanation-box">
+                        <p><strong>- 개인적 쓰기 윤리:</strong> 글쓴이 자신에게 지는 책임으로, 알고 있는 내용을 <strong>거짓 없이 진실하게</strong> 쓰는 것을 의미합니다. (예: 실험 결과를 귀찮다고 조작하지 않기)</p>
+                        <p><strong>- 사회적 쓰기 윤리:</strong> 다른 사람과 사회에 대한 책임으로, 타인의 저작물을 <strong>무단으로 도용하지 않고, 인용 시 반드시 출처를 명확하게 밝히는 것</strong>을 의미합니다. (예: 사진, 인터뷰 내용, 논문 등의 출처 표시)</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="text-xl font-bold text-cyan-800 mb-4 mt-10">[Part 2] 공동 보고서 작성 과정 (단계별 활동)</h5>
+                    <div class="explanation-box">
+                        <p><strong>1단계: 계획하기</strong></p>
+                        <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>쓰기 맥락 분석:</strong> 보고서의 <strong>목적, 주제, 예상 독자, 매체</strong>를 명확히 설정합니다.</li>
+                            <li><strong>조사 계획 수립:</strong> 조사 기간, 대상, 방법, 역할 분담 등을 구체적으로 정합니다.</li>
+                        </ul>
+                    </div>
+                     <div class="explanation-box">
+                        <p><strong>2단계: 내용 생성하기 (자료 수집 및 점검)</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>자료 수집:</strong> 신문 기사, 누리집, 설문 조사, 전문가 면담 등 다양한 방법으로 자료를 수집합니다.</li>
+                            <li><strong>자료 점검:</strong> 수집한 자료가 주제와 목적에 맞는지, 출처가 명확하고 신뢰할 만한지, 쓰기 윤리에 어긋나지 않는지 등을 평가합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="explanation-box">
+                        <p><strong>3단계: 내용 조직하기 (개요 작성)</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>정보 선별 및 배열:</strong> 수집한 자료 중 필요한 내용을 선별하고, 독자가 이해하기 쉽도록 논리적인 순서로 배열합니다. (예: 독자의 흥미를 고려해 '직업 전망'을 앞으로 배치)</li>
+                            <li><strong>개요 작성:</strong> 보고서의 작문 관습에 따라 서론-본론-결론 혹은 정해진 목차에 맞게 내용을 구조화합니다. 주제에서 벗어나는 내용은 삭제합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="explanation-box">
+                        <p><strong>4. 초고 쓰기 및 고쳐 쓰기</strong></p>
+                         <ul class="list-disc list-inside ml-4 text-sm">
+                            <li><strong>초고 쓰기:</strong> 개요를 바탕으로 보고서의 초고를 작성합니다.</li>
+                            <li><strong>고쳐 쓰기 (점검 및 수정):</strong>
+                                <ul class="list-decimal list-inside ml-6">
+                                    <li><strong>내용:</strong> 빠진 내용은 없는지, 불필요한 내용은 없는지, 조사 결과가 정확하게 반영되었는지 확인합니다. (예: 설문 결과 왜곡 수정, '연기자' 정보 추가)</li>
+                                    <li><strong>표현:</strong> 문장이 명료한지, 작문 관습(객관적 서술)을 지켰는지 확인합니다. (예: 주관적 의견 삭제, 긴 문장 나누기)</li>
+                                    <li><strong>자료:</strong> 복합양식 자료(사진, 그래프)를 효과적으로 사용했는지, 출처를 명확히 밝혔는지 확인합니다.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제 (20문항)</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "보고서의 작문 관습으로 적절하지 않은 것은?", options: ["객관적인 사실을 중심으로 작성한다.", "독자의 감성에 호소하는 표현을 주로 사용한다.", "'조사 동기-계획-결과-참고 자료' 등의 형식을 따른다.", "문장은 명료하고 간결하게 표현한다.", "사진, 그래프 등 복합양식 자료를 활용할 수 있다."], answer: 1, explanation: "보고서는 정보를 객관적으로 전달하는 글이므로, 감성에 호소하는 표현보다는 사실에 기반한 명료한 표현을 사용해야 합니다." },
+            { question: "글을 쓰는 과정에서 다른 사람의 자료를 인용할 때 반드시 지켜야 할 '사회적 쓰기 윤리'는?", options: ["자신의 경험을 진실하게 쓰는 것", "실험 결과를 조작하지 않는 것", "내용을 과장하거나 축소하지 않는 것", "인용한 자료의 출처를 명확하게 밝히는 것", "예상 독자의 수준을 고려하여 쓰는 것"], answer: 3, explanation: "사회적 쓰기 윤리는 타인의 지적 재산권을 존중하는 것입니다. 따라서 다른 사람의 글이나 자료, 아이디어를 사용할 때는 반드시 그 출처를 정확하게 밝혀야 합니다." },
+            { question: "보고서 쓰기의 '계획하기' 단계에서 할 활동으로 거리가 먼 것은?", options: ["보고서의 주제와 목적 정하기", "예상 독자와 보고서를 게시할 매체 정하기", "수집한 자료의 신뢰성 검토하기", "조사 방법 및 역할 분담하기", "보고서의 전체적인 목차 구상하기"], answer: 2, explanation: "수집한 자료의 신뢰성을 검토하는 활동은 자료를 수집한 이후인 '내용 생성하기' 단계에서 이루어집니다. '계획하기' 단계에서는 어떤 자료를 수집할지 계획을 세웁니다." },
+            { question: "다음 중 보고서에 사용할 자료를 점검하는 기준으로 적절하지 않은 것은?", options: ["자료의 출처가 명확하고 신뢰할 만한가?", "글의 주제 및 목적과 관련이 있는가?", "최대한 분량이 많고 상세한 자료인가?", "예상 독자의 관심과 지식수준에 적합한가?", "내용이 과장되거나 왜곡되지 않았는가?"], answer: 2, explanation: "자료의 양이 무조건 많은 것보다, 주제와 관련성이 높고 신뢰할 수 있으며, 핵심 내용을 효과적으로 전달할 수 있는 질 좋은 자료를 선별하는 것이 더 중요합니다." },
+            { question: "보고서의 '내용 조직하기' 단계에 대한 설명으로 가장 적절한 것은?", options: ["다양한 매체를 통해 자료를 수집하는 단계이다.", "수집한 정보를 바탕으로 글의 뼈대인 개요를 작성하는 단계이다.", "작성한 초고를 읽으며 문장 표현을 다듬는 단계이다.", "보고서의 주제와 목적을 처음으로 정하는 단계이다.", "쓰기 윤리를 준수했는지 최종적으로 확인하는 단계이다."], answer: 1, explanation: "'내용 조직하기'는 수집된 자료들을 어떤 순서로 배열하고 구조화할지 결정하여 개요(outline)를 작성하는 단계입니다. 글의 전체적인 흐름과 논리성을 구성하는 중요한 과정입니다." },
+            { question: "보고서의 초고를 고쳐 쓸 때, '독자의 이해'를 돕기 위한 방법으로 가장 적절한 것은?", options: ["주관적인 느낌과 감상을 추가한다.", "조사 결과를 의도적으로 왜곡한다.", "긴 문장을 여러 개의 짧은 문장으로 나누고 접속어를 사용한다.", "전문 용어를 최대한 많이 사용하여 전문성을 드러낸다.", "참고한 자료의 출처를 모두 삭제한다."], answer: 2, explanation: "길고 복잡한 문장은 독자의 이해를 방해할 수 있습니다. 문장을 간결하게 나누고, '그러나', '그리고'와 같은 접속어를 적절히 사용하면 의미 관계가 명확해져 독자가 내용을 쉽게 파악할 수 있습니다." },
+            { question: "설문 조사 결과를 보고서에 제시할 때 가장 효과적인 복합양식 자료는?", options: ["관련 인물의 사진", "감성적인 배경 음악", "막대그래프나 원그래프", "사건 현장 동영상", "자세한 줄글 설명"], answer: 2, explanation: "설문 조사의 결과(응답자 수, 비율 등)는 수치 데이터를 시각적으로 명확하게 비교하고 보여줄 수 있는 그래프(막대, 원, 꺾은선 등)로 제시하는 것이 가장 효과적입니다." },
+            { question: "공동으로 보고서를 작성할 때의 장점으로 보기 어려운 것은?", options: ["혼자 쓸 때보다 풍성하고 다양한 내용을 담을 수 있다.", "글쓰기에 대한 부담을 나누어 가질 수 있다.", "의견 충돌 없이 항상 신속하게 과제를 완료할 수 있다.", "토의 과정을 통해 문제 해결 능력과 소통 능력을 기를 수 있다.", "서로의 글을 검토해주며 보고서의 완성도를 높일 수 있다."], answer: 2, explanation: "공동 작업은 서로 다른 의견을 조율하는 과정이 필요하기 때문에, 때로는 의견 충돌이 발생하거나 의사 결정에 시간이 더 걸릴 수 있습니다. 따라서 '항상 신속하게' 완료할 수 있다고 보기는 어렵습니다." },
+            { question: "보고서의 '참고 자료' 항목에 반드시 포함되어야 할 내용은?", options: ["보고서를 쓰면서 느낀 점", "보고서 내용에 대한 요약", "조사 과정에서 참고한 자료의 출처", "앞으로의 추가 연구 계획", "보고서 작성자들의 개인 정보"], answer: 2, explanation: "참고 자료 항목에는 보고서를 작성하며 인용한 모든 자료(책, 논문, 신문 기사, 웹사이트 등)의 출처를 정확하게 밝혀, 정보의 신뢰성을 높이고 쓰기 윤리를 준수해야 합니다." },
+            { question: "다음 중 '개인적 쓰기 윤리'를 위반한 사례는?", options: ["인터넷 기사를 그대로 복사해서 보고서에 붙여넣었다.", "친구의 아이디어를 허락 없이 사용했다.", "실험이 귀찮아서 예상되는 결과를 실제 결과인 것처럼 꾸며서 썼다.", "사용한 사진의 출처를 밝히지 않았다.", "유명한 학자의 이론을 자신의 생각인 것처럼 발표했다."], answer: 2, explanation: "실험 결과를 조작하는 것은 글쓴이 자신이 알고 있는 사실을 거짓으로 꾸미는 행위이므로, 진실성의 의무를 다하지 않은 '개인적 쓰기 윤리' 위반에 해당합니다. 나머지는 모두 '사회적 쓰기 윤리' 위반 사례입니다." },
+            { question: "보고서의 '조사 결과' 부분을 작성할 때 가장 중요하게 고려해야 할 점은?", options: ["자신의 주관적인 해석과 평가", "조사된 사실의 객관적이고 정확한 전달", "독자의 흥미를 끌기 위한 과장된 표현", "조사 과정의 어려움에 대한 토로", "참고한 자료 목록의 나열"], answer: 1, explanation: "'조사 결과' 부분은 보고서의 핵심으로, 조사, 실험, 설문 등을 통해 얻어진 사실(fact)을 왜곡 없이 객관적이고 정확하게 전달하는 것이 가장 중요합니다." },
+            { question: "보고서의 개요를 수정하는 과정에서 '공연 관람 예절' 항목을 삭제하기로 했다. 그 이유로 가장 타당한 것은?", options: ["내용이 너무 길어서", "조사하기 어려운 내용이라서", "글의 통일성을 해치기 때문에", "독자들이 이미 아는 내용이라서", "작성자들 간에 의견이 달라서"], answer: 2, explanation: "'공연 관련 직업 정보'라는 보고서의 주제와 '공연 관람 예절'은 직접적인 관련성이 떨어집니다. 이처럼 주제에서 벗어나는 내용은 글 전체의 통일성을 해치므로 삭제하는 것이 좋습니다." },
+            { question: "보고서의 신뢰성을 높이기 위한 방법으로 적절하지 않은 것은?", options: ["공신력 있는 기관에서 발표한 자료를 인용한다.", "전문가와의 면담 내용을 포함한다.", "자료의 출처를 정확하게 밝힌다.", "최신 정보를 반영하기 위해 노력한다.", "인터넷 커뮤니티의 익명 게시글을 주된 근거로 삼는다."], answer: 4, explanation: "인터넷 커뮤니티의 익명 게시글은 사실 확인이 어렵고 주관적인 의견인 경우가 많아 보고서의 근거 자료로 사용하기에는 신뢰성이 매우 낮습니다." },
+            { question: "공동 보고서 작성 시 '역할 분담'이 중요한 이유는?", options: ["모든 구성원이 동일한 양의 일을 하게 하기 위해", "과제의 책임을 한 사람에게 집중시키기 위해", "과정을 효율적으로 진행하고 모든 구성원의 책임감 있는 참여를 유도하기 위해", "누가 가장 일을 잘하는지 평가하기 위해", "보고서 작성 시간을 최대한 늘리기 위해"], answer: 2, explanation: "역할을 명확히 분담하면 각자 맡은 부분에 책임감을 갖고 참여하게 되며, 작업의 중복이나 누락을 막아 전체 과정을 효율적으로 진행할 수 있습니다." },
+            { question: "보고서의 '고쳐 쓰기' 단계에서 이루어지는 활동이 아닌 것은?", options: ["맞춤법이나 띄어쓰기 오류 수정하기", "더 적절한 단어나 문장으로 바꾸기", "보고서의 주제와 목적을 처음으로 정하기", "불필요한 내용을 삭제하고 부족한 내용 보충하기", "문단 간의 연결이 자연스러운지 점검하기"], answer: 2, explanation: "보고서의 주제와 목적을 정하는 것은 글쓰기의 첫 단계인 '계획하기'에서 이루어지는 핵심 활동입니다. '고쳐 쓰기'는 이미 작성된 초고를 개선하는 단계입니다." },
+            { question: "보고서의 목차 중 '조사 계획'에 포함될 내용으로 가장 적절한 것은?", options: ["조사를 통해 알게 된 점과 느낀 점", "보고서의 주제를 정하게 된 계기", "참고한 책과 신문 기사의 목록", "조사 대상, 기간, 방법, 역할 분담", "조사 결과 데이터를 분석한 내용"], answer: 3, explanation: "'조사 계획' 항목에는 앞으로 조사를 어떻게 진행할 것인지에 대한 구체적인 계획, 즉 조사 대상, 기간, 방법, 역할 분담 등을 명시합니다." },
+            { question: "다음 중 보고서의 작문 관습을 어긴 문장은?", options: ["설문 결과, 75%의 학생이 '만족'이라고 응답했다.", "이러한 현상의 원인은 다음과 같이 세 가지로 분석된다.", "정부의 적극적인 지원이 시급하다고 강력히 생각한다.", "자료의 출처는 예술경영지원센터의 보고서이다.", "본 조사는 5월 10일부터 17일까지 실시되었다."], answer: 2, explanation: "'강력히 생각한다'는 표현은 글쓴이의 주관적인 의견이나 주장이므로, 객관적인 사실 전달을 원칙으로 하는 보고서의 작문 관습에 어긋납니다." },
+            { question: "친구들과 함께 보고서를 쓰는 과정에서 의견이 다를 때 가장 바람직한 해결 방법은?", options: ["가장 목소리가 큰 사람의 의견을 따른다.", "각자 자신의 의견만 주장하며 대립한다.", "다수결로 빠르게 결정하고 넘어간다.", "대화와 토의를 통해 각 의견의 장단점을 분석하고 합리적인 대안을 찾는다.", "보고서 작성을 중단하고 각자 따로 보고서를 쓴다."], answer: 3, explanation: "공동 작문의 핵심은 협력적 문제 해결입니다. 의견이 다를 때는 충분한 대화와 토의를 통해 서로를 설득하고, 더 나은 결과를 위한 합리적인 대안을 함께 모색하는 과정이 중요합니다." },
+            { question: "보고서에 사진 자료를 넣고 그 아래에 '(출처: 연합뉴스)'라고 쓴 행위와 가장 관련 깊은 것은?", options: ["개인적 쓰기 윤리 준수", "사회적 쓰기 윤리 준수", "보고서의 분량 늘리기", "보고서의 주제 변경하기", "독자의 감성에 호소하기"], answer: 1, explanation: "사진의 출처를 밝히는 것은 타인의 저작물을 무단으로 사용하지 않고 저작권을 존중하는 행위이므로, '사회적 쓰기 윤리'를 준수하는 것입니다." },
+            { question: "완성된 보고서를 동아리 누리집에 게시하기로 했다. 이때 고려한 쓰기 맥락 요소는?", options: ["주제", "목적", "매체", "글쓴이", "시간"], answer: 2, explanation: "보고서를 어디에 실을 것인지, 즉 어떤 매체를 통해 독자에게 전달할 것인지를 결정하는 것은 쓰기 맥락의 중요한 요소 중 하나인 '매체'를 고려한 것입니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            if (!quizContainer) return;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                let finalQuestionHTML;
+                if (item.question.includes('<보기>')) {
+                    const parts = item.question.split('<보기>');
+                    const viewParts = parts[1].split('</보기>');
+                    const viewContent = viewParts[0];
+                    const restOfQuestion = viewParts[1];
+                    
+                    finalQuestionHTML = `<p class="font-semibold mb-3">${index + 1}. ${parts[0]}</p>` +
+                                   `<div class="p-3 my-2 border rounded-md bg-gray-50 text-sm">${viewContent.replace(/\n/g, '<br>')}</div>`;
+
+                    if (restOfQuestion) {
+                        finalQuestionHTML += `<p class="font-semibold mb-3">${restOfQuestion}</p>`;
+                    }
+                } else {
+                    finalQuestionHTML = `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                }
+                
+                let optionsHTML = '';
+                item.options.forEach((option, optionIndex) => {
+                    optionsHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+
+                quizHTML += `<div class="quiz-item" id="q${index}">` +
+                            finalQuestionHTML +
+                            `<div class="options-container space-y-2">${optionsHTML}</div>` +
+                            `<div class="quiz-result" id="result-${index}"></div>` +
+                            `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                if (!resultContainer) return;
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            if (totalResultContainer) {
+                totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+                totalResultContainer.classList.remove('hidden');
+                totalResultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>

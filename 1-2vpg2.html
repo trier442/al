@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-2. 창의적인 사람들의 뇌에서는 무슨 일이 벌어질까</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #16a34a; /* Green color for this unit */
+            color: #14532d;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #f0fdf4;
+            border-color: #86efac;
+        }
+        .quiz-option.selected {
+            background-color: #dcfce7;
+            border-color: #22c55e;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-green-700">1-2. 사회적 대화로서의 글 읽기</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 창의적인 사람들의 뇌에서는 무슨 일이 벌어질까 (정재승)</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-green-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-green-800">■ 갈래:</strong> 강연글, 설명문</p>
+                    <p><strong class="text-green-800">■ 성격:</strong> 설명적, 분석적, 설득적</p>
+                    <p><strong class="text-green-800">■ 주제:</strong> 뇌 과학적 관점에서 본 창의성의 본질과 창의성을 기르는 방법</p>
+                    <p><strong class="text-green-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>'도입부-전개부-정리부'의 짜임새 있는 구조를 가짐.</li>
+                        <li>청중에게 질문을 던지고 반응을 확인하는 등 상호작용적 말하기 방식을 사용함.</li>
+                        <li>구체적인 예시, 과학적 이론과 실험 결과를 근거로 들어 내용의 신뢰성을 높임.</li>
+                        <li>'창의성은 타고나는 것'이라는 통념을 반박하며 새로운 관점을 제시함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 문단별 상세 해설 -->
+            <section class="exam-section">
+                <h4>2. 문단별 상세 해설</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">[도입부] 발표 주제 소개 및 흥미 유발</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>전략:</strong> '창의적인 사람들은 어떻게 만들어질까?'라는 질문으로 시작하여 청중의 호기심과 관심을 유도합니다.</li>
+                            <li><strong>내용:</strong> 창의성에 대한 연구가 아직 초기 단계임을 밝히며 발표 내용의 범위를 한정하고, '뇌 과학'과 관련된 '창의적 존재의 특징'과 '창의적 존재가 되는 방법'을 중심으로 이야기할 것임을 명확히 안내하여 청중이 발표 내용을 예측하고 집중할 수 있도록 돕습니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">[전개부 1] 창의성에 대한 통념 반박</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>통념 1(지능):</strong> 지능(IQ)과 창의성의 관계를 설명합니다. IQ 110-120까지는 비례 관계이지만, 그 이상에서는 지능이 높다고 더 창의적인 것은 아니라고 밝힙니다. 즉, 창의성에는 일정 수준의 지능이 필요하지만, 지능이 창의성의 절대적 조건은 아님을 설명합니다.</li>
+                             <li><strong>통념 2(지식/암기):</strong> 바둑 기사와 운전자의 예를 들어, 숙련된 전문가는 불필요한 부분에 에너지를 낭비하지 않고 중요한 순간에 지적 에너지를 집중시킨다고 설명합니다. 이를 통해 '창의적인 사람은 암기를 안 할 것'이라는 편견을 반박하며, 오히려 방대한 지식의 축적과 훈련이 창의성의 바탕이 됨을 강조합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">[전개부 2] 창의적 발상의 뇌 과학적 원리</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>'1만 시간의 법칙':</strong> 안데르스 에릭슨 교수의 이론을 소개하며, 창의적 성취를 위해서는 재능보다 오랜 시간의 집중적인 '훈련'이 중요함을 뒷받침합니다.</li>
+                            <li><strong>fMRI 실험 결과:</strong> 창의적 발상이 일어나는 순간, 평소에 연결되지 않던 뇌의 먼 영역들이 서로 신호를 주고받는다는 뇌 과학 실험 결과를 제시합니다. 이는 창의성이 뇌의 특정 영역이 아닌 '뇌 전체를 사용하는 능력'임을 보여줍니다.</li>
+                            <li><strong>창의적 발상의 출발점:</strong> 뇌의 먼 영역이 연결된다는 것은 '다른 각도로 문제를 보거나 상관없는 개념을 연결하는 것'과 같다고 해석합니다. 따라서 '사고방식을 흉내 내고 꾸준히 변형하는 노력'이 창의성의 시작이라고 주장합니다.</li>
+                        </ul>
+                    </div>
+                     <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">[전개부 3] 창의적 존재가 되기 위한 방법</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>방법 1(지적 대화):</strong> 나와 다른 관점, 다른 분야의 사람들과 '지적인 대화'를 나누며 새로운 정보를 받아들이는 것이 중요하다고 강조합니다.</li>
+                            <li><strong>방법 2(일상적 실천):</strong> 일상에서 실천할 수 있는 구체적인 방법으로 ①운동(신경세포 생성), ②수면(정보 정리 및 장기기억 전환), ③독서, 여행, 사람 만나기(간접 경험 확장)를 제시합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">[정리부] 발표 내용 요약 및 마무리</p>
+                         <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>핵심 메시지:</strong> "창의적인 사람이 따로 있는 것이 아니라 창의적인 순간이 있을 뿐입니다."라는 말로 발표의 핵심을 요약하며, 누구나 노력하면 창의적 순간을 만들 수 있다는 격려의 메시지를 전달합니다.</li>
+                            <li><strong>마무리:</strong> 질의응답 시간을 예고하며 발표를 마무리하고, 청중과의 소통을 준비하는 모습을 보입니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 주요 개념 및 발표 전략 -->
+            <section class="exam-section">
+                <h4>3. 주요 개념 및 발표 전략</h4>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong>핵심 개념:</strong> 1만 시간의 법칙, fMRI 실험, 뇌의 연결성</li>
+                    <li><strong>발표자의 주장:</strong> 창의성은 타고난 재능이 아니라 훈련과 노력, 다양한 경험과 지적 대화를 통해 길러지는 능력이다.</li>
+                    <li><strong>발표 전략:</strong>
+                        <ul class="list-decimal list-inside ml-6 mt-1">
+                            <li><strong>청중과의 상호작용:</strong> 질문 던지기, 청중 반응 확인하기(표정, 웃음) 등을 통해 지속적으로 소통함.</li>
+                            <li><strong>구체적 예시 활용:</strong> 바둑 기사, 운전자, 아인슈타인 등 청중이 이해하기 쉬운 예를 들어 내용의 설득력을 높임.</li>
+                            <li><strong>전문적 근거 제시:</strong> '1만 시간의 법칙', 'fMRI 실험' 등 과학적 이론과 실험 결과를 근거로 들어 주장의 신뢰성을 확보함.</li>
+                            <li><strong>비언어적/준언어적 표현:</strong> 손가락으로 화면 가리키기(비언어적), 목소리 톤 조절(준언어적) 등을 사용하여 내용을 효과적으로 전달함.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 발표에 대한 설명으로 가장 적절한 것은?", options: ["문학 작품을 분석하며 작가의 의도를 파악하고 있다.", "특정 주제에 대한 정보를 전달하며 청중의 인식을 변화시키려 한다.", "역사적 사건의 원인과 결과를 설명하며 교훈을 전달하고 있다.", "자신의 슬픈 경험을 고백하며 청중의 감정적 공감을 유도하고 있다.", "상반된 두 주장을 제시한 뒤 청중에게 선택을 요구하고 있다."], answer: 1, explanation: "이 글은 '창의성'이라는 주제에 대해 뇌 과학적 지식과 정보를 전달하고, 창의성에 대한 통념을 바로잡으며, 창의성을 기르는 방법을 제안하는 강연(발표) 글입니다." },
+            { question: "발표자가 청중의 이해를 돕기 위해 사용한 방법이 아닌 것은?", options: ["청중에게 익숙한 인물을 예로 들었다.", "전문가의 이론을 근거로 제시했다.", "과학적 실험 결과를 소개했다.", "청중의 반응을 살피며 어려운 용어를 설명했다.", "복잡한 통계 자료를 도표로 제시했다."], answer: 4, explanation: "발표자는 아인슈타인, 에릭슨 교수의 이론, fMRI 실험 결과 등을 활용했지만, 복잡한 통계 자료나 도표를 직접 제시하지는 않았습니다." },
+            { question: "이 발표의 내용과 일치하지 않는 것은?", options: ["지능 지수가 높을수록 반드시 창의성도 높아진다.", "창의적인 성취를 위해서는 훈련이 중요하다.", "창의적인 발상을 할 때 뇌의 여러 영역이 함께 활동한다.", "운동과 수면은 창의적인 아이디어를 얻는 데 도움이 된다.", "나와 다른 관점을 가진 사람과의 대화는 창의성에 긍정적이다."], answer: 0, explanation: "발표자는 지능 지수가 110-120을 넘어가면 더 이상 창의성과 비례하지 않는다고 설명했습니다. 따라서 지능이 높을수록 '반드시' 창의성도 높아진다는 것은 잘못된 내용입니다." },
+            { question: "발표자가 '바둑 7단'과 '운전 경력 7년'의 예를 든 주된 이유로 가장 적절한 것은?", options: ["창의적인 사람은 바둑이나 운전을 잘한다는 것을 보여주기 위해", "창의적인 사람은 암기를 싫어한다는 통념을 강화하기 위해", "숙련된 전문가는 중요한 순간에 지적 에너지를 집중시킨다는 것을 설명하기 위해", "나이가 들수록 창의성이 감소한다는 것을 증명하기 위해", "오랜 시간 훈련하는 것의 단점을 부각하기 위해"], answer: 2, explanation: "이 예시는 숙련된 사람(바둑 7단, 운전 경력 7년)은 기본적인 작업을 자동적으로 처리하여, 정말 중요한 창의적 문제 해결이 필요한 순간에 자신의 모든 지적 에너지를 쏟아부을 수 있다는 점을 설명하기 위해 사용되었습니다. 이는 '창의적인 사람은 암기를 안 할 것'이라는 통념을 반박하는 근거가 됩니다." },
+            { question: "fMRI 실험을 통해 발표자가 궁극적으로 말하고자 하는 바로 가장 적절한 것은?", options: ["바둑 기사들은 일반인과 뇌 구조가 다르다.", "창의성은 뇌의 특정 한 부분에서만 나오는 고도의 능력이다.", "뇌 과학 기술이 아직 창의성의 비밀을 풀지 못했다.", "창의성은 뇌의 여러 영역을 연결하여 사용하는 종합적인 능력이다.", "뇌를 촬영하는 것은 창의성 연구에 별 도움이 되지 않는다."], answer: 3, explanation: "fMRI 실험 결과, 창의적인 순간에는 평소 연결되지 않던 뇌의 먼 영역들이 서로 신호를 주고받는다는 것이 밝혀졌습니다. 이를 통해 발표자는 창의성이 뇌 전체를 종합적으로 사용하는 능력임을 강조하고 있습니다." },
+            { question: "발표자가 말하는 '창의적 발상의 출발점'으로 가장 적절한 것은?", options: ["천재적인 영감을 기다리는 것", "결과물을 그대로 모방하는 것", "남들과 다른 사고방식을 흉내 내고 변형하는 것", "최대한 많은 지식을 암기하는 것", "혼자만의 시간을 가지며 고독을 즐기는 것"], answer: 2, explanation: "발표자는 '결과물이 아닌 사고방식을 흉내 내고 꾸준히 변형하는 것, 그것이 창의적인 발상의 출발입니다.'라고 명확하게 언급하며, 다른 각도에서 문제를 보려는 시도와 노력을 강조했습니다." },
+            { question: "발표자가 창의적인 존재가 되기 위한 방법으로 제안한 것이 아닌 것은?", options: ["다양한 분야의 사람들과 지적인 대화 나누기", "자전거 타기나 산책과 같은 격렬하지 않은 운동하기", "하루에 4시간 이하로 잠을 줄여 활동 시간 늘리기", "세상으로부터 자극을 받기 위해 독서와 여행하기", "자신과 다른 경험을 한 사람들을 만나기"], answer: 2, explanation: "발표자는 수면이 낮에 얻은 정보를 정리하고 장기 기억으로 넘기는 생산적인 활동이라고 강조하며, 잠이 '부족하면' 안 된다고 말했습니다. 잠을 줄이라는 내용은 언급되지 않았습니다." },
+            { question: "발표의 도입부에서 사용된 전략으로 가장 적절한 것은?", options: ["유명인의 말을 인용하여 권위를 높인다.", "자신의 실패 경험을 고백하여 공감대를 형성한다.", "청중에게 질문을 던져 주제에 대한 관심을 유도한다.", "충격적인 통계 자료를 제시하여 경각심을 일깨운다.", "발표의 결론을 먼저 제시하여 명료성을 높인다."], answer: 2, explanation: "발표자는 '창의적인 사람들은 어떻게 만들어질까요?'라는 질문으로 발표를 시작하여, 청중이 스스로 생각하게 만들고 발표 주제에 대한 흥미와 관심을 갖도록 유도하고 있습니다." },
+            { question: "이 발표의 마지막 문장에 담긴 의도로 가장 적절한 것은?", options: ["발표 내용에 오류가 있었음을 인정하고 사과하기 위해", "청중의 이해도를 평가하는 퀴즈를 내기 위해", "자신의 주장을 다시 한번 강력하게 강조하기 위해", "일방적인 전달이 아닌, 청중과의 소통으로 마무리하기 위해", "시간이 부족하여 발표를 급하게 끝내기 위해"], answer: 3, explanation: "발표자는 질의응답 시간을 갖겠다고 말하며 청중의 질문을 유도합니다. 이는 발표를 일방적인 정보 전달로 끝내지 않고, 청중의 궁금증을 해소하며 소통하려는 의도를 보여줍니다." },
+            { question: "이 발표를 통해 반박하고 있는 통념(편견)으로 적절한 것은?", options: ["창의적인 사람은 노력을 많이 한다.", "창의적인 사람은 운동을 좋아한다.", "창의적인 사람은 지식이 많다.", "창의적인 사람은 암기를 안 한다.", "창의적인 사람은 잠이 많다."], answer: 3, explanation: "발표자는 '창의적인 사람들은 암기를 안 할 것이라는 편견이 있습니다만, 전혀 그렇지 않습니다.'라고 직접적으로 언급하며, 오히려 많은 지식을 저장하고 기술을 체화하는 것이 중요하다고 설명합니다." },
+            { question: "'1만 시간의 법칙'을 소개한 이유로 가장 적절한 것은?", options: ["창의성은 타고난 재능이 가장 중요하다는 것을 강조하기 위해", "악기 연주자들이 다른 분야보다 더 창의적임을 보여주기 위해", "10대 시절의 연습량이 성인이 된 후에는 의미가 없음을 알리기 위해", "창의적인 성취를 위해서는 집중적인 훈련과 노력이 필요함을 뒷받침하기 위해", "심리학자 안데르스 에릭슨의 위대한 업적을 칭송하기 위해"], answer: 3, explanation: "발표자는 '1만 시간의 법칙'을 통해, 전문성과 창의적 성취의 기반에는 타고난 재능보다 오랜 시간 동안의 의식적인 훈련과 노력이 있다는 점을 강조하고 있습니다." },
+            { question: "발표자의 말하기 방식 중, 청중과의 상호작용에 해당하는 것을 모두 고른 것은? <보기> ㉠ 청중의 표정을 살핀다. ㉡ 어려운 용어를 쉽게 풀어 설명한다. ㉢ 청중에게 질문을 던진다. ㉣ 목소리 크기를 조절한다.", options: ["㉠, ㉡", "㉠, ㉢", "㉡, ㉣", "㉠, ㉡, ㉢", "㉠, ㉡, ㉢, ㉣"], answer: 3, explanation: "청중의 표정을 살피는 것(㉠), 질문을 던지는 것(㉢)은 직접적인 상호작용입니다. 청중의 반응(이해하지 못하는 표정)에 따라 어려운 용어를 설명하는 것(㉡)도 상호작용의 결과입니다. 목소리 크기 조절(㉣)은 전달력을 높이는 전략이지만 직접적인 상호작용은 아닙니다." },
+            { question: "이 발표를 들은 학생의 반응으로 가장 적절하지 않은 것은?", options: ["창의성을 기르기 위해 오늘부터 꾸준히 산책을 해야겠어.", "내가 관심 없는 분야의 책도 읽어보는 습관을 들여야겠다.", "역시 창의성은 IQ가 높은 천재들만의 영역이라는 걸 다시 확인했어.", "친구들과 그냥 수다만 떨 게 아니라, 가끔은 진지한 주제로 토론도 해봐야지.", "창의적인 아이디어가 떠오르지 않을 때, 문제를 다른 각도에서 보려는 노력을 해야겠어."], answer: 2, explanation: "이 발표는 창의성이 천재들만의 영역이라는 통념을 반박하고, 누구나 노력을 통해 창의적인 순간을 만들 수 있다고 주장합니다. 따라서 발표를 듣고 천재들만의 영역이라고 확인했다는 반응은 발표의 핵심 내용과 정반대됩니다." },
+            { question: "발표자가 '결과물이 아닌 사고방식을 흉내 내고 꾸준히 변형하는 것'을 강조한 이유로 가장 적절한 것은?", options: ["모방은 창조의 어머니이기 때문에", "다른 사람의 결과물을 훔치는 것은 비도덕적이기 때문에", "창의성의 핵심은 결과가 아닌 과정에 있기 때문에", "단순한 모방을 넘어 자신만의 새로운 관점을 만드는 것이 중요하기 때문에", "사고방식을 흉내 내는 것이 가장 쉬운 창의성 훈련법이기 때문에"], answer: 3, explanation: "뇌의 먼 영역들이 연결되는 것이 '다른 각도에서 문제를 보거나 상관없는 개념을 연결하는 것'과 같다고 설명한 맥락에서, 창의성의 본질은 단순히 결과물을 베끼는 것이 아니라, 새로운 시각으로 문제를 바라보는 '사고방식'을 배우고 그것을 자신만의 방식으로 '변형'하며 새로운 연결을 만들어내는 데 있음을 강조하기 위함입니다." },
+            { question: "이 발표에서 '창의성'과 가장 거리가 먼 개념은?", options: ["연결", "훈련", "대화", "모방", "고정관념"], answer: 4, explanation: "발표자는 창의성을 위해 다른 분야와의 '연결', '훈련'(1만 시간의 법칙), '대화'가 중요하다고 말합니다. 또한 사고방식을 '모방'하고 변형하는 것을 출발점으로 제시합니다. 반면 '고정관념'은 다른 각도에서 문제를 보는 창의적 사고를 방해하는 요소이므로 가장 거리가 멉니다." },
+            { question: "발표자가 운동, 수면, 독서 등을 강조한 근본적인 이유로 가장 적절한 것은?", options: ["신체적 건강이 정신적 건강으로 이어지기 때문에", "뇌가 새로운 연결을 만들고 정보를 효율적으로 처리할 수 있는 기반을 제공하기 때문에", "성공한 사람들이 공통적으로 가지고 있는 습관이기 때문에", "스트레스를 해소하는 가장 효과적인 방법이기 때문에", "학교 성적을 올리는 데 직접적인 도움이 되기 때문에"], answer: 1, explanation: "운동은 신경세포를 만들고, 수면은 정보를 정리하며, 독서 등은 새로운 자극을 줍니다. 이 모든 활동은 뇌가 창의적 발상(새로운 연결)을 할 수 있도록 최적의 상태를 만들고, 필요한 재료(정보, 자극)를 공급하는 역할을 합니다." },
+            { question: "발표의 흐름으로 볼 때, <보기>의 문장이 들어가기에 가장 적절한 곳은? <보기> 즉 문제를 다양하고 낯선 각도에서 바라보는 사람들이 모여서 서로 지적인 대화를 하고 영감을 주고받고, 지식을 섭취하고 흡수하는 과정이 필요합니다.", options: ["'1만 시간의 법칙'을 설명한 다음", "fMRI 실험 결과를 설명한 다음", "창의적인 존재가 되는 방법에 대해 질문을 던진 다음", "일상에서 실천할 수 있는 방법을 설명하기 전", "발표를 마무리하는 '정리부'의 시작 부분"], answer: 2, explanation: "해당 문장은 '창의적인 존재가 되려면 어떻게 해야 할까?'라는 질문에 대한 구체적인 답변의 시작 부분입니다. 다른 관점을 가진 사람들과의 '지적인 대화'가 필요하다고 먼저 원론적인 방법을 제시하고, 그 뒤에 운동, 수면 등 더 구체적인 실천 방법을 설명하는 흐름이 자연스럽습니다." },
+            { question: "이 발표의 제목으로 가장 적절한 것은?", options: ["뇌 과학의 역사와 미래", "성공하는 사람들의 7가지 습관", "뇌, 창의성의 비밀을 풀다", "지능과 재능의 상관관계", "토론과 대화의 중요성"], answer: 2, explanation: "이 발표는 '창의성'이라는 현상을 '뇌 과학'의 관점에서 분석하고, 그 원리와 방법을 설명하고 있습니다. 따라서 '뇌, 창의성의 비밀을 풀다'가 발표의 핵심 내용을 가장 잘 아우르는 제목입니다." },
+            { question: "발표자가 청중의 반응을 확인하는 행위의 주된 기능으로 적절하지 않은 것은?", options: ["청중의 이해도를 점검한다.", "청중의 집중과 참여를 유도한다.", "발표 내용의 순서를 결정한다.", "청중과의 유대감과 친밀감을 형성한다.", "발표 내용의 수준이나 설명을 조절한다."], answer: 2, explanation: "발표자는 청중의 반응을 보고 설명 방식을 바꾸거나(운전자 예시), 용어를 풀이(fMRI)하는 등 내용 수준을 조절하지만, 이미 계획된 발표 내용의 전체적인 순서 자체를 바꾸지는 않습니다." },
+            { question: "발표의 마지막에 '창의적인 사람이 따로 있는 것이 아니라 창의적인 순간이 있을 뿐입니다.'라고 말한 의도로 가장 적절한 것은?", options: ["창의성은 예측할 수 없는 우연의 산물임을 강조하기 위해", "창의성은 특별한 사람만이 가질 수 있는 능력임을 강조하기 위해", "창의성이 일상과 동떨어진 특별한 활동임을 강조하기 위해", "누구나 노력을 통해 일상 속에서 창의성을 발휘할 수 있다는 희망을 주기 위해", "창의성의 중요성을 낮추어 평가하며 발표를 마무리하기 위해"], answer: 3, explanation: "이 말은 창의성이 '사람'에게 고정된 특성이 아니라, 노력과 훈련을 통해 만들어낼 수 있는 '순간'의 상태임을 의미합니다. 이를 통해 청중에게 '여러분도 할 수 있다'는 격려와 희망의 메시지를 전달하며 실천을 유도하는 것입니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             buildQuiz();
+        });
+    </script>
+</body>
+</html>
