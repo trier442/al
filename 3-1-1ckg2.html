@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>제망매가 해설 및 문제</title>
+    <title>제망매가 양궁 퀴즈</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans KR', 'Inter', sans-serif;
-            touch-action: manipulation; /* 더블 탭 확대 방지 */
+            touch-action: manipulation;
         }
         .btn-primary {
             background-color: #3b82f6;
@@ -69,13 +71,15 @@
             background-color: #fff1f2;
             border: 1px solid #f87171;
         }
-        /* --- Penguin Game Styles --- */
+        /* --- Archery Game Styles --- */
         .game-container {
             width: 100%;
-            height: 600px; /* Adjusted for embedding */
-            background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 70%, #FFFFFF 100%);
+            height: 600px;
+            max-height: 900px;
+            background: linear-gradient(to bottom, #a0d8f0 0%, #d8e8f0 70%, #ffffff 100%);
             overflow: hidden;
             position: relative;
+            cursor: pointer;
             border-radius: 1rem;
             margin-top: 1rem;
         }
@@ -94,6 +98,10 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            pointer-events: none; /* 캔버스 클릭을 위해 이벤트 통과 */
+        }
+        .ui-overlay > div {
+             pointer-events: auto; /* UI 요소는 클릭 가능하도록 설정 */
         }
         .glassmorphism {
             background: rgba(255, 255, 255, 0.3);
@@ -102,34 +110,6 @@
             border-radius: 1rem;
             border: 1px solid rgba(255, 255, 255, 0.18);
         }
-        #touch-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 150px;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 5px;
-            opacity: 0.6;
-        }
-        .touch-btn {
-            background-color: rgba(0,0,0,0.5);
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 24px;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-        }
-        #touchUp { grid-area: 1 / 2 / 2 / 3; }
-        #touchLeft { grid-area: 2 / 1 / 3 / 2; }
-        #touchRight { grid-area: 2 / 3 / 3 / 4; }
-        #touchDown { grid-area: 3 / 2 / 4 / 3; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -200,56 +180,39 @@
             <!-- 3. 게임으로 내용 이해하기 -->
             <section class="exam-section">
                 <h4>3. 게임으로 내용 이해하기</h4>
-                <div id="gameContainer" class="game-container shadow-2xl">
-                    <!-- 게임 UI -->
-                    <div id="ui" class="absolute top-0 left-0 w-full p-4 text-white z-10">
-                        <div class="flex justify-between items-center">
-                            <h1 class="text-xl font-bold">제망매가 퀴즈</h1>
-                            <div class="text-lg font-bold bg-white/30 px-4 py-1 rounded-full">점수: <span id="score">0</span></div>
-                        </div>
-                        <div id="questionBox" class="mt-4 text-center bg-black/30 p-4 rounded-lg text-lg min-h-[80px] flex items-center justify-center">
-                            <p id="questionText"></p>
-                        </div>
-                    </div>
-
-                    <!-- 게임 캔버스 -->
-                    <canvas id="gameCanvas"></canvas>
-
-                    <!-- 게임 오버레이 (시작, 종료 화면) -->
-                    <div id="startScreen" class="ui-overlay z-20 glassmorphism mx-4">
-                        <div class="text-center p-8">
-                            <svg viewBox="0 0 200 200" class="w-24 h-24 mx-auto mb-4">
-                                <path fill="#333" d="M100,20 C60,20 30,50 30,90 C30,130 60,180 100,180 C140,180 170,130 170,90 C170,50 140,20 100,20 Z"></path>
-                                <path fill="#FFF" d="M100,60 C70,60 50,80 50,110 C50,140 70,160 100,160 C130,160 150,140 150,110 C150,80 130,60 100,60 Z"></path>
-                                <circle fill="#333" cx="80" cy="95" r="8"></circle>
-                                <circle fill="#333" cx="120" cy="95" r="8"></circle>
-                                <path fill="#FFA500" d="M100,110 L90,125 L110,125 Z"></path>
-                                <path fill="#FFA500" d="M40,140 a 20,20 0 0,0 0,10 a 30,20 0 0,0 20,-10 Z" transform="rotate(-20, 40, 140)"></path>
-                                <path fill="#FFA500" d="M160,140 a 20,20 0 0,1 0,10 a 30,20 0 0,1 -20,-10 Z" transform="rotate(20, 160, 140)"></path>
-                            </svg>
-                            <h2 class="text-4xl font-bold text-gray-800 mb-2">제망매가 펭귄 퀴즈</h2>
-                            <p class="text-gray-700 mb-6">펭귄을 움직여 정답 표지판으로 달려가세요!<br>(키보드 ↑↓←→ 또는 화면 터치)</p>
-                            <button id="startButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-transform transform hover:scale-105">게임 시작</button>
-                        </div>
-                    </div>
-
-                    <div id="gameOverScreen" class="ui-overlay z-20 glassmorphism mx-4 hidden">
-                        <div class="text-center p-8">
-                            <h2 class="text-4xl font-bold text-gray-800 mb-2">게임 종료!</h2>
-                            <p class="text-2xl text-gray-700 mb-4">최종 점수: <span id="finalScore" class="font-bold"></span>점</p>
-                            <p id="gameOverMessage" class="text-gray-600 mb-6">참 잘했어요!</p>
-                            <button id="restartButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-transform transform hover:scale-105">다시하기</button>
-                        </div>
-                    </div>
-                    
-                    <!-- 터치 컨트롤 -->
-                    <div id="touch-controls" class="hidden">
-                        <div id="touchUp" class="touch-btn">▲</div>
-                        <div id="touchLeft" class="touch-btn">◀</div>
-                        <div id="touchRight" class="touch-btn">▶</div>
-                        <div id="touchDown" class="touch-btn">▼</div>
-                    </div>
-                </div>
+                <div id="gameContainer" class="game-container shadow-2xl rounded-lg">
+                     <!-- 게임 UI -->
+                     <div id="ui" class="absolute top-0 left-0 w-full p-4 text-gray-800 z-10 pointer-events-none">
+                         <div class="flex justify-between items-center">
+                             <h1 class="text-xl font-bold">제망매가 양궁 퀴즈</h1>
+                             <div class="text-lg font-bold bg-white/30 px-4 py-1 rounded-full">점수: <span id="score">0</span></div>
+                         </div>
+                         <div id="questionBox" class="mt-4 text-center bg-black/30 text-white p-4 rounded-lg text-lg min-h-[80px] flex items-center justify-center">
+                             <p id="questionText"></p>
+                         </div>
+                     </div>
+ 
+                     <!-- 게임 캔버스 -->
+                     <canvas id="gameCanvas"></canvas>
+ 
+                     <!-- 게임 오버레이 (시작, 종료 화면) -->
+                     <div id="startScreen" class="ui-overlay z-20">
+                         <div class="text-center p-8 glassmorphism mx-4">
+                             <h2 class="text-4xl font-bold text-gray-800 mb-2">제망매가 양궁 퀴즈</h2>
+                             <p class="text-gray-700 mb-6">떨어지는 과녁 중 정답을 쏘아 맞히세요!</p>
+                             <button id="startButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-transform transform hover:scale-105">게임 시작</button>
+                         </div>
+                     </div>
+ 
+                     <div id="gameOverScreen" class="ui-overlay z-20 hidden">
+                         <div class="text-center p-8 glassmorphism mx-4">
+                             <h2 class="text-4xl font-bold text-gray-800 mb-2">게임 종료!</h2>
+                             <p class="text-2xl text-gray-700 mb-4">최종 점수: <span id="finalScore" class="font-bold"></span>점</p>
+                             <p id="gameOverMessage" class="text-gray-600 mb-6">참 잘했어요!</p>
+                             <button id="restartButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-transform transform hover:scale-105">다시하기</button>
+                         </div>
+                     </div>
+                 </div>
             </section>
 
             <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
@@ -348,7 +311,7 @@
         });
     </script>
 <script>
-    // --- DOM 요소 가져오기 ---
+    // --- Archery Game Script ---
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     const scoreEl = document.getElementById('score');
@@ -359,12 +322,7 @@
     const restartButton = document.getElementById('restartButton');
     const finalScoreEl = document.getElementById('finalScore');
     const gameContainer = document.getElementById('gameContainer');
-    const touchUp = document.getElementById('touchUp');
-    const touchDown = document.getElementById('touchDown');
-    const touchLeft = document.getElementById('touchLeft');
-    const touchRight = document.getElementById('touchRight');
 
-    // --- 게임 데이터 ---
     const questions = [
         { question: "<제망매가>의 갈래는 무엇인가?", answers: [{ text: "10구체 향가", correct: true }, { text: "고려가요", correct: false }, { text: "가사", correct: false }] },
         { question: "<제망매가>의 작가는 누구인가?", answers: [{ text: "월명사", correct: true }, { text: "충담사", correct: false }, { text: "원효", correct: false }] },
@@ -388,32 +346,8 @@
         { question: "'제망매가'의 '망매(亡妹)'는 무슨 뜻인가?", answers: [{ text: "죽은 누이", correct: true }, { text: "사라진 매화", correct: false }, { text: "잃어버린 동생", correct: false }] }
     ];
 
-    // --- 게임 상태 변수 ---
-    let score;
-    let currentQuestionIndex;
-    let gameState; // 'start', 'playing', 'feedback', 'gameOver'
-    let feedback = { type: '', timer: 0 };
-    let keys = {};
-    let penguin;
-    let signs;
-    let signSpeed;
+    let score, currentQuestionIndex, gameState, feedback, targets, targetSpeed, bow, arrow;
 
-    // --- 게임 객체 ---
-    const penguinSVG = new Image();
-    penguinSVG.src = "data:image/svg+xml," + encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-            <g transform="translate(0, 10)">
-                <path fill="#333" d="M100,20 C60,20 30,50 30,90 C30,130 60,180 100,180 C140,180 170,130 170,90 C170,50 140,20 100,20 Z"/>
-                <path fill="#FFF" d="M100,60 C70,60 50,80 50,110 C50,140 70,160 100,160 C130,160 150,140 150,110 C150,80 130,60 100,60 Z"/>
-                <circle fill="#333" cx="80" cy="95" r="8"/>
-                <circle fill="#333" cx="120" cy="95" r="8"/>
-                <path fill="#FFA500" d="M100,110 L90,125 L110,125 Z"/>
-                <path fill="#FFA500" d="M35,145 a 15,15 0 0,0 0,10 a 25,15 0 0,0 20,-10 Z" transform="rotate(-20, 35, 145)"/>
-                <path fill="#FFA500" d="M165,145 a 15,15 0 0,1 0,10 a 25,15 0 0,1 -20,-10 Z" transform="rotate(20, 165, 145)"/>
-            </g>
-        </svg>`);
-
-    // --- 유틸리티 함수 ---
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -430,7 +364,6 @@
         window.speechSynthesis.speak(utterance);
     }
 
-    // --- 게임 초기화 및 설정 ---
     function init() {
         const containerRect = gameContainer.getBoundingClientRect();
         canvas.width = containerRect.width;
@@ -440,36 +373,26 @@
         score = 0;
         currentQuestionIndex = 0;
         shuffleArray(questions);
+        
+        targetSpeed = 1.2; // 초기 속도를 상향 조정했습니다.
+        targets = [];
+        bow = { x: canvas.width / 2, y: canvas.height - 50, size: 80 };
+        arrow = { isFlying: false };
 
-        penguin = {
-            x: canvas.width / 2,
-            y: canvas.height - 100,
-            width: 50,
-            height: 50,
-            speed: 40,
-            targetX: canvas.width / 2,
-            targetY: canvas.height - 100,
-        };
-
-        signSpeed = 1;
-        signs = [];
         scoreEl.innerText = score;
         startScreen.classList.remove('hidden');
         gameOverScreen.classList.add('hidden');
         document.getElementById('questionBox').classList.add('hidden');
-        document.getElementById('touch-controls').classList.add('hidden');
     }
 
     function startGame() {
         gameState = 'playing';
         startScreen.classList.add('hidden');
         document.getElementById('questionBox').classList.remove('hidden');
-        document.getElementById('touch-controls').classList.remove('hidden');
         loadQuestion();
         gameLoop();
     }
 
-    // --- 게임 로직 ---
     function loadQuestion() {
         if (currentQuestionIndex >= questions.length) {
             gameState = 'gameOver';
@@ -479,61 +402,54 @@
         const q = questions[currentQuestionIndex];
         questionTextEl.innerText = q.question;
         
-        signs = [];
+        targets = [];
         const answers = [...q.answers];
         shuffleArray(answers);
         
         const laneCount = answers.length;
         const laneWidth = canvas.width / laneCount;
         answers.forEach((ans, i) => {
-            signs.push({
+            targets.push({
                 text: ans.text,
                 correct: ans.correct,
                 x: (i * laneWidth) + (laneWidth / 2),
-                y: -150,
-                width: Math.min(140, laneWidth - 20),
-                height: 100,
+                y: -100,
+                radius: Math.min(60, laneWidth / 2 - 10),
             });
         });
         
-        signSpeed += 0.1;
+        targetSpeed += 0.1; // 속도 증가량을 상향 조정했습니다.
     }
 
     function update() {
+        if (gameState === 'playing') {
+            let missed = false;
+            targets.forEach(target => {
+                target.y += targetSpeed;
+                if (target.y > canvas.height + target.radius) {
+                    missed = true;
+                }
+            });
+            if (missed) {
+                handleCollision({ correct: false });
+            }
+        }
+        
+        if (arrow.isFlying) {
+            arrow.x += arrow.vx;
+            arrow.y += arrow.vy;
+            if (Math.abs(arrow.x - arrow.targetX) < 15 && Math.abs(arrow.y - arrow.targetY) < 15) { // 약간의 허용 오차
+                arrow.isFlying = false;
+                handleCollision(arrow.hitTarget);
+            }
+        }
+    }
+
+    function handleCollision(target) {
         if (gameState !== 'playing') return;
 
-        if (keys['ArrowLeft'] || keys['touchLeft']) penguin.targetX -= penguin.speed;
-        if (keys['ArrowRight'] || keys['touchRight']) penguin.targetX += penguin.speed;
-        if (keys['ArrowUp'] || keys['touchUp']) penguin.targetY -= penguin.speed;
-        if (keys['ArrowDown'] || keys['touchDown']) penguin.targetY += penguin.speed;
-
-        penguin.x += (penguin.targetX - penguin.x) * 0.2;
-        penguin.y += (penguin.targetY - penguin.y) * 0.2;
-
-        penguin.x = Math.max(penguin.width / 2, Math.min(canvas.width - penguin.width / 2, penguin.x));
-        penguin.y = Math.max(penguin.height / 2, Math.min(canvas.height - penguin.height / 2, penguin.y));
-        penguin.targetX = penguin.x;
-        penguin.targetY = penguin.y;
-
-        signs.forEach(sign => {
-            sign.y += signSpeed;
-            if (
-                penguin.x < sign.x + sign.width / 2 &&
-                penguin.x > sign.x - sign.width / 2 &&
-                penguin.y < sign.y + sign.height / 2 &&
-                penguin.y > sign.y - sign.height / 2
-            ) {
-                handleCollision(sign);
-            }
-            if (sign.y > canvas.height + sign.height) {
-                 handleCollision({correct: false});
-            }
-        });
-    }
-    
-    function handleCollision(sign) {
         gameState = 'feedback';
-        if (sign.correct) {
+        if (target.correct) {
             speak('천재');
             score += 5;
             scoreEl.innerText = score;
@@ -551,23 +467,14 @@
             if (currentQuestionIndex >= questions.length) {
                 gameState = 'gameOver';
                 finalScoreEl.innerText = score;
-                
                 const gameOverMessageEl = document.getElementById('gameOverMessage');
-                if (score === 100) {
-                    gameOverMessageEl.innerText = "당신은 국어황입니다";
-                } else if (score >= 90) {
-                    gameOverMessageEl.innerText = "당신은 국어를 잘 합니다!";
-                } else if (score >= 80) {
-                    gameOverMessageEl.innerText = "당신은 국어를 그럭저럭 합니다";
-                } else if (score >= 70) {
-                    gameOverMessageEl.innerText = "당신은 국어를 못 합니다";
-                } else {
-                    gameOverMessageEl.innerText = "당신은 국어를 정말 못 합니다";
-                }
-
+                 if (score === 100) gameOverMessageEl.innerText = "당신은 국어황입니다";
+                 else if (score >= 90) gameOverMessageEl.innerText = "당신은 국어를 잘 합니다!";
+                 else if (score >= 80) gameOverMessageEl.innerText = "당신은 국어를 그럭저럭 합니다";
+                 else if (score >= 70) gameOverMessageEl.innerText = "당신은 국어를 못 합니다";
+                 else gameOverMessageEl.innerText = "당신은 국어를 정말 못 합니다";
                 gameOverScreen.classList.remove('hidden');
                 document.getElementById('questionBox').classList.add('hidden');
-                document.getElementById('touch-controls').classList.add('hidden');
             } else {
                 loadQuestion();
                 gameState = 'playing';
@@ -575,46 +482,16 @@
         }
     }
 
-    // --- 렌더링 ---
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(penguinSVG, penguin.x - penguin.width / 2, penguin.y - penguin.height / 2, penguin.width, penguin.height);
+        drawBow();
+        if (arrow.isFlying) drawArrow();
 
-        signs.forEach(sign => {
-            ctx.fillStyle = '#8B4513';
-            ctx.fillRect(sign.x - 5, sign.y - sign.height / 2, 10, sign.height);
-            ctx.fillStyle = '#DEB887';
-            ctx.fillRect(sign.x - sign.width / 2, sign.y - sign.height / 2, sign.width, sign.height / 2);
-            ctx.strokeStyle = '#8B4513';
-            ctx.lineWidth = 3;
-            ctx.strokeRect(sign.x - sign.width / 2, sign.y - sign.height / 2, sign.width, sign.height / 2);
-            
-            ctx.fillStyle = '#000';
-            ctx.font = '16px "Noto Sans KR"';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            const textY = sign.y - sign.height / 4;
-
-            const words = sign.text.split(' ');
-            let line = '';
-            let lines = [];
-            for (let n = 0; n < words.length; n++) {
-                let testLine = line + words[n] + ' ';
-                let metrics = ctx.measureText(testLine);
-                if (metrics.width > sign.width - 10 && n > 0) {
-                    lines.push(line);
-                    line = words[n] + ' ';
-                } else {
-                    line = testLine;
-                }
-            }
-            lines.push(line);
-            const lineHeight = 18;
-            let startY = textY - (lines.length - 1) * lineHeight / 2;
-            lines.forEach((l, i) => ctx.fillText(l.trim(), sign.x, startY + i * lineHeight));
+        targets.forEach(target => {
+            drawTarget(target);
         });
         
-        if (feedback.timer > 0) {
+        if (gameState === 'feedback' && feedback.timer > 0) {
             ctx.save();
             let alpha = Math.min(1, feedback.timer / 30);
             ctx.font = 'bold 60px "Noto Sans KR"';
@@ -628,57 +505,173 @@
             ctx.restore();
         }
     }
+    
+    function drawTarget(target) {
+        // 과녁 그리기 (옅은 파스텔톤 색상으로 변경)
+        ctx.beginPath();
+        ctx.fillStyle = '#FFFFFF';
+        ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = '#A7C7E7'; // Pastel Blue
+        ctx.arc(target.x, target.y, target.radius * 0.8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = '#FFB6B1'; // Pastel Red
+        ctx.arc(target.x, target.y, target.radius * 0.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = '#FFFFAA'; // Pastel Yellow
+        ctx.arc(target.x, target.y, target.radius * 0.2, 0, Math.PI * 2);
+        ctx.fill();
 
-    // --- 게임 루프 ---
+        // 텍스트 그리기 (선명하게)
+        ctx.font = 'bold 16px "Noto Sans KR"';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // 텍스트 테두리로 가독성 향상
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 3;
+        
+        const drawTextWithStroke = (text, x, y) => {
+            ctx.strokeText(text, x, y);
+            ctx.fillStyle = 'black';
+            ctx.fillText(text, x, y);
+        };
+        
+        const words = target.text.split(' ');
+        if (words.length > 1) {
+            drawTextWithStroke(words[0], target.x, target.y - 10);
+            drawTextWithStroke(words.slice(1).join(' '), target.x, target.y + 10);
+        } else {
+            drawTextWithStroke(target.text, target.x, target.y);
+        }
+    }
+
+    function drawBow() {
+        ctx.strokeStyle = '#8B4513';
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        ctx.arc(bow.x, bow.y, bow.size / 2, Math.PI, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(bow.x - bow.size / 2, bow.y);
+        ctx.lineTo(bow.x + bow.size / 2, bow.y);
+        ctx.strokeStyle = '#D2B48C';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+    function drawArrow() {
+        ctx.save();
+        ctx.translate(arrow.x, arrow.y);
+        ctx.rotate(arrow.angle);
+        ctx.strokeStyle = '#8B4513';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(0, -30);
+        ctx.lineTo(0, 20);
+        ctx.stroke();
+        // 깃
+        ctx.fillStyle = '#A0522D';
+        ctx.beginPath();
+        ctx.moveTo(0, 20);
+        ctx.lineTo(-8, 30);
+        ctx.lineTo(8, 30);
+        ctx.closePath();
+        ctx.fill();
+        // 촉
+        ctx.fillStyle = '#A9A9A9';
+        ctx.beginPath();
+        ctx.moveTo(0, -30);
+        ctx.lineTo(-6, -20);
+        ctx.lineTo(6, -20);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
+    
+    function fireArrow(target) {
+        if (gameState !== 'playing' || arrow.isFlying) return;
+        
+        const startX = bow.x;
+        const startY = bow.y;
+        const targetX = target.x;
+        const targetY = target.y;
+
+        const dx = targetX - startX;
+        const dy = targetY - startY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) + Math.PI / 2;
+        const speed = 20;
+
+        arrow = {
+            isFlying: true,
+            x: startX,
+            y: startY,
+            targetX: targetX,
+            targetY: targetY,
+            vx: (dx / distance) * speed,
+            vy: (dy / distance) * speed,
+            angle: angle,
+            hitTarget: target
+        };
+    }
+    
+    function handleCanvasClick(event) {
+        if (gameState !== 'playing' || arrow.isFlying) return;
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        let clickedTarget = null;
+        // 가장 위에 있는 (y값이 가장 큰) 과녁을 우선적으로 선택
+        let highestY = -Infinity;
+
+        targets.forEach(target => {
+            const dist = Math.sqrt((x - target.x) ** 2 + (y - target.y) ** 2);
+            if (dist < target.radius) {
+                if (target.y > highestY) {
+                    highestY = target.y;
+                    clickedTarget = target;
+                }
+            }
+        });
+
+        if (clickedTarget) {
+            fireArrow(clickedTarget);
+        }
+    }
+
     function gameLoop() {
         if (gameState === 'gameOver') return;
 
-        if (gameState === 'playing') update();
-        else if (gameState === 'feedback') handleFeedback();
-        
+        update();
         draw();
+        
+        if (gameState === 'feedback') handleFeedback();
+        
         requestAnimationFrame(gameLoop);
     }
     
-    // --- 이벤트 리스너 ---
-    window.addEventListener('keydown', e => {
-        if(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-            e.preventDefault();
-            keys[e.key] = true;
-        }
+    startButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        startGame();
     });
-    window.addEventListener('keyup', e => { keys[e.key] = false; });
-
-    function handleTouch(e, isDown) {
-        e.preventDefault();
-        const keyMap = {
-            touchUp: 'touchUp', touchDown: 'touchDown',
-            touchLeft: 'touchLeft', touchRight: 'touchRight'
-        };
-        const key = keyMap[e.currentTarget.id];
-        if (key) keys[key] = isDown;
-    }
-
-    [touchUp, touchDown, touchLeft, touchRight].forEach(btn => {
-        btn.addEventListener('touchstart', e => handleTouch(e, true));
-        btn.addEventListener('touchend', e => handleTouch(e, false));
-        btn.addEventListener('touchcancel', e => handleTouch(e, false));
-    });
-
-    startButton.addEventListener('click', startGame);
-    restartButton.addEventListener('click', () => {
+    restartButton.addEventListener('click', (e) => {
+        e.stopPropagation();
         init();
         startGame();
     });
-
+    
+    canvas.addEventListener('click', handleCanvasClick);
     window.addEventListener('resize', init);
     
     // DOMContentLoaded 이벤트 리스너를 게임 스크립트 전용으로 변경
     document.addEventListener('DOMContentLoaded', () => {
-        // 이 리스너는 게임 초기화만 담당하도록 합니다.
-        // 기존 퀴즈의 초기화는 별도의 스크립트 블록에 있습니다.
         const gameCanvasEl = document.getElementById('gameCanvas');
-        if (gameCanvasEl) {
+        if (gameCanvasEl && typeof init === 'function') {
             init();
         }
     });
@@ -686,3 +679,5 @@
 </script>
 </body>
 </html>
+
+
