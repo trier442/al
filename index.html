@@ -40,6 +40,13 @@
             padding-bottom: 0.5rem;
             border-bottom: 2px solid #e5e7eb;
         }
+        .sub-category-card {
+             background-color: #f9fafb;
+             transition: background-color 0.2s ease-in-out;
+        }
+        .sub-category-card:hover {
+            background-color: #f3f4f6;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -80,32 +87,6 @@
             <div class="container mx-auto px-6">
                 <h2 class="grade-title">고등학교 1학년</h2>
                 
-                <div class="mb-12">
-                    <h3 class="category-title">공통국어 1 (출판사별)</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <!-- 미래엔 -->
-                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
-                            <h4 class="font-bold text-lg text-gray-800">미래엔</h4>
-                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
-                        </a>
-                        <!-- 비상 -->
-                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
-                            <h4 class="font-bold text-lg text-gray-800">비상</h4>
-                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
-                        </a>
-                        <!-- 천재 -->
-                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
-                            <h4 class="font-bold text-lg text-gray-800">천재</h4>
-                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
-                        </a>
-                         <!-- 신사고 -->
-                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
-                            <h4 class="font-bold text-lg text-gray-800">신사고</h4>
-                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
-                        </a>
-                    </div>
-                </div>
-
                 <div>
                     <h3 class="category-title">공통국어 2 (출판사별)</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -119,10 +100,10 @@
                             <h4 class="font-bold text-lg text-green-800">비상 (강호영)</h4>
                             <p class="text-green-700 mt-1">자료 보러가기 →</p>
                         </a>
-                        <!-- 천재(박) -->
-                        <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
-                            <h4 class="font-bold text-lg text-gray-800">천재 (박)</h4>
-                            <p class="text-gray-600 mt-1">자료 준비 중입니다.</p>
+                        <!-- 천재(김수학) -->
+                        <a href="ckg2.html" class="block p-6 bg-yellow-50 rounded-lg card-hover">
+                            <h4 class="font-bold text-lg text-yellow-800">천재 (김수학)</h4>
+                            <p class="text-yellow-700 mt-1">자료 보러가기 →</p>
                         </a>
                         <!-- 미래엔 -->
                         <a href="#" class="block p-6 bg-gray-50 rounded-lg card-hover">
@@ -139,26 +120,47 @@
             <div class="container mx-auto px-6">
                 <h2 class="grade-title">고등학교 2학년</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <a href="#" class="block p-8 bg-white rounded-xl shadow-lg card-hover text-center">
-                        <div class="text-5xl mb-4">📜</div>
-                        <h3 class="font-bold text-xl text-gray-900">문학</h3>
-                        <p class="text-gray-600 mt-2">개념, 작품 분석, 문제 풀이</p>
-                    </a>
-                    <a href="#" class="block p-8 bg-white rounded-xl shadow-lg card-hover text-center">
-                        <div class="text-5xl mb-4">📖</div>
-                        <h3 class="font-bold text-xl text-gray-900">독서</h3>
-                        <p class="text-gray-600 mt-2">독해 원리, 지문 분석, 유형별 전략</p>
-                    </a>
-                    <a href="#" class="block p-8 bg-white rounded-xl shadow-lg card-hover text-center">
+                    <!-- 문학 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-8 text-center">
+                            <div class="text-5xl mb-4">📜</div>
+                            <h3 class="font-bold text-xl text-gray-900">문학</h3>
+                            <p class="text-gray-600 mt-2">개념, 작품 분석, 문제 풀이</p>
+                        </div>
+                        <div class="p-4 space-y-2 border-t border-gray-200">
+                             <a href="#" class="block p-3 rounded-md sub-category-card text-center font-medium text-gray-700">비상(한)</a>
+                             <a href="#" class="block p-3 rounded-md sub-category-card text-center font-medium text-gray-700">천재(정)</a>
+                        </div>
+                    </div>
+                     <!-- 독서 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-8 text-center">
+                            <div class="text-5xl mb-4">📖</div>
+                            <h3 class="font-bold text-xl text-gray-900">독서</h3>
+                            <p class="text-gray-600 mt-2">독해 원리, 지문 분석, 유형별 전략</p>
+                        </div>
+                         <div class="p-4 space-y-2 border-t border-gray-200">
+                             <a href="#" class="block p-3 rounded-md sub-category-card text-center font-medium text-gray-700">지학사</a>
+                        </div>
+                    </div>
+                    <!-- 화법과 작문 -->
+                    <div class="bg-white rounded-xl shadow-lg flex flex-col justify-center p-8 text-center card-hover">
                         <div class="text-5xl mb-4">🗣️</div>
                         <h3 class="font-bold text-xl text-gray-900">화법과 작문</h3>
                         <p class="text-gray-600 mt-2">발표, 토론, 글쓰기 전략</p>
-                    </a>
-                    <a href="#" class="block p-8 bg-white rounded-xl shadow-lg card-hover text-center">
-                        <div class="text-5xl mb-4">✍️</div>
-                        <h3 class="font-bold text-xl text-gray-900">언어와 매체</h3>
-                        <p class="text-gray-600 mt-2">문법 개념, 매체 언어 분석</p>
-                    </a>
+                    </div>
+                     <!-- 언어와 매체 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-8 text-center">
+                            <div class="text-5xl mb-4">✍️</div>
+                            <h3 class="font-bold text-xl text-gray-900">언어와 매체</h3>
+                            <p class="text-gray-600 mt-2">문법 개념, 매체 언어 분석</p>
+                        </div>
+                         <div class="p-4 space-y-2 border-t border-gray-200">
+                             <a href="#" class="block p-3 rounded-md sub-category-card text-center font-medium text-gray-700">비상(이관규)</a>
+                             <a href="#" class="block p-3 rounded-md sub-category-card text-center font-medium text-gray-700">천재(민현식)</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
