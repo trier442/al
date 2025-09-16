@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-2. 우리말과 매체의 변천</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #10b981; /* Green color for this unit */
+            color: #065f46;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #ecfdf5;
+            border-color: #6ee7b7;
+        }
+        .quiz-option.selected {
+            background-color: #d1fae5;
+            border-color: #10b981;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-green-800">2-2. 우리말과 매체의 변천</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 국어의 변화와 매체 소통</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-green-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-green-800">■ 학습 목표:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>과거와 현재의 국어생활에 나타나는 국어의 변화를 이해하고 국어문화 발전에 참여할 수 있다.</li>
+                        <li>매체의 변화가 소통 문화에 끼치는 영향을 탐구할 수 있다.</li>
+                    </ul>
+                    <p><strong class="text-green-800">■ 주요 내용:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>중세 국어와 현대 국어의 차이 (표기, 음운, 어휘, 문법)</li>
+                        <li>국어의 역사성 (변화의 연속성)</li>
+                        <li>매체의 변화에 따른 소통 방식의 변화 (디지털 매체 기반 소통의 특징)</li>
+                        <li>매체의 변화에 따른 소통 언어의 변화 (디지털 매체 언어의 특징)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 주요 내용 요약 -->
+            <section class="exam-section">
+                <h4>2. 주요 내용 요약</h4>
+                <div class="space-y-4 text-sm sm:text-base">
+                    <p>이 소단원은 국어의 역사적 변화와 매체 환경의 변화가 소통 방식과 언어생활에 미치는 영향을 탐구합니다. 중세 국어와 현대 국어의 표기, 음운, 어휘, 문법적 차이를 <세종어제훈민정음>을 통해 구체적으로 살펴봅니다. 이를 통해 국어가 시간이 흐름에 따라 끊임없이 변화해 왔음을 이해하고, 현대 국어에 남아있는 옛말의 흔적을 통해 국어의 연속성을 파악합니다.</p>
+                    <p>또한, 종이 매체 중심의 과거 소통 방식과 달리, 오늘날 디지털 매체(SNS, 온라인 수업 공간, 화상 회의, 개인 인터넷 방송 등)를 기반으로 하는 소통 방식의 특징(쌍방향성, 실시간성, 복합양식성, 비대면성, 편의성, 익명성)을 알아봅니다. 더불어 디지털 매체 환경에서 나타나는 언어의 특징(줄임말, 신어, 이모티콘 사용, 구어체 경향 등)을 파악하고, 바람직한 매체 소통 문화를 위한 예절과 태도를 모색합니다. 이를 통해 국어문화 발전에 참여하는 능동적인 태도를 기르는 데 중점을 둡니다.</p>
+                </div>
+            </section>
+
+            <!-- 3. 핵심 개념 및 특징 -->
+            <section class="exam-section">
+                <h4>3. 핵심 개념 및 특징</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">중세 국어의 특징 (세종어제훈민정음 기준)</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>표기:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>글을 세로 방향으로 썼음.</li>
+                                    <li>띄어쓰기를 하지 않고 붙여 썼음.</li>
+                                    <li>글자 왼쪽에 방점(성조)을 찍어 소리의 높낮이를 나타냈음.</li>
+                                    <li>이어 적기(연철) 표기 방식이 쓰였음. (예: 말쓰미)</li>
+                                </ul>
+                            </li>
+                            <li><strong>음운:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>현대 국어에 없는 음운(ㅸ, △, ㆆ, ㆁ, ㆍ)이 쓰였음.</li>
+                                    <li>음절 첫머리에 둘 이상의 자음이 오는 어두 자음군(예: ㅄ-, ㅂㅅ-)이 있었음.</li>
+                                    <li>모음 조화가 비교적 잘 지켜졌음. (예: 뜨들, 롤)</li>
+                                </ul>
+                            </li>
+                            <li><strong>문법:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>부사격 조사 '에'(비교)가 쓰였음. (예: 듕귁에 달아)</li>
+                                    <li>주격 조사로 '이'(ㅣ)만 쓰였고 '가'는 쓰이지 않았음. (예: 말쓰미, 홈배이셔도)</li>
+                                    <li>관형격 조사로 'ㅅ'이 쓰였음. (예: 나랏말쓰미)</li>
+                                    <li>목적격 조사 '-ㅭ/을, -ㅭ/를'이 쓰였음. (예: 뜨들)</li>
+                                    <li>명사형 어미 '옴/-움'이 쓰였음. (예: 홈)</li>
+                                </ul>
+                            </li>
+                            <li><strong>어휘:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>현대 국어와 다른 의미로 쓰이거나 사라진 어휘가 쓰였음. (예: 놈(사람), 어린(어리석다), 어엿비(불쌍히), 하니라(많다))</li>
+                                    <li>한자어가 많이 사용되었음.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">국어의 역사성</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>국어는 시간이 흐름에 따라 형태, 의미, 문법 요소 등이 변화함.</li>
+                            <li>국어의 변화는 단절되지 않고 현대 국어에 옛말의 흔적이 남아있음. (예: ㅎ 종성 체언의 흔적 - 살코기, 암탉)</li>
+                            <li>국어는 현재도 끊임없이 변화하고 있음. (예: 표준어 추가/수정, 신어 등재)</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">디지털 매체 기반 소통 문화의 특징</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>쌍방향성/실시간성:</strong> 콘텐츠 생산자와 수용자가 쉽게 상호 작용하고 즉각적인 피드백 가능. (예: 개인 방송, 온라인 수업 공간, 화상 회의)</li>
+                            <li><strong>복합양식성:</strong> 문자, 소리, 사진, 영상 등 다양한 매체 언어를 활용.</li>
+                            <li><strong>편의성/비대면성/익명성:</strong> 시공간 제약 없이 소통, 자료 저장/복사/공유 용이, 비대면 소통, 불특정 다수와 소통 가능.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">매체 기반 소통 언어의 특징</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>빠른 소통을 위해 소리 나는 대로 적기, 단어/문장 줄여 쓰기, 초성 사용, 문장 부호 생략 등이 나타남. (예: ㄹㅇ, ㅋㅋㅋㅋ, 땡김, 보내바)</li>
+                            <li>이모티콘이나 기호를 사용하여 감정을 표현함. (예: ^^, 이모티콘)</li>
+                            <li>줄임말, 유행어 등 신어가 빠르게 생성되고 확산됨. (예: 맵찔이, 어쩔티비)</li>
+                            <li>구어체 경향이 강함.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "중세 국어의 표기상 특징으로 적절하지 않은 것은?", options: ["글을 세로 방향으로 썼다.", "단어와 단어 사이를 띄어 썼다.", "글자 왼쪽에 방점을 찍어 성조를 나타냈다.", "이어 적기(연철) 표기 방식이 쓰였다.", "현대 국어에 없는 음운이 쓰였다."], answer: 1, explanation: "중세 국어에서는 띄어쓰기를 하지 않고 붙여 썼습니다. 띄어쓰기는 현대 국어에 와서 정착된 표기 방식입니다." },
+            { question: "<세종어제훈민정음>에 쓰인 음운 중 현대 국어에서 사라진 것은?", options: ["ㄱ", "ㄴ", "ㅁ", "ㅅ", "ㆍ"], answer: 4, explanation: "아래아(ㆍ)는 중세 국어에서 사용되었으나 현대 국어에서는 사라진 모음입니다. ㄱ, ㄴ, ㅁ, ㅅ은 현대 국어에서도 사용되는 자음입니다." },
+            { question: "중세 국어의 문법적 특징으로 적절하지 않은 것은?", options: ["주격 조사 '가'가 사용되었다.", "부사격 조사 '에'가 비교의 의미로 쓰였다.", "관형격 조사 'ㅅ'이 사용되었다.", "목적격 조사 '-ㅭ/을, -ㅭ/를'이 사용되었다.", "명사형 어미 '옴/-움'이 주로 쓰였다."], answer: 0, explanation: "중세 국어에서는 주격 조사로 '이'(ㅣ)만 쓰였고, '가'는 쓰이지 않았습니다. '가'는 근대 국어 이후에 나타난 형태입니다." },
+            { question: "다음 중 중세 국어에서 현대 국어로 오면서 의미가 '축소'된 어휘는?", options: ["어리다", "어엿비", "놈", "세수", "하니라"], answer: 2, explanation: "'놈'은 중세 국어에서 '사람'을 의미했으나, 현대 국어에서는 '남자'를 낮잡아 이르는 말로 의미가 축소되었습니다. '어리다'와 '어엿비'는 의미 이동, '세수'는 의미 확대, '하니라'는 사라진 어휘입니다." },
+            { question: "국어의 역사성에 대한 설명으로 적절하지 않은 것은?", options: ["국어는 시간이 흐름에 따라 변화한다.", "국어의 변화는 이전의 모습과 단절된다.", "현대 국어에 옛말의 흔적이 남아있다.", "국어는 지금 이 순간에도 계속 변화하고 있다.", "표준어의 추가나 수정은 국어의 역사성을 보여주는 예이다."], answer: 1, explanation: "국어의 변화는 단절되는 것이 아니라 연속성을 가지며, 현대 국어에도 옛말의 흔적이 남아있습니다." },
+            { question: "디지털 매체 기반 소통 방식의 특징으로 적절하지 않은 것은?", options: ["시공간의 제약으로부터 자유롭다.", "콘텐츠 생산자와 수용자가 일방향으로 소통한다.", "영상, 사진, 문자 등 다양한 매체를 복합적으로 사용한다.", "자료를 쉽게 저장, 복사, 공유할 수 있다.", "불특정 다수의 사람들과 소통하기도 한다."], answer: 1, explanation: "디지털 매체 기반 소통은 주로 쌍방향으로 이루어지며, 생산자와 수용자가 상호 작용하는 것이 특징입니다." },
+            { question: "매체 기반 소통에서 나타나는 언어의 특징으로 적절하지 않은 것은?", options: ["소리 나는 대로 쓰는 경우가 많다.", "문장 부호를 철저히 준수한다.", "줄임말이나 초성을 사용한다.", "이모티콘이나 기호를 사용하여 감정을 표현한다.", "신어가 빠르게 생성되고 확산된다."], answer: 1, explanation: "매체 기반 소통에서는 빠른 소통을 위해 문장 부호를 생략하거나 간소화하는 경우가 많습니다. 철저히 준수하는 것은 특징이 아닙니다." },
+            { question: "<세종어제훈민정음>에서 '나랏말쓰미'와 같이 받침을 다음 자의 초성으로 내려 쓰는 표기 방식은?", options: ["분철", "연철", "중철", "이어쓰기", "끊어쓰기"], answer: 1, explanation: "받침을 다음 자의 초성으로 내려 쓰는 표기 방식을 '이어 적기' 또는 '연철'이라고 합니다." },
+            { question: "다음 중 중세 국어의 어두 자음군 표기에 해당하는 것은?", options: ["말쓰미", "뜨들", "어엿비", "하니라", "달아"], answer: 1, explanation: "'뜨들'은 'ㅂㄷ'과 같은 음절 첫머리에 둘 이상의 자음이 오는 어두 자음군이 쓰인 예입니다." },
+            { question: "현대 국어에서 '살코기', '암탉'과 같이 옛말의 흔적이 남아있는 현상과 가장 관련 깊은 것은?", options: ["모음 조화", "구개음화", "ㅎ 종성 체언", "두음 법칙", "음운 축약"], answer: 2, explanation: "'살코기'의 '살'과 '암탉'의 '암'은 옛날에 'ㅎ' 받침으로 끝났던 'ㅎ 종성 체언'의 흔적이 남아있는 말입니다." },
+            { question: "디지털 매체 기반 소통의 '쌍방향성'을 가장 잘 보여주는 예시는?", options: ["개인이 찍은 동영상을 온라인에 올리는 것", "메신저에서 문서 파일을 공유하는 것", "개인 방송에서 시청자들이 실시간으로 채팅하는 것", "사회 관계망 서비스에 자신의 일상을 기록하는 것", "공유 문서 기능을 통해 자료를 다른 사람들과 함께 편집하는 것"], answer: 2, explanation: "개인 방송에서 시청자들이 실시간으로 채팅하는 것은 콘텐츠 생산자와 수용자가 즉각적으로 상호 작용하는 '쌍방향성'의 대표적인 예시입니다." },
+            { question: "다음 중 디지털 매체 언어의 특징으로 '빠른 소통'과 가장 관련이 없는 것은?", options: ["'ㄹㅇ(레알)'과 같은 줄임말 사용", "'ㅋㅋㅋㅋ'와 같은 초성 사용", "문장 부호를 생략하는 경향", "이모티콘을 사용하여 감정을 표현", "소리 나는 대로 글자를 이어 적기"], answer: 3, explanation: "이모티콘을 사용하여 감정을 표현하는 것은 감정 표현의 특징이지 빠른 소통을 위한 언어적 축약과는 직접적인 관련이 적습니다." },
+            { question: "중세 국어에서 '어리석다'를 의미했던 어휘가 현대 국어에서 '나이가 어리다'로 의미가 변한 현상을 무엇이라고 하는가?", options: ["의미 축소", "의미 확대", "의미 이동", "의미 소멸", "의미 분화"], answer: 2, explanation: "어휘의 의미가 원래의 의미에서 다른 의미로 바뀌는 것을 '의미 이동'이라고 합니다." },
+            { question: "다음 중 중세 국어에서 '사람'을 의미했으나 현대 국어에서 '남자'를 낮잡아 이르는 말로 의미가 변한 어휘는?", options: ["어린", "어엿비", "놈", "세수", "하니라"], answer: 2, explanation: "'놈'은 중세 국어에서 '사람'을 의미했지만, 현대 국어에서는 '남자'를 낮잡아 이르는 말로 의미가 축소되었습니다." },
+            { question: "다음 중 <세종어제훈민정음>에서 '모음 조화'가 잘 지켜진 예시로 가장 적절한 것은?", options: ["나랏말쓰미", "듕귁에", "뜨들", "홈배이셔도", "어엿비너겨"], answer: 2, explanation: "'뜨들'은 음성 모음 'ㅡ' 뒤에 음성 모음 목적격 조사 '을'이 붙어 모음 조화가 잘 지켜진 예시입니다." },
+            { question: "디지털 매체 기반 소통의 '복합양식성'을 가장 잘 설명하는 것은?", options: ["다양한 사람들이 함께 소통하는 것", "문자, 소리, 사진, 영상 등 여러 매체를 활용하는 것", "시공간의 제약 없이 소통하는 것", "익명으로 자신의 의견을 표현하는 것", "정보를 빠르게 주고받는 것"], answer: 1, explanation: "복합양식성은 문자, 소리, 사진, 영상 등 다양한 매체 언어를 활용하여 소통하는 것을 의미합니다." },
+            { question: "다음 중 매체 기반 소통 언어의 특징으로 '신어의 확산'을 가장 잘 보여주는 예시는?", options: ["'ㅋㅋㅋㅋ'를 사용하여 웃음을 표현", "'땡김'과 같이 소리 나는 대로 적기", "'맵찔이'와 같은 유행어가 널리 사용되기", "문장 부호를 생략하여 간결하게 표현", "이모티콘을 사용하여 감정을 전달"], answer: 2, explanation: "'맵찔이'와 같은 유행어가 널리 사용되는 것은 신어가 생성되고 확산되는 현상을 잘 보여줍니다." },
+            { question: "중세 국어에서 '까닭'을 의미했으나 현대 국어에서는 쓰이지 않는 어휘는?", options: ["놈", "어리다", "어엿비", "전차", "하니라"], answer: 3, explanation: "'전차'는 중세 국어에서 '까닭'을 의미했으나 현대 국어에서는 사라진 어휘입니다." },
+            { question: "다음 중 중세 국어의 표기 방식인 '방점'에 대한 설명으로 옳은 것은?", options: ["글자의 크기를 조절하여 소리의 강약을 나타냈다.", "글자 왼쪽에 점을 찍어 소리의 높낮이(성조)를 나타냈다.", "글자의 색깔을 달리하여 의미의 중요도를 표시했다.", "글자 아래에 점을 찍어 받침의 유무를 나타냈다.", "글자 오른쪽에 점을 찍어 음절의 길이를 나타냈다."], answer: 1, explanation: "방점은 글자 왼쪽에 점을 찍어 소리의 높낮이(성조)를 나타내는 표기 방식입니다." },
+            { question: "다음 중 디지털 매체 기반 소통의 '편의성'을 가장 잘 보여주는 예시는?", options: ["서로 다른 시공간에서 대화하는 것", "문서나 이미지 파일을 쉽게 공유하고 저장하는 것", "개인 방송에서 실시간으로 소통하는 것", "익명으로 자신의 의견을 표현하는 것", "다양한 매체 언어를 활용하여 소통하는 것"], answer: 1, explanation: "문서나 이미지 파일을 쉽게 공유하고 저장하는 것은 디지털 매체 기반 소통이 제공하는 '편의성'의 대표적인 예시입니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            buildQuiz();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제망매가 해설 및 문제</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #6b7280; /* Gray color for this unit */
+            color: #374151;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+        }
+        .quiz-option.selected {
+            background-color: #e5e7eb;
+            border-color: #6b7280;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-gray-800">3-1-1. 시가 세 편</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: <제망매가></h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-gray-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-gray-800">■ 작자:</strong> 월명사</p>
+                    <p><strong class="text-gray-800">■ 갈래:</strong> 10구체 향가</p>
+                    <p><strong class="text-gray-800">■ 성격:</strong> 서정적, 애상적, 추모적, 비유적, 불교적</p>
+                    <p><strong class="text-gray-800">■ 제재:</strong> 죽은 누이의 죽음</p>
+                    <p><strong class="text-gray-800">■ 주제:</strong> 죽은 누이에 대한 추모, 혈육의 죽음으로 인한 슬픔과 극복 의지</p>
+                    <p><strong class="text-gray-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>시적 상황을 자연 현상에 비유하여 형상화함.</li>
+                        <li>10구체 향가의 정제된 형식미와 고도의 서정성이 두드러짐.</li>
+                        <li>불교적 내세 사상과 윤회 사상을 기반으로 하여 사별의 슬픔을 종교적으로 승화함.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 2. 작품 해설 및 표현법 -->
+            <section class="exam-section">
+                <h4>2. 작품 해설 및 표현법</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <p>이 작품은 신라의 승려 월명사가 죽은 누이를 추모하며 지은 10구체 향가입니다. 혈육의 죽음을 자연 현상에 비유하여 형상화하고, 그 슬픔을 종교적으로 승화하는 과정을 담고 있습니다. 향가 중에서도 문학성과 서정성이 뛰어난 작품으로 평가받습니다.</p>
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-gray-400">
+                        <p class="font-bold text-lg text-gray-800">기(起): 1~4행 - 누이의 죽음에 대한 안타까움</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>"생사 길은 / 예 있으매 머뭇거리고": 삶과 죽음의 길은 이승에 있어 화자가 머뭇거립니다.</li>
+                            <li>"나는 간다는 말도 / 못다 이르고 어찌 갑니까.": 화자는 죽은 누이가 '간다는 말' 한마디 없이 갑작스럽게 떠난 것에 대해 안타까워합니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-gray-400">
+                        <p class="font-bold text-lg text-gray-800">서(敍): 5~8행 - 혈육의 죽음에서 느끼는 삶의 무상함</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>"어느 가을 이른 바람에 / 이에 저에 떨어질 잎처럼": '이른 바람'은 누이의 요절(젊은 나이에 죽음)을, '떨어질 잎'은 죽은 누이를 비유합니다. 누이의 죽음을 자연 현상에 빗대어 시각적으로 표현하고 있습니다.</li>
+                            <li>"한 가지에 나고 / 가는 곳 모르온저.": '한 가지'는 같은 부모에게서 태어난 혈육을 의미합니다. 같은 부모에게서 태어났지만 죽음 후에는 어디로 가는지 알 수 없는 삶의 무상감을 드러냅니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-gray-400">
+                        <p class="font-bold text-lg text-gray-800">결(結): 9~10행 - 종교적 믿음을 통한 슬픔의 극복</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>"아아, 미타찰에서 만날 나": 낙구의 첫머리 감탄사 '아아'를 통해 시상이 전환됩니다. '미타찰(彌陀刹)'은 불교적 내세인 극락 세계를 의미합니다.</li>
+                            <li>"도 닦아 기다리겠노라.": 화자는 누이와의 재회를 기약하며 종교적 믿음으로 슬픔을 극복하려는 의지를 다집니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-gray-400">
+                        <p class="font-bold text-lg text-gray-800">주요 표현법</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>비유법:</strong> 누이의 요절을 '이른 바람'에, 죽은 누이를 '떨어질 잎'에, 혈육 관계를 '한 가지'에 빗대어 표현하여 시적 상황을 구체화합니다.</li>
+                            <li><strong>상징법:</strong> '미타찰'은 불교적 내세인 극락 세계를 상징하여 화자의 종교적 믿음을 드러냅니다.</li>
+                            <li><strong>시각적 심상:</strong> '떨어질 잎'이라는 시각적 이미지를 통해 누이의 죽음을 형상화하여 애상적 분위기를 조성합니다.</li>
+                            <li><strong>영탄법:</strong> 낙구의 감탄사 '아아'를 사용하여 슬픔을 극복하려는 화자의 의지를 강조하며 시상을 전환합니다.</li>
+                            <li><strong>대유법:</strong> '한 가지'는 나무의 가지를 통해 그 나무에서 나온 모든 잎(혈육)을 대표하여 나타냅니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>3. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 작품에 대한 설명으로 가장 적절한 것은?", options: ["시적 화자는 누이의 죽음에 대해 분노를 표출하고 있다.", "현실의 고통을 외면하고 자연에 귀의하려는 태도를 보인다.", "삶과 죽음의 문제를 종교적 관점에서 다루고 있다.", "4구체 향가의 정제된 형식미를 보여준다.", "시간적 배경은 가을이며, 화자는 누이의 죽음을 덤덤하게 받아들인다."], answer: 2, explanation: "작품은 누이의 죽음이라는 비극적 상황을 불교적 내세 사상과 윤회 사상을 통해 극복하려는 태도를 보여주고 있습니다. 이는 삶과 죽음의 문제를 종교적으로 다룬 것입니다." },
+            { question: "작품의 5~6행 '어느 가을 이른 바람에 / 이에 저에 떨어질 잎처럼'의 비유적 의미로 가장 적절한 것은?", options: ["삶의 무상함과 허망함", "누이의 요절과 죽음", "인생의 덧없음과 비관", "자연의 순리와 섭리", "세상과의 단절과 고립"], answer: 1, explanation: "'이른 바람'은 계절에 맞지 않게 일찍 불어오는 바람으로 누이의 '이른 죽음'을 비유하며, '떨어질 잎'은 죽은 누이의 모습을 비유한 것입니다." },
+            { question: "이 작품의 낙구(9~10행)가 지닌 기능으로 가장 적절한 것은?", options: ["시적 상황을 요약하여 전달한다.", "자연물의 이미지를 통해 정서를 심화한다.", "현실의 비극성을 강조하고 절망감을 표현한다.", "감탄사를 통해 시상을 전환하고 화자의 의지를 드러낸다.", "누이에 대한 그리움을 해학적으로 표현한다."], answer: 3, explanation: "9행의 감탄사 '아아'는 누이의 죽음으로 인한 슬픔과 무상감에서 벗어나 내세에서의 재회를 다짐하는 의지적 태도로 시상을 전환하는 역할을 합니다." },
+            { question: "이 작품에 나타난 시적 화자의 태도 변화로 가장 적절한 것은?", options: ["현실의 고통에 좌절 → 자연 속에서 평안을 찾음", "삶의 무상함에 절망 → 종교적 믿음으로 극복", "누이의 죽음에 대한 분노 → 체념적인 태도로 수용", "세상과의 단절 → 공동체와의 유대감을 회복", "운명에 대한 순응 → 운명에 대한 반발과 저항"], answer: 1, explanation: "화자는 누이의 죽음을 겪으며 삶의 무상함에 절망하지만, 마지막에 '도 닦아 기다리겠노라'고 말하며 불교적 믿음으로 슬픔을 극복하려는 의지적 태도를 보여줍니다." },
+            { question: "이 작품의 '한 가지'가 의미하는 바와 가장 유사한 것은?", options: ["서로 다른 목표를 추구하는 두 사람", "다른 지역에서 온 두 사람의 만남", "같은 직장에서 일하는 두 동료", "같은 부모에게서 태어난 형제", "사상적 갈등을 겪는 두 집단"], answer: 3, explanation: "'한 가지에 나고'는 같은 나무의 가지에서 나온 잎처럼, 같은 부모에게서 태어난 혈육 관계를 의미합니다. 즉, 같은 부모에게서 태어난 형제와 유사한 의미를 가집니다." },
+            { question: "이 작품의 주제 의식에 대한 설명으로 가장 적절한 것은?", options: ["죽음은 삶의 끝이 아니라 새로운 시작임을 보여준다.", "인간은 자연의 섭리에 순응하며 살아야 한다.", "혈육의 죽음으로 인한 슬픔은 인간이라면 누구나 겪는 보편적 감정이다.", "사랑하는 사람과의 이별을 통해 자아를 성찰하는 계기를 얻는다.", "소중한 사람과의 사별에서 오는 슬픔을 종교적 믿음을 통해 이겨내려는 의지를 보여준다."], answer: 4, explanation: "작품의 결말에서 '도 닦아 기다리겠노라'는 구절을 통해, 누이와의 사별에서 오는 슬픔을 불교적 믿음으로 극복하려는 화자의 의지를 보여주고 있습니다." },
+            { question: "<제망매가>에 대한 설명 중 '비유적 표현'에 해당하는 것은?", options: ["'생사 길은 예 있으매 머뭇거리고'", "'나는 간다는 말도 못다 이르고'", "'어느 가을 이른 바람에'", "'한 가지에 나고'", "'미타찰에서 만날 나'"], answer: 2, explanation: "'이른 바람'은 누이의 요절을 비유하고, '떨어질 잎'은 죽은 누이를 비유하는 표현입니다. 이는 죽음이라는 추상적인 개념을 구체적인 자연 현상에 빗대어 표현한 것입니다." },
+            { question: "이 작품의 문학사적 의의로 적절하지 않은 것은?", options: ["향찰을 활용하여 우리말을 표기한 최초의 서정시이다.", "10구체 향가의 정제된 형식미를 보여준다.", "후대 시조의 3단 구성에 영향을 주었다고 볼 수 있다.", "불교적 세계관을 바탕으로 개인의 정서를 노래했다.", "자연의 풍요로움과 아름다움을 노래하여 후대 가사 문학에 영향을 주었다."], answer: 4, explanation: "이 작품은 누이의 죽음을 슬퍼하는 애상적 정서를 다루고 있으며, 자연의 풍요로움과는 거리가 멉니다. 자연 예찬은 주로 가사 문학이나 평시조에서 나타나는 주제입니다." },
+            { question: "이 작품을 '추모적' 성격이라고 평가할 수 있는 이유로 가장 적절한 것은?", options: ["누이의 요절에 대한 비탄과 슬픔이 드러나기 때문에", "누이와의 재회를 기약하며 도를 닦겠다고 다짐하기 때문에", "누이의 갑작스러운 죽음에 대한 안타까움이 드러나기 때문에", "죽은 누이를 그리워하며 그녀의 명복을 빌기 때문에", "누이의 죽음을 자연의 순리로 받아들이기 때문에"], answer: 3, explanation: "'추모적(追慕的)'은 죽은 사람을 그리워하며 그를 기리는 것을 의미합니다. 이 작품은 죽은 누이를 그리워하고 불교적 내세에서 만나기를 바라며 도를 닦겠다고 다짐하는 점에서 추모적 성격이 두드러집니다." },
+            { question: "이 작품의 시적 화자와 <십 년을 경영하여>의 시적 화자의 공통점으로 가장 적절한 것은?", options: ["둘 다 슬픔을 종교적으로 극복하려는 태도를 보인다.", "둘 다 자연물을 인격체로 대우하고 있다.", "둘 다 3단 구성의 형식을 통해 시상을 전개하고 있다.", "둘 다 현실의 고통을 해학적으로 풀어내고 있다.", "둘 다 속세의 욕망을 버리고 자연에 귀의하려는 태도를 보인다."], answer: 2, explanation: "두 작품 모두 3단 구성(기-서-결, 초장-중장-종장)을 통해 시상을 전개하고 있다는 공통점을 가집니다." },
+            { question: "이 작품의 '생사 길은 예 있으매 머뭇거리고'에서 화자가 머뭇거리는 이유로 가장 적절한 것은?", options: ["누이의 갑작스러운 죽음 때문에 혼란스럽기 때문에", "삶과 죽음의 경계가 모호하다고 느끼기 때문에", "자신도 곧 죽을 것이라는 두려움 때문에", "아직 이승에 해야 할 일이 많이 남아있기 때문에", "누이의 무덤을 찾아가기 두렵기 때문에"], answer: 0, explanation: "'생사 길은 예 있으매'는 삶과 죽음의 경계가 이승에 존재한다는 것을 의미하며, '머뭇거리고'는 누이의 갑작스러운 죽음에 대한 화자의 당혹감과 혼란스러운 심정을 드러냅니다." },
+            { question: "'한 가지에 나고 가는 곳 모르온저'에서 알 수 있는 화자의 정서로 가장 적절한 것은?", options: ["상실감과 허무함", "누이에 대한 그리움", "삶에 대한 희망", "운명에 대한 감사", "미래에 대한 기대"], answer: 0, explanation: "'한 가지에 나고'는 같은 부모에게서 태어난 혈육임을 의미하지만, '가는 곳 모르온저'는 누이의 죽음 후 가는 곳을 알 수 없어 느끼는 허무감과 삶의 덧없음을 드러냅니다." },
+            { question: "이 작품에서 화자의 정서가 고조되는 부분은?", options: ["1~2행", "3~4행", "5~6행", "7~8행", "9~10행"], answer: 3, explanation: "5~8행은 '이른 바람에 떨어질 잎처럼' 누이의 죽음을 비유하고, '가는 곳 모르온저'라고 탄식하며 삶의 무상감을 드러내는 부분으로, 화자의 슬픔과 정서가 고조됩니다." },
+            { question: "이 작품에 대한 다음 해석 중 불교적 세계관과 관련이 없는 것은?", options: ["'미타찰'에서 누이를 만나고자 한다.", "누이의 죽음을 전생의 업보로 생각한다.", "'도 닦아' 기다리겠다는 태도를 보인다.", "불교적 윤회 사상을 바탕으로 슬픔을 승화한다.", "누이의 명복을 빌기 위해 제사를 지낸다."], answer: 1, explanation: "작품에서 누이의 죽음을 전생의 업보로 생각한다는 내용은 없습니다. 이는 불교적 세계관의 일부이지만, 이 작품의 내용과 직접적인 관련은 없습니다." },
+            { question: "<제망매가>에 대한 다음 설명 중 '추모적' 성격을 가장 잘 보여주는 시구는?", options: ["'나는 간다는 말도 못다 이르고'", "'어느 가을 이른 바람에'", "'한 가지에 나고'", "'아아, 미타찰에서 만날 나'", "'도 닦아 기다리겠노라.'"], answer: 3, explanation: "'미타찰'은 불교적 내세인 극락 세계를 의미하며, '만날 나'는 죽은 누이와의 재회를 기약하는 화자의 마음을 드러냅니다. 이는 죽은 사람을 그리워하며 그를 기리는 추모적 성격을 잘 보여줍니다." },
+            { question: "다음 중 '비유적 표현'에 해당하는 시구가 아닌 것은?", options: ["이른 바람", "떨어질 잎", "한 가지", "미타찰", "생사 길"], answer: 4, explanation: "'생사 길'은 삶과 죽음의 길이라는 의미로, 비유적 표현이 아닌 직접적인 의미를 사용하고 있습니다. '이른 바람', '떨어질 잎', '한 가지'는 각각 누이의 요절, 죽은 누이, 혈육을 비유한 표현입니다." },
+            { question: "다음 중 '시상 전환'에 대한 설명으로 가장 적절한 것은?", options: ["시의 주제를 처음부터 끝까지 일관되게 유지하는 것", "시의 내용과 분위기가 극적으로 바뀌는 것", "시의 화자가 바뀌는 것", "시의 배경이 바뀌는 것", "시의 형식과 운율이 바뀌는 것"], answer: 1, explanation: "시상 전환은 시의 내용이나 분위기가 한 시점부터 다른 방향으로 바뀌는 것을 의미합니다. 이 작품에서는 '아아'를 기점으로 슬픔에서 극복 의지로 전환됩니다." },
+            { question: "'아아, 미타찰에서 만날 나 / 도 닦아 기다리겠노라'에서 화자의 태도를 가장 잘 보여주는 한자 성어는?", options: ["물아일체(物我一體)", "안분지족(安分知足)", "사자성어", "불교", "극복의지"], answer: 4, explanation: "낙구에서 화자는 누이와의 재회를 위해 '도 닦아 기다리겠노라'고 다짐하며, 이는 슬픔을 이겨내려는 '극복 의지'를 보여줍니다." },
+            { question: "이 작품의 창작 배경 설화에서 월명사가 종이돈을 날려 보냈을 때 종이돈이 날아간 방향은?", options: ["동쪽", "서쪽", "남쪽", "북쪽", "하늘"], answer: 1, explanation: "배경 설화에 따르면, 월명사가 종이돈을 날려 보냈을 때 '세찬 바람이 불어 종이돈을 날려 서쪽으로 사라지게 하였다'고 되어 있습니다. 이는 불교에서 극락이 서쪽에 있다고 믿는 것과 관련이 있습니다." },
+            { question: "다음 중 <제망매가>의 내용과 관련된 문학사적 의의는?", options: ["고려 가요의 시초가 되었다.", "후대 평시조의 주제에 영향을 주었다.", "한시 문학의 발전에 기여했다.", "우리말로 표기된 최초의 서정시 중 하나이다.", "노동요의 형식을 갖추고 있다."], answer: 3, explanation: "향가는 향찰을 활용하여 우리말을 표기한 최초의 서정시로, 우리나라 시가 문학의 발전 과정에서 중요한 위치를 차지합니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            buildQuiz();
+        });
+    </script>
+</body>
+</html>

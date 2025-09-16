@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>춘향전 해설 및 문제</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ef4444; /* Red color for this unit */
+            color: #b91c1c;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #fee2e2;
+            border-color: #f87171;
+        }
+        .quiz-option.selected {
+            background-color: #fecaca;
+            border-color: #ef4444;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-red-800">3-2. 춘향전</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: <춘향전> 해설 및 문제</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-red-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-red-800">■ 작자:</strong> 작자 미상</p>
+                    <p><strong class="text-red-800">■ 갈래:</strong> 고전 소설, 판소리계 소설, 염정 소설</p>
+                    <p><strong class="text-red-800">■ 성격:</strong> 평민적, 해학적, 풍자적</p>
+                    <p><strong class="text-red-800">■ 배경:</strong> 조선 후기, 전라도 남원</p>
+                    <p><strong class="text-red-800">■ 제재:</strong> 춘향의 정절, 암행어사 출두</p>
+                    <p><strong class="text-red-800">■ 주제:</strong> 신분을 초월한 남녀 간의 사랑, 불의한 지배 계층에 대한 항거</p>
+                    <p><strong class="text-red-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>판소리의 영향으로 운문체와 산문체가 섞여 있음.</li>
+                        <li>인물의 해학적 성격이 뚜렷하게 형상화됨.</li>
+                        <li>남녀의 사랑 이면에 인간 평등사상을 고취함.</li>
+                        <li>서술자의 직접적인 개입(편집자적 논평)이 나타남.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 작품 해설 및 표현법 -->
+            <section class="exam-section">
+                <h4>2. 작품 해설 및 표현법</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <p>이 작품은 판소리로 불리며 전승되다가 소설로 정착된 판소리계 소설입니다. 양반의 아들 몽룡과 기생의 딸 춘향의 신분을 초월한 사랑 이야기를 통해 해학적이고 풍자적인 조선 후기 평민 의식을 담고 있습니다. 교과서에 수록된 암행어사 출두 장면은 탐관오리의 횡포에 저항하는 사회적 의식을 잘 보여줍니다.</p>
+                    
+                    <!-- 앞부분 줄거리 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-red-400">
+                        <p class="font-bold text-lg text-red-800">앞부분 줄거리 (발단~위기)</p>
+                        <p class="mt-2 ml-4 text-gray-700">남원 부사의 아들 이몽룡이 단옷날 광한루에서 기생 월매의 딸 성춘향을 만나 첫눈에 반해 백년가약을 맺습니다. 하지만 몽룡의 아버지가 한양으로 가면서 둘은 이별하게 됩니다. 이후 신임 부사로 부임한 변학도가 춘향에게 수청을 강요하고, 춘향이 이를 거절하자 옥에 가둡니다. 몽룡은 암행어사가 되어 남원에 오게 됩니다.</p>
+                    </div>
+
+                    <!-- 절정 1 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-red-400">
+                        <p class="font-bold text-lg text-red-800">절정 1</p>
+                        <p class="mt-2 ml-4 text-gray-700">몽룡은 거지 행색으로 변학도의 생일잔치에 참석합니다. 잔치는 남원과 인근 지역 수령들이 모여 산해진미를 차려놓고 흥청망청 즐기는 모습입니다. 서술자는 이 모습을 "이렇듯 요란할 제 온갖 깃발이며 삼현육각 풍류 소리 공중에 떠 있고..."와 같이 운문체와 산문체를 섞어 생동감 있게 묘사합니다. 이어서 서술자는 "어사의 마음이 심란하구나"라고 직접 개입하여, 백성의 고통과 대비되는 지배층의 사치스러운 잔치에 대한 몽룡의 분노를 전달합니다.</p>
+                    </div>
+
+                    <!-- 절정 2 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-red-400">
+                        <p class="font-bold text-lg text-red-800">절정 2</p>
+                        <p class="mt-2 ml-4 text-gray-700">몽룡은 잔치에서 푸대접을 받고 분노하지만, 운봉 영장의 제안으로 시 짓기에 참여합니다. 몽룡은 겉으로는 잔치를 칭송하는 듯하면서도, 백성의 피와 기름으로 차려진 현실을 비판하는 한시를 짓습니다. "금준미주(金樽美酒) 천인혈(千人血)이요 / 옥반가효(玉盤佳肴) 만성고(萬姓膏)라"와 같은 시구는 지배층의 사치와 백성의 고통을 대조하고 비유하여 풍자성을 드러냅니다. 운봉 영장은 이 시를 보고 몽룡의 정체를 직감하며 긴장감을 고조시킵니다.</p>
+                    </div>
+
+                    <!-- 절정 3 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-red-400">
+                        <p class="font-bold text-lg text-red-800">절정 3</p>
+                        <p class="mt-2 ml-4 text-gray-700">몽룡은 어사또의 정체를 밝히고 "암행어사 출두야"를 외치며 수령들을 벌합니다. 이 장면은 "강산이 무너지고 천지가 뒤집히는 듯"이라는 과장적 표현으로 어사또의 위세를 강조합니다. 또한 도망치는 수령들의 모습을 "인궤 잃고 강정 들고"와 같이 장황하게 열거하고, 변학도가 "문 들어온다 바람 닫아라"와 같은 언어유희를 사용하며 당황하는 모습을 묘사하여 해학성과 풍자성을 극대화합니다. 이 부분은 판소리계 소설의 특징인 '장면의 극대화'가 두드러지게 나타납니다.</p>
+                    </div>
+
+                    <!-- 절정 4 및 결말 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-red-400">
+                        <p class="font-bold text-lg text-red-800">절정 4 및 결말</p>
+                        <p class="mt-2 ml-4 text-gray-700">몽룡은 옥에 갇힌 춘향을 불러 자신의 수청을 들라고 시험합니다. 춘향은 "내려오는 관장마다 모두 명관이로구나"라고 반어적으로 말하며 지조를 지키겠다는 의지를 드러냅니다. 몽룡은 자신의 정체를 밝히고, 둘은 극적으로 재회합니다. 춘향은 정렬부인에 봉해지고, 몽룡과 함께 한양으로 떠납니다. 이 결말은 권선징악과 함께, 춘향과 몽룡의 사랑을 통해 신분제도를 초월한 인간 평등사상을 보여줍니다. "일희일비"하는 춘향의 모습은 고향을 떠나는 아쉬움과 몽룡과의 행복에 대한 기쁨을 동시에 드러냅니다.</p>
+                    </div>
+
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-red-400">
+                        <p class="font-bold text-lg text-red-800">작품에 반영된 사회상 및 주제</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong>사회상:</strong> 양반과 기생의 만남에서 신분 제도, 변학도의 횡포에서 탐관오리 수탈, 암행어사의 등장에서 부패 감찰 제도 등을 엿볼 수 있음.</li>
+                            <li><strong>주제:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li><strong>표면적 주제:</strong> 여성의 굳은 정절 (봉건적 윤리 이념)</li>
+                                    <li><strong>이면적 주제:</strong> 신분을 초월한 사랑, 불의한 지배 계층에 대한 항거 (민중의 욕망)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-red-400">
+                        <p class="font-bold text-lg text-red-800">주요 표현법 (판소리계 소설의 특징)</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong>편집자적 논평:</strong> "어사의 마음이 심란하구나", "어찌 아니 명관인가" 등 서술자가 직접 작품에 개입하여 인물이나 사건에 대한 의견을 제시함.</li>
+                            <li><strong>장면의 극대화:</strong> 암행어사 출두 장면처럼 특정 상황을 장황하게 나열하거나 과장하여 묘사함으로써 극적인 긴장감과 생동감을 높임. (운문체와 산문체가 혼합된 문체)</li>
+                            <li><strong>언어유희:</strong> "문 들어온다 바람 닫아라, 물 마르다 목 들여라"처럼 언어를 가지고 재미있게 표현하여 해학성을 높임.</li>
+                            <li><strong>반어법:</strong> "어찌 아니 명관인가"처럼 실제 의미와 반대되는 표현을 사용하여 변학도를 풍자하고 비판함.</li>
+                            <li><strong>대구법/열거법:</strong> "인궤 잃고 강정 들고, 병부 잃고 송편 들고"처럼 유사한 문장 구조를 반복하거나 나열하여 상황을 생동감 있게 묘사함.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>3. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 작품의 갈래적 특징으로 적절하지 않은 것은?", options: ["판소리로 불리며 전승되다가 소설로 정착되었다.", "운문체와 산문체가 혼합된 문체가 사용되었다.", "편집자적 논평이 나타나 서술자가 작품에 개입한다.", "인물의 내면 심리를 섬세하게 분석하는 데 초점을 맞추었다.", "해학적이고 풍자적인 성격을 지니고 있다."], answer: 3, explanation: "판소리계 소설은 인물의 내면 심리보다는 특정 장면의 장황한 묘사와 사건의 극적 전개에 초점을 맞추는 경향이 강합니다." },
+            { question: "변학도 생일잔치 장면에서 어사또가 지은 한시의 기능으로 가장 적절한 것은?", options: ["자신의 신분을 위장하여 잔치를 즐기기 위해", "운봉 영장의 제안에 응하여 예의를 갖추기 위해", "변학도에게 자신의 학문적 능력을 과시하기 위해", "탐관오리의 폭정을 비판하고 사건의 긴장감을 높이기 위해", "백성들의 고통스러운 삶을 아름다운 풍경에 빗대어 위로하기 위해"], answer: 3, explanation: "어사또의 한시는 겉으로는 잔치를 칭송하는 듯하지만, 실은 백성의 피와 기름으로 잔치를 벌이는 변학도의 폭정을 비판하고 있습니다. 이는 극적 긴장감을 고조시키고 어사 출두를 예고하는 역할을 합니다." },
+            { question: "작품의 결말을 통해 알 수 있는 당시 사회의 특징으로 가장 적절한 것은?", options: ["신분 제도가 완전히 해체되었다.", "여성의 정절이 중요한 가치로 여겨졌다.", "탐관오리들의 횡포가 사라졌다.", "기생이 양반과 자유롭게 혼인할 수 있었다.", "암행어사의 권력이 임금보다 막강했다."], answer: 1, explanation: "춘향이 정렬부인에 봉해지고 몽룡과 혼인하는 결말은, 기생의 딸임에도 정절을 지킨 춘향의 행위가 사회적으로 높이 평가되었음을 보여줍니다. 이는 당시 여성의 정절이 중요하게 여겨지는 사회였음을 알 수 있습니다." },
+            { question: "다음 중 판소리계 소설의 특징인 '장면의 극대화'에 해당하는 것은?", options: ["'어사의 마음이 심란하구나'", "춘향이 '층암절벽 높은 바위가 바람 분들 무너지며'라고 말하는 장면", "수령들이 도망치는 모습을 장황하게 나열하는 장면", "어사또가 지은 한시", "춘향과 몽룡이 재회하는 장면"], answer: 2, explanation: "수령들이 도망치는 모습을 인궤, 병부 등과 같은 물건을 잃고 챙기는 행위, 엉뚱한 행동 등을 열거하며 장황하게 묘사하는 것은 '장면의 극대화'에 해당합니다." },
+            { question: "다음 중 <춘향전>에 나타난 '언어유희'에 해당하는 것은?", options: ["'갈비 한 대 먹고지고'", "'어찌 아니 명관(名官)인가'", "'수절이 정절이라'", "'이 골은 대감이 좌정하시던 골이라'", "'금준미주(金樽美酒) 천인혈(千人血)'"], answer: 2, explanation: "'수절이 정절이라'는 '수절'과 '정절'의 음이 유사함을 이용한 언어유희입니다. '갈비 한 대 먹고지고'는 반어적 표현, '어찌 아니 명관인가'는 반어법과 편집자적 논평, '금준미주 천인혈'은 은유와 대구법이 사용되었습니다." },
+            { question: "이 작품의 '표면적 주제'와 '이면적 주제'를 올바르게 연결한 것은?", options: ["표면적 주제: 신분적 제약을 벗어난 인간 해방 / 이면적 주제: 여성의 굳은 정절", "표면적 주제: 여성의 굳은 정절 / 이면적 주제: 신분적 제약을 벗어난 인간 해방", "표면적 주제: 불의한 지배 계층에 대한 항거 / 이면적 주제: 여성의 굳은 정절", "표면적 주제: 신분적 제약을 벗어난 인간 해방 / 이면적 주제: 불의한 지배 계층에 대한 항거", "표면적 주제: 신분을 초월한 사랑 / 이면적 주제: 여성의 굳은 정절"], answer: 1, explanation: "작품의 표면적 주제는 춘향이 수청을 거부하고 정절을 지키는 '여성의 굳은 정절'이며, 그 이면에는 춘향과 몽룡의 결혼을 통해 '신분적 제약을 벗어난 인간 해방'이라는 주제 의식이 담겨 있습니다." },
+            { question: "다음 중 '편집자적 논평'에 해당하는 시구가 아닌 것은?", options: ["'어사의 마음이 심란하구나.'", "'어찌 아니 명관(名官)인가.'", "'이렇듯 요란할 제 온갖 깃발이며 삼현육각 풍류 소리 공중에 떠 있고'", "'오냐, 도적질은 내가 하마. 오라는 네가 받아라.'", "춘향의 높은 절개 광채 있게 되었으니 어찌 아니 좋을쏜가.'"], answer: 3, explanation: "'오냐, 도적질은 내가 하마. 오라는 네가 받아라.'는 어사또가 속으로 한 생각으로, 서술자가 인물의 내면을 직접 서술한 것입니다. 서술자의 의견이나 평가가 아닙니다." },
+            { question: "변학도가 춘향에게 수청을 강요한 이유로 가장 적절한 것은?", options: ["춘향의 미모에 반했기 때문에", "몽룡과의 사랑을 질투했기 때문에", "탐관오리로서 백성을 핍박하기 위해", "춘향의 신분이 천민이었기 때문에", "몽룡과의 관계를 알지 못했기 때문에"], answer: 2, explanation: "변학도는 '기생의 딸'인 춘향이 당연히 자신의 수청을 들어야 한다고 생각합니다. 이는 탐관오리로서 권력을 남용하여 백성을 핍박하는 그의 성격에서 비롯된 것입니다." },
+            { question: "다음 중 <춘향전>에 나타난 갈등 양상으로 볼 수 없는 것은?", options: ["춘향과 변학도의 갈등", "춘향과 사회의 갈등", "몽룡과 변학도의 갈등", "춘향과 몽룡의 갈등", "몽룡과 사회의 갈등"], answer: 3, explanation: "춘향과 몽룡은 서로를 사랑하는 관계로, 둘 사이에 직접적인 갈등은 나타나지 않습니다." },
+            { question: "다음 중 <춘향전>과 민속극 <봉산 탈춤>의 공통점으로 가장 적절한 것은?", options: ["둘 다 판소리계 소설이다.", "둘 다 양반의 유교적 가치관을 강조한다.", "둘 다 지배 계층인 양반을 풍자하고 조롱한다.", "둘 다 사랑하는 남녀의 비극적인 이별을 주제로 한다.", "둘 다 3장 6구의 정제된 형식을 갖추고 있다."], answer: 2, explanation: "<춘향전>은 탐관오리를 풍자하고, <봉산 탈춤>은 양반을 조롱하는 내용을 담고 있습니다. 둘 다 지배 계층을 풍자한다는 공통점이 있습니다." },
+            { question: "춘향이 '층암절벽 높은 바위가 바람 분들 무너지며, 청송녹죽 푸른 나무가 눈이 온들 변하리까'라고 말한 이유로 가장 적절한 것은?", options: ["자신의 지조와 절개를 굳게 지키겠다는 의지를 드러내기 위해", "자연의 아름다움을 예찬하기 위해", "자연의 섭리에 순응하겠다는 태도를 보이기 위해", "자신이 겪는 고난과 시련을 자연에 빗대어 표현하기 위해", "변학도의 부당한 요구에 대한 분노를 표출하기 위해"], answer: 0, explanation: "춘향은 '층암절벽 높은 바위'와 '청송녹죽 푸른 나무'를 자신의 굳은 지조와 절개에 비유하고, '바람'과 '눈'을 외부의 탄압과 시련에 비유하며, 변학도의 수청 요구에 굴복하지 않겠다는 굳은 의지를 드러냅니다." },
+            { question: "다음 중 어사또가 지은 한시의 의미를 가장 잘 요약한 것은?", options: ["금동이에 담긴 술은 백성의 피이고, 옥쟁반의 안주는 백성의 기름이다.", "촛불의 눈물 떨어질 때 백성의 눈물도 떨어지고, 노랫소리 높은 곳에 원망 소리도 높았더라.", "금동이에 담긴 아름다운 술과 옥쟁반의 아름다운 안주는 탐관오리의 사치스러운 삶을 보여준다.", "촛불의 눈물은 백성의 눈물이고, 노랫소리는 백성의 원망 소리이다.", "위의 모든 것을 종합한 의미"], answer: 4, explanation: "한시는 금준미주(아름다운 술)와 옥반가효(아름다운 안주)를 백성의 피(천인혈)와 기름(만성고)에 비유하고, 촛불의 눈물(촉루락)과 노랫소리(가성고)를 백성의 눈물(민루락)과 원망 소리(원성고)에 대립적으로 표현함으로써, 지배층의 사치와 백성의 고통을 동시에 비판하고 있습니다." },
+            { question: "어사또 출두 장면에서 나타나는 표현상 특징으로 적절하지 않은 것은?", options: ["호흡이 짧고 긴 문장이 혼재되어 극적인 긴장감을 조성한다.", "청각적 이미지를 활용하여 현장의 생동감을 높인다.", "과장적 표현을 사용하여 어사또의 위세를 강조한다.", "반복적 표현을 사용하여 사건의 속도감을 높인다.", "운문체와 산문체가 혼합되어 나타난다."], answer: 0, explanation: "어사또 출두 장면은 '출두야'와 같은 짧은 어구와 문장이 반복적으로 사용되어 긴장감을 조성하고 있습니다. 호흡이 짧은 어구와 문장이 혼재되는 것은 맞지만, 긴 문장이 함께 나타나지는 않습니다." },
+            { question: "이 작품의 근원 설화로 볼 수 없는 것은?", options: ["열녀 설화", "신원 설화", "관탈 민녀 설화", "염정 설화", "환생 설화"], answer: 4, explanation: "환생 설화는 <춘향전>의 근원 설화가 아닙니다. <춘향전>은 열녀 설화, 신원 설화, 관탈 민녀 설화, 염정 설화, 암행어사 설화 등이 복합적으로 작용하여 형성되었습니다." },
+            { question: "다음 중 춘향과 몽룡의 관계에 대한 설명으로 가장 적절한 것은?", options: ["신분을 초월한 사랑을 하며, 갈등을 통해 사랑이 더욱 깊어진다.", "서로를 믿지 못해 오해하고 갈등을 겪지만 결국 사랑을 이룬다.", "신분의 차이로 인해 서로에게 고통을 주는 관계이다.", "신분을 초월한 사랑을 하고, 불의에 함께 항거하는 관계이다.", "서로의 사랑을 확인하지 못하고 비극적인 결말을 맞는다."], answer: 3, explanation: "춘향과 몽룡은 신분을 초월한 사랑을 하는 동시에, 변학도의 부당한 횡포에 춘향이 항거하고 몽룡이 이를 심판하는 역할을 함으로써 불의한 지배 계층에 함께 저항하는 관계입니다." },
+            { question: "춘향이 어사또에게 '내려오는 관장마다 모두 명관(名官)이로구나.'라고 말한 의도로 가장 적절한 것은?", options: ["어사또의 뛰어난 정치를 칭찬하기 위해", "변학도에 이어 어사또까지 탐관오리임을 비꼬기 위해", "자신을 구원해 줄 어사또에게 아첨하기 위해", "어사또의 질문에 대한 답변을 피하기 위해", "명관은 모두 자신에게 수청을 요구한다고 비판하기 위해"], answer: 1, explanation: "춘향은 변학도에게 시달리다 어사또가 된 몽룡에게서 똑같은 수청 요구를 받자, 모든 관리가 변학도와 같다고 비꼬는 반어적인 표현을 사용하고 있습니다." },
+            { question: "결말에서 '춘향이 남원을 하직할새, 영귀(榮貴)하게 되었건만 고향을 이별하니 일희일비(一喜一悲)가 아니 되랴'에 나타난 춘향의 심정으로 가장 적절한 것은?", options: ["고향을 떠나는 기쁨과 고위 관직에 오른 슬픔", "고향을 떠나는 슬픔과 고위 관직에 오른 기쁨", "사랑하는 몽룡과 함께 떠나는 기쁨과 고향을 떠나는 슬픔", "고향을 떠나는 것에 대한 아쉬움과 몽룡과의 재회에 대한 기대", "고향을 떠나는 것에 대한 슬픔과 다시 돌아오지 못하는 것에 대한 아쉬움"], answer: 2, explanation: "춘향은 몽룡과 재회하여 행복한 미래를 맞게 된 기쁨과, 태어나고 자란 정든 고향 남원을 떠나야 하는 슬픔이 교차하고 있습니다." },
+            { question: "어사또 출두 장면에서 '강산이 무너지고 천지가 뒤집히는 듯'이라는 표현이 지닌 효과는?", options: ["자연의 아름다움을 강조한다.", "어사또의 위엄과 위세를 과장한다.", "백성들의 고통을 현실적으로 묘사한다.", "잔치 분위기의 흥겨움을 표현한다.", "춘향과 몽룡의 사랑을 비유한다."], answer: 1, explanation: "어사또 출두라는 극적인 상황을 '강산이 무너지고 천지가 뒤집히는 듯'이라는 과장된 표현을 통해 어사또의 위엄과 위세를 강조하고 있습니다." },
+            { question: "다음 중 <춘향전>에 나타난 '민중의 욕망'과 가장 거리가 먼 것은?", options: ["신분을 초월한 사랑을 이루는 것", "부패한 지배 계층을 징벌하는 것", "억울한 자의 원한을 풀어주는 것", "여성이 정절을 지켜 정렬부인이 되는 것", "개인이 신분적 제약에서 벗어나 행복을 추구하는 것"], answer: 3, explanation: "여성이 정절을 지켜 정렬부인이 되는 것은 봉건 사회의 윤리 이념을 추구하는 '표면적 주제'에 해당하며, 민중의 욕망보다는 지배층의 윤리 의식에 가깝습니다." },
+            { question: "이 작품과 같은 판소리계 소설의 특징으로 적절하지 않은 것은?", options: ["장면의 극대화가 나타난다.", "편집자적 논평이 나타난다.", "운문체와 산문체가 혼합되어 있다.", "이야기의 모든 서술이 운율에 맞춰 이루어진다.", "서민들의 삶의 애환과 당대 사회에 대한 비판 의식이 담겨 있다."], answer: 3, explanation: "판소리계 소설은 운문체와 산문체가 혼합되어 있지만, 이야기의 모든 서술이 운율에 맞춰져 있지는 않습니다." },
+            { question: "다음 중 판소리계 소설의 특징인 '확장적 문체'에 해당하는 것은?", options: ["'어찌 아니 명관인가'와 같은 서술자의 직접 개입", "어사또가 지은 한시", "수령들이 도망치는 모습을 장황하게 나열하는 묘사", "'춘향이 정렬부인이 되었으니'와 같은 사건 요약", "춘향이 '층암절벽 높은 바위'에 자신을 비유하는 표현"], answer: 2, explanation: "확장적 문체는 특정 상황을 장황하게 나열하고 반복하는 것으로, 수령들이 도망치는 모습을 상세하게 묘사하는 부분에서 잘 드러납니다." },
+            { question: "춘향이 어사또의 수청 요구에 '내려오는 관장마다 모두 명관이로구나'라고 말한 이유로 가장 적절한 것은?", options: ["어사또의 뛰어난 정치를 칭찬하기 위해", "변학도에 이어 어사또까지 탐관오리임을 비꼬기 위해", "자신을 구원해줄 어사또에게 아첨하기 위해", "어사또의 질문에 대한 답변을 피하기 위해", "명관들은 모두 자신에게 수청을 요구한다고 비판하기 위해"], answer: 1, explanation: "춘향은 변학도에 이어 거지 행색을 한 어사또에게서도 수청 요구를 받자, 모든 관리가 똑같다고 생각하며 반어적으로 비꼬는 표현을 사용합니다." },
+            { question: "'아무도 없는 곳에서 혼자서 몰래 울었네'와 같이 서술자가 인물의 내면을 직접 서술하는 것은 무엇에 해당하는가?", options: ["편집자적 논평", "장면의 극대화", "언어유희", "확장적 문체", "인물 심리 서술"], answer: 4, explanation: "'인물 심리 서술'은 서술자가 인물의 내면을 직접 서술하는 것에 해당합니다. '편집자적 논평'은 인물이나 사건에 대한 서술자의 의견이나 평가를 직접 제시하는 것입니다." },
+            { question: "다음 중 '사랑하는 임과 헤어지기 싫다'라는 감정을 가장 잘 표현한 시구는?", options: ["'내려오는 관장마다 모두 명관이로구나'", "'이별하니 일희일비가 아니 되랴'", "'층암절벽 높은 바위가 바람 분들 무너지며'", "'수절이 정절이라'", "'얼씨구나 좋을시고'"], answer: 1, explanation: "'일희일비'는 한편으로는 기뻐하고 한편으로는 슬퍼한다는 뜻으로, 춘향이 몽룡과 함께 한양으로 가는 기쁨과 정든 고향을 떠나는 슬픔을 동시에 느끼는 심정을 표현한 것입니다." },
+            { question: "어사또의 한시에서 '촛불 눈물 떨어질 때 백성 눈물 떨어지고'라는 구절이 지닌 의미는?", options: ["양반의 사치와 백성의 고통은 무관하다는 의미", "양반의 눈물과 백성의 눈물은 다르다는 의미", "촛불의 눈물은 백성의 눈물과 같다는 의미", "촛불이 꺼질 때 백성들이 슬퍼한다는 의미", "양반들의 즐거운 노랫소리와 백성들의 원망 소리는 대조된다는 의미"], answer: 2, explanation: "촛불의 눈물이 떨어지는 상황과 백성의 눈물이 떨어지는 상황이 서로 같다는 의미로, 지배층의 사치가 백성의 고통에서 비롯되었음을 암시하고 있습니다." },
+            { question: "다음 중 <춘향전>에 나타난 '인간 평등사상'과 가장 관련 깊은 것은?", options: ["춘향이 정렬부인이 되는 것", "춘향이 수청을 거부하는 것", "몽룡이 암행어사가 되는 것", "몽룡과 춘향이 신분을 초월하여 결혼하는 것", "변학도가 어사또에게 벌을 받는 것"], answer: 3, explanation: "몽룡과 춘향의 결혼은 양반과 기생이라는 신분의 차이를 극복하는 것으로, 당시의 봉건적 신분 질서에 대한 비판과 함께 인간은 모두 평등하다는 사상을 담고 있습니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            buildQuiz();
+        });
+    </script>
+</body>
+</html>

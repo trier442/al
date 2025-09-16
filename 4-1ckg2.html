@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-1. 주제 통합적으로 읽기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3b82f6; /* Blue color for this unit */
+            color: #1e40af;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #e0f2fe;
+            border-color: #93c5fd;
+        }
+        .quiz-option.selected {
+            background-color: #bfdbfe;
+            border-color: #3b82f6;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-blue-800">4-1. 주제 통합적으로 읽기</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: '소비'와 관련된 글 읽기</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-blue-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-blue-800">■ 학습 목표:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>다양한 관점과 형식으로 작성된 동일한 화제의 글이나 자료를 비교 분석하며 읽을 수 있다.</li>
+                        <li>읽기 목적을 고려하여 다양한 글이나 자료에서 필요한 정보를 선별한 뒤 자신의 견해를 재구성할 수 있다.</li>
+                    </ul>
+                    <p><strong class="text-blue-800">■ 주요 내용:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>주제 통합적 읽기:</strong> 동일한 화제(소비)에 대해 다양한 관점(사회적, 심리학적, 경제학적)과 형식(논설문, 설명문)의 글을 비교·분석하며 자신의 견해를 재구성하는 과정.</li>
+                        <li><strong>소비의 종류:</strong> 윤리적 소비, 보상적 소비, 합리적 소비, 비합리적 소비 등.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 작품 해설 -->
+            <section class="exam-section">
+                <h4>2. 작품 해설: '소비' 관련 글</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <p>이 소단원에서는 '바람직한 소비란 무엇인가?'라는 질문에 답하기 위해 여러 글과 자료를 통합적으로 읽고 분석하는 과정을 다룹니다. 각 글은 '소비'라는 동일한 화제를 다른 관점에서 바라보며 독자에게 다양한 생각을 할 기회를 제공합니다.</p>
+                    
+                    <!-- '왜 지금, 윤리적 소비인가' 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-blue-400">
+                        <p class="font-bold text-lg text-blue-800"><왜 지금, 윤리적 소비인가></p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>관점:</strong> 사회적 관점에서 윤리적 소비의 필요성을 논증하는 논설문입니다.</li>
+                            <li><strong>주요 내용:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>무분별한 소비가 환경 파괴와 저임금 노동 등 사회 문제를 심화시킨다고 지적합니다.</li>
+                                    <li>윤리적 소비를 종적(미래 세대 고려) 및 횡적(현세대 빈부 격차 고려) 차원으로 구분하여 설명합니다.</li>
+                                    <li>윤리적 소비를 실천하는 단계를 기초(구매/불매 운동), 성장(녹색/지역/공정무역 소비), 성숙(기부/나눔)으로 제시합니다.</li>
+                                    <li>윤리적 소비는 세상과 자신을 모두 행복하게 만드는 가치 있는 행위임을 강조하며 실천을 촉구합니다.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- '난 슬플 때 돈을 써, 우울함과 소비' 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-blue-400">
+                        <p class="font-bold text-lg text-blue-800"><난 슬플 때 돈을 써, 우울함과 소비></p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>관점:</strong> 심리학적 관점에서 보상적 소비를 설명하는 블로그 자료입니다.</li>
+                            <li><strong>주요 내용:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>'보상적 소비'를 부정적 상황에 대한 보상으로 이루어지는 소비 행위로 정의합니다.</li>
+                                    <li>보상적 소비는 심리적 만족감을 통해 자기 통제감과 자율성을 회복하는 긍정적 효과가 있음을 설문 조사와 연구 결과를 통해 설명합니다.</li>
+                                    <li>다만, 과도한 보상적 소비는 쇼핑 중독과 같은 부작용을 낳을 수 있다고 경고합니다.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- '합리적 소비' 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-blue-400">
+                        <p class="font-bold text-lg text-blue-800"><합리적 소비></p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>관점:</strong> 경제학적 관점에서 합리적 소비를 설명하는 온라인 백과사전 자료입니다.</li>
+                            <li><strong>주요 내용:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>합리적 소비를 '비용 대비 편익이 가장 큰 대안을 선택하는 행위'로 정의합니다.</li>
+                                    <li>사람들이 한정된 자원 속에서 합리적인 선택을 해야 하는 이유를 제시합니다.</li>
+                                    <li>유명인이나 유행을 맹목적으로 따르는 '모방 소비'나 자신의 부를 과시하는 '과시 소비'는 비합리적 소비라고 설명합니다.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>3. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "주제 통합적 읽기에 대한 설명으로 적절하지 않은 것은?", options: ["동일한 화제에 대한 다양한 글과 자료를 읽는 것이다.", "읽기 목적에 따라 글이나 자료를 비판적으로 재구성하는 읽기이다.", "한 가지 관점으로 화제를 깊이 있게 파고드는 읽기이다.", "각 자료의 관점과 형식을 비교 분석하며 읽는다.", "자신의 견해를 재구성하는 과정이 포함된다."], answer: 2, explanation: "주제 통합적 읽기는 한 가지 관점이 아닌 다양한 관점으로 화제를 이해하는 데 목적이 있습니다." },
+            { question: "<왜 지금, 윤리적 소비인가>의 관점으로 가장 적절한 것은?", options: ["경제학적 관점", "심리학적 관점", "사회적 관점", "개인주의적 관점", "역사적 관점"], answer: 2, explanation: "이 글은 무분별한 소비가 지구 환경과 사회에 미치는 문제를 지적하고 윤리적 소비를 촉구하므로, 사회적 관점을 취하고 있습니다." },
+            { question: "<난 슬플 때 돈을 써, 우울함과 소비>에 대한 설명으로 적절하지 않은 것은?", options: ["'보상적 소비'의 개념을 정의하고 있다.", "심리적 만족감이 소비의 중요한 기준임을 제시한다.", "보상적 소비의 긍정적 효과와 부작용을 모두 다룬다.", "설문 조사 자료를 활용하여 주장을 논증하고 있다.", "개인의 심리적 결핍감을 해소하는 소비 행위를 '보상적 소비'라고 한다."], answer: 3, explanation: "이 글은 보상적 소비의 개념과 효과를 설명하는 설명문으로, 특정한 주장을 논증하는 논설문이 아닙니다." },
+            { question: "다음 중 '윤리적 소비'와 '합리적 소비'의 관계에 대한 설명으로 가장 적절한 것은?", options: ["윤리적 소비는 항상 합리적 소비에 포함된다.", "합리적 소비는 윤리적 소비와 항상 상충된다.", "두 소비는 서로 다른 관점에서 소비를 바라본다.", "윤리적 소비는 개인의 만족을, 합리적 소비는 사회적 가치를 우선한다.", "두 소비 모두 물질적 이득만을 고려하는 소비이다."], answer: 2, explanation: "윤리적 소비는 사회적 가치를, 합리적 소비는 경제적 이득을 각각 다른 관점에서 우선시하며 소비를 바라봅니다." },
+            { question: "'보상적 소비'가 부정적 감정을 해소하는 이유로 가장 적절한 것은?", options: ["비용 대비 편익이 가장 크기 때문에", "다른 사람에게 자신의 부를 과시할 수 있기 때문에", "스스로 무언가를 선택하며 자율성을 회복할 수 있기 때문에", "공동체 의식을 강화하고 기부를 실천할 수 있기 때문에", "유행에 뒤처지지 않고 새로운 제품을 구매할 수 있기 때문에"], answer: 2, explanation: "보상적 소비는 '스스로 무언가를 선택하며 자신의 환경을 통제하는 활동'이기 때문에, 자신의 의지와 관계없이 발생하는 슬픈 상황에서 잃었던 통제력과 자율성을 회복하는 데 도움이 된다고 설명합니다." },
+            { question: "<합리적 소비>의 내용에 대한 설명으로 적절하지 않은 것은?", options: ["합리적 소비의 기준은 '비용 대비 편익'이다.", "한정된 자원 때문에 합리적인 선택을 해야 한다.", "'과시 소비'는 비합리적 소비의 예시이다.", "편익이 일정하다면 최소한의 비용을 지불하는 것이 합리적이다.", "모든 소비 행위는 이성적이고 합리적인 판단에 따라 이루어진다."], answer: 4, explanation: "글은 '많은 학자들은 구매 행위가 이성적이고 합리적인 판단에 따라 이루어지지 않았다면 비합리적 소비라고 이야기한다'고 언급하여, 모든 소비 행위가 합리적인 것은 아님을 밝히고 있습니다." },
+            { question: "<왜 지금, 윤리적 소비인가>에서 제시한 '윤리적 소비'의 실천 단계 중, '물건 나눔하기'는 어디에 해당하는가?", options: ["기초 단계", "성장 단계", "성숙 단계", "전환 단계", "실천 단계"], answer: 2, explanation: "물건 나눔하기는 '공동체 의식을 강화하며 일상생활에서 꾸준히 윤리적인 가치를 실천하는 것'에 속하는 '성숙 단계'의 예시입니다." },
+            { question: "다음 중 '보상적 소비'와 '합리적 소비'가 상충되는 상황으로 가장 적절한 것은?", options: ["기분이 우울할 때 꼭 필요했던 물건을 싸게 구매한 경우", "스트레스를 풀기 위해 충동적으로 비싼 옷을 구매한 경우", "자신에게 맞는 물건을 여러 곳에서 비교한 후 구매한 경우", "환경 보호를 위해 비싼 친환경 제품을 구매한 경우", "친구의 유행을 따라 옷을 구매한 경우"], answer: 1, explanation: "합리적 소비는 비용 대비 편익을 고려하지만, 보상적 소비는 심리적 만족감을 위해 비용을 고려하지 않는 경우가 많습니다. 따라서 충동적으로 비싼 옷을 구매한 경우는 두 소비의 가치 기준이 충돌하는 상황입니다." },
+            { question: "다음 중 '합리적 소비'의 예시에 해당하는 것은?", options: ["친구가 구매한 옷을 보고 따라서 구매한 경우", "자신의 사회적 지위를 뽐내기 위해 명품 가방을 구매한 경우", "유명인이 광고하는 제품을 무분별하게 구매한 경우", "물가 상승으로 인해 지출을 줄이고 절약하는 경우", "비슷한 성능을 가진 제품 중에서 가장 저렴한 것을 선택한 경우"], answer: 4, explanation: "합리적 소비는 '비용 대비 편익이 가장 큰 대안을 선택하는 소비 행위'이므로, 비슷한 성능의 제품 중에서 가장 저렴한 것을 선택한 경우가 가장 적절한 예시입니다." },
+            { question: "주제 통합적 읽기 과정에 대한 설명으로 적절하지 않은 것은?", options: ["읽기 목적을 구체화하는 것으로 시작한다.", "다양한 글과 자료를 비교 분석하여 읽는다.", "선별한 정보들 간에 상충되는 점은 없는지 확인한다.", "자신의 관점과 생각을 재구성하는 것으로 끝이 난다.", "자신의 견해에 맞는 자료만 선택하여 읽는다."], answer: 4, explanation: "주제 통합적 읽기는 다양한 관점을 균형 있게 수용하는 것이 목적이므로, 자신의 견해에 맞는 자료만 선택적으로 읽는 것은 바람직하지 않습니다." },
+            { question: "이 작품에 나타난 '소비'라는 화제를 가장 잘 이해한 것은?", options: ["소비는 개인의 욕망을 충족시키기 위한 행위일 뿐이다.", "소비는 모두 이성적이고 합리적인 판단에 따라 이루어진다.", "소비는 개인의 심리적 안정뿐만 아니라 사회적 책임까지 고려해야 한다.", "소비는 물질적 이득을 얻기 위한 경제적 행위일 뿐이다.", "소비는 개인의 행복과 공동체의 행복에 아무런 영향을 미치지 않는다."], answer: 2, explanation: "세 글을 통합적으로 읽으면 소비는 개인의 만족을 넘어 사회적, 심리적, 경제적 관점에서 복합적인 의미를 지니고 있음을 알 수 있습니다." },
+            { question: "다음 중 '윤리적 소비'의 '횡적 차원'에 해당하는 것은?", options: ["환경을 보호하기 위해 플라스틱 사용을 줄이는 것", "미래 세대를 위해 에너지 절약을 실천하는 것", "공정 무역 제품을 구매하여 생산자에게 정당한 대가를 지불하는 것", "지역 경제 활성화를 위해 지역 상점에서 물건을 구매하는 것", "기부를 통해 현세대 인류의 빈부 격차 해소에 기여하는 것"], answer: 4, explanation: "횡적 차원의 소비 윤리는 '현세대 인류 간 빈부 격차 문제'를 고려하는 것이므로, 기부를 통해 빈부 격차 해소에 기여하는 것이 가장 적절한 예시입니다." },
+            { question: "다음 중 '무지출' 유행에 대한 설명으로 가장 적절한 것은?", options: ["과시 소비를 촉진하는 사회적 현상이다.", "충동구매와 과소비를 유도한다.", "소비자에게 심리적 만족감을 주는 보상적 소비이다.", "소비를 극단적으로 줄여 보상 심리로 과소비에 빠질 위험이 있다.", "소비자들에게 합리적 소비의 중요성을 깨닫게 한다."], answer: 3, explanation: "소비자학과 교수의 언급에 따르면, '무지출'은 '소비를 극단적으로 줄이면 어느 순간 보상 심리로 과소비하게 될 수 있다'는 문제점을 지니고 있습니다." },
+            { question: "다음 중 '디드로 효과'에 대한 설명으로 가장 적절한 것은?", options: ["물건 하나를 구매하면 그에 어울릴 만한 다른 물건을 계속 구매하게 되는 현상", "자신을 드러내는 도구로 소비하는 현상", "소비 행위를 통해 자신의 정체성을 표현하는 현상", "다른 사람의 소비 행위를 모방하는 현상", "소비에 따른 비용과 편익을 비교하는 현상"], answer: 0, explanation: "'디드로 효과'는 '물건 하나를 구매하면 그에 어울릴 만한 다른 물건을 계속 구매하게 되는 현상'으로 정의합니다." },
+            { question: "다음 중 '윤리적 소비'의 실천 단계 중 '녹색 소비'와 '지역 소비'가 속하는 단계는?", options: ["기초 단계", "성장 단계", "성숙 단계", "전환 단계", "실천 단계"], answer: 1, explanation: "녹색 소비와 지역 소비는 '소비 생활 전반에서 윤리적 소비를 실천하는 것'에 해당하는 '성장 단계'의 예시입니다." },
+            { question: "다음 중 '합리적 소비'의 '편익'에 대한 설명으로 가장 적절한 것은?", options: ["물건을 구매하는 데 드는 비용", "구매 행위를 통해 얻는 심리적 만족감이나 이득", "다른 사람이 얻는 이득", "사회적 가치를 실현하는 데 기여하는 정도", "물건의 객관적 성능과 품질"], answer: 1, explanation: "편익은 '어떠한 선택으로 얻을 수 있는 만족이나 이득을 수치화한 개념'으로 정의합니다." },
+            { question: "다음 중 <난 슬플 때 돈을 써, 우울함과 소비>에서 언급된 '쇼핑 중독'의 부작용으로 가장 적절한 것은?", options: ["자기 통제감을 높일 수 있다.", "심리적 만족감을 줄 수 있다.", "긍정적인 성취감을 느끼게 한다.", "자신에게 독이 될 수 있다.", "우울한 감정을 완화하는 데 도움이 된다."], answer: 3, explanation: "글은 보상적 소비가 과도해지면 '쇼핑 중독이라는 부작용을 겪으며 결국 자신에게 독이 될 수 있기 때문에 조심해야 한다.'고 경고하고 있습니다." },
+            { question: "다음 중 '윤리적 소비'의 '종적 차원'에 해당하는 것은?", options: ["공정 무역 제품을 소비하여 생산자의 권익을 보장하는 것", "기부를 통해 현세대의 빈부 격차를 해소하는 것", "지구를 위한 소비를 통해 미래 세대의 요구에 대응하는 것", "생활을 간소화하여 불필요한 소비를 줄이는 것", "지역 상점에서 물건을 구매하여 지역 경제를 활성화하는 것"], answer: 2, explanation: "종적 차원의 소비 윤리는 '환경과 미래 세대를 고려한 소비'를 판단하는 기준으로, 미래 세대의 요구에 대응하는 소비를 목표로 합니다." },
+            { question: "다음 중 '합리적 소비'와 '비합리적 소비'를 구분하는 기준으로 가장 적절한 것은?", options: ["물건을 구매하는 데 드는 비용이 얼마나 되는가", "소비 행위가 이성적이고 합리적인 판단에 따라 이루어지는가", "구매한 물건이 얼마나 유행하는 제품인가", "소비 행위가 개인의 심리적 만족감을 주는가", "구매한 물건이 사회적 가치를 실현하는 데 기여하는가"], answer: 1, explanation: "글은 '구매 행위가 이성적이고 합리적인 판단에 따라 이루어지지 않았다면 비합리적 소비라고 이야기한다'고 명시하고 있습니다." },
+            { question: "다음 중 세 가지 글을 통합적으로 읽었을 때 얻을 수 있는 깨달음으로 가장 적절한 것은?", options: ["소비는 오로지 경제적 가치만을 기준으로 해야 한다.", "윤리적 소비는 개인의 만족을, 합리적 소비는 사회적 가치를 추구해야 한다.", "소비는 개인의 심리적 만족과 경제적 효율, 사회적 책임까지 아우르는 복합적인 행위이다.", "모든 소비는 결국 환경 파괴와 사회 문제로 이어지므로 소비를 줄여야 한다.", "소비는 합리적이어야만 하므로 보상적 소비와 윤리적 소비는 지양해야 한다."], answer: 2, explanation: "세 글을 통합적으로 읽으면 소비는 경제적(합리적), 심리적(보상적), 사회적(윤리적) 관점에서 모두 의미를 지니는 복합적인 행위임을 깨달을 수 있습니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            buildQuiz();
+        });
+    </script>
+</body>
+</html>

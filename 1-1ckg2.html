@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-1. 주체적으로 감상하기: 뉴욕제과점 (김연수)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3b82f6; /* Blue color for this unit */
+            color: #1e40af;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #e0f2fe;
+            border-color: #93c5fd;
+        }
+        .quiz-option.selected {
+            background-color: #bfdbfe;
+            border-color: #3b82f6;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-blue-800">1-1. 주체적으로 감상하기</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 뉴욕제과점 (김연수)</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-blue-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-blue-800">■ 갈래:</strong> 현대 소설, 단편 소설</p>
+                    <p><strong class="text-blue-800">■ 성격:</strong> 회고적, 자전적</p>
+                    <p><strong class="text-blue-800">■ 배경:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>시간: 1970년대~1990년대</li>
+                        <li>공간: 경상북도 김천의 뉴욕제과점을 중심으로 한 생활 공간</li>
+                    </ul>
+                    <p><strong class="text-blue-800">■ 제재:</strong> 뉴욕제과점, 뉴욕제과점을 배경으로 한 '나'와 가족의 추억</p>
+                    <p><strong class="text-blue-800">■ 주제:</strong> 세상을 살아가는 데 힘이 되어 주는 소중한 추억</p>
+                    <p><strong class="text-blue-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>작가의 실제 경험을 바탕으로 한 자전적 소설임.</li>
+                        <li>뉴욕제과점에 얽힌 이야기들을 나열하는 삽화식 구성으로 되어 있음.</li>
+                        <li>뉴욕제과점이 탄생하고 쇠락하는 과정을 순차적으로 제시함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 줄거리 및 인물 소개 -->
+            <section class="exam-section">
+                <h4>2. 줄거리 및 인물 소개</h4>
+                <div class="space-y-4 text-sm sm:text-base">
+                    <p><strong>■ 전체 줄거리:</strong> '나'는 연필로 소설을 쓰기로 결심하고, 자신이 태어나기 전부터 존재했던 뉴욕제과점과 가족의 추억을 회상한다. 1980년대 소비가 미덕인 시대에 뉴욕제과점은 전성기를 맞지만, 대기업 빵집의 등장과 어머니의 건강 악화로 점차 쇠락하여 1995년 결국 폐업한다. '나'는 뉴욕제과점이 사라진 것에 대한 상실감과 함께, 소중한 존재들은 사라져도 그 추억은 마음속에 '불빛'처럼 남아 삶의 위안과 힘이 된다는 깨달음을 얻는다. 마지막으로 24시간 국밥집으로 바뀐 뉴욕제과점 자리를 방문하여 깊은 감회에 젖는다.</p>
+                    <p><strong>■ 인물 소개:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>나 (서술자):</strong> 뉴욕제과점의 막내아들. 뉴욕제과점과 관련된 어린 시절의 추억을 소중히 여기며, 사라진 것들이 마음속에 불멸의 추억으로 남아 삶의 힘이 된다는 깨달음을 얻는 인물.</li>
+                        <li><strong>어머니:</strong> 뉴욕제과점을 억척스럽게 운영하며 가족의 생계를 책임진 인물. 자존심이 강하고 낙천적인 성격을 지녔으며, 뉴욕제과점에 대한 깊은 애착을 보인다.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. 장면별 상세 해설 (발단-전개-위기-결말) -->
+            <section class="exam-section">
+                <h4>3. 장면별 상세 해설 (발단-전개-위기-결말)</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">[발단] 이 소설을 연필로 쓰기로 결심한 '나'</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>'나'는 이 소설을 연필로 쓰기로 결심한다. 이는 소설의 내용이 '나'에게 매우 소중하며, 정성을 다해 기록하려는 의지를 암시한다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">[전개] 어린 시절 뉴욕제과점에 관한 '나'의 기억과 뉴욕제과점의 전성기</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>뉴욕제과점은 '나'가 태어나기 전부터 존재했으며, '나'의 삶과 정체성에 밀접하게 연결된 공간으로 그려진다. '나'는 자신을 '뉴욕제과점 막내아들'이라 불렀던 사람들의 기억을 통해 뉴욕제과점이 자신의 삶의 중요한 부분임을 인식한다.</li>
+                            <li>1980년대 소비가 미덕인 시대에 뉴욕제과점은 전성기를 맞는다. 어머니는 빙수 판매 기록을 세우고 자식들의 학비를 벌어들인 것에 대한 자부심을 드러낸다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">[위기] 대기업 빵집의 등장과 어머니의 건강 악화로 인한 뉴욕제과점의 쇠락</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>김영삼 대통령의 세계화 주창 이후 대기업 빵집이 등장하면서 뉴욕제과점은 점차 쇠락의 길을 걷는다. '나'는 뉴욕제과점의 빵이 형편없다고 느낀다.</li>
+                            <li>뉴욕제과점을 이끌던 어머니의 건강이 악화되고, 팔지 못해 상한 빵을 몰래 버리는 어머니의 모습에서 '나'는 처참함을 느낀다. 이는 어머니의 강한 자존심과 뉴욕제과점에 대한 깊은 애착을 보여준다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">[결말] 사라진 뉴욕제과점을 통해 깨달은 소중한 추억의 의미</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>뉴욕제과점은 1995년 8월 결국 폐업하고 24시간 국밥집으로 바뀐다. '나'는 고향의 변화와 소중한 것들이 사라질 것이라는 두려움에 사로잡힌다.</li>
+                            <li>그러나 '나'는 사라진 존재들이 마음속에 '불빛'처럼 남아 자신을 살아가게 한다는 깨달음을 얻는다. 이는 삶에서 보이는 것만이 전부가 아니며, 사라졌다고 믿었던 것들이 실은 내 안에 고스란히 존재한다는 주제 의식으로 이어진다.</li>
+                            <li>'나'는 24시간 국밥집이 된 뉴욕제과점 자리를 방문하여 그곳에 남아있는 흔적을 통해 가족과의 추억을 생생하게 떠올리며 깊은 감회에 젖는다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 소설의 '나'가 연필로 소설을 쓰기로 결심한 이유로 가장 적절한 것은?", options: ["연필로 쓰는 것이 더 빠르고 효율적이기 때문에", "글쓰기 습관을 기르기 위해 새로운 방법을 시도하기 위해", "소설의 내용이 '나'에게 매우 소중하여 정성을 다하고 싶었기 때문에", "어린 시절 연필로 글을 썼던 추억을 되살리고 싶었기 때문에", "다른 필기 도구가 없어서 어쩔 수 없이 연필을 사용했기 때문에"], answer: 2, explanation: "작품의 첫 부분에 '왜 그런 결심을 하게 됐는지 모르겠다. 그냥 그래야만 할 것 같았다.'라고 서술되어 있으며, 이는 소설의 내용이 '나'에게 매우 소중하여 정성을 다해 기록하려는 의지를 암시합니다." },
+            { question: "뉴욕제과점에 대한 '나'의 인식 변화 과정을 바르게 나열한 것은?", options: ["당연히 항상 있을 존재 → 언젠가 사라질 존재 → 불멸의 추억으로 남는 존재", "사라질 존재 → 당연히 있을 존재 → 불멸의 추억으로 남는 존재", "불멸의 추억 → 당연히 있을 존재 → 사라질 존재", "언젠가 사라질 존재 → 불멸의 추억으로 남는 존재 → 당연히 항상 있을 존재", "당연히 항상 있을 존재 → 불멸의 추억으로 남는 존재 → 언젠가 사라질 존재"], answer: 0, explanation: "'나'는 어린 시절 뉴욕제과점을 '죽은 뒤에도 거기에 있을 것이라고 쉽게 생각했던 것 같다'고 말하며 당연히 항상 있을 존재로 인식했습니다. 이후 폐업 소식을 듣고 '어차피 인생은 그런 것이니까'라고 생각하며 사라질 존재임을 받아들이려 합니다. 마지막에는 '이 세상에서 사라졌다고 믿었던 것들이 실은 내 안에 고스란히 존재한다는 사실을 나는 깨닫게 됐다'며 불멸의 추억으로 남는 존재임을 깨닫습니다." },
+            { question: "뉴욕제과점이 쇠락하게 된 원인으로 가장 적절하지 않은 것은?", options: ["대기업에서 운영하는 빵집의 등장", "어머니의 건강 악화", "뉴욕제과점 빵의 품질 저하", "시대의 변화에 적응하지 못한 경영 방식", "'나'가 대학 졸업 후 글을 쓰는 일에 집중했기 때문"], answer: 4, explanation: "뉴욕제과점 쇠락의 직접적인 원인은 대기업 빵집의 등장과 어머니의 건강 악화, 그리고 시대 변화에 적응하지 못한 경영 방식입니다. '나'가 글을 쓴 것은 뉴욕제과점의 쇠락 이후의 개인적인 상황이며, 직접적인 쇠락 원인은 아닙니다." },
+            { question: "어머니가 팔지 못해 상한 빵들을 검은색 비닐봉투에 넣어 버린 이유로 가장 적절한 것은?", options: ["음식물 쓰레기 처리 규정을 지키기 위해", "다른 사람들이 장사가 잘되지 않는 것을 눈치채지 못하게 하려고", "위생상의 문제를 막기 위해", "환경 보호에 동참하기 위해", "'나'에게 더 이상 빵을 주지 않기 위해서"], answer: 1, explanation: "어머니는 '빵을 팔지 못해서 버린다는 사실을 남들이 눈치채지 못하도록 비닐 봉투에 꽁꽁 묶어서 버리는 정도로만 남아 있었다'고 서술되어 있어, 자존심이 강한 어머니가 장사가 잘되지 않는 것을 숨기려 했음을 알 수 있습니다." },
+            { question: "고향 사람들이 뉴욕제과점이 사라졌다는 말에 '나'처럼 놀라거나 충격받지 않는 이유로 가장 적절한 것은?", options: ["고향 사람들은 뉴욕제과점을 전혀 기억하지 못하기 때문에", "고향 사람들에게 뉴욕제과점은 '나'에게처럼 소중한 추억의 장소가 아니었기 때문에", "고향 사람들은 이미 뉴욕제과점이 폐업할 것을 예상하고 있었기 때문에", "고향 사람들은 뉴욕제과점보다 더 중요한 다른 추억의 장소가 있기 때문에", "고향 사람들은 변화에 대한 적응력이 '나'보다 훨씬 빠르기 때문에"], answer: 1, explanation: "작품에서 '나'는 '뉴욕제과점은 그저 학창 시절에 미팅을 했던 장소 정도라 죽는 마당에 다시 가 보고 싶은 마음은 전혀 없는 것 같았다.'고 언급하며, 뉴욕제과점에 얽힌 추억의 내용과 성격이 서로 다르기 때문임을 암시합니다." },
+            { question: "이 소설에서 '불빛'이 상징하는 의미로 가장 적절한 것은?", options: ["어둠을 밝히는 희망찬 미래", "사라진 존재들이 남긴 소중한 추억", "물질적 풍요와 성공", "인생의 고난과 역경", "새로운 시작을 알리는 신호"], answer: 1, explanation: "작품에서 '내 안에 간직한 불빛들을 하나둘 꺼내 보는 일이 잦다는 사실을 깨닫게 됐다.'며 '추억 속에서 조금씩 밝혀지는 그 불빛들의 중심에는 뉴욕제과점이 늘 존재한다.'고 서술되어, '불빛'은 사라진 존재들이 남긴 소중한 추억을 의미합니다." },
+            { question: "'나'가 '어떤 의미에서 나는 실향민이나 마찬가지다.'라고 말한 까닭으로 가장 적절한 것은?", options: ["고향을 떠나 타지에서 외롭게 살고 있기 때문에", "고향에 돌아가도 더 이상 만날 사람이 없기 때문에", "고향의 옛 모습이 크게 변하여 더 이상 찾아볼 수 없기 때문에", "고향 사람들이 '나'를 더 이상 뉴욕제과점 막내아들이라고 부르지 않기 때문에", "고향에 대한 기억이 점점 희미해지고 있기 때문에"], answer: 2, explanation: "'그 거리는 이제 이 세상에 존재하지 않는다. 지금 고향에 있는 거리는 예전에 내가 살았던 곳이 아니다.'라고 언급하며, 고향의 옛 모습이 개발로 인해 크게 변하여 '나'의 의식과 정체성을 이루는 장소가 사라져 버린 데 따른 상실감을 비유적으로 표현한 것입니다." },
+            { question: "이 소설의 구성 방식인 '삽화식 구성'의 특징으로 가장 적절한 것은?", options: ["시간의 흐름에 따라 사건이 순차적으로 전개된다.", "인과 관계가 명확하여 사건의 개연성이 강조된다.", "각각의 사건들이 독립적으로 존재하며 나열되는 방식이다.", "주인공의 내면 심리 변화를 중심으로 이야기가 진행된다.", "미래에 대한 예측을 통해 독자의 궁금증을 유발한다."], answer: 2, explanation: "삽화식 구성은 각각의 사건들이 개연성이나 필연성 없이 단편적으로 연결된 이야기 구성을 의미합니다. <뉴욕제과점>에서는 뉴욕제과점에 얽힌 다양한 일화들이 나열됩니다." },
+            { question: "이 소설의 주제 의식에 대한 설명으로 가장 적절한 것은?", options: ["인간은 끊임없이 새로운 것을 추구하며 발전해야 한다.", "과거의 아픔을 잊고 새로운 삶을 시작해야 한다.", "소중한 존재들은 사라져도 그 추억은 마음속에 남아 삶의 위안과 힘이 된다.", "물질적인 성공이 진정한 행복을 가져다준다.", "세상의 변화에 순응하며 현실에 만족해야 한다."], answer: 2, explanation: "작품의 결말에서 '이 세상에서 사라졌다고 믿었던 것들이 실은 내 안에 고스란히 존재한다는 사실을 나는 깨닫게 됐다.'는 구절을 통해, 소중한 존재들이 사라져도 그 추억은 마음속에 남아 삶의 위안과 힘이 된다는 주제 의식이 드러납니다." },
+            { question: "'나'가 24시간 국밥집이 된 뉴욕제과점 자리를 방문했을 때의 심정으로 가장 적절한 것은?", options: ["새로운 변화에 대한 기대감", "과거에 대한 후회와 반성", "씁쓸함과 함께 밀려오는 감동과 그리움", "무관심과 냉담함", "미래에 대한 불안감"], answer: 2, explanation: "'나'는 '조금 쓸쓸한 기분이 들었다.'고 말하면서도, 국밥집에서 뉴욕제과점의 흔적을 발견하고 '내 눈길이 닿는 모든 곳에서 나는 우리 가족의 모습을 볼 수 있었다.'며 '더 이상 고개를 들고 실내를 바라볼 수 없었다.'고 서술하여 감정이 북받침을 보여줍니다. 이는 씁쓸함과 함께 깊은 감동과 그리움을 느꼈음을 나타냅니다." },
+            { question: "어머니의 성격에 대한 설명으로 적절하지 않은 것은?", options: ["억척스럽고 책임감이 강하다.", "낙천적이고 긍정적이다.", "자립심을 중요하게 여긴다.", "자존심이 강하다.", "현실에 안주하며 변화를 두려워한다."], answer: 4, explanation: "어머니는 뉴욕제과점이 쇠락하는 상황에서도 쉽게 가게를 그만두지 않으려 했고, 과거의 영광을 회상하며 애착을 보였습니다. 이는 현실에 안주하기보다는 소중히 여기는 것에 대한 애착이 강한 성격으로 볼 수 있습니다. 변화를 두려워한다는 직접적인 언급은 없습니다." },
+            { question: "이 소설의 시간적 배경인 1970년대~1990년대의 사회상을 엿볼 수 있는 내용으로 적절하지 않은 것은?", options: ["월남 파병 결정과 한일 협정 조인", "대기업에서 운영하는 빵집의 등장", "소비가 미덕인 시대의 도래", "인터넷과 스마트폰의 보급 확산", "김영삼 대통령의 세계화 주창"], answer: 3, explanation: "인터넷과 스마트폰의 보급 확산은 1990년대 후반 이후에 본격화된 현상으로, 이 소설의 주요 시간적 배경인 1970년대~1990년대와는 다소 거리가 있습니다. 나머지 보기는 모두 해당 시대의 사회상을 반영합니다." },
+            { question: "이 소설에서 '나'와 어머니가 뉴욕제과점에 대해 느끼는 감정의 공통점으로 가장 적절한 것은?", options: ["과거의 영광에 대한 자부심", "사라진 것에 대한 허무함", "변화에 대한 두려움", "깊은 애착과 소중한 추억", "경제적 어려움에 대한 비관"], answer: 3, explanation: "'나'는 뉴욕제과점을 통해 삶의 의미를 깨닫고 소중한 추억으로 살아간다고 말하며, 어머니 또한 뉴욕제과점을 통해 자식들을 길러낸 것에 대한 자부심과 깊은 애착을 보입니다. 둘 다 뉴욕제과점을 소중한 추억의 공간으로 여기는 공통점이 있습니다." },
+            { question: "이 소설에서 '나'의 의식 변화를 가장 잘 보여주는 문장은?", options: ["'어머니는 언제부터 장사를 시작했어요?'", "'물론 인생은 그런 게 아니다.'", "'갑자기 겁이 덜컥 났다.'", "'나는 깨달았다. 이제 내가 살아갈 세상에 괴로운 일만 남은 것은 아니라는 사실을.'", "'나는 셈을 치른 뒤, 새시 문을 열고 밖으로 나왔다.'"], answer: 3, explanation: "이 문장은 '나'가 처음에는 소중한 것들이 사라질 것이라는 두려움에 사로잡혔다가, 결국 사라진 것들이 마음속에 불멸의 추억으로 남아 삶의 힘이 된다는 긍정적인 깨달음을 얻게 되는 결정적인 전환점을 보여줍니다." },
+            { question: "이 소설을 읽고 독자가 얻을 수 있는 교훈으로 가장 적절한 것은?", options: ["과거에 얽매이지 않고 현재에 충실해야 한다.", "물질적인 풍요가 삶의 질을 높이는 데 중요하다.", "진정한 행복은 타인과의 경쟁에서 승리하는 데 있다.", "사라지는 것들에 대한 아쉬움보다는 그 속에 담긴 소중한 의미를 되새겨야 한다.", "어려움에 직면했을 때 혼자 힘으로 극복하는 것이 중요하다."], answer: 3, explanation: "이 소설은 뉴욕제과점이라는 물리적인 공간은 사라졌지만, 그곳에 얽힌 추억과 의미는 '나'의 마음속에 영원히 남아 삶의 힘이 된다는 메시지를 전달합니다. 이는 사라지는 것들에 대한 아쉬움보다는 그 속에 담긴 소중한 의미를 되새기는 것의 중요성을 강조합니다." },
+            { question: "어머니가 '나'에게 '옛날에는 얼마나 많이 팔았다구. 여름에 빙수 팔아 가지고 가을에 너희들 학교도 보내고 옷도 사 입히고 그랬으니까 얼마나 많이 팔아야 됐겠냐?'라고 말한 의도로 가장 적절한 것은?", options: ["자신이 빙수를 더 많이 팔았음을 자랑하기 위해", "'나'의 빙수 판매 기록을 깎아내리기 위해", "뉴욕제과점을 경영하며 자식들을 길러낸 자부심을 드러내기 위해", "'나'에게 돈 버는 것이 쉽지 않음을 가르치기 위해", "과거의 어려웠던 시절을 회상하며 위로받기 위해"], answer: 2, explanation: "어머니는 뉴욕제과점을 운영하여 번 돈으로 삼 남매를 모두 길러낸 것에 대한 깊은 자부심을 가지고 있습니다. 이 말은 '나'의 빙수 판매 기록을 넘어서는 자신의 노고와 성과를 강조하며 자부심을 드러내는 표현입니다." },
+            { question: "'나'가 24시간 국밥집으로 바뀐 뉴욕제과점 자리를 한 번도 가지 않다가 뒤늦게 방문한 이유로 가장 적절한 것은?", options: ["국밥을 좋아하지 않기 때문에", "새로운 가게에 대한 호기심이 없었기 때문에", "뉴욕제과점이 사라진 현실을 직접 확인하고 싶지 않았기 때문에", "그 당시 자신의 문제만으로도 걱정할 일이 많았기 때문에", "고향 친구들과의 약속이 없었기 때문에"], answer: 2, explanation: "'나'는 뉴욕제과점이 폐업했다는 소식을 듣고도 '그 광경을 보지 못했다'고 언급합니다. 이는 자신이 소중하게 여겼던 공간이 사라진 현실을 직접 마주하는 것에 대한 주저함과 상실감을 보여주는 행동입니다." },
+            { question: "'나'가 '내 안에 간직한 불빛들을 하나둘 꺼내 보는 일이 잦다는 사실을 깨닫게 됐다'고 서술한 이유로 가장 적절한 것은?", options: ["어두운 현실을 밝히기 위한 희망을 찾기 위해", "과거의 잘못을 반성하고 새로운 삶을 시작하기 위해", "소중하게 여겼던 것들이 사라질 것이라는 두려움에 사로잡혔기 때문에", "잃어버린 물건을 찾기 위해 기억을 더듬기 위해", "자신이 살아갈 세상에 괴로운 일만 남았다는 생각에 위안을 얻기 위해"], answer: 4, explanation: "'나'는 '이제 내가 살아갈 세상에는 괴로운 일만 남았다는 생각을 하게 됐다'며 '문득 그런 두려움에 사로잡혔다'고 말합니다. 이러한 두려움 속에서 '나'는 위안을 얻기 위해 기억 속에 남아 있는 소중한 추억들, 즉 '불빛'을 떠올리게 됩니다." },
+            { question: "<뉴욕제과점>의 주제 의식인 '소멸'과 '불멸'에 대한 설명으로 적절하지 않은 것은?", options: ["소중한 모든 존재는 시간의 흐름에 따라 소멸한다.", "소멸한 존재가 우리에게 만들어 준 소중한 추억은 사라지지 않는다.", "사라진 존재가 남긴 소중한 기억은 마음속 불빛으로 남아 우리를 살아가게 한다.", "'나'에게 두려움을 불러일으키는 것은 사라지지 않는 추억들이다.", "'나'에게 위안을 주고 삶의 힘이 되는 것은 소멸한 존재들이 남긴 추억이다."], answer: 3, explanation: "작품에서 '나'에게 두려움을 불러일으키는 것은 '내가 알던 사람이 죽을 것이고 내가 알던 거리가 바뀔 것이고 내가 소중하게 여겼던 것들이 떠나 버릴 것'이라는 '사라질 것'이라는 생각입니다. 사라지지 않고 마음속에 남아있는 추억은 오히려 '나'에게 위안과 힘이 됩니다." },
+            { question: "'나'가 24시간 국밥집에서 국밥을 먹으며 '더 이상 고개를 들고 실내를 바라볼 수 없었다'고 서술한 이유로 가장 적절한 것은?", options: ["국밥집의 분위기가 뉴욕제과점과 너무 달라서 실망했기 때문에", "국밥이 너무 뜨거워서 고개를 들 수 없었기 때문에", "뉴욕제과점에서의 추억이 북받쳐 올라 감정을 주체할 수 없었기 때문에", "새로운 환경에 적응하지 못하고 당황했기 때문에", "주변 사람들의 시선이 부담스러웠기 때문에"], answer: 2, explanation: "'나'는 국밥집의 바닥 무늬, 천장 등 뉴욕제과점의 흔적을 발견하며 '내 눈길이 닿는 모든 곳에서 나는 우리 가족의 모습을 볼 수 있었다.'고 말합니다. 이는 뉴욕제과점에서의 수많은 추억들이 생생하게 떠올라 감정이 북받쳐 올랐기 때문입니다." },
+            { question: "뉴욕제과점이 폐업한 연도는?", options: ["1975년", "1985년", "1990년", "1995년", "2000년"], answer: 3, explanation: "뉴욕제과점은 '나'가 대학을 졸업한 해인 1995년 8월에 문을 닫았습니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            buildQuiz();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-2. 매체 자료 평가하며 읽기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #10b981; /* Green color for this unit */
+            color: #065f46;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #ecfdf5;
+            border-color: #6ee7b7;
+        }
+        .quiz-option.selected {
+            background-color: #d1fae5;
+            border-color: #10b981;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-green-800">1-2. 매체 자료 평가하며 읽기</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 매체 자료 평가 및 비평</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-green-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-green-800">■ 갈래:</strong> 신문 기사, 다큐멘터리, 비평문 등 다양한 매체 자료</p>
+                    <p><strong class="text-green-800">■ 학습 목표:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>복합양식으로 구성된 글이나 자료에 내재된 필자의 관점이나 의도, 표현 방법을 평가하며 읽을 수 있다.</li>
+                        <li>매체 비평 자료를 비판적으로 수용하고 자신의 관점을 담아 매체 비평 자료를 제작할 수 있다.</li>
+                    </ul>
+                    <p><strong class="text-green-800">■ 주요 개념:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>복합양식 텍스트:</strong> 문자와 그림, 도표, 사진, 음성, 영상 등 다양한 양식이 혼합된 글. 각 양식은 정보 전달에 특화되어 있으며, 텍스트 평가 시 각 양식의 표현 방법이 적절한지 평가해야 한다.</li>
+                        <li><strong>매체 비평:</strong> 특정한 관점이나 가치에 따라, 타당한 근거를 들어 매체 자료의 가치를 평가하는 것. 매체 비평 자료에는 평가의 관점과 가치, 매체 자료에 대한 평가, 평가의 근거가 포함된다.</li>
+                        <li><strong>미디어 리터러시:</strong> 다양한 미디어 정보를 비판적으로 이해·분석하고 활용하며, 주체적·비판적·창의적으로 정보 생산에 참여하고 소통하는 능력.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 주요 내용 요약 -->
+            <section class="exam-section">
+                <h4>2. 주요 내용 요약</h4>
+                <div class="space-y-4 text-sm sm:text-base">
+                    <p>이 소단원은 매체 자료를 비판적으로 읽고 평가하는 능력을 기르는 데 중점을 둡니다. 매체 자료에는 제작자의 관점이나 의도가 반영되어 있으며, 이는 다양한 표현 방법을 통해 드러납니다. 독자는 이러한 관점과 의도, 표현 방법의 적절성을 평가하고, 자료의 신뢰성과 공정성을 따져 내용의 타당성을 판단해야 합니다.</p>
+                    <p>특히, '무인 안내기(키오스크)라는 차별과 배제, 당신은 괜찮나요?' 신문 기사와 '다큐 인사이트' 다큐멘터리, 그리고 농어촌 생활 예능 프로그램 비평문을 통해 실제 사례를 분석합니다. 이를 통해 매체 자료가 사회에 미치는 영향, 현실 반영 여부, 제작자의 통찰력 등을 다양한 관점에서 평가하는 방법을 학습합니다.</p>
+                    <p>매체 비평은 단순한 감상을 넘어, 타당한 근거를 바탕으로 매체 자료의 가치를 평가하고, 이를 통해 비판적 사고력을 함양하는 중요한 활동입니다.</p>
+                </div>
+            </section>
+
+            <!-- 3. 핵심 개념 및 평가 기준 -->
+            <section class="exam-section">
+                <h4>3. 핵심 개념 및 평가 기준</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">매체 자료의 특성 및 평가 요소</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>만든 이의 관점과 의도:</strong> 매체 자료에 반영된 제작자의 태도나 시각, 그리고 독자에게 끼치고자 하는 영향.</li>
+                            <li><strong>표현 방법:</strong> 문자, 이미지, 음성, 영상 등 복합양식 요소들이 관점이나 의도를 효과적으로 드러내는지 평가. (예: 신문 기사의 표제/부제/본문/사진/표, 다큐멘터리의 내레이션/촬영 기법/배경 음악 등)</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">내용의 타당성 평가 기준</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>신뢰성:</strong> 내용이 믿을 만한지, 자료 출처가 정확하고 사실에 근거하는지.</li>
+                            <li><strong>공정성:</strong> 관점이나 의도가 편견에 치우치지 않고 균형 있게 다루고 있는지, 형평성을 유지하는지.</li>
+                            <li><strong>적절성(타당성):</strong> 추론, 논증 과정이 논리적인지, 주장을 뒷받침하는 근거가 적절한지.</li>
+                            <li><strong>선정성:</strong> 흥미 위주의 자극적인 내용을 다루지 않는지.</li>
+                            <li><strong>상업성:</strong> 지나치게 상업적인 이익을 목적으로 하지 않는지.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-green-500">
+                        <p class="font-bold text-lg text-green-800">매체 비평 시 유의점</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>적절한 관점과 가치에 따라 매체 자료를 수용해야 한다.</li>
+                            <li>매체 자료에 대한 평가가 명확히 드러나야 한다.</li>
+                            <li>매체 자료의 내용을 분석하여 평가를 뒷받침하는 근거로 활용해야 한다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "복합양식 텍스트에 대한 설명으로 적절하지 않은 것은?", options: ["문자, 그림, 사진 등 다양한 양식이 혼합된 글이다.", "각 양식은 정보를 전달하는 데 가장 특화되어 있다.", "텍스트 평가 시 각 양식의 표현 방법이 적절한지 평가해야 한다.", "하나의 양식으로만 구성되어 통일성이 강조된다.", "음성, 영상과 같은 비언어적 요소도 포함될 수 있다."], answer: 3, explanation: "복합양식 텍스트는 다양한 양식이 혼합된 글입니다. 하나의 양식으로만 구성된 것은 복합양식 텍스트의 특징이 아닙니다." },
+            { question: "매체 비평의 개념으로 가장 적절한 것은?", options: ["매체 자료의 내용을 요약하여 전달하는 활동", "특정한 관점이나 가치에 따라 매체 자료의 가치를 평가하는 활동", "매체 자료의 장점만을 부각하여 홍보하는 활동", "매체 자료 제작자의 의도를 추측하는 활동", "매체 자료의 시각적 요소를 분석하는 활동"], answer: 1, explanation: "매체 비평은 특정한 관점이나 가치에 따라, 타당한 근거를 들어 매체 자료의 가치를 평가하는 것을 의미합니다." },
+            { question: "'무인 안내기(키오스크)라는 차별과 배제, 당신은 괜찮나요?' 신문 기사의 글쓴이의 관점으로 가장 적절한 것은?", options: ["무인 안내기 보급 확대를 긍정적으로 바라본다.", "무인 안내기 사용의 효율성을 강조한다.", "무인 안내기가 사회적 약자를 배제하는 현실을 부정적으로 바라본다.", "무인 안내기 기술 발전에 대한 기대감을 드러낸다.", "무인 안내기 도입으로 인한 경제적 이득을 중시한다."], answer: 2, explanation: "해당 신문 기사는 무인 안내기가 장애인과 노인 등 사회적 약자를 배제하는 '차별의 상징'이 되었다고 언급하며, 현 상황을 부정적으로 바라보는 글쓴이의 관점을 드러냅니다." },
+            { question: "위 신문 기사에서 글쓴이가 독자에게 설득하려는 의도로 가장 적절한 것은?", options: ["무인 안내기 사용을 전면 중단할 것을 촉구한다.", "무인 안내기 기술 개발에 더 많은 투자를 요구한다.", "무인 안내기 관련 제도 개선과 사회적 인식 개선에 관심을 갖도록 한다.", "무인 안내기를 사용하지 않는 식당을 이용하도록 권장한다.", "무인 안내기 사용의 불편함을 직접 경험해 보도록 유도한다."], answer: 2, explanation: "글쓴이는 '제도의 실효성 있는 개선과 함께 반드시 필요한 것이 사회적 인식 개선이다.'라고 강조하며, 독자들이 이 문제에 관심을 갖고 개선에 동참하도록 설득하려 합니다." },
+            { question: "신문 기사의 구성 요소 중, 기사의 내용을 압축적으로 표현하는 것은?", options: ["부제", "본문", "사진", "표제", "해설"], answer: 3, explanation: "표제는 기사의 제목으로, 기사의 내용을 압축적으로 표현합니다. 부제는 표제를 보완하는 부수적 제목입니다." },
+            { question: "'다큐 인사이트'에서 소나무재선충병 확산의 근본적인 원인으로 제시한 것은?", options: ["소나무의 무단 벌채", "솔수염하늘소의 개체 수 감소", "기후 변화로 인한 기온 상승", "소나무 방제 작업 소홀", "제주도 지역의 잦은 태풍"], answer: 2, explanation: "다큐멘터리에서는 전문가의 인터뷰와 통계 자료를 통해 '기후 변화 때문에 소나무재선충병의 발생 위험이 점점 더 높아지고 있습니다.'라고 명확히 밝히며 기온 상승을 원인으로 꼽습니다." },
+            { question: "'다큐 인사이트'에서 상황의 비극성을 강조하기 위해 사용된 표현 방법으로 적절하지 않은 것은?", options: ["노랗게 변한 소나무의 모습을 클로즈업 기법으로 보여줌", "소나무를 톱으로 베어 내는 소리를 크게 들려줌", "'50년 이상'과 '한순간에'를 대조하는 언어적 표현 사용", "긴박한 느낌의 배경 음악을 넣어 상황의 심각성을 강조함", "차분하고 정돈된 어조의 내레이션으로 신뢰감을 줌"], answer: 4, explanation: "차분하고 정돈된 어조의 내레이션은 내용의 신뢰성을 높이는 데 기여하지만, 상황의 비극성을 직접적으로 강조하는 표현 방법은 아닙니다. 비극성은 주로 시각, 청각, 언어적 대조를 통해 강조됩니다." },
+            { question: "매체 자료의 내용이 타당한지 평가할 때, '제시된 정보의 내용이 정확하고 출처가 믿을 만한지'를 따져보는 평가 기준은?", options: ["공정성", "적절성", "선정성", "상업성", "신뢰성"], answer: 4, explanation: "제시된 정보의 내용이 정확하고 출처가 믿을 만한지를 따져보는 것은 매체 자료의 '신뢰성'을 평가하는 기준입니다." },
+            { question: "매체 자료의 내용이 타당한지 평가할 때, '만든 이의 관점이나 의도가 편견에 치우치지 않고 균형 있게 다루고 있는지'를 따져보는 평가 기준은?", options: ["신뢰성", "적절성", "공정성", "선정성", "상업성"], answer: 2, explanation: "만든 이의 관점이나 의도가 편견에 치우치지 않고 균형 있게 다루고 있는지를 따져보는 것은 매체 자료의 '공정성'을 평가하는 기준입니다." },
+            { question: "농어촌 생활 예능 프로그램 비평문에서 긍정적으로 평가하는 측면으로 가장 적절한 것은?", options: ["농어촌의 현실을 사실적으로 반영한다.", "도시 생활에 지친 이들에게 자연과의 일체감을 통해 갈증을 풀어준다.", "농어촌 주민들의 실제 삶의 어려움을 잘 보여준다.", "농어촌을 문명이 결핍된 공간으로 대상화하지 않는다.", "농어촌의 경제적 가치를 재조명한다."], answer: 1, explanation: "비평문에서는 농어촌 생활 예능 프로그램이 '딱딱하고 건조한 도시 생활에 지친 이들의 갈증을 풀어 준다는 점에서 가치가 있다.'고 언급하며, 시청자들이 자연과 일체화되는 느낌을 대리 경험할 수 있음을 긍정적으로 평가합니다." },
+            { question: "농어촌 생활 예능 프로그램 비평문에서 비판적으로 평가하는 측면으로 가장 적절한 것은?", options: ["출연진의 팀워크가 부족하다.", "촬영 장소의 선정성이 지나치다.", "농어촌을 문명이 결핍된 '야생'이나 '휴양지'로 대상화하여 현실을 은폐할 위험이 있다.", "프로그램의 내용이 너무 지루하여 시청률이 낮다.", "농어촌의 자연 경관을 제대로 담아내지 못한다."], answer: 2, explanation: "비평문에서는 '농어촌을 문명이 결핍된 '야생'이나 '휴양지'로 대상화하는 이들 프로그램의 관점은 농어촌의 현실을 은폐할 위험성이 있다.'고 명확히 비판하고 있습니다." },
+            { question: "매체 비평 자료를 제작할 때 포함되어야 할 내용 요소로 적절하지 않은 것은?", options: ["평가의 관점과 가치", "매체 자료에 대한 평가", "평가의 근거", "매체 자료의 제작 비용", "매체 자료의 기본 정보"], answer: 3, explanation: "매체 비평 자료에는 평가의 관점과 가치, 매체 자료에 대한 평가, 평가의 근거가 포함되어야 하지만, 제작 비용은 필수로 포함되는 내용 요소가 아닙니다." },
+            { question: "미디어 리터러시 능력에 대한 설명으로 적절하지 않은 것은?", options: ["다양한 미디어 정보를 비판적으로 이해하고 분석하는 능력이다.", "매체 정보의 생산 과정에 주체적·창의적으로 참여하는 능력이다.", "매체 정보를 바탕으로 타인과 소통하고 자신의 생각을 표현하는 능력이다.", "미디어에서 나오는 정보를 단순하게 받아들이는 능력이다.", "영상 매체의 시대에 그 중요성이 더욱 커졌다."], answer: 3, explanation: "미디어 리터러시는 정보를 단순하게 받아들이는 것이 아니라 비판적으로 해석하고 검토하는 능력을 의미합니다." },
+            { question: "매체 비평 시 '매체 자료의 내용을 분석하여 평가를 뒷받침하는 근거로 활용해야 한다'는 유의점과 가장 관련 깊은 것은?", options: ["매체 자료의 흥미성", "매체 자료의 시청률", "매체 자료의 논리적 타당성", "매체 자료의 제작 기간", "매체 자료의 광고 수익"], answer: 2, explanation: "평가를 뒷받침하는 근거는 매체 자료의 내용 분석, 즉 논리적 타당성과 관련이 깊습니다." },
+            { question: "다음 중 매체 자료를 평가할 때 고려해야 할 '표현의 적절성'에 대한 질문으로 가장 적절한 것은?", options: ["자료의 출처가 명확한가?", "만든 이의 관점이 편견에 치우치지 않았는가?", "복합양식 요소들이 만든 이의 의도를 효과적으로 드러내는가?", "내용이 상업적인 이익을 목적으로 하는가?", "자료에 제시된 통계가 최신 자료인가?"], answer: 2, explanation: "'표현의 적절성'은 매체 자료를 구성하는 다양한 복합양식 요소들(문자, 이미지, 음향, 영상 등)이 제작자의 관점이나 표현 의도를 드러내는 데 효과적으로 사용되었는지를 평가하는 기준입니다." },
+            { question: "신문 기사의 '부제'에 대한 설명으로 가장 적절한 것은?", options: ["기사의 제목으로 내용을 압축적으로 표현한다.", "표제를 보완하는 부수적 제목으로 구체적인 정보를 담는다.", "기사의 핵심 내용을 자세히 서술한 부분이다.", "기사의 마지막 부분에 위치하여 결론을 제시한다.", "기사에 사용된 사진이나 표의 출처를 밝힌다."], answer: 1, explanation: "부제는 표제를 보완하는 부수적 제목으로, 표제보다 구체적인 정보를 담습니다." },
+            { question: "'다큐 인사이트'에서 제주도 소나무재선충병 피해의 심각성을 강조하기 위해 사용된 시각 자료로 적절한 것은?", options: ["소나무재선충의 확대 현미경 사진", "제주도 평균 기온 변화 그래프", "노랗게 변한 소나무의 클로즈업 영상", "소나무가 잘려 나가는 모습의 롱숏 영상", "위의 모든 것"], answer: 4, explanation: "제시된 모든 시각 자료(소나무재선충 확대 사진, 기온 변화 그래프, 노랗게 변한 소나무 클로즈업, 잘려 나가는 소나무 롱숏)는 소나무재선충병 피해의 심각성을 다양한 방식으로 강조하는 데 사용되었습니다." },
+            { question: "매체 비평 자료를 읽을 때, 평가의 근거를 제시하고 있는지 확인해야 하는 이유로 가장 적절한 것은?", options: ["비평문의 길이를 늘리기 위해", "비평가의 개인적인 의견을 확인하기 위해", "비평의 객관성과 타당성을 판단하기 위해", "비평가가 얼마나 많은 자료를 조사했는지 확인하기 위해", "비평문의 문학적 가치를 평가하기 위해"], answer: 2, explanation: "평가의 근거는 비평의 객관성과 타당성을 확보하는 데 매우 중요합니다. 근거가 명확해야 비평이 설득력을 가질 수 있습니다." },
+            { question: "매체 자료를 평가할 때 '선정성'을 따져보는 이유로 가장 적절한 것은?", options: ["정보의 정확성을 확인하기 위해", "내용이 대중에게 잘 알려진 친숙한 내용인지 확인하기 위해", "흥미 위주의 자극적인 내용으로 독자의 관심을 끄는 데만 초점을 맞추고 있지 않은지 확인하기 위해", "매체 자료가 사회에 어떤 영향을 미치는지 확인하기 위해", "제작자의 경제적 이익을 확인하기 위해"], answer: 2, explanation: "선정성은 흥미 위주의 자극적인 내용으로 수용자의 관심을 끄는 데에만 초점을 맞추고 있지 않은지 확인하는 기준입니다." },
+            { question: "다음 중 매체 비평의 대상이 될 수 있는 복합양식 매체 자료가 아닌 것은?", options: ["산불로 피해를 입은 숲의 전경을 담은 사진", "대사를 자막으로 제공하는 무장애 영화", "참고 자료로 그래프를 제시하는 신문 기사", "글과 사진으로 메시지를 전달하는 포스터 광고", "음성으로만 정보를 전달하는 라디오 뉴스"], answer: 4, explanation: "복합양식 매체 자료는 두 가지 이상의 양식이 혼합된 것을 의미합니다. 음성으로만 정보를 전달하는 라디오 뉴스는 단일 양식에 해당하므로 복합양식 매체 자료가 아닙니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            buildQuiz();
+        });
+    </script>
+</body>
+</html>

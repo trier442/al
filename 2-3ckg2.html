@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-3. 효과적으로 의견 전달하기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3b82f6; /* Blue color for this unit, consistent with main menu */
+            color: #1e40af;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #e0f2fe;
+            border-color: #93c5fd;
+        }
+        .quiz-option.selected {
+            background-color: #bfdbfe;
+            border-color: #3b82f6;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-blue-800">2-3. 효과적으로 의견 전달하기</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 발표 및 논증 글쓰기</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-blue-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-blue-800">■ 학습 목표:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>청중의 관심과 요구에 맞게 내용을 구성하여 발표하고, 청중의 질문에 효과적으로 답변할 수 있다.</li>
+                        <li>논증 요소에 따른 분석을 바탕으로 하여, 효과적으로 내용을 조직하여 논증하는 글을 쓸 수 있다.</li>
+                    </ul>
+                    <p><strong class="text-blue-800">■ 주요 내용:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li><strong>발표:</strong> 발표 맥락(주제, 목적, 청중, 시간) 고려, 청중 분석(배경지식, 태도, 관심사), 발표 내용 선정 및 조직(도입-전개-정리), 다양한 발표 전략(언어적/준언어적/비언어적 표현, 매체 자료 활용), 청중과의 소통(질의응답)</li>
+                        <li><strong>논증하는 글쓰기:</strong> 쓰기 맥락(주제, 목적, 독자, 매체) 분석, 논증 요소(주장, 이유, 근거, 예상 반론, 반박), 논증 방법(연역, 귀납, 유추), 논증 글의 구성(서론-본론-결론)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 주요 내용 요약 -->
+            <section class="exam-section">
+                <h4>2. 주요 내용 요약</h4>
+                <div class="space-y-4 text-sm sm:text-base">
+                    <p>이 소단원은 자신의 의견을 논리적이고 효과적으로 전달하는 방법을 학습합니다. 먼저, 발표 상황에서 청중의 특성을 분석하고, 이에 맞춰 발표 내용을 선정하고 체계적으로 조직하는 방법을 배웁니다. 도입-전개-정리의 구성에 따라 내용을 전달하며, 다양한 발표 전략(예: 시각 자료 활용, 어조 조절, 질문 활용)을 통해 청중의 관심과 이해를 높이는 방법을 익힙니다. 또한, 발표 후 청중의 질문에 적절하게 답변하며 소통하는 능력도 강조됩니다.</p>
+                    <p>다음으로, 논증하는 글쓰기에서는 글의 주제, 목적, 예상 독자, 매체 등 쓰기 맥락을 분석하는 것이 중요함을 다룹니다. 주장, 이유, 근거, 예상되는 반론과 그에 대한 반박 등 논증의 핵심 요소를 파악하고, 연역, 귀납과 같은 논증 방법을 효과적으로 활용하여 글의 설득력을 높이는 방법을 학습합니다. 이를 통해 독자를 설득하고 문제 해결에 기여하는 논리적 사고와 표현 능력을 함양하는 데 중점을 둡니다.</p>
+                </div>
+            </section>
+
+            <!-- 3. 핵심 개념 및 전략 -->
+            <section class="exam-section">
+                <h4>3. 핵심 개념 및 전략</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">발표 계획 및 수행</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>발표 맥락 고려:</strong> 발표 주제, 목적(정보 전달/설득), 예상 청중(지적 수준, 배경지식, 태도, 관심사), 발표 시간.</li>
+                            <li><strong>내용 선정:</strong> 청중 분석 결과를 바탕으로 적합한 정보 선별 (발표 목적에 부합하고 청중의 관심사에 맞는 내용).</li>
+                            <li><strong>내용 조직 (도입-전개-정리):</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>도입: 청중의 배경지식 환기 및 관심 유발, 발표 주제 및 내용 소개.</li>
+                                    <li>전개: 중심 내용 제시 (나열, 인과, 비교·대조, 문제·해결 구조 등 활용).</li>
+                                    <li>정리: 문제의 심각성 강조, 주제 강조, 실천 당부.</li>
+                                </ul>
+                            </li>
+                            <li><strong>발표 전략:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>언어적 표현: 질문 던지기, 구체적 경험담 언급.</li>
+                                    <li>준언어적 표현: 어조, 말의 속도 조절.</li>
+                                    <li>비언어적 표현: 시선, 표정, 몸동작 활용.</li>
+                                    <li>매체 자료 활용: 사진, 그림, 동영상, 통계 자료 제시.</li>
+                                </ul>
+                            </li>
+                            <li><strong>청중과의 소통:</strong> 질문 의도 이해, 솔직한 답변, 추가 질문 유도.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-blue-500">
+                        <p class="font-bold text-lg text-blue-800">논증하는 글쓰기</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>쓰기 맥락 분석:</strong> 글의 주제, 목적(정보 전달/설득/감정 유도), 예상 독자(연령, 배경지식, 관심사), 글을 실을 매체.</li>
+                            <li><strong>논증 요소:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>주장: 글쓴이가 내세우는 의견 (명확하고 타당해야 함).</li>
+                                    <li>이유: 주장을 뒷받침하는 주관적 생각.</li>
+                                    <li>근거: 이유를 뒷받침하는 객관적 사실, 정보 (신뢰성, 공정성 확보).</li>
+                                    <li>예상 반론: 주장에 대한 반대 의견.</li>
+                                    <li>반박: 예상 반론에 대한 글쓴이의 재반론.</li>
+                                </ul>
+                            </li>
+                            <li><strong>논증 방법:</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>연역: 일반적 사실/원리에서 개별적 사실/특수한 원리 도출 (대전제-소전제-결론).</li>
+                                    <li>귀납: 개별적/특수한 사실/원리에서 일반적/보편적 명제/법칙 도출.</li>
+                                    <li>유추(유비 추리): 두 대상의 유사성을 바탕으로 다른 속성도 유사할 것이라 추론.</li>
+                                </ul>
+                                (논리적 오류 없이 적절히 활용하여 설득력 높임.)
+                            </li>
+                            <li><strong>글의 구성 (서론-본론-결론):</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>서론: 문제 제기, 주장 제시.</li>
+                                    <li>본론: 이유와 근거 제시, 예상 반론과 반박 제시.</li>
+                                    <li>결론: 주장 재강조, 전망이나 새로운 시각 제시, 독자에게 행동 촉구.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "발표 계획 단계에서 청중의 특성을 파악해야 하는 이유로 가장 적절한 것은?", options: ["발표자의 지적 수준을 확인하기 위해", "발표 시간을 정확하게 예측하기 위해", "청중의 흥미와 관심을 유발하고 발표 목적을 달성하기 위해", "발표 내용의 분량을 조절하기 위해", "발표 장소를 효율적으로 선택하기 위해"], answer: 2, explanation: "청중의 특성을 파악하는 것은 발표 내용을 청중에게 효과적으로 전달하고, 청중의 흥미와 관심을 유발하여 발표 목적을 달성하는 데 필수적입니다." },
+            { question: "발표 내용을 조직할 때 '도입-전개-정리'의 구성에 대한 설명으로 적절하지 않은 것은?", options: ["도입에서는 청중의 배경지식을 환기하고 발표 주제를 소개한다.", "전개에서는 중심 내용을 문제-해결 구조 등으로 제시한다.", "정리에서는 문제의 심각성을 강조하고 실천을 당부한다.", "도입에서는 발표자가 전달할 모든 정보를 간략하게 요약한다.", "각 단계별로 청중의 특성을 고려하여 내용을 구성한다."], answer: 3, explanation: "도입에서는 발표 주제와 내용을 간략하게 소개하며 흥미를 유발하는 것이 목적입니다. 모든 정보를 요약하는 것은 '정리' 단계에서 이루어집니다." },
+            { question: "다음 중 발표자가 청중의 관심을 유지하기 위해 활용할 수 있는 '비언어적 표현 전략'에 해당하는 것은?", options: ["어조를 조절하여 강조하는 것", "질문을 던져 청중의 반응을 유도하는 것", "시각 자료(사진, 그림)를 제시하는 것", "표정이나 몸동작을 활용하는 것", "말의 속도를 조절하는 것"], answer: 3, explanation: "표정이나 몸동작은 말없이 전달되는 메시지로, 비언어적 표현 전략에 해당합니다. 어조와 말의 속도 조절은 준언어적 표현, 질문과 시각 자료는 언어적/매체 활용 전략입니다." },
+            { question: "논증하는 글쓰기에서 '주장'에 대한 설명으로 가장 적절한 것은?", options: ["글쓴이가 내세우는 의견으로, 명확하고 타당해야 한다.", "주장을 뒷받침하는 객관적인 사실이나 정보이다.", "주장을 뒷받침하는 원인이나 조건 등의 주관적인 생각이다.", "예상되는 반론에 대한 글쓴이의 재반론이다.", "논증의 대상이 되는 사안에 대한 배경지식이다."], answer: 0, explanation: "주장은 글쓴이가 내세우는 의견으로, 논증 글의 핵심이며 명확하고 타당해야 합니다." },
+            { question: "논증 방법 중, 일반적인 사실이나 원리에서 개별적인 사실이나 좀 더 특수한 다른 원리를 이끌어 내는 방법은?", options: ["귀납", "유추", "연역", "분석", "종합"], answer: 2, explanation: "일반적인 것에서 특수한 것을 도출하는 논증 방법은 '연역'입니다. 귀납은 특수한 것에서 일반적인 것을 도출합니다." },
+            { question: "논증하는 글쓰기에서 '예상 반론'과 '반박'을 제시하는 효과로 적절하지 않은 것은?", options: ["글쓴이가 논증의 대상이 되는 사안을 다각적으로 검토할 수 있게 한다.", "자신의 논증을 더욱 정교하게 다듬을 수 있게 한다.", "독자가 글쓴이가 균형 잡힌 관점을 가졌다고 느끼게 한다.", "논증의 설득력을 높이는 효과를 낸다.", "독자가 글쓴이의 주장에 대한 반대 의견을 가질 기회를 완전히 차단한다."], answer: 4, explanation: "예상 반론과 반박을 제시하는 것은 독자의 반대 의견을 완전히 차단하는 것이 아니라, 독자가 가질 수 있는 반대 의견에 대해 미리 고려하고 답변함으로써 글의 논리성과 설득력을 높이는 것입니다." },
+            { question: "다음 중 발표자가 청중의 질문에 답변할 때의 바람직한 태도로 적절하지 않은 것은?", options: ["질문 의도와 내용을 잘 이해하고 답변한다.", "모르는 내용에 대해서는 모른다고 솔직하게 답변한다.", "질문이 길어질 경우 청중의 말을 끊고 답변한다.", "답변 후 추가 질문이 있는지 확인한다.", "청중의 질문에 성의껏 답변하려 노력한다."], answer: 2, explanation: "청중의 말을 끊는 것은 바람직한 소통 태도가 아닙니다. 질문이 길어질 경우, 질문의 요지를 파악한 후 간결하게 답변하는 것이 좋습니다." },
+            { question: "논증하는 글쓰기에서 '근거'에 대한 설명으로 가장 적절한 것은?", options: ["글쓴이의 주관적인 생각이다.", "주장을 뒷받침하는 객관적인 사실이나 정보이다.", "글쓴이가 내세우는 최종적인 의견이다.", "예상되는 반론에 대한 재반론이다.", "글을 쓰는 목적을 나타낸다."], answer: 1, explanation: "근거는 주장을 뒷받침하는 객관적인 사실이나 정보로, 글의 설득력을 높이는 데 중요한 역할을 합니다." },
+            { question: "다음 중 '귀납' 논증 방법에 해당하는 예시는?", options: ["모든 사람은 죽는다. 소크라테스는 사람이다. 그러므로 소크라테스는 죽는다.", "지구는 생물이 살 수 있는 환경이다. 화성도 지구와 유사한 환경이다. 그러므로 화성에도 생물이 살 것이다.", "까마귀는 검다. 까마귀2도 검다. 까마귀3도 검다. 그러므로 모든 까마귀는 검다.", "A는 B이다. B는 C이다. 그러므로 A는 C이다.", "인간은 이성적 동물이다. 고양이는 이성적 동물이 아니다. 고양이는 인간이 아니다."], answer: 2, explanation: "까마귀의 개별적인 관찰을 통해 '모든 까마귀는 검다'는 일반적인 명제를 도출하는 것은 귀납 논증의 예시입니다." },
+            { question: "논증하는 글의 일반적인 구성인 '서론-본론-결론'에 대한 설명으로 적절하지 않은 것은?", options: ["서론에서는 문제 제기 및 주장 제시가 이루어진다.", "본론에서는 주장과 이유, 근거가 제시된다.", "본론에서는 예상되는 반론과 그에 대한 반박이 제시될 수 있다.", "결론에서는 새로운 문제 제기와 함께 글을 마무리한다.", "결론에서는 주장을 재강조하고 전망을 제시할 수 있다."], answer: 3, explanation: "결론에서는 새로운 문제 제기보다는 글의 주장을 재강조하고, 앞으로의 전망이나 실천을 당부하며 글을 마무리하는 것이 일반적입니다." },
+            { question: "발표 내용을 선정할 때 고려해야 할 사항으로 적절하지 않은 것은?", options: ["발표 목적에 부합하는가?", "청중의 관심사에 맞는가?", "수집한 정보가 타당성, 신뢰성, 공정성을 갖추었는가?", "발표자의 개인적인 경험만을 중심으로 구성하는가?", "청중의 배경지식 수준을 고려하는가?"], answer: 3, explanation: "발표는 청중을 대상으로 하는 것이므로, 발표자의 개인적인 경험만을 중심으로 구성하기보다는 청중의 특성을 고려하여 내용을 선정해야 합니다." },
+            { question: "다음 중 '유추' 논증 방법에 해당하는 예시는?", options: ["모든 식물은 광합성을 한다. 장미는 식물이다. 그러므로 장미는 광합성을 한다.", "지구는 생물이 존재한다. 화성도 지구와 여러 면에서 비슷하다. 그러므로 화성에도 생물이 존재할 것이다.", "철수는 인간이다. 영희도 인간이다. 민수도 인간이다. 그러므로 모든 인간은 이성적이다.", "A가 발생하면 B가 발생한다. B가 발생했으므로 A가 발생했다.", "모든 새는 날 수 있다. 펭귄은 새다. 그러므로 펭귄은 날 수 있다."], answer: 1, explanation: "유추는 두 대상이 여러 면에서 비슷하다는 것을 근거로 하여 다른 속성도 유사할 것이라고 추론하는 방법입니다. 지구와 화성의 유사성을 바탕으로 생명체 존재 여부를 추론하는 것이 이에 해당합니다." },
+            { question: "논증하는 글쓰기에서 '쓰기 맥락'을 분석할 때 고려해야 할 요소가 아닌 것은?", options: ["글의 주제", "글을 쓰는 목적", "예상 독자의 특성", "글을 실을 매체", "글쓴이의 개인적인 감정"], answer: 4, explanation: "쓰기 맥락 분석은 글의 효과적인 전달을 위한 외부적, 객관적 요소를 고려하는 것이며, 글쓴이의 개인적인 감정은 직접적인 분석 대상이 아닙니다." },
+            { question: "발표자가 청중의 이해를 돕기 위해 사용할 수 있는 '매체 자료 활용 전략'에 해당하는 것은?", options: ["말의 속도를 조절하는 것", "손짓을 활용하여 시선을 유도하는 것", "질문을 던져 청중의 반응을 확인하는 것", "통계 자료를 이미지로 제시하는 것", "어조를 바꾸어 내용을 강조하는 것"], answer: 3, explanation: "통계 자료를 이미지로 제시하는 것은 시각적 자료를 활용하는 매체 자료 활용 전략에 해당합니다." },
+            { question: "논증하는 글에서 '주장'과 '이유', '근거'의 관계에 대한 설명으로 가장 적절한 것은?", options: ["주장은 근거를 바탕으로 하고, 이유는 주장을 뒷받침한다.", "이유는 주장을 뒷받침하고, 근거는 이유를 뒷받침한다.", "근거는 이유를 뒷받침하고, 이유는 근거를 뒷받침한다.", "주장은 이유와 근거와는 독립적으로 존재한다.", "이유와 근거는 주장의 설득력에 영향을 미치지 않는다."], answer: 1, explanation: "논증의 기본 구조는 '주장 - 이유 - 근거'로, 이유는 주장을 뒷받침하고, 근거는 이유를 뒷받침하는 역할을 합니다." },
+            { question: "다음 중 발표자가 청중과의 질의응답 시간을 확보하기 위해 사용할 수 있는 방법은?", options: ["발표 시간을 늘린다.", "중요하지 않은 내용은 생략한다.", "청중의 질문을 받지 않는다.", "발표 내용을 더 자세하게 설명한다.", "발표 중간에 휴식 시간을 자주 갖는다."], answer: 1, explanation: "발표 시간을 조절하기 위해 중요하지 않은 내용을 생략하거나 말하는 속도를 조절하는 것이 질의응답 시간 확보에 도움이 됩니다." },
+            { question: "논증하는 글에서 '결론' 단계의 역할로 적절하지 않은 것은?", options: ["주장을 재강조한다.", "앞으로의 전망을 제시한다.", "새로운 시각을 제시한다.", "독자에게 행동을 촉구한다.", "글에서 다루지 않은 새로운 문제점을 제기한다."], answer: 4, explanation: "결론은 글의 내용을 마무리하는 단계이므로, 글에서 다루지 않은 새로운 문제점을 제기하는 것은 적절하지 않습니다." },
+            { question: "다음 중 '준언어적 표현 전략'에 해당하는 것은?", options: ["시선 처리", "몸동작", "표정", "어조", "매체 자료"], answer: 3, explanation: "어조, 말의 속도, 음량 등은 언어 자체는 아니지만 언어와 함께 사용되어 의미를 보완하는 '준언어적 표현'에 해당합니다. 시선, 몸동작, 표정은 비언어적 표현이며, 매체 자료는 별도의 전략입니다." },
+            { question: "논증하는 글을 쓸 때 예상 독자를 고려해야 하는 이유로 가장 적절한 것은?", options: ["글의 분량을 정확히 맞추기 위해", "글의 문학적 가치를 높이기 위해", "독자의 배경지식과 관심사에 맞춰 글의 내용과 표현을 조절하여 설득력을 높이기 위해", "글을 실을 매체를 효율적으로 선택하기 위해", "글쓴이의 개인적인 생각을 자유롭게 표현하기 위해"], answer: 2, explanation: "예상 독자의 특성을 고려하여 글의 내용과 표현 방식을 조절하면 독자가 글을 더 쉽게 이해하고 공감하며, 결과적으로 글의 설득력을 높일 수 있습니다." },
+            { question: "다음 중 '문제-해결 구조'로 내용을 조직하는 것이 가장 적절한 발표 주제는?", options: ["한국 문학의 시대별 특징", "환경 오염의 심각성과 해결 방안", "다양한 독서 방법 소개", "세계 주요 도시의 문화유산", "인공지능 기술의 발전 과정"], answer: 1, explanation: "'환경 오염의 심각성'은 문제에 해당하고, '해결 방안'은 해결책에 해당하므로, '문제-해결 구조'로 내용을 조직하기에 가장 적절한 주제입니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            buildQuiz();
+        });
+    </script>
+</body>
+</html>

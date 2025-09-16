@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>흰 바람벽이 있어 해설 및 문제</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #374151; /* Slate color for this unit */
+            color: #1f2937;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #f1f5f9;
+            border-color: #94a3b8;
+        }
+        .quiz-option.selected {
+            background-color: #e2e8f0;
+            border-color: #374151;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-slate-800">3-3. 흰 바람벽이 있어</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: <흰 바람벽이 있어> 해설 및 문제</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-slate-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-slate-800">■ 작자:</strong> 백석</p>
+                    <p><strong class="text-slate-800">■ 갈래:</strong> 자유시, 서정시</p>
+                    <p><strong class="text-slate-800">■ 성격:</strong> 성찰적, 회고적, 의지적</p>
+                    <p><strong class="text-slate-800">■ 제재:</strong> 타향에서의 고된 삶</p>
+                    <p><strong class="text-slate-800">■ 주제:</strong> 고단한 삶을 긍정적으로 수용하는 자세</p>
+                    <p><strong class="text-slate-800">■ 특징:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>화자의 의식의 흐름에 따라 시상이 전개됨.</li>
+                        <li>화자의 내면을 감각적으로 이미지화하여 벽면에 영사하는 것처럼 그려 냄.</li>
+                        <li>같은 단어나 유사한 문장 구조를 반복하여 운율을 형성함.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 작품 해설 및 표현법 -->
+            <section class="exam-section">
+                <h4>2. 작품 해설 및 표현법</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <p>이 작품은 일제 강점기 말, 고향을 떠나 홀로 쓸쓸한 삶을 살고 있는 화자가 '흰 바람벽'을 보며 그리운 사람들과 자신의 삶을 돌아보고 긍정적으로 수용하는 과정을 담고 있습니다. 시인의 자전적 경험을 바탕으로 한 시로, 내면을 솔직하게 고백하는 방식이 돋보입니다.</p>
+                    
+                    <!-- 1연 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-slate-400">
+                        <p class="font-bold text-lg text-slate-800">1연: 현재 나의 쓸쓸한 처지</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>화자는 '좁다란 방'에서 '흰 바람벽'을 바라봅니다. '희미한 십오 촉 전등'과 '다 낡은 무명 셔츠'는 화자의 가난하고 곤궁한 처지를 시각적으로 보여주는 시어입니다.</li>
+                            <li>'외로운 생각이 헤매인다'는 구절을 통해 화자가 현재 외로움과 쓸쓸함에 잠겨 있음을 알 수 있습니다.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 2연 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-slate-400">
+                        <p class="font-bold text-lg text-slate-800">2연: '흰 바람벽'에 비치는 그리운 사람들</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>'그런데 이것은 또 어인 일인가'라는 구절을 통해 시상이 전환됩니다.</li>
+                            <li>흰 바람벽에 '내 가난한 늙은 어머니'와 '내 사랑하는 어여쁜 사람'의 모습이 투영됩니다. 이들은 모두 현재 화자 곁에 없는 그리움의 대상입니다.</li>
+                            <li>'시퍼러둥둥하니 추운 날인데'라는 색채어와 '차디찬 물'이라는 감각적 표현을 통해 어머니의 고단한 삶을 형상화합니다.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 3연 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-slate-400">
+                        <p class="font-bold text-lg text-slate-800">3연: 자신의 삶에 대한 운명론적 생각</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>'그런데 또 이즈막하여'를 통해 시상이 다시 전환됩니다.</li>
+                            <li>벽면에 '나는 이 세상에서 가난하고 외롭고 높고 쓸쓸하니 살아가도록 태어났다'는 글자들이 지나갑니다. 이는 화자가 자신의 고된 삶을 숙명론적으로 받아들이고 있음을 보여줍니다.</li>
+                            <li>'가슴은 너무도 많이 뜨거운 것으로 호젓한 것으로 사랑으로 슬픔으로 가득 찬다'는 구절을 통해 화자의 내면에는 복합적인 정서가 공존함을 알 수 있습니다.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 4연 해설 -->
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-slate-400">
+                        <p class="font-bold text-lg text-slate-800">4연: 운명의 긍정적 수용과 자기 위안</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li>'그리고 이번에는 나를 위로하는 듯이'를 통해 시상의 심화가 이루어집니다.</li>
+                            <li>'하늘이 이 세상을 낼 적에 그가 가장 귀해하고 사랑하는 것들'은 '가난하고 외롭고 높고 쓸쓸하니' 살아간다고 말합니다. 화자는 자신 또한 이러한 존재임을 깨닫고 자신의 고결한 삶을 긍정적으로 받아들입니다.</li>
+                            <li>'초생달과 바구지꽃과 짝새와 당나귀', 그리고 '프랑시스 잠과 도연명과 라이너 마리아 릴케'와 같은 존재들은 화자와 동질감을 느끼는 대상들입니다.</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-gray-100 rounded-md border-l-4 border-slate-400">
+                        <p class="font-bold text-lg text-slate-800">주요 표현법</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li><strong>시각적 심상:</strong> '시퍼러둥둥하니 추운 날', '어두운 그림자'와 같은 표현으로 화자의 정서를 감각적으로 형상화합니다.</li>
+                            <li><strong>직유법/은유법:</strong> '영사막'과 같이 화자의 내면 의식을 투영하는 '흰 바람벽'의 역할을 직유적으로 보여줍니다.</li>
+                            <li><strong>영탄법:</strong> 감탄사는 아니지만, '그런데 이것은 또 어인 일인가'와 같은 구절을 통해 화자의 내면적 변화를 강조합니다.</li>
+                            <li><strong>반복법:</strong> '내 가난한 늙은 어머니가', '내 사랑하는 어여쁜 사람이'와 같이 유사한 문장 구조를 반복하여 운율을 형성하고, 화자의 그리움과 정서를 강조합니다.</li>
+                            <li><strong>점층법:</strong> 화자가 떠올리는 대상이 그리운 어머니, 사랑하는 사람, 그리고 인류의 위대한 문인들로 점차 확장됩니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 3. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>3. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "이 시의 '흰 바람벽'이 지닌 기능으로 가장 적절한 것은?", options: ["화자의 내면을 투영하는 스크린", "고향에 대한 그리움을 해소하는 공간", "물질적 풍요를 상징하는 공간", "현실의 고통을 잊게 하는 안식처", "아름다운 자연을 감상하는 매개체"], answer: 0, explanation: "흰 바람벽은 화자의 쓸쓸하고 외로운 생각, 그리운 사람들의 모습, 그리고 자신의 삶에 대한 인식을 영상처럼 투영하는 역할을 합니다." },
+            { question: "작품의 1~6행에 나타난 화자의 정서로 가장 적절한 것은?", options: ["희망과 기대", "슬픔과 절망", "쓸쓸함과 외로움", "분노와 저항", "평안과 안빈지족"], answer: 2, explanation: "'희미한 십오 촉 전등', '다 낡은 무명 셔츠', '외로운 생각'과 같은 시어를 통해 화자가 가난하고 외로운 처지임을 알 수 있습니다." },
+            { question: "다음 중 화자의 내면 의식 변화를 유도하는 시적 장치로 적절하지 않은 것은?", options: ["'그런데 이것은 또 어인 일인가'", "'그런데 또 이즈막하여'", "'그리고 이번에는'", "'그리고 또'", "'흰 바람벽'"], answer: 4, explanation: "'그런데', '그리고'와 같은 접속 부사들은 화자의 내면 의식의 흐름과 시상의 전환을 유도하는 장치입니다. '흰 바람벽'은 화자의 내면이 투영되는 매개체 역할을 하지만, 직접적인 시상 전환 장치는 아닙니다." },
+            { question: "이 작품의 '가난하고 외롭고 높고 쓸쓸하니'에 대한 설명으로 가장 적절한 것은?", options: ["화자가 세상의 부귀영화에 대한 미련을 버리지 못하는 모습", "화자가 긍정적으로 인식하는 자신의 삶의 모습", "화자가 현실의 고통을 잊기 위해 상상한 이상적인 삶의 모습", "화자가 추구하는 삶의 가치와는 정반대되는 삶의 모습", "화자가 지배 계층에 대해 느끼는 분노의 감정"], answer: 1, explanation: "화자는 이 구절을 '하늘이 그가 가장 귀해하고 사랑하는 것들'에게 부여한 운명으로 인식하며, 자신의 고단한 삶을 긍정적으로 받아들입니다." },
+            { question: "이 작품의 문학사적 의의로 가장 적절한 것은?", options: ["우리말의 아름다움을 살려 민족의 정서를 노래했다.", "자연의 순리와 섭리를 통해 삶의 깨달음을 얻었다.", "암울한 현실을 초월하여 유토피아를 꿈꿨다.", "당대 지배 계층의 허위 의식을 비판했다.", "전통적인 시조의 형식을 계승했다."], answer: 0, explanation: "일제 강점기라는 암울한 현실 속에서도 우리말을 사용하여 시를 창작하고, 민족의 보편적인 정서(그리움, 외로움)를 담아냈다는 점에서 큰 의의를 가집니다." },
+            { question: "다음 중 '흰 바람벽에...ㄴ다'와 같은 문장 구조를 반복하여 얻는 효과로 가장 적절한 것은?", options: ["시의 주제를 요약하여 독자의 이해를 돕는다.", "서정성을 배제하고 현실을 객관적으로 묘사한다.", "운율을 형성하여 시에 리듬감을 부여한다.", "화자의 감정을 절제하여 표현한다.", "대상을 의인화하여 생동감을 높인다."], answer: 2, explanation: "유사한 문장 구조를 반복하는 것은 운율을 형성하여 시에 리듬감을 부여하는 가장 기본적인 방법입니다." },
+            { question: "이 시의 화자가 '프랑시스 잠'과 '도연명'을 떠올린 이유로 가장 적절한 것은?", options: ["그들이 가난하고 외롭지만 고결하게 살았기 때문에", "그들이 화자에게 깊은 시적 영감을 주었기 때문에", "그들과 함께 과거의 아름다운 추억을 공유했기 때문에", "그들의 문학 작품이 화자의 삶에 큰 영향을 미쳤기 때문에", "그들이 화자와 같이 타향에서 고된 삶을 살았기 때문에"], answer: 0, explanation: "화자는 '하늘이 그가 가장 귀해하고 사랑하는 것들은 모두 가난하고 외롭고 높고 쓸쓸하니 살도록 만드신 것'이라고 인식하며, 이들과 자신에게서 동질감을 느낍니다." },
+            { question: "이 시의 시상 전개 방식에 대한 설명으로 가장 적절한 것은?", options: ["과거 회상 → 현재 자각 → 미래 다짐", "시간의 흐름에 따라 순차적으로", "현재 자각 → 과거 회상 → 현재 깨달음", "문제 제기 → 해결 방안 제시", "기-승-전-결의 4단 구성"], answer: 2, explanation: "화자는 현재 자신의 쓸쓸한 처지를 자각하고(기), 과거의 그리운 사람들을 회상하며(승), 다시 현재로 돌아와 자신의 삶을 숙명론적으로 인식하고(전), 운명을 긍정적으로 수용하며 위안을 얻는(결) 흐름을 보입니다." },
+            { question: "다음 중 <흰 바람벽이 있어>에 나타난 '주제 의식'을 가장 잘 표현한 한자 성어는?", options: ["사필귀정(事必歸正)", "인생무상(人生無常)", "안빈낙도(安貧樂道)", "전전반측(輾轉反側)", "운명론적 세계관"], answer: 4, explanation: "화자가 자신의 고된 삶을 '하늘이 정한 운명'으로 받아들이는 태도는 '운명론적 세계관'과 가장 관련 깊습니다." },
+            { question: "이 시에서 '시퍼러둥둥하니'와 같은 색채어를 사용한 효과로 가장 적절한 것은?", options: ["어머니의 건강함을 강조하기 위해", "어머니에 대한 그리움을 드러내기 위해", "추운 날의 차가운 이미지를 강조하기 위해", "화자의 밝은 미래를 암시하기 위해", "어머니의 비극적인 삶을 사실적으로 묘사하기 위해"], answer: 2, explanation: "'시퍼러둥둥하니'는 파랗고 퉁퉁 부은 것처럼 추운 날을 시각적으로 강조하여 어머니의 고단한 삶을 더욱 절실하게 느끼게 합니다." },
+            { question: "다음 중 <흰 바람벽이 있어>와 <별 헤는 밤>의 공통점으로 가장 적절한 것은?", options: ["둘 다 화자의 고향 상실감을 주제로 한다.", "둘 다 산문적 문체를 사용하고 있다.", "둘 다 일제 강점기라는 시대상을 배경으로 한다.", "둘 다 특정 사물을 통해 과거의 추억을 떠올리고 있다.", "둘 다 삶에 대한 성찰적 태도를 드러낸다."], answer: 4, explanation: "두 작품 모두 일제 강점기라는 암울한 현실 속에서 고향과 그리운 사람들을 떠올리며 자신의 삶을 성찰하는 태도를 보인다는 공통점을 가집니다." },
+            { question: "이 시의 화자가 자신의 삶을 '가난하고 외롭고 높고 쓸쓸하니'라고 표현한 이유로 가장 적절한 것은?", options: ["물질적으로 풍요롭지 못한 삶의 현실을 비판하기 위해", "주변 사람들과의 관계가 단절된 자신의 처지를 드러내기 위해", "속세의 가치와 타협하지 않고 고결하게 살고자 하는 자신의 태도를 표현하기 위해", "고향을 떠나 홀로 지내는 자신의 처지를 비관적으로 묘사하기 위해", "현실의 어려움 때문에 정신적인 가치를 포기한 자신의 모습을 반성하기 위해"], answer: 2, explanation: "'높고'는 속세와 타협하지 않고 고결하게 살고자 하는 화자의 태도를 나타내는 시어로, 가난하고 외롭고 쓸쓸하지만 정신적으로는 높은 가치를 추구하는 화자의 모습을 보여줍니다." },
+            { question: "이 작품의 '결' 부분에서 화자가 자신의 운명을 긍정적으로 수용하게 된 이유로 가장 적절한 것은?", options: ["가족의 사랑과 따뜻한 위로 덕분에", "고향으로 돌아갈 수 있는 희망이 생겼기 때문에", "자신과 같이 고결한 삶을 살았던 위대한 문인들을 떠올렸기 때문에", "삶의 고통과 어려움이 사라질 것이라는 믿음 때문에", "자신의 가난하고 외로운 처지를 비관적으로 받아들이지 않게 되었기 때문에"], answer: 2, explanation: "화자는 자신과 같이 고결한 삶을 살았던 문인들(프랑시스 잠, 도연명, 라이너 마리아 릴케)과 동질감을 느끼며 자신의 운명을 긍정적으로 수용하게 됩니다." },
+            { question: "다음 중 이 작품에 나타난 표현법 중 '점층법'에 해당하는 것은?", options: ["'내 가난한 늙은 어머니가', '내 사랑하는 어여쁜 사람이'와 같은 문장 구조 반복", "'희미한 십오 촉 전등'과 같은 시각적 이미지", "화자가 떠올리는 대상이 그리운 어머니 → 사랑하는 사람 → 위대한 문인들로 확장되는 것", "'가난하고 외롭고 높고 쓸쓸하니'와 같은 시어의 나열", "'그리고 이번에는 나를 위로하는 듯이'와 같은 시상 전환"], answer: 2, explanation: "점층법은 화자가 떠올리는 대상의 범위가 '그리운 어머니 → 사랑하는 사람 → 위대한 문인들'로 점차 확장되는 것을 의미합니다." },
+            { question: "'아아'와 같은 영탄법은 사용되지 않았지만, 화자의 정서가 강조되는 부분은?", options: ["'오늘 저녁 이 좁다란 방의 흰 바람벽에'", "'어쩐지 쓸쓸한 것만이 오고 간다'", "'그런데 이것은 또 어인 일인가'", "'내 사랑하는 어여쁜 사람이'", "'나는 이 세상에서 가난하고 외롭고 높고 쓸쓸하니 살아가도록 태어났다'"], answer: 2, explanation: "'그런데 이것은 또 어인 일인가'는 화자가 현재의 쓸쓸함에서 벗어나 그리운 대상을 떠올리며 내면적 변화를 겪는 부분으로, 정서가 강조됩니다." },
+            { question: "이 시의 화자가 지향하는 삶의 태도로 가장 적절한 것은?", options: ["고통스러운 현실을 외면하고 과거의 추억에만 머물러 있는 삶", "세상과의 단절을 통해 자신만의 정신적 세계를 구축하는 삶", "가난하고 외롭지만, 정신적으로는 고결함을 잃지 않는 삶", "사랑하는 사람과의 재회를 통해 삶의 의미를 찾는 삶", "현실의 고난을 극복하고 물질적 풍요를 이루는 삶"], answer: 2, explanation: "화자는 '가난하고 외롭고 쓸쓸하지만' 동시에 '높은' 삶을 살고자 하는 의지를 드러내며, 현실의 고통 속에서도 정신적인 고결함을 잃지 않는 삶의 태도를 지향합니다." },
+            { question: "이 시의 화자가 자신의 삶을 '사랑과 슬픔으로 가득 찬다'고 표현한 이유로 가장 적절한 것은?", options: ["그리운 사람들을 떠올리며 사랑과 슬픔을 동시에 느끼기 때문에", "사랑하는 사람과의 이별로 슬픔에 잠겨있기 때문에", "가난한 현실 때문에 사랑을 포기해야 했기 때문에", "사랑하는 사람의 죽음으로 인해 슬픔에 빠졌기 때문에", "사랑과 슬픔이라는 감정에서 벗어나고 싶기 때문에"], answer: 0, explanation: "화자는 '흰 바람벽'에 비치는 그리운 어머니와 사랑하는 사람의 모습을 떠올리며 그들에 대한 그리움과 사랑, 그리고 함께할 수 없는 슬픔을 동시에 느낍니다." },
+            { question: "이 시의 배경인 '1940년대'에 대한 설명으로 가장 적절한 것은?", options: ["경제적으로 매우 풍요롭고 안정된 시기였다.", "일제에 저항하여 독립을 쟁취하는 시기였다.", "우리말과 우리 문학의 말살 정책이 시행되던 암흑기였다.", "백석과 윤동주가 문단에 등단하며 활발하게 활동하던 시기였다.", "민족주의 문학이 쇠퇴하고 순수 문학이 발달하던 시기였다."], answer: 2, explanation: "1940년대는 일제 강점기 말로, 일제는 조선어 말살 정책을 펼치며 우리말과 우리 문학을 탄압했습니다. 이로 인해 백석은 더 이상 시를 발표하지 못했습니다." },
+            { question: "이 시의 시적 화자와 <별 헤는 밤>의 시적 화자의 공통점으로 가장 적절한 것은?", options: ["둘 다 고향을 떠나 타향에서 살고 있다.", "둘 다 삶에 대한 비관적 태도를 보이고 있다.", "둘 다 어머니에 대한 그리움을 표현하고 있다.", "둘 다 가난하고 외로운 삶을 살고 있다.", "둘 다 삶에 대한 성찰적 태도를 드러내고 있다."], answer: 4, explanation: "두 작품 모두 일제 강점기라는 암울한 현실 속에서 자신의 삶을 돌아보고 성찰하는 태도를 보인다는 공통점을 가집니다. '둘 다 어머니에 대한 그리움을 표현하고 있다'도 맞는 설명이지만, 더 포괄적인 의미는 '삶에 대한 성찰적 태도'입니다." },
+            { question: "이 시의 제목 '흰 바람벽이 있어'가 시사하는 바가 아닌 것은?", options: ["화자의 내면을 투영하는 공간", "고향과 단절된 화자의 외로운 처지", "화자에게 그리움을 환기하는 매개체", "삶의 고난을 극복하게 하는 긍정적 힘", "일제의 억압에 굴복한 화자의 무력함"], answer: 4, explanation: "이 시의 화자는 일제의 억압에 굴복하지 않고, 우리말을 사용해 시를 창작하며 자신의 신념을 지키려 했습니다. 따라서 '일제의 억압에 굴복한 화자의 무력함'은 시사하는 바가 아닙니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            buildQuiz();
+        });
+    </script>
+</body>
+</html>

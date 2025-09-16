@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-1. 우리말 바로 쓰기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .exam-section h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ef4444; /* Red color for this unit */
+            color: #b91c1c;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background-color: #ffffff;
+            transition: background-color 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+        .quiz-option:hover {
+            background-color: #fee2e2;
+            border-color: #f87171;
+        }
+        .quiz-option.selected {
+            background-color: #fecaca;
+            border-color: #ef4444;
+            font-weight: 600;
+        }
+        .quiz-result {
+            display: none;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .quiz-result.correct {
+            background-color: #ecfdf5;
+            border: 1px solid #34d399;
+        }
+        .quiz-result.incorrect {
+            background-color: #fff1f2;
+            border: 1px solid #f87171;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
+        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <h2 class="text-3xl font-bold mb-2 text-center text-red-800">2-1. 우리말 바로 쓰기</h2>
+        <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: 한글 맞춤법 원리</h3>
+        
+        <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md space-y-10">
+            <!-- 1. 제재 개관 -->
+            <section class="exam-section">
+                <h4>1. 제재 개관</h4>
+                <div class="p-4 bg-red-50 rounded-lg text-gray-700 leading-relaxed space-y-2">
+                    <p><strong class="text-red-800">■ 학습 목표:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>단어의 표기, 띄어쓰기와 관련된 한글 맞춤법의 원리를 탐구할 수 있다.</li>
+                        <li>한글 맞춤법 원리를 적용하여 국어생활을 성찰하고 문제를 해결할 수 있다.</li>
+                    </ul>
+                    <p><strong class="text-red-800">■ 주요 내용:</strong></p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>한글 맞춤법의 기본 원리 (소리대로 적기 vs. 어법에 맞도록 적기)</li>
+                        <li>된소리 나는 단어의 표기 규정 (제5항)</li>
+                        <li>용언의 어간과 어미의 표기 규정 (제15항)</li>
+                        <li>접미사가 붙어서 된 말의 표기 규정 (제19항)</li>
+                        <li>조사, 의존 명사, 단위를 나타내는 명사의 띄어쓰기 규정 (제41항, 제42항, 제43항)</li>
+                        <li>사이시옷 표기 규정 (제30항)</li>
+                        <li>올바른 국어생활 성찰 및 캠페인</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. 주요 내용 요약 -->
+            <section class="exam-section">
+                <h4>2. 주요 내용 요약</h4>
+                <div class="space-y-4 text-sm sm:text-base">
+                    <p>이 소단원은 우리말을 한글로 표기할 때 지켜야 할 공식적인 기준인 '한글 맞춤법'의 기본 원리와 세부 조항들을 탐구합니다. 한글 맞춤법은 표준어를 '소리대로 적되, 어법에 맞도록 함을 원칙'으로 하여 의사소통의 원활함을 추구합니다. 특히, 된소리 표기, 용언의 어간과 어미 표기, 접미사가 붙어 된 말의 표기 등 단어의 형태를 밝혀 적는 표의주의 원칙과 소리 나는 대로 적는 표음주의 원칙이 적용되는 다양한 사례를 학습합니다. 또한, 단어의 자립성을 기준으로 하는 띄어쓰기 원칙과 조사의 특수성, 의존 명사 및 단위 명사의 띄어쓰기, 그리고 사이시옷 표기 원리까지 다룹니다. 마지막으로, 올바른 표기 생활의 중요성을 인식하고 국어생활을 성찰하며 문제 해결 능력을 기르는 활동을 통해 실제 언어생활에 맞춤법 원리를 적용하는 방법을 제시합니다.</p>
+                </div>
+            </section>
+
+            <!-- 3. 핵심 개념 및 표기/띄어쓰기 원리 -->
+            <section class="exam-section">
+                <h4>3. 핵심 개념 및 표기/띄어쓰기 원리</h4>
+                <div class="space-y-6 text-sm sm:text-base">
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">한글 맞춤법 기본 원리 (총칙 제1항)</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>표준어를 소리대로 적기 (표음주의):</strong> 표준어를 발음에 따라 적는 것을 의미합니다. (예: 거위, 바다)</li>
+                            <li><strong>어법에 맞도록 적기 (표의주의):</strong> 뜻을 파악하기 쉽도록 각 형태소의 원형을 밝혀 적는 것을 의미합니다. (예: 넓고, 찾으래)</li>
+                            <li><strong>원칙 적용:</strong> 소리대로만 적으면 뜻 파악이 어려워 가독성이 떨어지므로, 어법에 맞도록 원형을 밝혀 적어 의미 파악을 돕습니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">된소리 나는 단어의 표기 (제5항)</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>뚜렷한 까닭 없이 된소리:</strong> 한 단어 안에서 뚜렷한 까닭 없이 나는 된소리는 다음 음절의 첫소리를 된소리로 적습니다.
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>두 모음 사이: 어깨, 으뜸, 아끼다</li>
+                                    <li>'ㄴ, ㄹ, ㅁ, ㅇ' 받침 뒤: 산뜻하다, 잔뜩, 살짝</li>
+                                </ul>
+                            </li>
+                            <li><strong>'ㄱ, ㅂ' 받침 뒤 된소리:</strong> 'ㄱ, ㅂ' 받침 뒤에서 나는 된소리는 같은 음절이나 비슷한 음절이 겹쳐 나는 경우가 아니면 된소리로 적지 아니합니다. (예: 국수, 딱지, 갑자기, 몹시)</li>
+                            <li><strong>음절 반복:</strong> 음절이 반복되어 나는 된소리는 소리 나는 대로 적습니다. (예: 딱딱, 쓱싹, 짭짤하다)</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">어간과 어미의 표기 (제15항)</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>어간과 어미 구별:</strong> 용언의 어간과 어미는 구별하여 적는 것이 원칙입니다. (예: 먹다, 먹고, 먹어)</li>
+                            <li><strong>두 용언이 어울릴 때 (붙임 1):</strong>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>앞말의 본뜻 유지: 원형을 밝혀 적습니다. (예: 늘어나다, 떨어지다, 들어가다)</li>
+                                    <li>앞말의 본뜻에서 멀어짐: 소리 나는 대로 적습니다. (예: 드러나다, 사라지다, 쓰러지다)</li>
+                                </ul>
+                            </li>
+                            <li><strong>명사형 어미 '-음/-ㅁ':</strong> 어간이 모음이나 'ㄹ' 받침으로 끝나면 '-ㅁ', 그 외 받침으로 끝나면 '-음'을 붙여 명사형을 만듭니다. (예: 설렘, 많음, 찾음)</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">접미사가 붙어서 된 말의 표기 (제19항)</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>원형 밝혀 적는 경우:</strong> 어간에 '-이'나 '-음/-ㅁ'이 붙어 명사로 된 것과 '-이'나 '-히'가 붙어 부사로 된 것은 그 어간의 원형을 밝혀 적습니다. (예: 길이, 깊이, 높이, 먹이, 같이, 굳이, 밝히, 익히)</li>
+                            <li><strong>소리대로 적는 경우 (붙임):</strong> 어간에 '-이'나 '-음' 이외의 모음으로 시작된 접미사가 붙어 다른 품사로 바뀐 것은 어간의 원형을 밝혀 적지 아니합니다. (예: 너머, 마개, 쓰레기, 너무, 비로소, 차마, 부터, 조차)</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">조사, 의존 명사, 단위를 나타내는 명사의 띄어쓰기</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>기본 원칙 (총칙 제2항):</strong> 문장의 각 단어는 띄어 씀을 원칙으로 합니다.</li>
+                            <li><strong>조사 (제41항):</strong> 조사는 그 앞말에 붙여 씁니다. (예: 꽃이, 꽃마저, 꽃으로만, 웃고만)</li>
+                            <li><strong>의존 명사 (제42항):</strong> 의존 명사는 띄어 씁니다. (예: 아는 것이, 먹을 만큼, 떠난 지가)</li>
+                            <li><strong>단위를 나타내는 명사 (제43항):</strong> 단위를 나타내는 명사는 띄어 씁니다.
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>원칙: 한 개, 차 한 대</li>
+                                    <li>허용: 순서를 나타내는 경우나 숫자와 어울릴 때 붙여 쓸 수 있습니다. (예: 제이차/제2차, 열개/10개)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">사이시옷 표기 (제30항)</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>표기 조건:</strong> 다음 세 가지 조건을 모두 충족할 때 사이시옷을 적습니다.
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>두 명사가 결합한 합성어에서 하나 이상이 고유어일 것.</li>
+                                    <li>앞 단어가 받침 없이 모음으로 끝날 것.</li>
+                                    <li>뒷말의 첫소리가 된소리가 나거나, 'ㄴ, ㅁ' 앞에서 'ㄴ' 소리가 덧나거나, 모음 앞에서 'LL' 소리가 덧날 것.</li>
+                                </ul>
+                                (예: 최댓값, 혼잣말, 깻잎)
+                            </li>
+                            <li><strong>예외:</strong> 고유어와 외래어가 결합한 경우 (예: 핑크빛, 피자집), 두 음절 한자어 중 6개 (곳간, 셋방, 숫자, 찻간, 툇간, 횟수)를 제외한 한자어에는 사이시옷을 적지 않습니다.</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-md border-l-4 border-red-500">
+                        <p class="font-bold text-lg text-red-800">국어생활 성찰 및 올바른 표기 생활</p>
+                        <ul class="mt-2 ml-4 list-disc list-outside space-y-2 text-gray-700">
+                            <li><strong>성찰의 중요성:</strong> 자신이 쓴 글에서 맞춤법 오류를 찾아 고치면서 언어생활을 반성하고 개선합니다.</li>
+                            <li><strong>부정적 영향:</strong> 일부러 맞춤법을 틀리게 쓰는 현상은 국어 학습 방해, 의사소통 문제 유발, 언어 공동체 통합 약화 등의 부정적 영향을 끼칠 수 있습니다.</li>
+                            <li><strong>올바른 태도:</strong> 한글 맞춤법 기본 원리 익히기, 사전 활용 습관 가지기, 국어를 사랑하고 소중히 생각하는 마음 가지기.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
+                <div id="quiz-container" class="space-y-8">
+                    <!-- 문제가 여기에 동적으로 추가됩니다. -->
+                </div>
+                <button id="grade-button" class="mt-8 w-full btn-primary py-3 rounded-lg text-lg font-bold" onclick="gradeQuiz()">채점하기</button>
+                <div id="quiz-total-result" class="hidden mt-6 p-4 text-center rounded-lg"></div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { question: "한글 맞춤법 제1항의 '표준어를 소리대로 적되, 어법에 맞도록 함을 원칙으로 한다'는 규정에 대한 설명으로 적절하지 않은 것은?", options: ["'소리대로 적기'는 표음주의를 바탕으로 한다.", "'어법에 맞도록 적기'는 표의주의를 바탕으로 한다.", "'소리대로 적기'는 발음에 따라 적는 것을 의미한다.", "'어법에 맞도록 적기'는 형태소의 원형을 밝혀 적는 것을 의미한다.", "두 원칙 중 '소리대로 적기'가 '어법에 맞도록 적기'보다 항상 우선한다."], answer: 4, explanation: "두 원칙은 상호 보완적이며, 항상 어느 하나가 우선하는 것은 아닙니다. 의미 파악의 용이성 등을 고려하여 적용됩니다." },
+            { question: "다음 중 한 단어 안에서 뚜렷한 까닭 없이 된소리가 나는 경우에 해당하여 된소리로 적는 것이 옳은 것은?", options: ["국수", "딱지", "몹시", "어깨", "갑자기"], answer: 3, explanation: "어깨는 두 모음 사이에서 뚜렷한 까닭 없이 된소리가 나므로 '어깨'로 적는 것이 옳습니다. 국수, 딱지, 몹시, 갑자기는 'ㄱ, ㅂ' 받침 뒤에서 나는 된소리로, 된소리로 적지 않습니다." },
+            { question: "한글 맞춤법 제15항에 따라 용언의 어간과 어미를 구별하여 적는 것이 옳은 것은?", options: ["쓰러지다", "사라지다", "드러나다", "늘어나다", "업어지다"], answer: 3, explanation: "늘어나다는 '늘다'의 본뜻이 유지되므로 원형을 밝혀 적습니다. 쓰러지다, 사라지다, 드러나다는 앞말의 본뜻에서 멀어져 소리 나는 대로 적습니다." },
+            { question: "다음 중 한글 맞춤법 제19항에 따라 어간의 원형을 밝혀 적는 것이 옳은 것은?", options: ["마개", "너머", "쓰레기", "길이", "차마"], answer: 3, explanation: "길이는 어간 '길-'에 명사를 만드는 접미사 '-이'가 붙어 원형을 밝혀 적습니다. 마개, 너머, 쓰레기, 차마는 어간에 '-이'나 '-음' 이외의 모음으로 시작된 접미사가 붙어 다른 품사로 바뀐 경우이므로 원형을 밝혀 적지 않습니다." },
+            { question: "한글 맞춤법 제41항에 따라 조사를 앞말에 붙여 쓰는 것이 옳은 것은?", options: ["꽃 이", "꽃 마저", "꽃 으로만", "웃고 만", "위의 모든 것"], answer: 4, explanation: "조사는 단어이지만 홀로 쓰일 수 없으므로 앞말에 붙여 쓰는 것이 원칙입니다. 제시된 모든 예시는 조사가 앞말에 붙어 쓰인 경우입니다." },
+            { question: "다음 중 의존 명사의 띄어쓰기가 올바르지 않은 것은?", options: ["아는 것이 힘이다.", "먹을 만큼 담아라.", "버스가 떠난지가 오래다.", "네가 뜻한 바를 알겠다.", "할 수 있다."], answer: 2, explanation: "떠난 지가는 '지'가 의존 명사이므로 '떠난 지가'로 띄어 쓰는 것이 옳습니다." },
+            { question: "사이시옷 표기 조건에 대한 설명으로 적절하지 않은 것은?", options: ["두 명사가 결합한 합성어여야 한다.", "결합한 두 명사 중 하나 이상이 고유어여야 한다.", "앞 단어가 받침 없이 모음으로 끝나야 한다.", "뒷말의 첫소리가 된소리가 나야만 한다.", "뒷말의 첫소리 'ㄴ, ㅁ' 앞에서 'ㄴ' 소리가 덧나는 경우에도 사이시옷을 적을 수 있다."], answer: 3, explanation: "사이시옷 표기 조건 중 세 번째는 '뒷말의 첫소리가 된소리가 나거나, 'ㄴ, ㅁ' 앞에서 'ㄴ' 소리가 덧나거나, 모음 앞에서 'LL' 소리가 덧날 것'이므로, 된소리가 나야만 하는 것은 아닙니다." },
+            { question: "다음 중 'ㄱ, ㅂ' 받침 뒤에서 된소리로 적지 않는 경우에 해당하는 것은?", options: ["딱지", "산뜻하다", "살짝", "움찔", "엉뚱하다"], answer: 0, explanation: "딱지는 'ㄱ' 받침 뒤에서 된소리가 나지만, 된소리로 적지 않습니다. (딱지[딱찌])" },
+            { question: "용언의 어간에 명사형 어미 '-음/-ㅁ'이 붙은 단어의 표기가 올바른 것은?", options: ["설레임", "만듬", "웃음", "아름다움", "느낌"], answer: 2, explanation: "웃음은 '웃-'에 명사형 어미 '-음'이 붙어 올바르게 표기되었습니다. 설레임은 '설렘'으로, 만듬은 '만듦'으로, 아름다움은 '아름다움'으로, 느낌은 '느낌'으로 표기해야 합니다." },
+            { question: "다음 중 단위를 나타내는 명사의 띄어쓰기가 허용되는 경우가 아닌 것은?", options: ["제이차", "10개", "두시 삼십분", "오십팔회", "한 사람"], answer: 4, explanation: "한 사람은 단위를 나타내는 명사이지만, 순서나 숫자가 아닌 일반적인 경우이므로 띄어 쓰는 것이 원칙이며 붙여 쓰는 것이 허용되지 않습니다." },
+            { question: "다음 중 '일부러 맞춤법을 틀리게 쓰는 현상'이 국어생활에 끼칠 수 있는 부정적 영향으로 가장 적절하지 않은 것은?", options: ["국어를 배우는 외국인에게 혼란을 줄 수 있다.", "의사소통에 문제가 발생할 수 있다.", "국어 학습에 대한 흥미를 유발할 수 있다.", "언어 공동체 구성원 간의 통합이 약화될 수 있다.", "잘못된 맞춤법이 학습될 수 있다."], answer: 2, explanation: "일부러 맞춤법을 틀리게 쓰는 것은 국어 학습에 대한 흥미를 유발하기보다는 잘못된 언어 습관을 형성하고 혼란을 줄 수 있습니다." },
+            { question: "한글 맞춤법 제19항 [붙임]에 따라 어간의 원형을 밝혀 적지 않는 것이 옳은 것은?", options: ["굳이", "같이", "높이", "마개", "밝히"], answer: 3, explanation: "마개는 '막-'에 '-애'가 붙어 명사로 바뀐 경우로, 원형을 밝혀 적지 않습니다. 굳이, 같이, 높이, 밝히는 원형을 밝혀 적는 경우입니다." },
+            { question: "다음 중 조사가 둘 이상 연속될 때의 띄어쓰기가 올바른 것은?", options: ["꽃으로 만", "너 까지도", "오늘 만이라도", "웃고 만", "위의 모든 것"], answer: 2, explanation: "오늘만이라도는 조사 '만'과 '이라도'가 연속되었지만, 모두 앞말에 붙여 쓰는 것이 원칙입니다." },
+            { question: "다음 중 사이시옷을 적지 않는 예외적인 경우에 해당하는 것은?", options: ["최댓값", "혼잣말", "깻잎", "곳간", "나뭇잎"], answer: 3, explanation: "곳간은 두 음절 한자어 중 사이시옷을 적는 예외 6개 단어에 해당합니다. 나머지 단어들은 일반적인 사이시옷 표기 원칙에 따라 사이시옷을 적습니다." },
+            { question: "올바른 표기 생활을 위한 태도로 적절하지 않은 것은?", options: ["한글 맞춤법 기본 원리를 익힌다.", "표기나 띄어쓰기가 헷갈릴 때 국어사전을 찾아본다.", "국어를 사랑하고 소중하게 생각하는 마음을 가진다.", "유행을 따르기 위해 일부러 맞춤법을 틀리게 사용한다.", "자신이 쓴 글에서 맞춤법 오류를 찾아 고쳐 본다."], answer: 3, explanation: "유행을 따르기 위해 일부러 맞춤법을 틀리게 사용하는 것은 올바른 표기 생활에 반하는 태도입니다." },
+            { question: "다음 중 '소리대로 적기' 원칙이 적용된 단어는?", options: ["넓고", "찾으래", "구름", "젊다", "읽고"], answer: 2, explanation: "구름은 발음 그대로 적는 '소리대로 적기' 원칙이 적용된 단어입니다. 넓고, 찾으래, 젊다, 읽고는 형태소의 원형을 밝혀 적는 '어법에 맞도록 적기' 원칙이 적용됩니다." },
+            { question: "다음 중 용언의 어간과 어미의 결합에서 앞말의 본뜻이 유지되어 원형을 밝혀 적는 것이 옳은 것은?", options: ["쓰러지다", "사라지다", "드러나다", "늘어나다", "엎어지다"], answer: 3, explanation: "늘어나다는 '늘다'의 본뜻이 유지되므로 원형을 밝혀 적습니다. 쓰러지다, 사라지다, 드러나다, 엎어지다는 앞말의 본뜻에서 멀어져 소리 나는 대로 적습니다." },
+            { question: "다음 중 한글 맞춤법 제19항 [붙임]에 따라 소리 나는 대로 적는 것이 옳은 것은?", options: ["굳이", "같이", "높이", "너무", "밝히"], answer: 3, explanation: "너무는 어간에 '-이'나 '-음' 이외의 모음으로 시작된 접미사가 붙어 부사로 바뀐 경우이므로 소리 나는 대로 적습니다. 굳이, 같이, 높이, 밝히는 원형을 밝혀 적는 경우입니다." },
+            { question: "다음 문장에서 띄어쓰기가 올바른 것은?", options: ["책을 읽을 만큼 읽었다.", "그녀는 웃고만 있을뿐이다.", "버스가 떠난 지 오래다.", "나는 너 밖에 없다.", "제이차 세계대전"], answer: 0, explanation: "책을 읽을 만큼 읽었다는 '만큼'이 의존 명사이므로 띄어 쓰는 것이 올바릅니다. '웃고만 있을 뿐이다', '떠난 지 오래다', '너밖에 없다', '제이차 세계대전'이 올바른 띄어쓰기입니다." },
+            { question: "다음 중 사이시옷을 받쳐 적는 것이 옳은 것은?", options: ["피자집", "곳간", "머리말", "인사말", "나뭇잎"], answer: 4, explanation: "나뭇잎은 '나무'와 '잎'의 합성어로, 앞 단어가 모음으로 끝나고 뒷말의 첫소리 모음 앞에서 'ㄴㄴ' 소리가 덧나므로 사이시옷을 받쳐 적습니다. 피자집은 고유어+외래어 조합으로 사이시옷을 적지 않고, 곳간은 예외적으로 사이시옷을 적는 한자어이며, 머리말과 인사말은 사이시옷을 적지 않습니다." }
+        ];
+
+        let userAnswers = {};
+
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz-container');
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            let quizHTML = '';
+            quizData.forEach((item, index) => {
+                quizHTML += `<div class="quiz-item" id="q${index}">`;
+                quizHTML += `<p class="font-semibold mb-3">${index + 1}. ${item.question}</p>`;
+                quizHTML += `<div class="options-container space-y-2">`;
+                item.options.forEach((option, optionIndex) => {
+                    quizHTML += `<button class="quiz-option" onclick="selectAnswer(${index}, ${optionIndex})">${optionChars[optionIndex]} ${option}</button>`;
+                });
+                quizHTML += `</div>`;
+                quizHTML += `<div class="quiz-result" id="result-${index}"></div>`;
+                quizHTML += `</div>`;
+            });
+            quizContainer.innerHTML = quizHTML;
+        }
+
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const optionChars = ['①', '②', '③', '④', '⑤'];
+            quizData.forEach((item, index) => {
+                const resultContainer = document.getElementById(`result-${index}`);
+                const isCorrect = userAnswers[index] === item.answer;
+                
+                let resultHTML = '';
+                if (userAnswers[index] === undefined) {
+                    resultHTML = `<p class="font-bold text-yellow-600">답을 선택하지 않았습니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                } else if (isCorrect) {
+                    score++;
+                    resultHTML = `<p class="font-bold text-green-600">정답!</p>`;
+                    resultContainer.className = 'quiz-result correct';
+                } else {
+                    resultHTML = `<p class="font-bold text-red-600">오답!</p><p class="mt-1">정답은 ${optionChars[item.answer]} 입니다.</p>`;
+                    resultContainer.className = 'quiz-result incorrect';
+                }
+                
+                resultHTML += `<hr class="my-2"><p class="font-semibold">해설</p><p class="text-gray-700 text-sm">${item.explanation}</p>`;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = 'block';
+            });
+
+            const totalScore = (score / quizData.length) * 100;
+            const totalResultContainer = document.getElementById('quiz-total-result');
+            totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
+            totalResultContainer.classList.remove('hidden');
+            totalResultContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            buildQuiz();
+        });
+    </script>
+</body>
+</html>
