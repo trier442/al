@@ -2,13 +2,14 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>제망매가 해설 및 문제</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            touch-action: manipulation; /* 더블 탭 확대 방지 */
         }
         .btn-primary {
             background-color: #3b82f6;
@@ -68,6 +69,67 @@
             background-color: #fff1f2;
             border: 1px solid #f87171;
         }
+        /* --- Penguin Game Styles --- */
+        .game-container {
+            width: 100%;
+            height: 600px; /* Adjusted for embedding */
+            background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 70%, #FFFFFF 100%);
+            overflow: hidden;
+            position: relative;
+            border-radius: 1rem;
+            margin-top: 1rem;
+        }
+        .game-container canvas {
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+        }
+        .ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        #touch-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 5px;
+            opacity: 0.6;
+        }
+        .touch-btn {
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        #touchUp { grid-area: 1 / 2 / 2 / 3; }
+        #touchLeft { grid-area: 2 / 1 / 3 / 2; }
+        #touchRight { grid-area: 2 / 3 / 3 / 4; }
+        #touchDown { grid-area: 3 / 2 / 4 / 3; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -134,10 +196,65 @@
                     </div>
                 </div>
             </section>
-
-            <!-- 3. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            
+            <!-- 3. 게임으로 내용 이해하기 -->
             <section class="exam-section">
-                <h4>3. 실전 대비 내용 확인 문제</h4>
+                <h4>3. 게임으로 내용 이해하기</h4>
+                <div id="gameContainer" class="game-container shadow-2xl">
+                    <!-- 게임 UI -->
+                    <div id="ui" class="absolute top-0 left-0 w-full p-4 text-white z-10">
+                        <div class="flex justify-between items-center">
+                            <h1 class="text-xl font-bold">제망매가 퀴즈</h1>
+                            <div class="text-lg font-bold bg-white/30 px-4 py-1 rounded-full">점수: <span id="score">0</span></div>
+                        </div>
+                        <div id="questionBox" class="mt-4 text-center bg-black/30 p-4 rounded-lg text-lg min-h-[80px] flex items-center justify-center">
+                            <p id="questionText"></p>
+                        </div>
+                    </div>
+
+                    <!-- 게임 캔버스 -->
+                    <canvas id="gameCanvas"></canvas>
+
+                    <!-- 게임 오버레이 (시작, 종료 화면) -->
+                    <div id="startScreen" class="ui-overlay z-20 glassmorphism mx-4">
+                        <div class="text-center p-8">
+                            <svg viewBox="0 0 200 200" class="w-24 h-24 mx-auto mb-4">
+                                <path fill="#333" d="M100,20 C60,20 30,50 30,90 C30,130 60,180 100,180 C140,180 170,130 170,90 C170,50 140,20 100,20 Z"></path>
+                                <path fill="#FFF" d="M100,60 C70,60 50,80 50,110 C50,140 70,160 100,160 C130,160 150,140 150,110 C150,80 130,60 100,60 Z"></path>
+                                <circle fill="#333" cx="80" cy="95" r="8"></circle>
+                                <circle fill="#333" cx="120" cy="95" r="8"></circle>
+                                <path fill="#FFA500" d="M100,110 L90,125 L110,125 Z"></path>
+                                <path fill="#FFA500" d="M40,140 a 20,20 0 0,0 0,10 a 30,20 0 0,0 20,-10 Z" transform="rotate(-20, 40, 140)"></path>
+                                <path fill="#FFA500" d="M160,140 a 20,20 0 0,1 0,10 a 30,20 0 0,1 -20,-10 Z" transform="rotate(20, 160, 140)"></path>
+                            </svg>
+                            <h2 class="text-4xl font-bold text-gray-800 mb-2">제망매가 펭귄 퀴즈</h2>
+                            <p class="text-gray-700 mb-6">펭귄을 움직여 정답 표지판으로 달려가세요!<br>(키보드 ↑↓←→ 또는 화면 터치)</p>
+                            <button id="startButton" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-transform transform hover:scale-105">게임 시작</button>
+                        </div>
+                    </div>
+
+                    <div id="gameOverScreen" class="ui-overlay z-20 glassmorphism mx-4 hidden">
+                        <div class="text-center p-8">
+                            <h2 class="text-4xl font-bold text-gray-800 mb-2">게임 종료!</h2>
+                            <p class="text-2xl text-gray-700 mb-4">최종 점수: <span id="finalScore" class="font-bold"></span>점</p>
+                            <p id="gameOverMessage" class="text-gray-600 mb-6">참 잘했어요!</p>
+                            <button id="restartButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-xl transition-transform transform hover:scale-105">다시하기</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 터치 컨트롤 -->
+                    <div id="touch-controls" class="hidden">
+                        <div id="touchUp" class="touch-btn">▲</div>
+                        <div id="touchLeft" class="touch-btn">◀</div>
+                        <div id="touchRight" class="touch-btn">▶</div>
+                        <div id="touchDown" class="touch-btn">▼</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
+            <section class="exam-section">
+                <h4>4. 실전 대비 내용 확인 문제</h4>
                 <div id="quiz-container" class="space-y-8">
                     <!-- 문제가 여기에 동적으로 추가됩니다. -->
                 </div>
@@ -148,6 +265,7 @@
     </div>
 
     <script>
+        // 기존 퀴즈 스크립트
         const quizData = [
             { question: "이 작품에 대한 설명으로 가장 적절한 것은?", options: ["시적 화자는 누이의 죽음에 대해 분노를 표출하고 있다.", "현실의 고통을 외면하고 자연에 귀의하려는 태도를 보인다.", "삶과 죽음의 문제를 종교적 관점에서 다루고 있다.", "4구체 향가의 정제된 형식미를 보여준다.", "시간적 배경은 가을이며, 화자는 누이의 죽음을 덤덤하게 받아들인다."], answer: 2, explanation: "작품은 누이의 죽음이라는 비극적 상황을 불교적 내세 사상과 윤회 사상을 통해 극복하려는 태도를 보여주고 있습니다. 이는 삶과 죽음의 문제를 종교적으로 다룬 것입니다." },
             { question: "작품의 5~6행 '어느 가을 이른 바람에 / 이에 저에 떨어질 잎처럼'의 비유적 의미로 가장 적절한 것은?", options: ["삶의 무상함과 허망함", "누이의 요절과 죽음", "인생의 덧없음과 비관", "자연의 순리와 섭리", "세상과의 단절과 고립"], answer: 1, explanation: "'이른 바람'은 계절에 맞지 않게 일찍 불어오는 바람으로 누이의 '이른 죽음'을 비유하며, '떨어질 잎'은 죽은 누이의 모습을 비유한 것입니다." },
@@ -170,9 +288,7 @@
             { question: "이 작품의 창작 배경 설화에서 월명사가 종이돈을 날려 보냈을 때 종이돈이 날아간 방향은?", options: ["동쪽", "서쪽", "남쪽", "북쪽", "하늘"], answer: 1, explanation: "배경 설화에 따르면, 월명사가 종이돈을 날려 보냈을 때 '세찬 바람이 불어 종이돈을 날려 서쪽으로 사라지게 하였다'고 되어 있습니다. 이는 불교에서 극락이 서쪽에 있다고 믿는 것과 관련이 있습니다." },
             { question: "다음 중 <제망매가>의 내용과 관련된 문학사적 의의는?", options: ["고려 가요의 시초가 되었다.", "후대 평시조의 주제에 영향을 주었다.", "한시 문학의 발전에 기여했다.", "우리말로 표기된 최초의 서정시 중 하나이다.", "노동요의 형식을 갖추고 있다."], answer: 3, explanation: "향가는 향찰을 활용하여 우리말을 표기한 최초의 서정시로, 우리나라 시가 문학의 발전 과정에서 중요한 위치를 차지합니다." }
         ];
-
         let userAnswers = {};
-
         function buildQuiz() {
             const quizContainer = document.getElementById('quiz-container');
             const optionChars = ['①', '②', '③', '④', '⑤'];
@@ -190,14 +306,12 @@
             });
             quizContainer.innerHTML = quizHTML;
         }
-
         function selectAnswer(questionIndex, optionIndex) {
             userAnswers[questionIndex] = optionIndex;
             const options = document.querySelectorAll(`#q${questionIndex} .quiz-option`);
             options.forEach(option => option.classList.remove('selected'));
             options[optionIndex].classList.add('selected');
         }
-
         function gradeQuiz() {
             let score = 0;
             const optionChars = ['①', '②', '③', '④', '⑤'];
@@ -222,7 +336,6 @@
                 resultContainer.innerHTML = resultHTML;
                 resultContainer.style.display = 'block';
             });
-
             const totalScore = (score / quizData.length) * 100;
             const totalResultContainer = document.getElementById('quiz-total-result');
             totalResultContainer.innerHTML = `<h4 class="text-xl font-bold">총점: ${totalScore.toFixed(0)}점</h4><p>(${quizData.length}문제 중 ${score}문제 정답)</p>`;
@@ -234,5 +347,342 @@
             buildQuiz();
         });
     </script>
+<script>
+    // --- DOM 요소 가져오기 ---
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('score');
+    const questionTextEl = document.getElementById('questionText');
+    const startScreen = document.getElementById('startScreen');
+    const gameOverScreen = document.getElementById('gameOverScreen');
+    const startButton = document.getElementById('startButton');
+    const restartButton = document.getElementById('restartButton');
+    const finalScoreEl = document.getElementById('finalScore');
+    const gameContainer = document.getElementById('gameContainer');
+    const touchUp = document.getElementById('touchUp');
+    const touchDown = document.getElementById('touchDown');
+    const touchLeft = document.getElementById('touchLeft');
+    const touchRight = document.getElementById('touchRight');
+
+    // --- 게임 데이터 ---
+    const questions = [
+        { question: "<제망매가>의 갈래는 무엇인가?", answers: [{ text: "10구체 향가", correct: true }, { text: "고려가요", correct: false }, { text: "가사", correct: false }] },
+        { question: "<제망매가>의 작가는 누구인가?", answers: [{ text: "월명사", correct: true }, { text: "충담사", correct: false }, { text: "원효", correct: false }] },
+        { question: "작품의 중심 주제로 가장 알맞은 것은?", answers: [{ text: "죽은 누이 추모", correct: true }, { text: "임과의 이별", correct: false }, { text: "자연 예찬", correct: false }] },
+        { question: "작품의 성격으로 알맞지 않은 것은?", answers: [{ text: "해학적", correct: true }, { text: "애상적", correct: false }, { text: "불교적", correct: false }] },
+        { question: "'이른 바람'이 상징하는 것은?", answers: [{ text: "누이의 요절", correct: true }, { text: "가을 날씨", correct: false }, { text: "인생의 시련", correct: false }] },
+        { question: "'떨어질 잎'이 비유하는 대상은?", answers: [{ text: "죽은 누이", correct: true }, { text: "화자 자신", correct: false }, { text: "부모님", correct: false }] },
+        { question: "'한 가지'는 화자와 누이가 어떤 관계임을 암시하는가?", answers: [{ text: "같은 부모", correct: true }, { text: "같은 스승", correct: false }, { text: "같은 마을", correct: false }] },
+        { question: "누이의 죽음 앞에서 화자가 처음 느끼는 감정은?", answers: [{ text: "머뭇거림/안타까움", correct: true }, { text: "분노", correct: false }, { text: "체념", correct: false }] },
+        { question: "화자가 삶의 무상함을 느끼게 하는 구절은?", answers: [{ text: "가는 곳 모르온저", correct: true }, { text: "나는 간다는 말도", correct: false }, { text: "도 닦아 기다리겠노라", correct: false }] },
+        { question: "화자가 슬픔을 극복하려는 의지를 보이는 공간은 어디인가?", answers: [{ text: "미타찰", correct: true }, { text: "이승", correct: false }, { text: "저승길", correct: false }] },
+        { question: "<제망매가>는 어떤 문자로 기록되었는가?", answers: [{ text: "향찰", correct: true }, { text: "한글", correct: false }, { text: "이두", correct: false }] },
+        { question: "<제망매가>가 창작된 시대는?", answers: [{ text: "신라 시대", correct: true }, { text: "고려 시대", correct: false }, { text: "조선 시대", correct: false }] },
+        { question: "10구체 향가의 3단 구성이 아닌 것은?", answers: [{ text: "기-승-전-결", correct: true }, { text: "1-4행(기)", correct: false }, { text: "5-8행(서)", correct: false }] },
+        { question: "시상을 집약하고 마무리하는 9-10행을 무엇이라 부르는가?", answers: [{ text: "낙구", correct: true }, { text: "여음구", correct: false }, { text: "후렴구", correct: false }] },
+        { question: "낙구의 시작을 알리는 감탄사는 무엇인가?", answers: [{ text: "아아", correct: true }, { text: "어와", correct: false }, { text: "아으", correct: false }] },
+        { question: "작가 월명사의 신분은 무엇이었는가?", answers: [{ text: "승려", correct: true }, { text: "화랑", correct: false }, { text: "귀족", correct: false }] },
+        { question: "<제망매가>는 어느 책에 실려 전해지는가?", answers: [{ text: "삼국유사", correct: true }, { text: "삼국사기", correct: false }, { text: "고려사", correct: false }] },
+        { question: "누이의 죽음을 '떨어질 잎처럼'에 빗댄 표현 방식은?", answers: [{ text: "직유법", correct: true }, { text: "은유법", correct: false }, { text: "의인법", correct: false }] },
+        { question: "작품의 마지막 부분에 드러나는 화자의 태도는?", answers: [{ text: "종교적 승화", correct: true }, { text: "현실 도피", correct: false }, { text: "절망", correct: false }] },
+        { question: "'제망매가'의 '망매(亡妹)'는 무슨 뜻인가?", answers: [{ text: "죽은 누이", correct: true }, { text: "사라진 매화", correct: false }, { text: "잃어버린 동생", correct: false }] }
+    ];
+
+    // --- 게임 상태 변수 ---
+    let score;
+    let currentQuestionIndex;
+    let gameState; // 'start', 'playing', 'feedback', 'gameOver'
+    let feedback = { type: '', timer: 0 };
+    let keys = {};
+    let penguin;
+    let signs;
+    let signSpeed;
+
+    // --- 게임 객체 ---
+    const penguinSVG = new Image();
+    penguinSVG.src = "data:image/svg+xml," + encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+            <g transform="translate(0, 10)">
+                <path fill="#333" d="M100,20 C60,20 30,50 30,90 C30,130 60,180 100,180 C140,180 170,130 170,90 C170,50 140,20 100,20 Z"/>
+                <path fill="#FFF" d="M100,60 C70,60 50,80 50,110 C50,140 70,160 100,160 C130,160 150,140 150,110 C150,80 130,60 100,60 Z"/>
+                <circle fill="#333" cx="80" cy="95" r="8"/>
+                <circle fill="#333" cx="120" cy="95" r="8"/>
+                <path fill="#FFA500" d="M100,110 L90,125 L110,125 Z"/>
+                <path fill="#FFA500" d="M35,145 a 15,15 0 0,0 0,10 a 25,15 0 0,0 20,-10 Z" transform="rotate(-20, 35, 145)"/>
+                <path fill="#FFA500" d="M165,145 a 15,15 0 0,1 0,10 a 25,15 0 0,1 -20,-10 Z" transform="rotate(20, 165, 145)"/>
+            </g>
+        </svg>`);
+
+    // --- 유틸리티 함수 ---
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function speak(text) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ko-KR';
+        utterance.rate = 1.5;
+        utterance.pitch = 1.2;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // --- 게임 초기화 및 설정 ---
+    function init() {
+        const containerRect = gameContainer.getBoundingClientRect();
+        canvas.width = containerRect.width;
+        canvas.height = containerRect.height;
+
+        gameState = 'start';
+        score = 0;
+        currentQuestionIndex = 0;
+        shuffleArray(questions);
+
+        penguin = {
+            x: canvas.width / 2,
+            y: canvas.height - 100,
+            width: 50,
+            height: 50,
+            speed: 40,
+            targetX: canvas.width / 2,
+            targetY: canvas.height - 100,
+        };
+
+        signSpeed = 1;
+        signs = [];
+        scoreEl.innerText = score;
+        startScreen.classList.remove('hidden');
+        gameOverScreen.classList.add('hidden');
+        document.getElementById('questionBox').classList.add('hidden');
+        document.getElementById('touch-controls').classList.add('hidden');
+    }
+
+    function startGame() {
+        gameState = 'playing';
+        startScreen.classList.add('hidden');
+        document.getElementById('questionBox').classList.remove('hidden');
+        document.getElementById('touch-controls').classList.remove('hidden');
+        loadQuestion();
+        gameLoop();
+    }
+
+    // --- 게임 로직 ---
+    function loadQuestion() {
+        if (currentQuestionIndex >= questions.length) {
+            gameState = 'gameOver';
+            return;
+        }
+
+        const q = questions[currentQuestionIndex];
+        questionTextEl.innerText = q.question;
+        
+        signs = [];
+        const answers = [...q.answers];
+        shuffleArray(answers);
+        
+        const laneCount = answers.length;
+        const laneWidth = canvas.width / laneCount;
+        answers.forEach((ans, i) => {
+            signs.push({
+                text: ans.text,
+                correct: ans.correct,
+                x: (i * laneWidth) + (laneWidth / 2),
+                y: -150,
+                width: Math.min(140, laneWidth - 20),
+                height: 100,
+            });
+        });
+        
+        signSpeed += 0.1;
+    }
+
+    function update() {
+        if (gameState !== 'playing') return;
+
+        if (keys['ArrowLeft'] || keys['touchLeft']) penguin.targetX -= penguin.speed;
+        if (keys['ArrowRight'] || keys['touchRight']) penguin.targetX += penguin.speed;
+        if (keys['ArrowUp'] || keys['touchUp']) penguin.targetY -= penguin.speed;
+        if (keys['ArrowDown'] || keys['touchDown']) penguin.targetY += penguin.speed;
+
+        penguin.x += (penguin.targetX - penguin.x) * 0.2;
+        penguin.y += (penguin.targetY - penguin.y) * 0.2;
+
+        penguin.x = Math.max(penguin.width / 2, Math.min(canvas.width - penguin.width / 2, penguin.x));
+        penguin.y = Math.max(penguin.height / 2, Math.min(canvas.height - penguin.height / 2, penguin.y));
+        penguin.targetX = penguin.x;
+        penguin.targetY = penguin.y;
+
+        signs.forEach(sign => {
+            sign.y += signSpeed;
+            if (
+                penguin.x < sign.x + sign.width / 2 &&
+                penguin.x > sign.x - sign.width / 2 &&
+                penguin.y < sign.y + sign.height / 2 &&
+                penguin.y > sign.y - sign.height / 2
+            ) {
+                handleCollision(sign);
+            }
+            if (sign.y > canvas.height + sign.height) {
+                 handleCollision({correct: false});
+            }
+        });
+    }
+    
+    function handleCollision(sign) {
+        gameState = 'feedback';
+        if (sign.correct) {
+            speak('천재');
+            score += 5;
+            scoreEl.innerText = score;
+            feedback = { type: 'correct', timer: 60 };
+        } else {
+            speak('바보');
+            feedback = { type: 'wrong', timer: 60 };
+        }
+    }
+    
+    function handleFeedback() {
+        feedback.timer--;
+        if (feedback.timer <= 0) {
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= questions.length) {
+                gameState = 'gameOver';
+                finalScoreEl.innerText = score;
+                
+                const gameOverMessageEl = document.getElementById('gameOverMessage');
+                if (score === 100) {
+                    gameOverMessageEl.innerText = "당신은 국어황입니다";
+                } else if (score >= 90) {
+                    gameOverMessageEl.innerText = "당신은 국어를 잘 합니다!";
+                } else if (score >= 80) {
+                    gameOverMessageEl.innerText = "당신은 국어를 그럭저럭 합니다";
+                } else if (score >= 70) {
+                    gameOverMessageEl.innerText = "당신은 국어를 못 합니다";
+                } else {
+                    gameOverMessageEl.innerText = "당신은 국어를 정말 못 합니다";
+                }
+
+                gameOverScreen.classList.remove('hidden');
+                document.getElementById('questionBox').classList.add('hidden');
+                document.getElementById('touch-controls').classList.add('hidden');
+            } else {
+                loadQuestion();
+                gameState = 'playing';
+            }
+        }
+    }
+
+    // --- 렌더링 ---
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(penguinSVG, penguin.x - penguin.width / 2, penguin.y - penguin.height / 2, penguin.width, penguin.height);
+
+        signs.forEach(sign => {
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(sign.x - 5, sign.y - sign.height / 2, 10, sign.height);
+            ctx.fillStyle = '#DEB887';
+            ctx.fillRect(sign.x - sign.width / 2, sign.y - sign.height / 2, sign.width, sign.height / 2);
+            ctx.strokeStyle = '#8B4513';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(sign.x - sign.width / 2, sign.y - sign.height / 2, sign.width, sign.height / 2);
+            
+            ctx.fillStyle = '#000';
+            ctx.font = '16px "Noto Sans KR"';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            const textY = sign.y - sign.height / 4;
+
+            const words = sign.text.split(' ');
+            let line = '';
+            let lines = [];
+            for (let n = 0; n < words.length; n++) {
+                let testLine = line + words[n] + ' ';
+                let metrics = ctx.measureText(testLine);
+                if (metrics.width > sign.width - 10 && n > 0) {
+                    lines.push(line);
+                    line = words[n] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line);
+            const lineHeight = 18;
+            let startY = textY - (lines.length - 1) * lineHeight / 2;
+            lines.forEach((l, i) => ctx.fillText(l.trim(), sign.x, startY + i * lineHeight));
+        });
+        
+        if (feedback.timer > 0) {
+            ctx.save();
+            let alpha = Math.min(1, feedback.timer / 30);
+            ctx.font = 'bold 60px "Noto Sans KR"';
+            if (feedback.type === 'correct') {
+                ctx.fillStyle = `rgba(76, 175, 80, ${alpha})`;
+                ctx.fillText('천재!', canvas.width / 2, canvas.height / 2);
+            } else {
+                ctx.fillStyle = `rgba(244, 67, 54, ${alpha})`;
+                ctx.fillText('바보!', canvas.width / 2, canvas.height / 2);
+            }
+            ctx.restore();
+        }
+    }
+
+    // --- 게임 루프 ---
+    function gameLoop() {
+        if (gameState === 'gameOver') return;
+
+        if (gameState === 'playing') update();
+        else if (gameState === 'feedback') handleFeedback();
+        
+        draw();
+        requestAnimationFrame(gameLoop);
+    }
+    
+    // --- 이벤트 리스너 ---
+    window.addEventListener('keydown', e => {
+        if(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+            e.preventDefault();
+            keys[e.key] = true;
+        }
+    });
+    window.addEventListener('keyup', e => { keys[e.key] = false; });
+
+    function handleTouch(e, isDown) {
+        e.preventDefault();
+        const keyMap = {
+            touchUp: 'touchUp', touchDown: 'touchDown',
+            touchLeft: 'touchLeft', touchRight: 'touchRight'
+        };
+        const key = keyMap[e.currentTarget.id];
+        if (key) keys[key] = isDown;
+    }
+
+    [touchUp, touchDown, touchLeft, touchRight].forEach(btn => {
+        btn.addEventListener('touchstart', e => handleTouch(e, true));
+        btn.addEventListener('touchend', e => handleTouch(e, false));
+        btn.addEventListener('touchcancel', e => handleTouch(e, false));
+    });
+
+    startButton.addEventListener('click', startGame);
+    restartButton.addEventListener('click', () => {
+        init();
+        startGame();
+    });
+
+    window.addEventListener('resize', init);
+    
+    // DOMContentLoaded 이벤트 리스너를 게임 스크립트 전용으로 변경
+    document.addEventListener('DOMContentLoaded', () => {
+        // 이 리스너는 게임 초기화만 담당하도록 합니다.
+        // 기존 퀴즈의 초기화는 별도의 스크립트 블록에 있습니다.
+        const gameCanvasEl = document.getElementById('gameCanvas');
+        if (gameCanvasEl) {
+            init();
+        }
+    });
+
+</script>
 </body>
 </html>
