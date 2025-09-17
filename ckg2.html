@@ -3,150 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공통국어2 김수학 - 메인페이지</title>
+    <title>공통국어2 김수학</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Noto Sans KR', 'Inter', sans-serif;
         }
-        .fade-in {
-            animation: fadeIn 1s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
         .unit-card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .unit-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-        .unit-link {
-            transition: background-color 0.2s, color 0.2s, transform 0.2s;
-        }
-        .unit-link:hover {
-            background-color: #f0f9ff;
-            color: #0c4a6e;
-            transform: translateX(4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
-        
-        <!-- Header -->
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">
-                <i class="fas fa-book-open text-blue-500"></i> 공통국어 2 (김수학)
-            </h1>
-            <p class="text-lg text-gray-600">시험 대비 완전 정복을 위한 학습 허브</p>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="w-full flex justify-end mb-4">
+            <a href="http://modukorean.co.kr" class="bg-gray-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-700 transition-colors">홈으로</a>
+        </div>
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-800">공통국어2 (김수학)</h1>
+            <p class="text-lg text-gray-600 mt-2">단원별 학습 자료</p>
         </header>
 
-        <!-- Main Content Grid -->
-        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <!-- Unit 1 Card -->
-            <div class="unit-card bg-white p-6 rounded-xl shadow-md">
-                <div class="flex items-center mb-4">
-                    <div class="bg-blue-100 text-blue-600 p-3 rounded-full mr-4">
-                        <i class="fas fa-feather-alt fa-lg"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-gray-800">1. 읽고 나누는 기쁨</h2>
-                </div>
-                <div class="space-y-3">
-                    <a href="1-1ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-blue-400"></i> 1-1. 주체적으로 감상하기
+        <main class="space-y-12">
+            <!-- 1단원: 읽고 나누는 기쁨 -->
+            <section>
+                <h2 class="text-3xl font-bold text-blue-700 border-b-4 border-blue-700 pb-2 mb-6">1. 읽고 나누는 기쁨</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <a href="1-1ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-blue-800">1-1. 주체적으로 감상하기</h3>
+                        <p class="text-gray-600 mt-2">현대 소설 <뉴욕제과점>을 통해 작품을 주체적으로 해석하고 평가하는 방법을 학습합니다.</p>
                     </a>
-                    <a href="1-2ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-blue-400"></i> 1-2. 매체 자료 평가하며 읽기
+                    <a href="1-2ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-blue-800">1-2. 매체 자료 평가하며 읽기</h3>
+                        <p class="text-gray-600 mt-2">다양한 매체 자료를 비판적으로 읽고, 만든 이의 관점과 의도, 표현 방법을 평가합니다.</p>
                     </a>
                 </div>
-            </div>
+            </section>
 
-            <!-- Unit 2 Card -->
-            <div class="unit-card bg-white p-6 rounded-xl shadow-md">
-                <div class="flex items-center mb-4">
-                    <div class="bg-red-100 text-red-600 p-3 rounded-full mr-4">
-                        <i class="fas fa-spell-check fa-lg"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-gray-800">2. 바람직한 언어생활</h2>
-                </div>
-                <div class="space-y-3">
-                    <a href="2-1ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-red-400"></i> 2-1. 우리말 바로 쓰기
+            <!-- 2단원: 바람직한 언어생활 -->
+            <section>
+                <h2 class="text-3xl font-bold text-green-700 border-b-4 border-green-700 pb-2 mb-6">2. 바람직한 언어생활</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <a href="2-1ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-green-800">2-1. 우리말 바로 쓰기</h3>
+                        <p class="text-gray-600 mt-2">한글 맞춤법의 기본 원리를 탐구하고, 올바른 표기 및 띄어쓰기 방법을 학습합니다.</p>
                     </a>
-                    <a href="2-2ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-red-400"></i> 2-2. 우리말과 매체의 변천
+                    <a href="2-2ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-green-800">2-2. 우리말과 매체의 변천</h3>
+                        <p class="text-gray-600 mt-2">국어의 역사적 변화와 매체 발달에 따른 소통 방식의 변화를 탐구합니다.</p>
                     </a>
-                    <a href="2-3ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-red-400"></i> 2-3. 효과적으로 의견 전달하기
+                    <a href="2-3ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-green-800">2-3. 효과적으로 의견 전달하기</h3>
+                        <p class="text-gray-600 mt-2">발표 및 논증하는 글쓰기를 통해 자신의 의견을 논리적이고 효과적으로 전달하는 방법을 학습합니다.</p>
                     </a>
                 </div>
-            </div>
+            </section>
 
-            <!-- Unit 3 Card -->
-            <div class="unit-card bg-white p-6 rounded-xl shadow-md">
-                <div class="flex items-center mb-4">
-                    <div class="bg-green-100 text-green-600 p-3 rounded-full mr-4">
-                        <i class="fas fa-landmark fa-lg"></i>
+            <!-- 3단원: 우리 문학의 어제와 오늘 -->
+            <section>
+                <h2 class="text-3xl font-bold text-red-700 border-b-4 border-red-700 pb-2 mb-6">3. 우리 문학의 어제와 오늘</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                     <div class="unit-card bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-red-800 mb-3">3-1. 시가 세 편</h3>
+                        <div class="space-y-3">
+                           <a href="3-1-1ckg2.html" class="block bg-red-50 p-3 rounded-md hover:bg-red-100"> <제망매가> 해설 및 문제</a>
+                           <a href="3-1-2ckg2.html" class="block bg-red-50 p-3 rounded-md hover:bg-red-100"> <십 년을 경영하여> 해설 및 문제</a>
+                           <a href="3-1-3ckg2.html" class="block bg-red-50 p-3 rounded-md hover:bg-red-100"> <나무도 바윗돌도 없는> 해설 및 문제</a>
+                        </div>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-800">3. 우리 문학의 어제와 오늘</h2>
-                </div>
-                <div class="space-y-3">
-                     <div class="pl-4 border-l-2 border-green-200">
-                        <h3 class="font-semibold text-green-800 mb-2">3-1. 시가 세 편</h3>
-                        <a href="3-1-1ckg2.html" class="unit-link block p-2 rounded-lg font-medium text-gray-700 text-sm">
-                            <i class="fas fa-caret-right mr-2 text-green-400"></i> (1) 제망매가
-                        </a>
-                        <a href="3-1-2ckg2.html" class="unit-link block p-2 rounded-lg font-medium text-gray-700 text-sm">
-                            <i class="fas fa-caret-right mr-2 text-green-400"></i> (2) 십 년을 경영하여
-                        </a>
-                        <a href="3-1-3ckg2.html" class="unit-link block p-2 rounded-lg font-medium text-gray-700 text-sm">
-                            <i class="fas fa-caret-right mr-2 text-green-400"></i> (3) 나무도 바윗돌도 없는
-                        </a>
-                    </div>
-                     <a href="3-2ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-green-400"></i> 3-2. 춘향전
+                    <a href="3-2ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-red-800">3-2. 춘향전</h3>
+                        <p class="text-gray-600 mt-2">고전 소설 <춘향전>을 통해 당대 사회상과 판소리계 소설의 특징을 학습합니다.</p>
                     </a>
-                    <a href="3-3ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-green-400"></i> 3-3. 흰 바람벽이 있어
+                    <a href="3-3ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-red-800">3-3. 흰 바람벽이 있어</h3>
+                        <p class="text-gray-600 mt-2">백석의 시를 통해 일제 강점기 시의 특징과 문학사적 가치를 탐구합니다.</p>
                     </a>
-                    <a href="3-4ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-green-400"></i> 3-4. 겨울 나들이
+                    <a href="3-4ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-red-800">3-4. 겨울 나들이</h3>
+                        <p class="text-gray-600 mt-2">박완서의 소설을 통해 전쟁과 분단이 개인의 삶에 미친 영향을 이해합니다.</p>
                     </a>
                 </div>
-            </div>
+            </section>
 
-            <!-- Unit 4 Card -->
-            <div class="unit-card bg-white p-6 rounded-xl shadow-md">
-                <div class="flex items-center mb-4">
-                    <div class="bg-purple-100 text-purple-600 p-3 rounded-full mr-4">
-                        <i class="fas fa-users fa-lg"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-gray-800">4. 다양한 생각을 아우르는 힘</h2>
-                </div>
-                <div class="space-y-3">
-                    <a href="4-1ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-purple-400"></i> 4-1. 주제 통합적으로 읽기
+             <!-- 4단원: 다양한 생각을 아우르는 힘 -->
+            <section>
+                <h2 class="text-3xl font-bold text-indigo-700 border-b-4 border-indigo-700 pb-2 mb-6">4. 다양한 생각을 아우르는 힘</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <a href="4-1ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-indigo-800">4-1. 주제 통합적으로 읽기</h3>
+                        <p class="text-gray-600 mt-2">동일한 화제에 대한 다양한 관점의 글을 비교·분석하며 자신의 견해를 재구성합니다.</p>
                     </a>
-                    <a href="4-2ckg2.html" class="unit-link block p-3 rounded-lg font-medium text-gray-700">
-                        <i class="fas fa-caret-right mr-2 text-purple-400"></i> 4-2. 공동 보고서 쓰기
+                    <a href="4-2ckg2.html" class="unit-card bg-white p-6 rounded-lg shadow-md block">
+                        <h3 class="text-xl font-semibold text-indigo-800">4-2. 공동 보고서 쓰기</h3>
+                        <p class="text-gray-600 mt-2">신뢰할 수 있는 정보를 바탕으로 복합양식 자료를 포함한 공동 보고서를 작성합니다.</p>
                     </a>
                 </div>
-            </div>
+            </section>
 
         </main>
 
-        <!-- Footer -->
-        <footer class="text-center mt-12 text-gray-500">
-            <p>&copy; 2024 국어의 모든것. All Rights Reserved.</p>
+        <footer class="text-center mt-12 pt-6 border-t border-gray-300">
+            <p class="text-gray-500">&copy; 2024 국어의모든것. All rights reserved.</p>
         </footer>
-
     </div>
 </body>
 </html>
