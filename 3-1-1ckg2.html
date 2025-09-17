@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>제망매가 양궁 퀴즈</title>
+    <title>천재 김수학 공통국어2 3-1-1 제망매가 해설 및 문제</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,10 +71,11 @@
             background-color: #fff1f2;
             border: 1px solid #f87171;
         }
-        /* --- Archery Game Styles --- */
+         /* --- Archery Game Styles --- */
         .game-container {
             width: 100%;
-            height: 600px; /* Adjusted for embedding */
+            height: 600px;
+            max-height: 900px;
             background: linear-gradient(to bottom, #a0d8f0 0%, #d8e8f0 70%, #ffffff 100%);
             overflow: hidden;
             position: relative;
@@ -114,7 +115,7 @@
 <body class="bg-gray-100 text-gray-800">
 
     <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl fade-in">
-        <button class="btn-primary mb-6 px-4 py-2 rounded-lg" onclick="alert('목차 페이지로 돌아갑니다. (별도 파일)')">← 목차로 돌아가기</button>
+        <a href="http://modukorean.co.kr/ckg2.html" class="btn-primary mb-6 px-4 py-2 rounded-lg inline-block">← 목차로 돌아가기</a>
         <h2 class="text-3xl font-bold mb-2 text-center text-gray-800">3-1-1. 시가 세 편</h2>
         <h3 class="text-xl font-semibold mb-6 text-center text-gray-600">시험 대비 완전 정복: <제망매가></h3>
         
@@ -175,7 +176,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <!-- 3. 게임으로 내용 이해하기 -->
             <section class="exam-section">
                 <h4>3. 게임으로 내용 이해하기</h4>
@@ -213,7 +214,7 @@
                      </div>
                  </div>
             </section>
-
+            
             <!-- 4. 실전 대비 내용 확인 문제 (5지 선다형) -->
             <section class="exam-section">
                 <h4>4. 실전 대비 내용 확인 문제</h4>
@@ -311,384 +312,374 @@
     </script>
 <script>
     // --- Archery Game Script ---
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const scoreEl = document.getElementById('score');
-    const questionTextEl = document.getElementById('questionText');
-    const startScreen = document.getElementById('startScreen');
-    const gameOverScreen = document.getElementById('gameOverScreen');
-    const startButton = document.getElementById('startButton');
-    const restartButton = document.getElementById('restartButton');
-    const finalScoreEl = document.getElementById('finalScore');
-    const gameContainer = document.getElementById('gameContainer');
-
-    const questions = [
-        { question: "<제망매가>의 갈래는 무엇인가?", answers: [{ text: "10구체 향가", correct: true }, { text: "고려가요", correct: false }, { text: "가사", correct: false }] },
-        { question: "<제망매가>의 작가는 누구인가?", answers: [{ text: "월명사", correct: true }, { text: "충담사", correct: false }, { text: "원효", correct: false }] },
-        { question: "작품의 중심 주제로 가장 알맞은 것은?", answers: [{ text: "죽은 누이 추모", correct: true }, { text: "임과의 이별", correct: false }, { text: "자연 예찬", correct: false }] },
-        { question: "작품의 성격으로 알맞지 않은 것은?", answers: [{ text: "해학적", correct: true }, { text: "애상적", correct: false }, { text: "불교적", correct: false }] },
-        { question: "'이른 바람'이 상징하는 것은?", answers: [{ text: "누이의 요절", correct: true }, { text: "가을 날씨", correct: false }, { text: "인생의 시련", correct: false }] },
-        { question: "'떨어질 잎'이 비유하는 대상은?", answers: [{ text: "죽은 누이", correct: true }, { text: "화자 자신", correct: false }, { text: "부모님", correct: false }] },
-        { question: "'한 가지'는 화자와 누이가 어떤 관계임을 암시하는가?", answers: [{ text: "같은 부모", correct: true }, { text: "같은 스승", correct: false }, { text: "같은 마을", correct: false }] },
-        { question: "누이의 죽음 앞에서 화자가 처음 느끼는 감정은?", answers: [{ text: "머뭇거림/안타까움", correct: true }, { text: "분노", correct: false }, { text: "체념", correct: false }] },
-        { question: "화자가 삶의 무상함을 느끼게 하는 구절은?", answers: [{ text: "가는 곳 모르온저", correct: true }, { text: "나는 간다는 말도", correct: false }, { text: "도 닦아 기다리겠노라", correct: false }] },
-        { question: "화자가 슬픔을 극복하려는 의지를 보이는 공간은 어디인가?", answers: [{ text: "미타찰", correct: true }, { text: "이승", correct: false }, { text: "저승길", correct: false }] },
-        { question: "<제망매가>는 어떤 문자로 기록되었는가?", answers: [{ text: "향찰", correct: true }, { text: "한글", correct: false }, { text: "이두", correct: false }] },
-        { question: "<제망매가>가 창작된 시대는?", answers: [{ text: "신라 시대", correct: true }, { text: "고려 시대", correct: false }, { text: "조선 시대", correct: false }] },
-        { question: "10구체 향가의 3단 구성이 아닌 것은?", answers: [{ text: "기-승-전-결", correct: true }, { text: "1-4행(기)", correct: false }, { text: "5-8행(서)", correct: false }] },
-        { question: "시상을 집약하고 마무리하는 9-10행을 무엇이라 부르는가?", answers: [{ text: "낙구", correct: true }, { text: "여음구", correct: false }, { text: "후렴구", correct: false }] },
-        { question: "낙구의 시작을 알리는 감탄사는 무엇인가?", answers: [{ text: "아아", correct: true }, { text: "어와", correct: false }, { text: "아으", correct: false }] },
-        { question: "작가 월명사의 신분은 무엇이었는가?", answers: [{ text: "승려", correct: true }, { text: "화랑", correct: false }, { text: "귀족", correct: false }] },
-        { question: "<제망매가>는 어느 책에 실려 전해지는가?", answers: [{ text: "삼국유사", correct: true }, { text: "삼국사기", correct: false }, { text: "고려사", correct: false }] },
-        { question: "누이의 죽음을 '떨어질 잎처럼'에 빗댄 표현 방식은?", answers: [{ text: "직유법", correct: true }, { text: "은유법", correct: false }, { text: "의인법", correct: false }] },
-        { question: "작품의 마지막 부분에 드러나는 화자의 태도는?", answers: [{ text: "종교적 승화", correct: true }, { text: "현실 도피", correct: false }, { text: "절망", correct: false }] },
-        { question: "'제망매가'의 '망매(亡妹)'는 무슨 뜻인가?", answers: [{ text: "죽은 누이", correct: true }, { text: "사라진 매화", correct: false }, { text: "잃어버린 동생", correct: false }] }
-    ];
-
-    let score, currentQuestionIndex, gameState, feedback, targets, targetSpeed, bow, arrow;
-
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-
-    /*
-    function speak(text) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ko-KR';
-        utterance.rate = 1.5;
-        utterance.pitch = 1.2;
-        window.speechSynthesis.speak(utterance);
-    }
-    */
-
-    function init() {
-        // Stop any ongoing animation frame
-        if (window.gameAnimationId) {
-            cancelAnimationFrame(window.gameAnimationId);
-        }
-
-        const containerRect = gameContainer.getBoundingClientRect();
-        canvas.width = containerRect.width;
-        canvas.height = containerRect.height;
-
-        gameState = 'start';
-        score = 0;
-        currentQuestionIndex = 0;
-        shuffleArray(questions);
+    document.addEventListener('DOMContentLoaded', () => {
         
-        targetSpeed = 0.8; 
-        targets = [];
-        bow = { x: canvas.width / 2, y: canvas.height - 50, size: 80 };
-        arrow = { isFlying: false };
+        const gameContainer = document.getElementById('gameContainer');
+        if (!gameContainer) return;
 
-        scoreEl.innerText = score;
-        startScreen.classList.remove('hidden');
-        gameOverScreen.classList.add('hidden');
-        document.getElementById('questionBox').classList.add('hidden');
-    }
+        const canvas = document.getElementById('gameCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('score');
+        const questionTextEl = document.getElementById('questionText');
+        const startScreen = document.getElementById('startScreen');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const startButton = document.getElementById('startButton');
+        const restartButton = document.getElementById('restartButton');
+        const finalScoreEl = document.getElementById('finalScore');
 
-    function startGame() {
-        gameState = 'playing';
-        startScreen.classList.add('hidden');
-        gameOverScreen.classList.add('hidden'); // Ensure game over screen is hidden
-        document.getElementById('questionBox').classList.remove('hidden');
-        loadQuestion();
-        gameLoop();
-    }
+        const questions = [
+            { question: "<제망매가>의 갈래는 무엇인가?", answers: [{ text: "10구체 향가", correct: true }, { text: "고려가요", correct: false }, { text: "가사", correct: false }] },
+            { question: "<제망매가>의 작가는 누구인가?", answers: [{ text: "월명사", correct: true }, { text: "충담사", correct: false }, { text: "원효", correct: false }] },
+            { question: "작품의 중심 주제로 가장 알맞은 것은?", answers: [{ text: "죽은 누이 추모", correct: true }, { text: "임과의 이별", correct: false }, { text: "자연 예찬", correct: false }] },
+            { question: "작품의 성격으로 알맞지 않은 것은?", answers: [{ text: "해학적", correct: true }, { text: "애상적", correct: false }, { text: "불교적", correct: false }] },
+            { question: "'이른 바람'이 상징하는 것은?", answers: [{ text: "누이의 요절", correct: true }, { text: "가을 날씨", correct: false }, { text: "인생의 시련", correct: false }] },
+            { question: "'떨어질 잎'이 비유하는 대상은?", answers: [{ text: "죽은 누이", correct: true }, { text: "화자 자신", correct: false }, { text: "부모님", correct: false }] },
+            { question: "'한 가지'는 화자와 누이가 어떤 관계임을 암시하는가?", answers: [{ text: "같은 부모", correct: true }, { text: "같은 스승", correct: false }, { text: "같은 마을", correct: false }] },
+            { question: "누이의 죽음 앞에서 화자가 처음 느끼는 감정은?", answers: [{ text: "머뭇거림/안타까움", correct: true }, { text: "분노", correct: false }, { text: "체념", correct: false }] },
+            { question: "화자가 삶의 무상함을 느끼게 하는 구절은?", answers: [{ text: "가는 곳 모르온저", correct: true }, { text: "나는 간다는 말도", correct: false }, { text: "도 닦아 기다리겠노라", correct: false }] },
+            { question: "화자가 슬픔을 극복하려는 의지를 보이는 공간은 어디인가?", answers: [{ text: "미타찰", correct: true }, { text: "이승", correct: false }, { text: "저승길", correct: false }] },
+            { question: "<제망매가>는 어떤 문자로 기록되었는가?", answers: [{ text: "향찰", correct: true }, { text: "한글", correct: false }, { text: "이두", correct: false }] },
+            { question: "<제망매가>가 창작된 시대는?", answers: [{ text: "신라 시대", correct: true }, { text: "고려 시대", correct: false }, { text: "조선 시대", correct: false }] },
+            { question: "10구체 향가의 3단 구성이 아닌 것은?", answers: [{ text: "기-승-전-결", correct: true }, { text: "1-4행(기)", correct: false }, { text: "5-8행(서)", correct: false }] },
+            { question: "시상을 집약하고 마무리하는 9-10행을 무엇이라 부르는가?", answers: [{ text: "낙구", correct: true }, { text: "여음구", correct: false }, { text: "후렴구", correct: false }] },
+            { question: "낙구의 시작을 알리는 감탄사는 무엇인가?", answers: [{ text: "아아", correct: true }, { text: "어와", correct: false }, { text: "아으", correct: false }] },
+            { question: "작가 월명사의 신분은 무엇이었는가?", answers: [{ text: "승려", correct: true }, { text: "화랑", correct: false }, { text: "귀족", correct: false }] },
+            { question: "<제망매가>는 어느 책에 실려 전해지는가?", answers: [{ text: "삼국유사", correct: true }, { text: "삼국사기", correct: false }, { text: "고려사", correct: false }] },
+            { question: "누이의 죽음을 '떨어질 잎처럼'에 빗댄 표현 방식은?", answers: [{ text: "직유법", correct: true }, { text: "은유법", correct: false }, { text: "의인법", correct: false }] },
+            { question: "작품의 마지막 부분에 드러나는 화자의 태도는?", answers: [{ text: "종교적 승화", correct: true }, { text: "현실 도피", correct: false }, { text: "절망", correct: false }] },
+            { question: "'제망매가'의 '망매(亡妹)'는 무슨 뜻인가?", answers: [{ text: "죽은 누이", correct: true }, { text: "사라진 매화", correct: false }, { text: "잃어버린 동생", correct: false }] }
+        ];
 
-    function loadQuestion() {
-        if (currentQuestionIndex >= questions.length) {
-            gameState = 'gameOver';
-            return;
-        }
+        let score, currentQuestionIndex, gameState, feedback, targets, targetSpeed, bow, arrow;
 
-        const q = questions[currentQuestionIndex];
-        questionTextEl.innerText = q.question;
-        
-        targets = [];
-        const answers = [...q.answers];
-        shuffleArray(answers);
-        
-        const laneCount = answers.length;
-        const laneWidth = canvas.width / laneCount;
-        answers.forEach((ans, i) => {
-            targets.push({
-                text: ans.text,
-                correct: ans.correct,
-                x: (i * laneWidth) + (laneWidth / 2),
-                y: -100,
-                radius: Math.min(60, laneWidth / 2 - 10),
-            });
-        });
-        
-        targetSpeed += 0.05; 
-    }
-
-    function update() {
-        if (gameState === 'playing') {
-            let missed = false;
-            targets.forEach(target => {
-                target.y += targetSpeed;
-                if (target.y > canvas.height + target.radius) {
-                    missed = true;
-                }
-            });
-            if (missed) {
-                handleCollision({ correct: false });
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
         }
-        
-        if (arrow.isFlying) {
-            arrow.x += arrow.vx;
-            arrow.y += arrow.vy;
-            if (Math.abs(arrow.x - arrow.targetX) < 15 && Math.abs(arrow.y - arrow.targetY) < 15) { 
-                arrow.isFlying = false;
-                handleCollision(arrow.hitTarget);
-            }
+
+        /*
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ko-KR';
+            utterance.rate = 1.5;
+            utterance.pitch = 1.2;
+            window.speechSynthesis.speak(utterance);
         }
-    }
+        */
 
-    function handleCollision(target) {
-        if (gameState !== 'playing') return;
+        function init() {
+            if (window.gameAnimationId) {
+                cancelAnimationFrame(window.gameAnimationId);
+            }
 
-        gameState = 'feedback';
-        if (target.correct) {
-            // speak('천재');
-            score += 5;
+            const containerRect = gameContainer.getBoundingClientRect();
+            canvas.width = containerRect.width;
+            canvas.height = containerRect.height;
+
+            gameState = 'start';
+            score = 0;
+            currentQuestionIndex = 0;
+            shuffleArray(questions);
+            
+            targetSpeed = 0.8; 
+            targets = [];
+            bow = { x: canvas.width / 2, y: canvas.height - 50, size: 80 };
+            arrow = { isFlying: false };
+
             scoreEl.innerText = score;
-            feedback = { type: 'correct', timer: 60 };
-        } else {
-            // speak('바보');
-            feedback = { type: 'wrong', timer: 60 };
+            startScreen.classList.remove('hidden');
+            gameOverScreen.classList.add('hidden');
+            document.getElementById('questionBox').classList.add('hidden');
+            draw(); // Draw initial state
         }
-    }
-    
-    function handleFeedback() {
-        feedback.timer--;
-        if (feedback.timer <= 0) {
-            currentQuestionIndex++;
+
+        function startGame() {
+            gameState = 'playing';
+            startScreen.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+            document.getElementById('questionBox').classList.remove('hidden');
+            loadQuestion();
+            gameLoop();
+        }
+
+        function loadQuestion() {
             if (currentQuestionIndex >= questions.length) {
                 gameState = 'gameOver';
-                finalScoreEl.innerText = score;
-                const gameOverMessageEl = document.getElementById('gameOverMessage');
-                 if (score === 100) gameOverMessageEl.innerText = "당신은 국어황입니다";
-                 else if (score >= 90) gameOverMessageEl.innerText = "당신은 국어를 잘 합니다!";
-                 else if (score >= 80) gameOverMessageEl.innerText = "당신은 국어를 그럭저럭 합니다";
-                 else if (score >= 70) gameOverMessageEl.innerText = "당신은 국어를 못 합니다";
-                 else gameOverMessageEl.innerText = "당신은 국어를 정말 못 합니다";
-                startScreen.classList.add('hidden'); // Ensure start screen is hidden
-                gameOverScreen.classList.remove('hidden');
-                document.getElementById('questionBox').classList.add('hidden');
-            } else {
-                loadQuestion();
-                gameState = 'playing';
+                return;
             }
+
+            const q = questions[currentQuestionIndex];
+            questionTextEl.innerText = q.question;
+            
+            targets = [];
+            const answers = [...q.answers];
+            shuffleArray(answers);
+            
+            const laneCount = answers.length;
+            const laneWidth = canvas.width / laneCount;
+            answers.forEach((ans, i) => {
+                targets.push({
+                    text: ans.text,
+                    correct: ans.correct,
+                    x: (i * laneWidth) + (laneWidth / 2),
+                    y: -100,
+                    radius: Math.min(60, laneWidth / 2 - 10),
+                });
+            });
+            
+            targetSpeed += 0.05; 
         }
-    }
 
-    function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (gameState === 'gameOver') return; // Don't draw game elements on game over
-
-        drawBow();
-        if (arrow.isFlying) drawArrow();
-
-        targets.forEach(target => {
-            drawTarget(target);
-        });
-        
-        if (gameState === 'feedback' && feedback.timer > 0) {
-            ctx.save();
-            let alpha = Math.min(1, feedback.timer / 30);
-            ctx.font = 'bold 60px "Noto Sans KR"';
-            if (feedback.type === 'correct') {
-                ctx.fillStyle = `rgba(76, 175, 80, ${alpha})`;
-                ctx.fillText('정답!', canvas.width / 2, canvas.height / 2);
-            } else {
-                ctx.fillStyle = `rgba(244, 67, 54, ${alpha})`;
-                ctx.fillText('오답!', canvas.width / 2, canvas.height / 2);
-            }
-            ctx.restore();
-        }
-    }
-    
-    function drawTarget(target) {
-        // 과녁 그리기 (옅은 파스텔톤 색상으로 변경)
-        ctx.beginPath();
-        ctx.fillStyle = '#FFFFFF';
-        ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.fillStyle = '#A7C7E7'; // Pastel Blue
-        ctx.arc(target.x, target.y, target.radius * 0.8, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.fillStyle = '#FFB6B1'; // Pastel Red
-        ctx.arc(target.x, target.y, target.radius * 0.5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.fillStyle = '#FFFFAA'; // Pastel Yellow
-        ctx.arc(target.x, target.y, target.radius * 0.2, 0, Math.PI * 2);
-        ctx.fill();
-
-        // 텍스트 그리기 (선명하게)
-        ctx.font = 'bold 16px "Noto Sans KR"';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        
-        // 텍스트 테두리로 가독성 향상
-        ctx.strokeStyle = 'white';
-        ctx.lineWidth = 3;
-        
-        const drawTextWithStroke = (text, x, y) => {
-            ctx.strokeText(text, x, y);
-            ctx.fillStyle = 'black';
-            ctx.fillText(text, x, y);
-        };
-        
-        const words = target.text.split(' ');
-        if (words.length > 1) {
-            drawTextWithStroke(words[0], target.x, target.y - 10);
-            drawTextWithStroke(words.slice(1).join(' '), target.x, target.y + 10);
-        } else {
-            drawTextWithStroke(target.text, target.x, target.y);
-        }
-    }
-
-    function drawBow() {
-        ctx.strokeStyle = '#8B4513';
-        ctx.lineWidth = 8;
-        ctx.beginPath();
-        ctx.arc(bow.x, bow.y, bow.size / 2, Math.PI, Math.PI * 2);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(bow.x - bow.size / 2, bow.y);
-        ctx.lineTo(bow.x + bow.size / 2, bow.y);
-        ctx.strokeStyle = '#D2B48C';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-    }
-
-    function drawArrow() {
-        ctx.save();
-        ctx.translate(arrow.x, arrow.y);
-        ctx.rotate(arrow.angle);
-        ctx.strokeStyle = '#8B4513';
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.moveTo(0, -30);
-        ctx.lineTo(0, 20);
-        ctx.stroke();
-        // 깃
-        ctx.fillStyle = '#A0522D';
-        ctx.beginPath();
-        ctx.moveTo(0, 20);
-        ctx.lineTo(-8, 30);
-        ctx.lineTo(8, 30);
-        ctx.closePath();
-        ctx.fill();
-        // 촉
-        ctx.fillStyle = '#A9A9A9';
-        ctx.beginPath();
-        ctx.moveTo(0, -30);
-        ctx.lineTo(-6, -20);
-        ctx.lineTo(6, -20);
-        ctx.closePath();
-        ctx.fill();
-        ctx.restore();
-    }
-    
-    function fireArrow(target) {
-        if (gameState !== 'playing' || arrow.isFlying) return;
-        
-        const startX = bow.x;
-        const startY = bow.y;
-        const targetX = target.x;
-        const targetY = target.y;
-
-        const dx = targetX - startX;
-        const dy = targetY - startY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const angle = Math.atan2(dy, dx) + Math.PI / 2;
-        const speed = 20;
-
-        arrow = {
-            isFlying: true,
-            x: startX,
-            y: startY,
-            targetX: targetX,
-            targetY: targetY,
-            vx: (dx / distance) * speed,
-            vy: (dy / distance) * speed,
-            angle: angle,
-            hitTarget: target
-        };
-    }
-    
-    function handleCanvasClick(event) {
-        if (gameState !== 'playing' || arrow.isFlying) return;
-        const rect = canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-
-        let clickedTarget = null;
-        let highestY = -Infinity;
-
-        targets.forEach(target => {
-            const dist = Math.sqrt((x - target.x) ** 2 + (y - target.y) ** 2);
-            if (dist < target.radius) {
-                if (target.y > highestY) {
-                    highestY = target.y;
-                    clickedTarget = target;
+        function update() {
+            if (gameState === 'playing') {
+                let missed = false;
+                targets.forEach(target => {
+                    target.y += targetSpeed;
+                    if (target.y > canvas.height + target.radius) {
+                        missed = true;
+                    }
+                });
+                if (missed) {
+                    handleCollision({ correct: false });
                 }
             }
-        });
-
-        if (clickedTarget) {
-            fireArrow(clickedTarget);
+            
+            if (arrow.isFlying) {
+                arrow.x += arrow.vx;
+                arrow.y += arrow.vy;
+                if (Math.abs(arrow.x - arrow.targetX) < 15 && Math.abs(arrow.y - arrow.targetY) < 15) { 
+                    arrow.isFlying = false;
+                    handleCollision(arrow.hitTarget);
+                }
+            }
         }
-    }
 
-    function gameLoop() {
-        if (gameState === 'gameOver') {
-             // Ensure loop stops and canvas is cleared on game over
+        function handleCollision(target) {
+            if (gameState !== 'playing') return;
+
+            gameState = 'feedback';
+            if (target.correct) {
+                score += 5;
+                scoreEl.innerText = score;
+                feedback = { type: 'correct', timer: 60 };
+            } else {
+                feedback = { type: 'wrong', timer: 60 };
+            }
+        }
+        
+        function handleFeedback() {
+            feedback.timer--;
+            if (feedback.timer <= 0) {
+                currentQuestionIndex++;
+                if (currentQuestionIndex >= questions.length) {
+                    gameState = 'gameOver';
+                    finalScoreEl.innerText = score;
+                    const gameOverMessageEl = document.getElementById('gameOverMessage');
+                    if (score === 100) gameOverMessageEl.innerText = "당신은 국어황입니다";
+                    else if (score >= 90) gameOverMessageEl.innerText = "당신은 국어를 잘 합니다!";
+                    else if (score >= 80) gameOverMessageEl.innerText = "당신은 국어를 그럭저럭 합니다";
+                    else if (score >= 70) gameOverMessageEl.innerText = "당신은 국어를 못 합니다";
+                    else gameOverMessageEl.innerText = "당신은 국어를 정말 못 합니다";
+                    startScreen.classList.add('hidden'); 
+                    gameOverScreen.classList.remove('hidden');
+                    document.getElementById('questionBox').classList.add('hidden');
+                } else {
+                    loadQuestion();
+                    gameState = 'playing';
+                }
+            }
+        }
+
+        function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if(window.gameAnimationId) cancelAnimationFrame(window.gameAnimationId);
-            return;
+            if (gameState === 'gameOver') return;
+
+            if (gameState !== 'start') {
+                drawBow();
+                if (arrow.isFlying) drawArrow();
+                targets.forEach(drawTarget);
+            }
+            
+            if (gameState === 'feedback' && feedback.timer > 0) {
+                ctx.save();
+                let alpha = Math.min(1, feedback.timer / 30);
+                ctx.font = 'bold 60px "Noto Sans KR"';
+                if (feedback.type === 'correct') {
+                    ctx.fillStyle = `rgba(76, 175, 80, ${alpha})`;
+                    ctx.fillText('정답!', canvas.width / 2, canvas.height / 2);
+                } else {
+                    ctx.fillStyle = `rgba(244, 67, 54, ${alpha})`;
+                    ctx.fillText('오답!', canvas.width / 2, canvas.height / 2);
+                }
+                ctx.restore();
+            }
+        }
+        
+        function drawTarget(target) {
+            ctx.beginPath();
+            ctx.fillStyle = '#FFFFFF';
+            ctx.arc(target.x, target.y, target.radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.fillStyle = '#A7C7E7'; // Pastel Blue
+            ctx.arc(target.x, target.y, target.radius * 0.8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.fillStyle = '#FFB6B1'; // Pastel Red
+            ctx.arc(target.x, target.y, target.radius * 0.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.fillStyle = '#FFFFAA'; // Pastel Yellow
+            ctx.arc(target.x, target.y, target.radius * 0.2, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.font = 'bold 16px "Noto Sans KR"';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 3;
+            
+            const drawTextWithStroke = (text, x, y) => {
+                ctx.strokeText(text, x, y);
+                ctx.fillStyle = 'black';
+                ctx.fillText(text, x, y);
+            };
+            
+            const words = target.text.split(' ');
+            if (words.length > 1) {
+                drawTextWithStroke(words[0], target.x, target.y - 10);
+                drawTextWithStroke(words.slice(1).join(' '), target.x, target.y + 10);
+            } else {
+                drawTextWithStroke(target.text, target.x, target.y);
+            }
         }
 
-        update();
-        draw();
+        function drawBow() {
+            ctx.strokeStyle = '#8B4513';
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+            ctx.arc(bow.x, bow.y, bow.size / 2, Math.PI, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(bow.x - bow.size / 2, bow.y);
+            ctx.lineTo(bow.x + bow.size / 2, bow.y);
+            ctx.strokeStyle = '#D2B48C';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        function drawArrow() {
+            ctx.save();
+            ctx.translate(arrow.x, arrow.y);
+            ctx.rotate(arrow.angle);
+            ctx.strokeStyle = '#8B4513';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(0, -30);
+            ctx.lineTo(0, 20);
+            ctx.stroke();
+            ctx.fillStyle = '#A0522D';
+            ctx.beginPath();
+            ctx.moveTo(0, 20);
+            ctx.lineTo(-8, 30);
+            ctx.lineTo(8, 30);
+            ctx.closePath();
+            ctx.fill();
+            ctx.fillStyle = '#A9A9A9';
+            ctx.beginPath();
+            ctx.moveTo(0, -30);
+            ctx.lineTo(-6, -20);
+            ctx.lineTo(6, -20);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
         
-        if (gameState === 'feedback') handleFeedback();
+        function fireArrow(target) {
+            if (gameState !== 'playing' || arrow.isFlying) return;
+            
+            const startX = bow.x;
+            const startY = bow.y;
+            const targetX = target.x;
+            const targetY = target.y;
+
+            const dx = targetX - startX;
+            const dy = targetY - startY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) + Math.PI / 2;
+            const speed = 20;
+
+            arrow = {
+                isFlying: true,
+                x: startX,
+                y: startY,
+                targetX: targetX,
+                targetY: targetY,
+                vx: (dx / distance) * speed,
+                vy: (dy / distance) * speed,
+                angle: angle,
+                hitTarget: target
+            };
+        }
         
-        window.gameAnimationId = requestAnimationFrame(gameLoop);
-    }
-    
-    startButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        startGame();
-    });
-    restartButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        init();
-        startGame();
-    });
-    
-    canvas.addEventListener('click', handleCanvasClick);
-    window.addEventListener('resize', init);
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        const gameCanvasEl = document.getElementById('gameCanvas');
-        if (gameCanvasEl && typeof init === 'function') {
+        function handleCanvasClick(event) {
+            if (gameState !== 'playing' || arrow.isFlying) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            let clickedTarget = null;
+            let highestY = -Infinity;
+
+            targets.forEach(target => {
+                const dist = Math.sqrt((x - target.x) ** 2 + (y - target.y) ** 2);
+                if (dist < target.radius) {
+                    if (target.y > highestY) {
+                        highestY = target.y;
+                        clickedTarget = target;
+                    }
+                }
+            });
+
+            if (clickedTarget) {
+                fireArrow(clickedTarget);
+            }
+        }
+
+        function gameLoop() {
+            if (gameState === 'gameOver') {
+                if(window.gameAnimationId) cancelAnimationFrame(window.gameAnimationId);
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas on game over
+                return;
+            }
+
+            update();
+            draw();
+            
+            if (gameState === 'feedback') handleFeedback();
+            
+            window.gameAnimationId = requestAnimationFrame(gameLoop);
+        }
+        
+        startButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            startGame();
+        });
+        restartButton.addEventListener('click', (e) => {
+            e.stopPropagation();
             init();
-        }
+            startGame();
+        });
+        
+        canvas.addEventListener('click', handleCanvasClick);
+        window.addEventListener('resize', init);
+        
+        init();
     });
-
 </script>
 </body>
 </html>
