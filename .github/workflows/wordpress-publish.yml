@@ -37,7 +37,11 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "files=${{ inputs.file }}" >> "$GITHUB_OUTPUT"
           else
-            FILES=$(git diff --name-only HEAD^ HEAD -- 'wordpress-content/**/*.html' | tr '\n' ' ')
+            FILES=$(git diff --name-only HEAD^ HEAD -- ':(glob)wordpress-content/**/*.html' | tr '\n' ' ')
+            if [ -z "$FILES" ]; then
+              echo "게시할 HTML 파일을 찾지 못했습니다." >&2
+              exit 1
+            fi
             echo "files=$FILES" >> "$GITHUB_OUTPUT"
           fi
 
