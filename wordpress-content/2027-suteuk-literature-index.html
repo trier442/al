@@ -1,0 +1,66 @@
+<!-- title: 2027 수능특강 문학 상세 해설 및 변형 문제 -->
+<!-- slug: 2027-수능특강-문학-상세-해설-및-변형-문제 -->
+<!-- status: publish -->
+<!-- type: page -->
+<!-- revision: 1 -->
+<!-- excerpt: 2027학년도 EBS 수능특강 문학 전 작품의 상세 해설과 변형문제를 작품별로 확인할 수 있습니다. -->
+
+<style>
+.mk-lit-hub{max-width:1100px;margin:0 auto;color:#202520;line-height:1.7}
+.mk-lit-hero{padding:34px 26px;text-align:center;background:linear-gradient(135deg,#eaf7ed,#f8fcf8);border:1px solid #c9e1ce;border-radius:14px}
+.mk-lit-hero h2{margin:0 0 8px;color:#205f38;font-size:31px}.mk-lit-hero p{margin:0;color:#536057}
+.mk-lit-filter{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:28px 0}
+.mk-lit-filter button{padding:10px 15px;border:1px solid #8bb699;border-radius:22px;background:#fff;color:#285e39;font:inherit;cursor:pointer}
+.mk-lit-filter button.active,.mk-lit-filter button:hover{background:#2f7548;color:#fff;border-color:#2f7548}
+.mk-lit-heading{margin:35px 0 18px;padding-bottom:9px;border-bottom:3px solid #4d8c60;color:#245f38}
+.mk-lit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:17px}
+.mk-lit-card{display:block;padding:21px;border:1px solid #d1ddd3;border-radius:11px;background:#fff;color:#222;text-decoration:none;box-shadow:0 3px 12px rgba(30,80,45,.07);transition:.18s}
+.mk-lit-card:hover{border-color:#4b9160;transform:translateY(-2px);box-shadow:0 7px 18px rgba(30,80,45,.13)}
+.mk-lit-tag{display:inline-block;margin-bottom:9px;padding:4px 9px;border-radius:12px;background:#e8f4eb;color:#28633b;font-size:13px;font-weight:700}
+.mk-lit-card strong{display:block;font-size:19px;line-height:1.5;color:#1d5733}.mk-lit-card span:last-child{display:block;margin-top:8px;color:#667069;font-size:14px}
+.mk-lit-empty{padding:25px;text-align:center;color:#69716b;background:#fafafa;border:1px dashed #ccd5ce;border-radius:9px}
+@media(max-width:600px){.mk-lit-hero h2{font-size:25px}.mk-lit-filter{justify-content:flex-start}.mk-lit-filter button{font-size:14px;padding:8px 12px}}
+</style>
+
+<div class="mk-lit-hub">
+ <section class="mk-lit-hero">
+  <h2>2027 수능특강 문학</h2>
+  <p>EBS 연계교재 전 작품 해설 · 핵심 출제 포인트 · 선택지 클릭형 변형문제</p>
+ </section>
+
+ <nav class="mk-lit-filter" aria-label="작품 분류">
+  <button type="button" class="active" data-filter="all">전체보기</button>
+  <button type="button" data-filter="교과서 개념">교과서 개념</button>
+  <button type="button" data-filter="고전 시가">고전 시가</button>
+  <button type="button" data-filter="현대시">현대시</button>
+  <button type="button" data-filter="현대 소설">현대 소설</button>
+  <button type="button" data-filter="고전 산문">고전 산문</button>
+  <button type="button" data-filter="극 · 수필">극 · 수필</button>
+  <button type="button" data-filter="갈래 복합">갈래 복합</button>
+  <button type="button" data-filter="실전 학습">실전 학습</button>
+ </nav>
+
+ <h2 class="mk-lit-heading">상세 해설 및 변형문제</h2>
+ <p>원하시는 작품을 클릭하면 작품 해설과 변형문제 페이지로 이동합니다. 수능특강의 맨 뒤 작품부터 순서대로 추가됩니다.</p>
+
+ <div class="mk-lit-grid" id="mk-lit-grid">
+  <a class="mk-lit-card" data-categories="고전 시가 실전 학습" href="https://modukorean.co.kr/2027-%EC%88%98%EB%8A%A5%ED%8A%B9%EA%B0%95-%EB%AC%B8%ED%95%99-%EB%B0%95%ED%9A%A8%EA%B4%80-%EC%9E%84-%EA%B7%B8%EB%A6%B0-%EC%83%81%EC%82%AC%EB%AA%BD%EC%9D%B4-%ED%95%B4%EC%84%A4-%EB%B3%80%ED%98%95%EB%AC%B8%EC%A0%9C/">
+   <span class="mk-lit-tag">실전 학습 · 고전 시가</span>
+   <strong>박효관 「임 그린 상사몽이~」</strong>
+   <span>작품 해설 · 시어 분석 · 출제 포인트 · 변형문제 10제</span>
+  </a>
+ </div>
+ <p class="mk-lit-empty" id="mk-lit-empty" hidden>해당 분류의 작품은 순차적으로 추가됩니다.</p>
+</div>
+
+<script>
+(function(){
+ var buttons=document.querySelectorAll('.mk-lit-filter button'),cards=document.querySelectorAll('.mk-lit-card'),empty=document.getElementById('mk-lit-empty');
+ buttons.forEach(function(button){button.addEventListener('click',function(){
+  buttons.forEach(function(b){b.classList.remove('active')});button.classList.add('active');
+  var filter=button.getAttribute('data-filter'),shown=0;
+  cards.forEach(function(card){var visible=filter==='all'||card.getAttribute('data-categories').indexOf(filter)>-1;card.style.display=visible?'block':'none';if(visible)shown++;});
+  empty.hidden=shown!==0;
+ });});
+})();
+</script>
