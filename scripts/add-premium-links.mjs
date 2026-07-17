@@ -27,7 +27,7 @@ for(const item of items){
  if(found.length!==1)throw new Error(`${item.title}: 게시글을 정확히 1개 찾지 못했습니다. (${found.length})`);
  const post=found[0];
  let content=post.content.raw;
- content=content.replace(/<!-- mk-premium-ad:(?:top|bottom):start -->[\s\S]*?<!-- mk-premium-ad:\1:end -->/g,"").trim();
+ content=content.replace(/<!-- mk-premium-ad:(?:top|bottom):start -->[\\s\\S]*?<!-- mk-premium-ad:(?:top|bottom):end -->/g,"").trim();
  content=`${ad(item,"top")}\n\n${content}\n\n${ad(item,"bottom")}`;
  await wp(`${base}/wp-json/wp/v2/posts/${post.id}`,{method:"POST",headers:{"Content-Type":"application/json; charset=utf-8"},body:JSON.stringify({content})});
  console.log(`광고 삽입: ${item.title} -> ${item.premium_url}`);
