@@ -53,6 +53,7 @@ function parseFile(file) {
         .map(v => Number(v.trim()))
         .filter(Number.isInteger),
       featured_image: meta.featured_image || "",
+      post_id: Number(meta.post_id) || 0,
     },
     content,
   };
@@ -85,9 +86,9 @@ async function uploadImage(file) {
 async function publish(file) {
   const { meta, content } = parseFile(file);
   const endpoint = `${baseUrl}/wp-json/wp/v2/${meta.type}`;
-  const existing = await wpFetch(
-    `${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit`
-  );
+  const existing = meta.post_id
+    ? [{ id: meta.post_id }]
+    : await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit`);
 
   const payload = {
     title: meta.title,
