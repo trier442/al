@@ -1,0 +1,50 @@
+name: WordPress 게시
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "wordpress-content/**/*.html"
+      - "wordpress-content/images/**"
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "게시할 HTML 파일 경로"
+        required: true
+        default: "wordpress-content/test-draft.html"
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 게시 대상 확인
+        id: files
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "files=${{ inputs.file }}" >> "$GITHUB_OUTPUT"
+          else
+            FILES=$(git diff --name-only HEAD^ HEAD -- 'wordpress-content/**/*.html' | tr '\n' ' ')
+            echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: WordPress로 전송
+        if: steps.files.outputs.files != ''
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }}
