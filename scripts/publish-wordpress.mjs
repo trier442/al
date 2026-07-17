@@ -90,17 +90,19 @@ async function publish(file) {
     ? [{ id: meta.post_id }]
     : await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit`);
 
-  const payload = {
-    title: meta.title,
-    slug: meta.slug,
-    status: meta.status,
-    content,
-  };
-  if (meta.excerpt) payload.excerpt = meta.excerpt;
-  if (meta.type === "posts" && meta.categories.length) {
+  const payload = meta.post_id
+    ? { content }
+    : {
+        title: meta.title,
+        slug: meta.slug,
+        status: meta.status,
+        content,
+      };
+  if (!meta.post_id && meta.excerpt) payload.excerpt = meta.excerpt;
+  if (!meta.post_id && meta.type === "posts" && meta.categories.length) {
     payload.categories = meta.categories;
   }
-  if (meta.featured_image) {
+  if (!meta.post_id && meta.featured_image) {
     payload.featured_media = await uploadImage(meta.featured_image);
   }
 
