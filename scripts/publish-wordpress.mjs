@@ -33,7 +33,7 @@ function parseFile(file) {
   const meta = {};
   // 게시 메타데이터만 제거한다. Gutenberg의 <!-- wp:html --> 같은 블록 표시는
   // 본문에 남겨야 WordPress가 임의의 <p> 태그를 삽입하지 않는다.
-  const pattern = /<!--\s*(title|slug|status|type|categories|category_name|revision|excerpt|featured_image|post_id)\s*:\s*(.*?)\s*-->/g;
+  const pattern = /<!--\s*(title|slug|status|type|categories|revision|excerpt|featured_image|post_id)\s*:\s*(.*?)\s*-->/g;
   let match;
   while ((match = pattern.exec(raw))) meta[match[1]] = match[2].trim();
   const content = raw.replace(pattern, "").trim();
@@ -54,29 +54,11 @@ function parseFile(file) {
         .split(",")
         .map(v => Number(v.trim()))
         .filter(Number.isInteger),
-      category_name: meta.category_name || "",
       featured_image: meta.featured_image || "",
       post_id: Number(meta.post_id) || 0,
     },
     content,
   };
-}
-
-async function ensureCategory(name) {
-  const endpoint = `${baseUrl}/wp-json/wp/v2/categories`;
-  const matches = await wpFetch(
-    `${endpoint}?search=${encodeURIComponent(name)}&per_page=100&context=edit`
-  );
-  const exact = matches.find(category => category.name === name);
-  if (exact) return exact.id;
-
-  const created = await wpFetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json; charset=utf-8" },
-    body: JSON.stringify({ name }),
-  });
-  console.log(`카테고리 생성: ${created.name} (#${created.id})`);
-  return created.id;
 }
 
 function mimeType(file) {
@@ -121,9 +103,6 @@ async function publish(file) {
   if (!meta.post_id && meta.excerpt) payload.excerpt = meta.excerpt;
   if (!meta.post_id && meta.type === "posts" && meta.categories.length) {
     payload.categories = meta.categories;
-  }
-  if (!meta.post_id && meta.type === "posts" && !meta.categories.length && meta.category_name) {
-    payload.categories = [await ensureCategory(meta.category_name)];
   }
   if (!meta.post_id && meta.featured_image) {
     payload.featured_media = await uploadImage(meta.featured_image);
