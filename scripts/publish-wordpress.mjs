@@ -31,7 +31,9 @@ async function wpFetch(url, options = {}) {
 function parseFile(file) {
   const raw = fs.readFileSync(file, "utf8");
   const meta = {};
-  const pattern = /<!--\s*([a-z_]+)\s*:\s*(.*?)\s*-->/g;
+  // 게시 메타데이터만 제거한다. Gutenberg의 <!-- wp:html --> 같은 블록 표시는
+  // 본문에 남겨야 WordPress가 임의의 <p> 태그를 삽입하지 않는다.
+  const pattern = /<!--\s*(title|slug|status|type|categories|revision|excerpt|featured_image|post_id)\s*:\s*(.*?)\s*-->/g;
   let match;
   while ((match = pattern.exec(raw))) meta[match[1]] = match[2].trim();
   const content = raw.replace(pattern, "").trim();
