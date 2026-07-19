@@ -41,7 +41,8 @@ for (const page of source.pages) {
   const quizzes = [...html.matchAll(/<section class="quiz" data-answer="([1-5])">([\s\S]*?)<\/section>/g)];
 
   assert((html.match(/<article class="sut-read">/g) || []).length === 1, page.number, "표준 본문 래퍼가 1개가 아님");
-  assert(/<!-- revision: 2 -->/.test(html), page.number, "revision 2 메타데이터 누락");
+  const revision = Number((html.match(/<!-- revision: (\d+) -->/) || [])[1]);
+  assert(Number.isInteger(revision) && revision >= 2, page.number, "revision 2 이상 메타데이터 누락");
   assert((html.match(/class="study-blank paren-blank"/g) || []).length === 10, page.number, "괄호형 문제가 10개가 아님");
   assert(parenAnswers.length === 10 && new Set(parenAnswers).size === 10, page.number, "괄호형 정답이 중복되거나 10개가 아님");
   assert(coreCards.length === page.parts.length, page.number, "핵심 요약의 제시문 구분 수 불일치");
