@@ -1,8 +1,6 @@
 name: WordPress 게시
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
   push:
     branches: [main]
     paths:
@@ -36,10 +34,7 @@ jobs:
         id: files
         shell: bash
         run: |
-          if [ "${{ github.event_name }}" = "schedule" ]; then
-            FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-reading-*.html' | sort | tr '\n' ' ')
-            echo "files=$FILES" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "files=${{ inputs.file }}" >> "$GITHUB_OUTPUT"
           else
             FILES=$(git diff --name-only HEAD^ HEAD -- ':(glob)wordpress-content/**/*.html' | tr '\n' ' ')
