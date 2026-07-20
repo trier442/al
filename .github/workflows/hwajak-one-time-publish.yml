@@ -1,6 +1,9 @@
 name: 2027 화작 57개 일회 게시
 
 on:
+  pull_request:
+    types: [closed]
+    branches: [main]
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:
@@ -14,6 +17,7 @@ permissions:
 
 jobs:
   publish:
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -56,6 +60,7 @@ jobs:
           rm -f .github/workflows/hwajak-one-time-publish.yml
           rm -f scripts/hwajak-payload/publish-20260720.txt
           rm -f scripts/hwajak-payload/publish-pr-20260720.txt
+          rm -f scripts/hwajak-payload/publish-pr2-20260720.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
