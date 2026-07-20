@@ -47,6 +47,10 @@ for first in ALPHABET:
                 json_ok = isinstance(parsed, list) and len(parsed) == 57
             except Exception:
                 json_ok = False
+            expected_crc = int.from_bytes(decoded[-8:-4], "little")
+            expected_size = int.from_bytes(decoded[-4:], "little")
+            actual_crc = zlib.crc32(raw) & 0xFFFFFFFF
+            actual_size = len(raw) & 0xFFFFFFFF
             results.append({
                 "replacement": replacement,
                 "raw": raw,
@@ -57,6 +61,12 @@ for first in ALPHABET:
                 "bracket_gap": bracket_gap,
                 "quote_parity": quote_parity,
                 "json_ok": json_ok,
+                "crc_match": expected_crc == actual_crc,
+                "size_match": expected_size == actual_size,
+                "expected_crc": expected_crc,
+                "actual_crc": actual_crc,
+                "expected_size": expected_size,
+                "actual_size": actual_size,
             })
         except Exception as exc:
             results.append({
@@ -69,10 +79,13 @@ for first in ALPHABET:
                 "bracket_gap": 10**9,
                 "quote_parity": 1,
                 "json_ok": False,
+                "crc_match": False,
+                "size_match": False,
                 "error": f"{type(exc).__name__}: {exc}",
             })
 
 results.sort(key=lambda item: (
+    not (item["crc_match"] and item["size_match"]),
     not item["json_ok"],
     item["replacements"],
     item["controls"],
@@ -82,35 +95,40 @@ results.sort(key=lambda item: (
 ))
 
 print(f"손상 구간: part02[{start}:{end}]={target[start:end]!r}; 후보 조합 {len(results)}개")
-print("UTF-8·JSON 구조 품질 상위 후보")
-for rank, item in enumerate(results[:40], 1):
+print("CRC·UTF-8·JSON 구조 품질 상위 후보")
+for rank, item in enumerate(results[:50], 1):
     print(
-        f"{rank:02d}. replacement={item['replacement']} json={item['json_ok']} "
-        f"replacementChars={item['replacements']} controls={item['controls']} "
+        f"{rank:02d}. replacement={item['replacement']} crc={item.get('crc_match')} size={item.get('size_match')} "
+        f"json={item['json_ok']} replacementChars={item['replacements']} controls={item['controls']} "
         f"braceGap={item['brace_gap']} bracketGap={item['bracket_gap']} quoteParity={item['quote_parity']} "
-        f"bytes={len(item['raw'])}"
+        f"actualCRC={item.get('actual_crc', 0):08x} expectedCRC={item.get('expected_crc', 0):08x} "
+        f"actualSize={item.get('actual_size', 0)} expectedSize={item.get('expected_size', 0)}"
     )
 
-best = results[0]
-best_raw = best["raw"]
-best_text = best["text"]
-print(f"선정 후보: {best['replacement']} replacementChars={best['replacements']} braceGap={best['brace_gap']} bracketGap={best['bracket_gap']}")
+perfect = [item for item in results if item.get("json_ok") and item.get("replacements") == 0]
+print(f"완전 UTF-8 JSON 후보: {len(perfect)}개 = {', '.join(item['replacement'] for item in perfect)}")
 
-# 최초와 최후 손상 문자의 주변을 별도 파일에 저장합니다.
-positions = [i for i, ch in enumerate(best_text) if ch == "�"]
-if positions:
-    char_start = max(0, positions[0] - 3000)
-    char_end = min(len(best_text), positions[-1] + 3000)
-else:
-    char_start, char_end = 0, min(len(best_text), 12000)
-slice_text = best_text[char_start:char_end]
-lines = [
-    f"candidate={best['replacement']}",
-    f"replacementChars={best['replacements']}",
-    f"char-range={char_start}:{char_end}",
-    "",
-]
-for offset in range(0, len(slice_text), 240):
-    lines.append(f"[{char_start + offset:06d}] {slice_text[offset:offset + 240]}")
-(ROOT / "scripts" / "hwajak-corrupt-slice.txt").write_text("\n".join(lines), encoding="utf-8")
-print(f"손상 원문 조각 저장: scripts/hwajak-corrupt-slice.txt ({char_start}:{char_end})")
+if perfect:
+    baseline = perfect[0]["text"]
+    differing = []
+    for index in range(len(baseline)):
+        chars = {item["text"][index] for item in perfect if index < len(item["text"])}
+        if len(chars) > 1:
+            differing.append(index)
+    if differing:
+        diff_start = max(0, min(differing) - 350)
+        diff_end = min(len(baseline), max(differing) + 351)
+    else:
+        diff_start, diff_end = 0, min(len(baseline), 1200)
+    lines = [
+        f"candidates={','.join(item['replacement'] for item in perfect)}",
+        f"diff-char-range={diff_start}:{diff_end}",
+        "",
+    ]
+    for item in perfect:
+        lines.append(f"===== candidate {item['replacement']} crc={item['crc_match']} size={item['size_match']} =====")
+        segment = item["text"][diff_start:diff_end]
+        for offset in range(0, len(segment), 220):
+            lines.append(f"[{diff_start + offset:06d}] {segment[offset:offset + 220]}")
+    (ROOT / "scripts" / "hwajak-corrupt-slice.txt").write_text("\n".join(lines), encoding="utf-8")
+    print(f"완전 후보 차이 문맥 저장: scripts/hwajak-corrupt-slice.txt ({diff_start}:{diff_end})")
