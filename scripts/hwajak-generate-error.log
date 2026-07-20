@@ -1,9 +1,9 @@
-file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:48
-  throw new Error(`복원 후보가 1개여야 하지만 ${successes.length}개입니다: ${successes.map((item) => item.replacement).join(", ")}`);
+file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:77
+  throw new Error(`JSON 구조를 통과한 복원 후보가 1개여야 하지만 ${successes.length}개입니다: ${successes.map((item) => item.replacement).join(", ")}`);
         ^
 
-Error: 복원 후보가 1개여야 하지만 0개입니다: 
-    at file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:48:9
+Error: JSON 구조를 통과한 복원 후보가 1개여야 하지만 0개입니다: 
+    at file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:77:9
     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
