@@ -10,60 +10,46 @@ Error: JSON 구조를 통과한 복원 후보가 1개여야 하지만 0개입니
 
 Node.js v22.23.1
 손상 구간: part02[7387:7391]='АҞӘА'; 후보 조합 4096개
-01. replacement=n8 consumed=68288 output=411541 error=Error -3 while decompressing data: incorrect data check
-02. replacement=X8 consumed=68288 output=411541 error=Error -3 while decompressing data: incorrect data check
-03. replacement=H8 consumed=68288 output=411541 error=Error -3 while decompressing data: incorrect data check
-04. replacement=38 consumed=68288 output=411541 error=Error -3 while decompressing data: incorrect data check
-05. replacement=ns consumed=68288 output=411540 error=Error -3 while decompressing data: incorrect data check
-06. replacement=Xs consumed=68288 output=411540 error=Error -3 while decompressing data: incorrect data check
-07. replacement=Hs consumed=68288 output=411540 error=Error -3 while decompressing data: incorrect data check
-08. replacement=3s consumed=68288 output=411540 error=Error -3 while decompressing data: incorrect data check
-09. replacement=zf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-10. replacement=ze consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-11. replacement=zd consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-12. replacement=zc consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-13. replacement=wf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-14. replacement=we consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-15. replacement=wd consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-16. replacement=wc consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-17. replacement=tf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-18. replacement=te consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-19. replacement=td consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-20. replacement=tc consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-21. replacement=t9 consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-22. replacement=t8 consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-23. replacement=t/ consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-24. replacement=t+ consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-25. replacement=sf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-26. replacement=se consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-27. replacement=sd consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-28. replacement=sc consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-29. replacement=rf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-30. replacement=re consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
-
-상위 후보 JSON 분석
-01. replacement=n8 UTF-8 오류 start=93485 end=93486 bytes=b4 reason=invalid start byte
-    byte-context='�� 좋을지 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데.","예� 타인에게선택지를료는 공동7 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있�'
-02. replacement=X8 UTF-8 오류 start=93485 end=93486 bytes=b4 reason=invalid start byte
-    byte-context='�� 좋을지 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데에 의� 타인에게선택지를료는 공동7 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있�'
-03. replacement=H8 UTF-8 오류 start=93478 end=93479 bytes=b0 reason=invalid start byte
-    byte-context='�� 내야 좋을지 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데� 넘어 타인에게선택지를료는 공동7 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점�'
-04. replacement=38 UTF-8 오류 start=93737 end=93738 bytes=a8 reason=invalid start byte
-    byte-context='� 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있지만, 건축물 자체의 흔들림을 막을 수는 없기에 강한 �nd":8,"answer"� 창�[반 · 문제 해결��체에 옥숤이 �,"선�� 창�[반 ����체에 의해�지에� 설곌 되��엝� 준� �nd":8,"a�����요소�있�로 tart":9�� 때��을 �'
-05. replacement=ns UTF-8 오류 start=93485 end=93486 bytes=b4 reason=invalid start byte
-    byte-context='�� 좋을지 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데.","예� 타인에� 선택지륐료는 공�7� 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있�'
-06. replacement=Xs UTF-8 오류 start=93485 end=93486 bytes=b4 reason=invalid start byte
-    byte-context='�� 좋을지 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데에 의� 타인에� 선택지륐료는 공�7� 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있�'
-07. replacement=Hs UTF-8 오류 start=93478 end=93479 bytes=b0 reason=invalid start byte
-    byte-context='�� 내야 좋을지 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데� 넘어 타인에� 선택지륐료는 공�7� 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점�'
-08. replacement=3s UTF-8 오류 start=93496 end=93498 bytes=eab2 reason=invalid continuation byte
-    byte-context='� 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데. 마짴 타인에� 선택지륐료는 공�7� 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있지만, 건�'
-09. replacement=zf UTF-8 오류 start=93505 end=93507 bytes=eba0 reason=invalid continuation byte
-    byte-context='��다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데. 마째에 선택하영하� 자료는 �7�진 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있지만, 건축물 자�'
-10. replacement=ze UTF-8 오류 start=93486 end=93487 bytes=9c reason=invalid start byte
-    byte-context='� 좋을지 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데. 마진� 우리는 �영하� 자료는 �7�진 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있�'
-11. replacement=zd UTF-8 오류 start=93483 end=93485 bytes=eca7 reason=invalid continuation byte
-    byte-context='�야 좋을지 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데. 마�을 요구받�영하� 자료는 �7�진 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있'
-12. replacement=zc UTF-8 오류 start=93486 end=93487 bytes=b4 reason=invalid start byte
-    byte-context='� 좋을지 모르겠다는 학생들이 많았어. ‘나눔의 날’ 행사는 자신에게 필요하지 않은 물건이 타인에게 가서 의미 있게 쓰이는 데. 마짝�다.","예�영하� 자료는 �7�진 구조’라고 한다.","이는 가장 흔히 쓰이는 방법이며 보통의 건축물보다 붕괴될 위험이 적다는 장점이 있�'
-손상 원문 조각 저장: scripts/hwajak-corrupt-slice.txt (86000:104000, candidate=n8)
+UTF-8·JSON 구조 품질 상위 후보
+01. replacement=SH json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+02. replacement=UG json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+03. replacement=Zn json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+04. replacement=am json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+05. replacement=cG json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+06. replacement=dm json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+07. replacement=e2 json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+08. replacement=Qn json=True replacementChars=4 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+09. replacement=YH json=True replacementChars=4 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+10. replacement=a3 json=True replacementChars=4 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+11. replacement=Rm json=True replacementChars=34 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+12. replacement=Un json=True replacementChars=34 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+13. replacement=aH json=True replacementChars=34 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+14. replacement=WG json=True replacementChars=42 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+15. replacement=QG json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+16. replacement=Rn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+17. replacement=Sm json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+18. replacement=U3 json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+19. replacement=UH json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+20. replacement=Vm json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+21. replacement=Vn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+22. replacement=W2 json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+23. replacement=Wm json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+24. replacement=YG json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+25. replacement=Yn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+26. replacement=Zm json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+27. replacement=aG json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+28. replacement=cH json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+29. replacement=cn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+30. replacement=dn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+31. replacement=eG json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+32. replacement=eH json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+33. replacement=em json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+34. replacement=QH json=True replacementChars=69 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+35. replacement=SG json=True replacementChars=69 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+36. replacement=S3 json=True replacementChars=73 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+37. replacement=WH json=True replacementChars=73 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+38. replacement=c3 json=True replacementChars=73 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+39. replacement=+2 json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+40. replacement=0G json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
+선정 후보: SH replacementChars=0 braceGap=0 bracketGap=0
+손상 원문 조각 저장: scripts/hwajak-corrupt-slice.txt (0:12000)
