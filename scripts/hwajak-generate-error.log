@@ -64,3 +64,4 @@ CRC·UTF-8·JSON 구조 품질 상위 후보
 완전 UTF-8 JSON 후보: 7개 = SH, UG, Zn, am, cG, dm, e2
 게시글별 후보 차이표 저장: scripts/hwajak-candidate-diff.txt, indexes=[13, 14, 15, 18, 21]
 완전 후보 차이 문맥 저장: scripts/hwajak-corrupt-slice.txt (44312:75369)
+저장 완료: /home/runner/work/al/al/scripts/hwajak-cg-affected.json, 후보=cG, 인덱스=[13, 14, 15, 18, 21]
