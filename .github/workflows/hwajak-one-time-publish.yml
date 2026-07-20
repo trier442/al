@@ -35,6 +35,7 @@ jobs:
         shell: bash
         run: |
           : > /tmp/hwajak-generate.log
+          node scripts/patch-hwajak-recovery-summary.mjs >> /tmp/hwajak-generate.log 2>&1
           if ! node scripts/recover-hwajak-payload.mjs >> /tmp/hwajak-generate.log 2>&1; then
             python3 scripts/rank-hwajak-recovery.py >> /tmp/hwajak-generate.log 2>&1
             python3 scripts/dump-hwajak-candidate.py >> /tmp/hwajak-generate.log 2>&1
