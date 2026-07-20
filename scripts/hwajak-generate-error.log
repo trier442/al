@@ -1,10 +1,14 @@
-file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:24
-    throw new Error(`${slug}: 요약 길이 ${summary.length}자는 695~1,057자 범위를 벗어났습니다.`);
-          ^
+화작 교정 요약 최소 길이 보완 코드를 적용했습니다.
+file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:15
+    if (start < 0) throw new Error(`요약에서 빈칸 정답을 찾지 못했습니다: ${answer}`);
+                         ^
 
-Error: 2027-suteuk-hwajak-s06a: 요약 길이 657자는 695~1,057자 범위를 벗어났습니다.
-    at article (file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:24:11)
-    at file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:45:7
+Error: 요약에서 빈칸 정답을 찾지 못했습니다: 판매
+    at file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:15:26
+    at Array.map (<anonymous>)
+    at makeSpans (file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:13:18)
+    at article (file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:39:17)
+    at file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:47:7
     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
