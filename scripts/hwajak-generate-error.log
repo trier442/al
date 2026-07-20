@@ -1,55 +1,65 @@
-file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:77
-  throw new Error(`JSON 구조를 통과한 복원 후보가 1개여야 하지만 ${successes.length}개입니다: ${successes.map((item) => item.replacement).join(", ")}`);
+file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:101
+  throw new Error(`CRC·크기를 모두 통과한 후보가 1개여야 하지만 ${exact.length}개입니다. JSON 후보: ${successes.map((item) => `${item.replacement}(crc=${item.crcMatch},size=${item.sizeMatch})`).join(", ")}`);
         ^
 
-Error: JSON 구조를 통과한 복원 후보가 1개여야 하지만 0개입니다: 
-    at file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:77:9
+Error: CRC·크기를 모두 통과한 후보가 1개여야 하지만 0개입니다. JSON 후보: 
+    at file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:101:9
     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
 
 Node.js v22.23.1
 손상 구간: part02[7387:7391]='АҞӘА'; 후보 조합 4096개
-UTF-8·JSON 구조 품질 상위 후보
-01. replacement=SH json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-02. replacement=UG json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-03. replacement=Zn json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-04. replacement=am json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-05. replacement=cG json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-06. replacement=dm json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-07. replacement=e2 json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-08. replacement=Qn json=True replacementChars=4 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-09. replacement=YH json=True replacementChars=4 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-10. replacement=a3 json=True replacementChars=4 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-11. replacement=Rm json=True replacementChars=34 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-12. replacement=Un json=True replacementChars=34 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-13. replacement=aH json=True replacementChars=34 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-14. replacement=WG json=True replacementChars=42 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-15. replacement=QG json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-16. replacement=Rn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-17. replacement=Sm json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-18. replacement=U3 json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-19. replacement=UH json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-20. replacement=Vm json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-21. replacement=Vn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-22. replacement=W2 json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-23. replacement=Wm json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-24. replacement=YG json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-25. replacement=Yn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-26. replacement=Zm json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-27. replacement=aG json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-28. replacement=cH json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-29. replacement=cn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-30. replacement=dn json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-31. replacement=eG json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-32. replacement=eH json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-33. replacement=em json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-34. replacement=QH json=True replacementChars=69 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-35. replacement=SG json=True replacementChars=69 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-36. replacement=S3 json=True replacementChars=73 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-37. replacement=WH json=True replacementChars=73 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-38. replacement=c3 json=True replacementChars=73 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-39. replacement=+2 json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-40. replacement=0G json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 bytes=411353
-선정 후보: SH replacementChars=0 braceGap=0 bracketGap=0
-손상 원문 조각 저장: scripts/hwajak-corrupt-slice.txt (0:12000)
+CRC·UTF-8·JSON 구조 품질 상위 후보
+01. replacement=SH crc=False size=True json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=197d1d58 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+02. replacement=UG crc=False size=True json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=1989051f expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+03. replacement=Zn crc=False size=True json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=ab67e788 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+04. replacement=am crc=False size=True json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=abac8383 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+05. replacement=cG crc=False size=True json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=ad543343 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+06. replacement=dm crc=False size=True json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=10f66045 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+07. replacement=e2 crc=False size=True json=True replacementChars=0 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=23ca8e2b expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+08. replacement=Qn crc=False size=True json=True replacementChars=4 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=5ac52f7c expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+09. replacement=YH crc=False size=True json=True replacementChars=4 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=ad8ad618 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+10. replacement=a3 crc=False size=True json=True replacementChars=4 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=2c40b93f expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+11. replacement=Rm crc=False size=True json=True replacementChars=34 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=ac9e2e93 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+12. replacement=Un crc=False size=True json=True replacementChars=34 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=1170e7d4 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+13. replacement=aH crc=False size=True json=True replacementChars=34 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=aa19b036 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+14. replacement=WG crc=False size=True json=True replacementChars=42 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=f2aaab85 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+15. replacement=QG crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=0a533675 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+16. replacement=Rn crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=638ae16e expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+17. replacement=Sm crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=a7fdc281 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+18. replacement=U3 crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=3b7eaa7c expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+19. replacement=UH crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=932b7103 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+20. replacement=Vm crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=1092114c expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+21. replacement=Vn crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=504f146e expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+22. replacement=W2 crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=bdb79090 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+23. replacement=Wm crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=85b92314 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+24. replacement=YG crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=13a77ee2 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+25. replacement=Yn crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=18bdd6a2 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+26. replacement=Zm crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=add06750 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+27. replacement=aG crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=2962aba3 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+28. replacement=cH crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=a4e78f45 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+29. replacement=cn crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=49db2439 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+30. replacement=dn crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=7091e200 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+31. replacement=eG crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=3aea0273 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+32. replacement=eH crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=11502627 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+33. replacement=em crc=False size=True json=True replacementChars=65 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=f2a7b2c2 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+34. replacement=QH crc=False size=True json=True replacementChars=69 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=5748397b expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+35. replacement=SG crc=False size=True json=True replacementChars=69 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=5dcb03bc expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+36. replacement=S3 crc=False size=True json=True replacementChars=73 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=9c48b381 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+37. replacement=WH crc=False size=True json=True replacementChars=73 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=425990e0 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+38. replacement=c3 crc=False size=True json=True replacementChars=73 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=39ba7860 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+39. replacement=+2 crc=False size=True json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=288f7323 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+40. replacement=0G crc=False size=True json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=12ccf817 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+41. replacement=5n crc=False size=True json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=a0221a80 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+42. replacement=6m crc=False size=True json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=a0e97e8b expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+43. replacement=8G crc=False size=True json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=a611ce4b expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+44. replacement=9m crc=False size=True json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=1bb39d4d expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+45. replacement=yH crc=False size=True json=True replacementChars=888 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=1238e050 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+46. replacement=4H crc=False size=True json=True replacementChars=892 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=a6cf2b10 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+47. replacement=63 crc=False size=True json=True replacementChars=892 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=27054437 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+48. replacement=CH crc=False size=True json=True replacementChars=892 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=871591c2 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+49. replacement=EG crc=False size=True json=True replacementChars=892 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=87e18985 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+50. replacement=Jn crc=False size=True json=True replacementChars=892 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=350f6b12 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
+완전 UTF-8 JSON 후보: 7개 = SH, UG, Zn, am, cG, dm, e2
+완전 후보 차이 문맥 저장: scripts/hwajak-corrupt-slice.txt (44312:75369)
