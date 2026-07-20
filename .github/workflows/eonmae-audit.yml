@@ -1,9 +1,9 @@
-name: 2027 언어와 매체 정제본 재게시
+name: 2027 언어와 매체 최종 검증 게시
 
 on:
   pull_request:
     branches: [main]
-    types: [closed]
+    types: [opened]
   workflow_dispatch:
 
 permissions:
@@ -11,21 +11,22 @@ permissions:
 
 jobs:
   rebuild-publish:
-    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
-      - name: 저장소 가져오기
+      - name: PR 브랜치 가져오기
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
       - name: Node.js 설정
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: 정제표 기준 42개 재작성
+      - name: 최종 코드로 42개 재작성
         run: node scripts/rebuild-eonmae-pages.mjs
       - name: 개념·빈칸·문항·해설 전수 검증
         run: node scripts/validate-eonmae-pages.mjs
-      - name: WordPress 42개와 통합 목록 재게시
+      - name: WordPress 42개와 통합 목록 최종 게시
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
@@ -37,11 +38,11 @@ jobs:
           echo "게시 대상: ${COUNT}개"
           test "$COUNT" -eq 43
           node scripts/publish-wordpress.mjs $FILES
-      - name: 교정된 HTML 저장
+      - name: 최종 HTML을 PR 브랜치에 저장
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add wordpress-content/2027-suteuk-eonmae-*.html
-          git commit -m "2027 언어와 매체 정제 교정본 저장" || exit 0
-          git push
+          git commit -m "2027 언어와 매체 최종 검증 게시본 저장" || exit 0
+          git push origin HEAD:${{ github.head_ref }}
