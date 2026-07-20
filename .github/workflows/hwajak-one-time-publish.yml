@@ -33,7 +33,9 @@ jobs:
         id: generate
         continue-on-error: true
         shell: bash
-        run: node scripts/standardize-hwajak-pages.mjs > /tmp/hwajak-generate.log 2>&1
+        run: |
+          node scripts/diagnose-hwajak-payload.mjs > /tmp/hwajak-generate.log 2>&1
+          node scripts/standardize-hwajak-pages.mjs >> /tmp/hwajak-generate.log 2>&1
 
       - name: 생성 오류 저장
         if: steps.generate.outcome == 'failure'
@@ -81,6 +83,7 @@ jobs:
           rm -f scripts/hwajak-payload/publish-pr-20260720.txt
           rm -f scripts/hwajak-payload/publish-pr2-20260720.txt
           rm -f scripts/hwajak-payload/publish-pr3-20260720.txt
+          rm -f scripts/hwajak-payload/publish-pr4-20260720.txt
           rm -f scripts/hwajak-generate-error.log
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
