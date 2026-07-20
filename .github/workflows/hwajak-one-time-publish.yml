@@ -84,14 +84,7 @@ jobs:
         shell: bash
         run: |
           rm -f .github/workflows/hwajak-one-time-publish.yml
-          rm -f scripts/hwajak-payload/publish-20260720.txt
-          rm -f scripts/hwajak-payload/publish-pr-20260720.txt
-          rm -f scripts/hwajak-payload/publish-pr2-20260720.txt
-          rm -f scripts/hwajak-payload/publish-pr3-20260720.txt
-          rm -f scripts/hwajak-payload/publish-pr4-20260720.txt
-          rm -f scripts/hwajak-payload/publish-pr5-20260720.txt
-          rm -f scripts/hwajak-payload/publish-pr6-20260720.txt
-          rm -f scripts/hwajak-payload/publish-pr7-20260720.txt
+          rm -f scripts/hwajak-payload/publish-*.txt
           rm -f scripts/hwajak-generate-error.log
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
