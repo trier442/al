@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import json
 import pathlib
+import re
 import zlib
 
 ROOT = pathlib.Path.cwd()
@@ -30,6 +31,24 @@ def make_decoded(replacement: str) -> bytes:
     return base64.b64decode(joined, validate=True)
 
 
+def article_shape(article: object) -> str:
+    if not isinstance(article, dict):
+        return "not-object"
+    slug = str(article.get("slug", ""))
+    title = str(article.get("title", ""))
+    summary = str(article.get("summary", ""))
+    blank_count = len(article.get("blankSpans", [])) if isinstance(article.get("blankSpans"), list) else -1
+    flow_count = len(article.get("flow", [])) if isinstance(article.get("flow"), list) else -1
+    point_count = len(article.get("points", [])) if isinstance(article.get("points"), list) else -1
+    fact_count = len(article.get("facts10", [])) if isinstance(article.get("facts10"), list) else -1
+    slug_ok = bool(re.fullmatch(r"2027-suteuk-hwajak-[a-z0-9]+", slug))
+    return (
+        f"slug={slug!r} slugOK={slug_ok} title={title!r} summaryLen={len(summary)} "
+        f"blank={blank_count} flow={flow_count} points={point_count} facts={fact_count} "
+        f"summaryStart={summary[:180]!r}"
+    )
+
+
 for first in ALPHABET:
     for second in ALPHABET:
         replacement = first + second
@@ -42,6 +61,7 @@ for first in ALPHABET:
             brace_gap = abs(text.count("{") - text.count("}"))
             bracket_gap = abs(text.count("[") - text.count("]"))
             quote_parity = text.count('"') % 2
+            parsed = None
             try:
                 parsed = json.loads(text)
                 json_ok = isinstance(parsed, list) and len(parsed) == 57
@@ -55,6 +75,7 @@ for first in ALPHABET:
                 "replacement": replacement,
                 "raw": raw,
                 "text": text,
+                "parsed": parsed,
                 "replacements": replacements,
                 "controls": controls,
                 "brace_gap": brace_gap,
@@ -73,6 +94,7 @@ for first in ALPHABET:
                 "replacement": replacement,
                 "raw": b"",
                 "text": "",
+                "parsed": None,
                 "replacements": 10**9,
                 "controls": 10**9,
                 "brace_gap": 10**9,
@@ -109,6 +131,24 @@ perfect = [item for item in results if item.get("json_ok") and item.get("replace
 print(f"완전 UTF-8 JSON 후보: {len(perfect)}개 = {', '.join(item['replacement'] for item in perfect)}")
 
 if perfect:
+    diff_lines = [f"candidates={','.join(item['replacement'] for item in perfect)}", ""]
+    differing_indexes = []
+    for index in range(57):
+        variants = {
+            json.dumps(item["parsed"][index], ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+            for item in perfect
+        }
+        if len(variants) > 1:
+            differing_indexes.append(index)
+            diff_lines.append(f"===== article index {index} =====")
+            for item in perfect:
+                article = item["parsed"][index]
+                diff_lines.append(f"[{item['replacement']}] {article_shape(article)}")
+            diff_lines.append("")
+    diff_lines.insert(1, f"differingIndexes={differing_indexes}")
+    (ROOT / "scripts" / "hwajak-candidate-diff.txt").write_text("\n".join(diff_lines), encoding="utf-8")
+    print(f"게시글별 후보 차이표 저장: scripts/hwajak-candidate-diff.txt, indexes={differing_indexes}")
+
     baseline = perfect[0]["text"]
     differing = []
     for index in range(len(baseline)):
