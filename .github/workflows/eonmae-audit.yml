@@ -1,13 +1,28 @@
-name: 2027 언어와 매체 전수 점검(비활성)
+name: 2027 언어와 매체 원자료 추출
 
 on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  archived:
+  extract:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "언어와 매체 전수 점검이 완료되어 자동 실행을 비활성화했습니다."
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 언어와 매체 42개 고유 자료 추출
+        run: node scripts/extract-eonmae-source.mjs
+      - name: 추출 자료 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: eonmae-source
+          path: scripts/eonmae-source.json
