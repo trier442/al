@@ -1,5 +1,9 @@
 part01.txt: length=15182, mod4=2, start=H4sIAAKfXWoC/+y9, end=MSSN9LpjxYDABvR8, padding=0, invalid=0
 part02.txt: length=15184, mod4=0, start=QjPRlwfnxQlPnh6L, end=U3EsMYh0cGt9wP1s, padding=0, invalid=4
+  invalid index=7387, char="А", code=U+0410, context="LERB4s96mmIiАҞӘАutkSO0nbh"
+  invalid index=7388, char="Ҟ", code=U+049E, context="ERB4s96mmIiАҞӘАutkSO0nbhE"
+  invalid index=7389, char="Ә", code=U+04D8, context="RB4s96mmIiАҞӘАutkSO0nbhEw"
+  invalid index=7390, char="А", code=U+0410, context="B4s96mmIiАҞӘАutkSO0nbhEwx"
 part03.txt: length=15182, mod4=2, start=rx2VDmZl8oQPQTl2, end=qvuvo5V2jp02Wsm7, padding=0, invalid=0
 part04.txt: length=15182, mod4=2, start=DdF7g6V8TUV7vv11, end=LV7bTnLGt36cnSoM, padding=0, invalid=0
 part05.txt: length=15182, mod4=2, start=7CZNZLLtRV/SWUyZ, end=bO2y87aYCNzihsov, padding=0, invalid=0
