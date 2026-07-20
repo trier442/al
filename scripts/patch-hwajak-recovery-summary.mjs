@@ -16,11 +16,16 @@ if (!source.includes(marker)) {
   changed = true;
 }
 
-const wrongOrder = `["나눔", "행사", "참여율", "문제", "책", "선생님", "소독기", "도서실", "대안", "취지", "판매", "부담", "실행", "효과", "대의원회"]`;
-const correctOrder = `["나눔", "행사", "참여율", "문제", "책", "선생님", "소독기", "도서실", "대안", "판매", "취지", "부담", "실행", "효과", "대의원회"]`;
-if (source.includes(wrongOrder)) {
-  source = source.replace(wrongOrder, correctOrder);
-  changed = true;
+const variants = [
+  `["나눔", "행사", "참여율", "문제", "책", "선생님", "소독기", "도서실", "대안", "취지", "판매", "부담", "실행", "효과", "대의원회"]`,
+  `["나눔", "행사", "참여율", "문제", "책", "선생님", "소독기", "도서실", "대안", "판매", "취지", "부담", "실행", "효과", "대의원회"]`,
+];
+const finalOrder = `["나눔", "행사", "참여율", "문제", "책", "선생님", "소독기", "도서실", "대안", "판매", "취지", "부담", "효과", "대의원회", "실행"]`;
+for (const variant of variants) {
+  if (source.includes(variant)) {
+    source = source.replace(variant, finalOrder);
+    changed = true;
+  }
 }
 
 if (changed) {
