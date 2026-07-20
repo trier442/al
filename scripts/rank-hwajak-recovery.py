@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import base64
+import json
 import pathlib
 import zlib
 
@@ -22,14 +23,20 @@ prefix = target[:start]
 suffix = target[end:]
 results: list[tuple[int, int, str, str]] = []
 
+
+def make_decoded(replacement: str) -> bytes:
+    repaired = prefix + replacement + suffix
+    joined = "".join([chunks[0], repaired, *chunks[2:]])
+    return base64.b64decode(joined, validate=True)
+
+
 for first in ALPHABET:
     for second in ALPHABET:
-        repaired = prefix + first + second + suffix
-        joined = "".join([chunks[0], repaired, *chunks[2:]])
+        replacement = first + second
         try:
-            decoded = base64.b64decode(joined, validate=True)
+            decoded = make_decoded(replacement)
         except Exception as exc:
-            results.append((-1, -1, first + second, f"base64:{exc}"))
+            results.append((-1, -1, replacement, f"base64:{exc}"))
             continue
 
         inflater = zlib.decompressobj(16 + zlib.MAX_WBITS)
@@ -52,9 +59,29 @@ for first in ALPHABET:
                 error = "success"
             except zlib.error as exc:
                 error = str(exc)
-        results.append((consumed, output_len, first + second, error))
+        results.append((consumed, output_len, replacement, error))
 
 results.sort(reverse=True)
 print(f"손상 구간: part02[{start}:{end}]={target[start:end]!r}; 후보 조합 {len(results)}개")
 for rank, (consumed, output_len, replacement, error) in enumerate(results[:30], 1):
     print(f"{rank:02d}. replacement={replacement} consumed={consumed} output={output_len} error={error}")
+
+print("\n상위 후보 JSON 분석")
+for rank, (_, _, replacement, _) in enumerate(results[:12], 1):
+    try:
+        decoded = make_decoded(replacement)
+        raw = zlib.decompress(decoded[10:-8], -zlib.MAX_WBITS)
+        text = raw.decode("utf-8")
+        try:
+            data = json.loads(text)
+            print(f"{rank:02d}. replacement={replacement} JSON 성공 articles={len(data) if isinstance(data, list) else 'not-list'} chars={len(text)}")
+        except json.JSONDecodeError as exc:
+            left = max(0, exc.pos - 120)
+            right = min(len(text), exc.pos + 120)
+            context = text[left:right].replace("\n", "\\n")
+            print(f"{rank:02d}. replacement={replacement} JSON 오류 pos={exc.pos} line={exc.lineno} col={exc.colno} msg={exc.msg}")
+            print(f"    context={context!r}")
+    except UnicodeDecodeError as exc:
+        print(f"{rank:02d}. replacement={replacement} UTF-8 오류 start={exc.start} end={exc.end} reason={exc.reason}")
+    except Exception as exc:
+        print(f"{rank:02d}. replacement={replacement} 분석 실패: {type(exc).__name__}: {exc}")
