@@ -21,7 +21,8 @@ function sentenceSplit(text){return String(text).replace(/([.!?])\s*/g,'$1\n').s
 function restoreBlanks(block){
   return String(block)
     .replace(/<span class="blank-mask">[\s\S]*?<\/span>/gi,'')
-    .replace(/<span class="blank-answer"[^>]*>([\s\S]*?)<\/span>/gi,'$1');
+    .replace(/<span class="blank-answer"[^>]*>([\s\S]*?)<\/span>/gi,'$1')
+    .replace(/<\/?button\b[^>]*>/gi,'');
 }
 function extractItems(block){return [...block.matchAll(/<li>([\s\S]*?)<\/li>/gi)].map(m=>cleanSentence(plain(m[1])));}
 function exactDefinition(term,defs,title){const d=defs[term];if(!d)throw new Error(`${title}: 개념 사전에 없는 용어 ${term}`);return d;}
@@ -73,15 +74,16 @@ export function extractPage(file,defs,spec,index){
   const crumb=plain(html.match(/<(?:p|span) class="crumb">([\s\S]*?)<\/(?:p|span)>/i)?.[1]||'');
   const group=groupOf(crumb);
   const summaryBlock=html.match(/<(?:section|div) class="summary"[^>]*>([\s\S]*?)<\/(?:section|div)>/i)?.[1]||'';
-  const rawSummary=cleanSentence(plain(restoreBlanks(summaryBlock)));
+  const summaryParagraphs=[...summaryBlock.matchAll(/<p(?![^>]*class="guide")[^>]*>([\s\S]*?)<\/p>/gi)].map(m=>cleanSentence(plain(restoreBlanks(m[1]))));
+  const rawSummary=summaryParagraphs.join(' ');
   const currentPointsBlock=html.match(/<ol class="points">([\s\S]*?)<\/ol>/i)?.[1]||html.match(/<div class="pointbox">([\s\S]*?)<\/div>/i)?.[1]||'';
   const currentPoints=extractItems(currentPointsBlock).filter(p=>!GENERIC.test(p)&&!PLACEHOLDER.test(p));
   const concepts=spec.concepts.map(term=>({term,definition:exactDefinition(term,defs,title)}));
   const relevantTerms=new Set([...spec.concepts,...spec.blanks]);
   const rawSentences=sentenceSplit(rawSummary);
-  const specific=rawSentences.filter((s,i)=>i<5||[...relevantTerms].some(term=>s.includes(term))).filter(s=>!GENERIC.test(s)&&!PLACEHOLDER.test(s));
+  const specific=rawSentences.filter(s=>[...relevantTerms].some(term=>s.includes(term))).filter(s=>!GENERIC.test(s)&&!PLACEHOLDER.test(s)&&!/[^가-힣A-Za-z0-9·,.!?‘’“”()\-\s]/.test(s));
   const points=unique([...currentPoints.filter(p=>[...relevantTerms].some(term=>p.includes(term))),...currentPoints,...concepts.map(c=>`${c.term}의 정의는 ${c.definition}이다.`)]).slice(0,10);
   while(points.length<10)points.push(`${concepts[points.length%concepts.length].term}의 정의와 자료 속 기능을 구체적인 사례에 대응하여 판단한다.`);
-  const summary=ensureSummary([...specific.slice(0,7),...concepts.map(c=>`${c.term}의 정의는 ${c.definition}이다.`),...points.slice(0,6),...categoryGuidance(group,title,concepts)],spec.blanks);
+  const summary=ensureSummary([...points,...concepts.map(c=>`${c.term}의 정의는 ${c.definition}이다.`),...categoryGuidance(group,title,concepts)],spec.blanks);
   return {index,file:path.basename(file),slug,type:meta(html,'type')||'page',categories:meta(html,'categories'),postId:meta(html,'post_id'),revision:Number.parseInt(meta(html,'revision')||'1',10),premiumUrl:premiumUrl(html),title,crumb,group,summary,blanks:spec.blanks,flow:spec.flow,concepts,points,facts:points};
 }
