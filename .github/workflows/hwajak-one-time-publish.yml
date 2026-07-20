@@ -50,7 +50,7 @@ jobs:
           cat /tmp/hwajak-generate.log
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/hwajak-generate-error.log scripts/hwajak-corrupt-slice.txt
+          git add scripts/hwajak-generate-error.log scripts/hwajak-corrupt-slice.txt scripts/hwajak-candidate-diff.txt
           git commit -m "화작 생성 오류 로그 저장" || true
           git push || true
 
@@ -85,7 +85,7 @@ jobs:
         run: |
           rm -f .github/workflows/hwajak-one-time-publish.yml
           rm -f scripts/hwajak-payload/publish-*.txt
-          rm -f scripts/hwajak-generate-error.log scripts/hwajak-corrupt-slice.txt
+          rm -f scripts/hwajak-generate-error.log scripts/hwajak-corrupt-slice.txt scripts/hwajak-candidate-diff.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
