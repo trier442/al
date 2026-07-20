@@ -1,3 +1,14 @@
+part01.txt: length=15182, mod4=2, start=H4sIAAKfXWoC/+y9, end=MSSN9LpjxYDABvR8, padding=0, invalid=0
+part02.txt: length=15184, mod4=0, start=QjPRlwfnxQlPnh6L, end=U3EsMYh0cGt9wP1s, padding=0, invalid=4
+part03.txt: length=15182, mod4=2, start=rx2VDmZl8oQPQTl2, end=qvuvo5V2jp02Wsm7, padding=0, invalid=0
+part04.txt: length=15182, mod4=2, start=DdF7g6V8TUV7vv11, end=LV7bTnLGt36cnSoM, padding=0, invalid=0
+part05.txt: length=15182, mod4=2, start=7CZNZLLtRV/SWUyZ, end=bO2y87aYCNzihsov, padding=0, invalid=0
+part06a.txt: length=7591, mod4=3, start=UOMAzO1Cw6Q0EBr7, end=8ttkIkfiGcYjjvPg, padding=0, invalid=0
+part06b.txt: length=7591, mod4=3, start=/LUwH072QGXODDmP, end=j/8DovzI59lGBgA=, padding=1, invalid=0
+joined: length=91094, mod4=2, start=H4sIAAKfXWoC/+y9, end=j/8DovzI59lGBgA=
+decoded: bytes=68316, header=1f8b0800029f5d6a02ff, tail=5fc8fff03a2fcc8e7d946060
+gunzip joined failed: Z_DATA_ERROR: invalid code lengths set
+gunzip decoded-parts failed: Z_BUF_ERROR: unexpected end of file
 node:internal/modules/run_main:123
     triggerUncaughtException(
     ^
