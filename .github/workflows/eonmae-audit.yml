@@ -1,13 +1,47 @@
-name: 2027 언어와 매체 재작성 완료
+name: 2027 언어와 매체 정제본 재게시
 
 on:
+  pull_request:
+    branches: [main]
+    types: [closed]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  archived:
+  rebuild-publish:
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    timeout-minutes: 35
     steps:
-      - run: echo "2027 언어와 매체 42개 전면 재작성과 게시가 완료되었습니다."
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 정제표 기준 42개 재작성
+        run: node scripts/rebuild-eonmae-pages.mjs
+      - name: 개념·빈칸·문항·해설 전수 검증
+        run: node scripts/validate-eonmae-pages.mjs
+      - name: WordPress 42개와 통합 목록 재게시
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        shell: bash
+        run: |
+          FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-eonmae-*.html' | sort | tr '\n' ' ')
+          COUNT=$(printf '%s' "$FILES" | wc -w)
+          echo "게시 대상: ${COUNT}개"
+          test "$COUNT" -eq 43
+          node scripts/publish-wordpress.mjs $FILES
+      - name: 교정된 HTML 저장
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wordpress-content/2027-suteuk-eonmae-*.html
+          git commit -m "2027 언어와 매체 정제 교정본 저장" || exit 0
+          git push

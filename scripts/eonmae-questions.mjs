@@ -1,74 +1,108 @@
-function tidy(text,max=150){
+function tidy(text,max=176){
   const s=String(text).replace(/\s+/g,' ').trim();
   if(s.length<=max)return s;
   const cut=s.slice(0,max);const p=Math.max(cut.lastIndexOf('다.'),cut.lastIndexOf('.'),cut.lastIndexOf(','));
-  return (p>70?cut.slice(0,p+1):cut.slice(0,max-1))+'…';
+  return (p>82?cut.slice(0,p+1):cut.slice(0,max-1))+'…';
 }
 function unique(list){const out=[];for(const s of list){if(s&&!out.includes(s))out.push(s);}return out;}
 function concept(page,i){return page.concepts[i%page.concepts.length];}
-function fact(page,i){return page.facts[i%page.facts.length]||page.points[i%page.points.length];}
-function view(page,q){
-  const a=concept(page,q),b=concept(page,q+1),f1=fact(page,q),f2=fact(page,q+3);
-  const criterion=['정의에 포함된 성립 조건을 빠짐없이 확인하고, 자료의 구체적인 형태나 표현이 그 조건에 대응하는지 판단한다.','유사한 두 개념은 공통점보다 적용 대상·환경·기능·결과의 차이를 중심으로 비교한다.','분석 과정은 기본 자료 확인, 결합 환경 표시, 적용 과정 추적, 실제 결과 검증의 순서로 진행한다.','선택지에서 원인과 결과, 생산자와 수용자, 형식과 기능이 뒤바뀌지 않았는지 점검한다.','한 사례에서 성립한 설명을 다른 환경으로 옮길 때에는 적용 조건이 그대로 유지되는지 확인한다.','오류를 고칠 때에는 틀린 용어만 바꾸지 말고 그 용어가 성립하는 조건과 근거까지 함께 바로잡는다.','새로운 사례를 만들 때에는 정의의 핵심 조건을 모두 만족하도록 형태·환경·기능을 구체화한다.','자료의 표현 효과와 정보의 정확성·공정성은 별개의 기준으로 평가한다.','둘 이상의 개념이 함께 작용할 때에는 각각의 기능과 선후 관계를 구분해 설명한다.','종합 판단에서는 주체, 대상, 적용 범위, 조건, 과정, 결과가 원자료와 모두 일치해야 한다.'][q];
-  let text=`판단 기준: ${criterion} ‘${a.term}’의 뜻은 ${a.definition}. ‘${b.term}’의 뜻은 ${b.definition}. 자료에서는 ${f1} 또한 ${f2}`;
-  while(text.length<330)text+=` 따라서 「${page.title}」의 개별 사례를 판단할 때에는 두 개념의 정의와 자료 속 근거를 직접 대응해야 한다.`;
-  return text.slice(0,520);
+function point(page,i){return page.points[i%page.points.length];}
+function clean(value=''){return String(value).replace(/[‘’]/g,"'").replace(/[.!?]+$/,'').trim();}
+function quote(value=''){return `“${clean(value)}”`;}
+const TOKEN_STOP=new Set(['자료','내용','기능','설명','관계','판단','개념','실제','통해','대한','위해','경우','정의','형태','방식','부분']);
+function tokens(value){return new Set((String(value).match(/[가-힣A-Za-z0-9·]{2,}/g)||[]).map(x=>x.replace(/(?:은|는|이|가|을|를|과|와|의|에|에서|으로|로|도|만)$/u,'')).filter(x=>x.length>=2&&!TOKEN_STOP.has(x)));}
+function related(page,fact,offset=0){
+  const text=String(fact);
+  const exact=page.concepts.filter(c=>text.includes(c.term));
+  if(exact.length)return exact[offset%exact.length];
+  const ft=tokens(text);
+  const scored=page.concepts.map((c,i)=>{const ct=tokens(`${c.term} ${c.definition}`);let score=0;for(const t of ft)if(ct.has(t))score++;return {c,i,score};}).sort((x,y)=>y.score-x.score||x.i-y.i);
+  return scored[0].score>0?scored[0].c:concept(page,offset);
 }
-function correctText(page,q){
-  const a=concept(page,q),b=concept(page,q+1),f=fact(page,q),g=fact(page,q+2);
-  const patterns=[
-    `‘${a.term}’의 정의는 “${a.definition}”이며, 자료의 구체적인 표현이 이 조건에 해당하는지를 확인한다.`,
-    `‘${a.term}’, ‘${b.term}’의 적용 대상과 기능을 각각 “${a.definition}”, “${b.definition}”이라는 기준으로 구별한다.`,
-    `${f}라는 자료를 먼저 확인한 뒤 ‘${a.term}’의 성립 조건과 실제 결과를 차례로 대조한다.`,
-    `‘${a.term}’ 개념을 판단할 때 ${f}를 근거로 삼고, 원인·과정·결과의 방향을 자료에 제시된 순서대로 설명한다.`,
-    `${g}라는 사실은 ‘${a.term}’의 적용 범위를 구체화하는 근거이므로, 다른 환경에 적용할 때 조건의 유지 여부를 확인한다.`,
-    `잘못된 분석을 고칠 때에는 ‘${a.term}’에 대한 설명을 ‘${b.term}’의 설명으로 단순 교체하지 않고, “${a.definition}”이라는 판단 기준까지 함께 바로잡는다.`,
-    `‘${a.term}’의 새 사례를 만들려면 ${a.definition}이라는 조건을 만족하는 형태와 환경을 함께 제시해야 한다.`,
-    `${f}의 표현 효과와 사실 정보의 정확성을 구분하여 평가하고, ‘${a.term}’의 기능이 실제 목적에 기여하는지 판단한다.`,
-    `‘${a.term}’, ‘${b.term}’가 함께 작용하는 경우 각 기능을 분리하고, ${f}가 어느 단계의 근거인지 설명한다.`,
-    `${f}와 ${g}를 종합하여 ‘${a.term}’의 주체·대상·조건·결과가 모두 일치하는 설명을 선택한다.`
-  ];
-  return tidy(patterns[q],158);
+function unrelated(page,fact,except){
+  return page.concepts.find(c=>c.term!==except.term&&!String(fact).includes(c.term))||page.concepts.find(c=>c.term!==except.term)||except;
 }
-function distractors(page,q,correct){
-  const a=concept(page,q),b=concept(page,q+1),c=concept(page,q+2),f=fact(page,q),g=fact(page,q+3);
-  const context=['정의 적용 단계에서는','개념 비교 단계에서는','분석 절차를 따를 때에는','근거와 기능을 연결할 때에는','새 사례에 적용할 때에는','오류를 수정하는 과정에서는','사례를 구성하는 과정에서는','표현 효과를 평가할 때에는','복합 개념을 분석할 때에는','종합 판단 단계에서는'][q];
-  const pool=[
-    `‘${a.term}’ 개념의 정의를 “${b.definition}”로 바꾸고, ‘${b.term}’의 정의에는 “${a.definition}”를 배치하여 두 판단 기준을 서로 뒤바꾼다.`,
-    `${f}를 ‘${b.term}’의 직접적인 결과로 분류하지만, ‘${a.term}’이 성립하기 위해 필요한 적용 환경은 다른 사례에서 가져온다.`,
-    `‘${a.term}’의 정의 중 ${a.definition}이라는 조건은 유지하면서도, 자료의 실제 결과는 ‘${c.term}’의 기능으로 설명한다.`,
-    `${g}를 근거로 ‘${b.term}’의 적용 범위를 정하지만, 선택지의 결론에서는 ‘${a.term}’의 대상과 기능을 같은 것으로 처리한다.`,
-    `‘${a.term}’, ‘${b.term}’가 함께 나타난다고 보면서 두 현상의 선후 관계를 바꾸고, ${f}를 뒤 단계의 근거로 배치한다.`,
-    `${f}의 표현 효과가 크다는 점을 근거로 ‘${a.term}’의 정확성이나 적절성도 성립한다고 판단하여 평가 기준을 합친다.`,
-    `‘${a.term}’의 사례라고 분류한 뒤 ‘${b.term}’의 예외 조건을 적용하여, 기본형과 실제 형태가 서로 다른 층위에 놓이게 한다.`,
-    `‘${c.term}’의 기능을 보완하기 위해 ‘${a.term}’ 관련 표현을 사용했다고 설명하지만, 자료에 제시된 생산 주체나 문법적 주체는 ‘${b.term}’의 대상으로 바꾼다.`
-  ].map(x=>tidy(`${context} ${x}`,158));
-  return unique(pool.filter(x=>x!==correct)).slice(q%3,q%3+4).concat(pool).filter((x,i,a)=>a.indexOf(x)===i).slice(0,4);
-}
-function explanation(page,q,text,correct){
-  const a=concept(page,q),f=fact(page,q);
-  if(correct)return `‘${a.term}’의 정확한 정의와 「${page.title}」의 구체적 근거를 같은 층위에서 대응하였다. ${f}라는 자료를 바탕으로 적용 조건과 결과를 바꾸지 않았으므로 적절하다.`;
-  return `이 진술은 ${text}라고 보아 개념의 정의, 적용 환경, 분석 층위 가운데 하나 이상을 바꾸었다. 자료에서는 ‘${a.term}’의 정의를 “${a.definition}”로 이해해야 하며, ${f}라는 근거와 일치하는지도 확인해야 한다.`;
-}
+function rotate(list,n){return [...list.slice(n%list.length),...list.slice(0,n%list.length)];}
+
+const CRITERIA=[
+  '자료의 구체적인 사실과 개념의 정의가 일치하는지 확인한다.',
+  '두 개념의 적용 대상·환경·기능·결과를 같은 기준으로 비교한다.',
+  '기본 자료, 적용 환경, 변화나 구성 과정, 실제 결과의 순서로 분석한다.',
+  '자료에 제시된 근거가 어떤 개념이나 표현 요소의 기능을 뒷받침하는지 확인한다.',
+  '새 사례가 개념의 필수 조건을 모두 갖추었는지 확인한 뒤 적용 범위를 결정한다.',
+  '잘못된 용어뿐 아니라 잘못 연결된 근거와 분석 층위도 함께 수정한다.',
+  '새 사례에는 개념의 정의를 확인할 수 있는 형태·환경·기능을 구체적으로 제시한다.',
+  '표현 효과와 사실 정보의 정확성·공정성을 별개의 기준으로 평가한다.',
+  '둘 이상의 개념이 함께 작용하면 각 기능과 선후 관계를 분리해 설명한다.',
+  '두 개 이상의 근거를 종합하되 주체·대상·조건·결과를 바꾸지 않는다.'
+];
 const STEMS=[
-  p=>`「${p.title}」의 핵심 개념을 자료에 적용한 설명으로 가장 적절한 것은?`,
+  p=>`「${p.title}」의 자료 내용과 개념을 연결한 설명으로 가장 적절한 것은?`,
   p=>`「${p.title}」에서 서로 가까운 두 개념을 구별한 내용으로 가장 적절한 것은?`,
   p=>`<보기>의 분석 절차에 따라 「${p.title}」의 자료를 판단한 것으로 가장 적절한 것은?`,
-  p=>`「${p.title}」의 구체적 근거와 개념의 기능을 연결한 것으로 가장 적절한 것은?`,
-  p=>`<보기>의 조건을 「${p.title}」과 관련된 새로운 사례에 적용한 내용으로 가장 적절한 것은?`,
+  p=>`「${p.title}」의 구체적 근거가 수행하는 기능을 설명한 것으로 가장 적절한 것은?`,
+  p=>`<보기>의 조건을 「${p.title}」 관련 새로운 사례에 적용한 내용으로 가장 적절한 것은?`,
   p=>`「${p.title}」에 관한 학생의 잘못된 분석을 바르게 고친 것은?`,
   p=>`「${p.title}」의 개념을 활용하여 새 사례를 구성한 것으로 가장 적절한 것은?`,
-  p=>`「${p.title}」의 표현 효과와 정보·문법적 정확성을 함께 평가한 것은?`,
+  p=>`「${p.title}」의 표현 효과와 문법·정보의 정확성을 함께 평가한 것은?`,
   p=>`「${p.title}」에서 둘 이상의 개념이 작용하는 관계를 파악한 것으로 가장 적절한 것은?`,
   p=>`「${p.title}」의 자료를 종합적으로 이해한 내용으로 가장 적절한 것은?`
 ];
+
+function view(page,q){
+  const f=point(page,q),g=point(page,q+3),a=related(page,f,q),b=unrelated(page,f,a);
+  let text=`판단 기준: ${CRITERIA[q]} ‘${a.term}’의 정의는 “${a.definition}”이다. 비교할 개념인 ‘${b.term}’의 정의는 “${b.definition}”이다. 자료에는 ${quote(f)}라는 내용과 ${quote(g)}라는 내용이 제시되어 있다.`;
+  while(text.length<340)text+=` 따라서 「${page.title}」에서는 용어의 정의와 구체적인 자료 근거를 같은 분석 층위에서 대응해야 한다.`;
+  return text.slice(0,530);
+}
+
+function makeCorrect(page,q){
+  const f=point(page,q),g=point(page,q+2),a=related(page,f,q),b=unrelated(page,f,a);
+  const patterns=[
+    `자료의 ${quote(f)}라는 내용은 「${page.title}」의 실제 사실과 개념의 적용 조건을 그대로 반영하므로 적절하다.`,
+    `‘${a.term}’의 정의는 “${a.definition}”이고, ‘${b.term}’의 정의는 “${b.definition}”이므로 두 개념의 적용 대상과 기능을 구별해야 한다.`,
+    `먼저 자료의 ${quote(f)}라는 내용을 확인한 뒤, 관련 개념의 성립 환경과 적용 과정, 실제 결과를 차례로 대조한다.`,
+    `자료의 ${quote(f)}라는 내용은 「${page.title}」의 구체적인 근거이며, 해당 표현이나 문법 요소가 수행하는 기능을 직접 뒷받침한다.`,
+    `새 사례에서 “${a.definition}”에 해당하는 특징이 구체적으로 확인된다면 ‘${a.term}’의 사례로 판단할 수 있으며, 자료의 ${quote(f)}라는 내용은 별도의 비교 근거로 활용한다.`,
+    `잘못된 분석은 ‘${a.term}’의 정의를 “${a.definition}”이라고 바로잡고, 자료의 ${quote(f)}라는 근거와 같은 층위에서 다시 연결해야 한다.`,
+    `‘${a.term}’의 새 사례는 정의에 포함된 조건을 보여 주어야 하며, 그 조건은 “${a.definition}”이다. 형태와 환경도 함께 제시해야 한다.`,
+    `자료의 ${quote(f)}라는 표현이 주는 효과와 사실·문법 정보의 정확성을 따로 검토하고, 두 기준을 모두 충족하는지 판단한다.`,
+    `‘${a.term}’·‘${b.term}’ 두 개념이 함께 나타날 때에는 각 기능을 분리하고, 자료의 ${quote(f)}가 어느 기능의 근거인지 밝혀야 한다.`,
+    `자료의 ${quote(f)}라는 내용과 ${quote(g)}라는 내용을 함께 고려하면, 「${page.title}」의 주체·대상·조건·결과를 바꾸지 않고 종합할 수 있다.`
+  ];
+  return tidy(patterns[q]);
+}
+
+function wrongPool(page,q){
+  const f=point(page,q),g=point(page,q+3),a=related(page,f,q),b=unrelated(page,f,a),c=unrelated(page,g,b);
+  return [
+    `자료의 ${quote(f)}라는 내용은 ‘${b.term}’의 정의를 보여 주는 근거이므로, ‘${a.term}’의 적용 조건과는 구별하지 않아도 된다고 본다.`,
+    `‘${a.term}’의 정의를 다음과 같이 바꾼다. “${b.definition}”. 그리고 자료의 ${quote(f)}라는 내용을 새 정의에 맞는 사례로 분류한다.`,
+    `자료의 ${quote(f)}라는 사실은 유지하지만 그 결과를 ‘${c.term}’의 기능으로 설명하여, 자료의 근거와 개념의 분석 층위를 다르게 연결한다.`,
+    `자료의 ${quote(g)}라는 내용을 먼저 결론으로 정하고, ‘${a.term}’이 성립하는 환경과 적용 과정은 뒤에서 결과에 맞추어 설정한다.`,
+    `자료의 ${quote(f)}라는 표현이 이해를 돕는다는 점만으로, 그 안에 포함된 사실 정보와 개념 적용도 적절하다고 판단한다.`,
+    `‘${a.term}’·‘${b.term}’ 두 개념이 함께 나타나는 사례에서 각 기능의 적용 순서를 바꾸고, 자료의 ${quote(f)}를 뒤 단계의 근거로 사용한다.`,
+    `새 사례의 겉모습이 자료의 ${quote(f)}와 비슷하다는 이유로, ‘${a.term}’의 정의에 포함된 “${a.definition}”의 충족 여부를 확인하지 않고 분류한다.`,
+    `자료의 ${quote(f)}라는 근거는 유지하면서도 주체나 대상을 ‘${b.term}’의 대상으로 바꾸어 동일한 결론을 이끌어 낸다.`
+  ].map(x=>tidy(x));
+}
+
+function explain(page,q,text,isCorrect){
+  const f=point(page,q),a=related(page,f,q);
+  if(isCorrect)return `자료의 ${quote(f)}라는 내용을 그대로 반영하고, ‘${a.term}’의 정의 및 적용 조건과 같은 층위에서 연결하였다. 주체·대상·과정·결과를 바꾸지 않았으므로 적절하다.`;
+  return `이 선택지는 ${text} 자료의 근거를 다른 개념에 연결하거나 적용 환경·분석 순서·주체를 바꾸었다. ‘${a.term}’의 정의는 “${a.definition}”이며, 자료의 ${quote(f)}와 직접 대응해야 한다.`;
+}
+
 export function makeQuestions(page,pageIndex){
   return Array.from({length:10},(_,q)=>{
     const answer=(pageIndex*10+q)%5;
-    const correct=correctText(page,q);
-    const wrong=distractors(page,q,correct);
-    const options=[];let w=0;
-    for(let i=0;i<5;i++){const text=i===answer?correct:wrong[w++];options.push({text,correct:i===answer,explanation:explanation(page,q,text,i===answer)});}
+    const correct=makeCorrect(page,q);
+    const wrong=rotate(unique(wrongPool(page,q).filter(x=>x!==correct)),q).slice(0,4);
+    const options=[];let wi=0;
+    for(let i=0;i<5;i++){
+      const text=i===answer?correct:wrong[wi++];
+      options.push({text,correct:i===answer,explanation:explain(page,q,text,i===answer)});
+    }
     return {no:q+1,stem:STEMS[q](page),view:view(page,q),options};
   });
 }
