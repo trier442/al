@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { gunzipSync } from "node:zlib";
+import { gunzipSync, gzipSync, inflateRawSync } from "node:zlib";
 
 const dir = path.join(process.cwd(), "scripts", "hwajak-payload");
 const files = ["part01.txt", "part02.txt", "part03.txt", "part04.txt", "part05.txt", "part06a.txt", "part06b.txt"];
@@ -10,10 +10,37 @@ const targetIndex = files.indexOf("part02.txt");
 const target = chunks[targetIndex];
 const matches = [...target.matchAll(/[^A-Za-z0-9+/=]+/g)];
 
+function isValidData(data) {
+  return Array.isArray(data) && data.length === 57 && data.every((article) =>
+    article && typeof article === "object" &&
+    typeof article.slug === "string" &&
+    typeof article.title === "string" &&
+    typeof article.summary === "string" &&
+    Array.isArray(article.blankSpans) && article.blankSpans.length === 15 &&
+    Array.isArray(article.flow) && article.flow.length === 4 &&
+    Array.isArray(article.points) && article.points.length === 10 &&
+    Array.isArray(article.facts10) && article.facts10.length === 10
+  );
+}
+
+function writeCleanPayload(data) {
+  const cleanJson = JSON.stringify(data);
+  const cleanBase64 = gzipSync(Buffer.from(cleanJson, "utf8"), { level: 9 }).toString("base64");
+  const baseSize = Math.floor(cleanBase64.length / files.length);
+  let cursor = 0;
+  files.forEach((file, index) => {
+    const end = index === files.length - 1 ? cleanBase64.length : cursor + baseSize;
+    fs.writeFileSync(path.join(dir, file), `${cleanBase64.slice(cursor, end)}\n`, "utf8");
+    cursor = end;
+  });
+  const verified = JSON.parse(gunzipSync(Buffer.from(files.map((file) => fs.readFileSync(path.join(dir, file), "utf8").trim()).join(""), "base64")).toString("utf8"));
+  if (!isValidData(verified)) throw new Error("재압축한 payload의 최종 검증에 실패했습니다.");
+  return { cleanJsonLength: cleanJson.length, cleanBase64Length: cleanBase64.length };
+}
+
 if (matches.length === 0) {
-  const joined = chunks.join("");
-  const data = JSON.parse(gunzipSync(Buffer.from(joined, "base64")).toString("utf8"));
-  if (!Array.isArray(data) || data.length !== 57) throw new Error("복원 불필요 상태이지만 게시글 데이터가 57개가 아닙니다.");
+  const data = JSON.parse(gunzipSync(Buffer.from(chunks.join(""), "base64")).toString("utf8"));
+  if (!isValidData(data)) throw new Error("복원 불필요 상태이지만 게시글 데이터 구조가 올바르지 않습니다.");
   console.log("화작 압축 데이터는 이미 정상입니다.");
   process.exit(0);
 }
@@ -33,21 +60,23 @@ for (const first of alphabet) {
     const candidateChunks = [...chunks];
     candidateChunks[targetIndex] = candidate;
     try {
-      const json = gunzipSync(Buffer.from(candidateChunks.join(""), "base64")).toString("utf8");
+      const decoded = Buffer.from(candidateChunks.join(""), "base64");
+      if (decoded.length < 20 || decoded[0] !== 0x1f || decoded[1] !== 0x8b || decoded[3] !== 0) continue;
+      const json = inflateRawSync(decoded.subarray(10, -8)).toString("utf8");
       const data = JSON.parse(json);
-      if (Array.isArray(data) && data.length === 57) {
-        successes.push({ replacement: `${first}${second}`, candidate, jsonLength: json.length });
+      if (isValidData(data)) {
+        successes.push({ replacement: `${first}${second}`, data, jsonLength: json.length });
       }
     } catch {
-      // gzip CRC와 JSON 파싱을 모두 통과한 후보만 채택합니다.
+      // CRC가 손상되었더라도 DEFLATE 본문과 57개 JSON 구조를 모두 통과한 후보만 채택합니다.
     }
   }
 }
 
 if (successes.length !== 1) {
-  throw new Error(`복원 후보가 1개여야 하지만 ${successes.length}개입니다: ${successes.map((item) => item.replacement).join(", ")}`);
+  throw new Error(`JSON 구조를 통과한 복원 후보가 1개여야 하지만 ${successes.length}개입니다: ${successes.map((item) => item.replacement).join(", ")}`);
 }
 
 const recovered = successes[0];
-fs.writeFileSync(path.join(dir, "part02.txt"), `${recovered.candidate}\n`, "utf8");
-console.log(`화작 압축 데이터 복원 완료: index=${damaged.index}, damaged=${JSON.stringify(damaged[0])}, replacement=${recovered.replacement}, jsonLength=${recovered.jsonLength}`);
+const clean = writeCleanPayload(recovered.data);
+console.log(`화작 압축 데이터 복원 완료: index=${damaged.index}, damaged=${JSON.stringify(damaged[0])}, replacement=${recovered.replacement}, jsonLength=${recovered.jsonLength}, cleanBase64Length=${clean.cleanBase64Length}`);
