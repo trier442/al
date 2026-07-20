@@ -40,3 +40,17 @@ Node.js v22.23.1
 28. replacement=sc consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
 29. replacement=rf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
 30. replacement=re consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+
+상위 후보 JSON 분석
+01. replacement=n8 UTF-8 오류 start=93485 end=93486 reason=invalid start byte
+02. replacement=X8 UTF-8 오류 start=93485 end=93486 reason=invalid start byte
+03. replacement=H8 UTF-8 오류 start=93478 end=93479 reason=invalid start byte
+04. replacement=38 UTF-8 오류 start=93737 end=93738 reason=invalid start byte
+05. replacement=ns UTF-8 오류 start=93485 end=93486 reason=invalid start byte
+06. replacement=Xs UTF-8 오류 start=93485 end=93486 reason=invalid start byte
+07. replacement=Hs UTF-8 오류 start=93478 end=93479 reason=invalid start byte
+08. replacement=3s UTF-8 오류 start=93496 end=93498 reason=invalid continuation byte
+09. replacement=zf UTF-8 오류 start=93505 end=93507 reason=invalid continuation byte
+10. replacement=ze UTF-8 오류 start=93486 end=93487 reason=invalid start byte
+11. replacement=zd UTF-8 오류 start=93483 end=93485 reason=invalid continuation byte
+12. replacement=zc UTF-8 오류 start=93486 end=93487 reason=invalid start byte
