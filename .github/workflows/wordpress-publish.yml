@@ -6,6 +6,10 @@ on:
     paths:
       - "wordpress-content/**/*.html"
       - "wordpress-content/images/**"
+      - "scripts/standardize-hwajak-pages.mjs"
+      - "scripts/validate-hwajak-pages.mjs"
+      - "scripts/hwajak-payload/**"
+      - ".github/workflows/wordpress-publish.yml"
   workflow_dispatch:
     inputs:
       file:
@@ -30,6 +34,12 @@ jobs:
         with:
           node-version: "22"
 
+      - name: 화법과 작문 원고 생성
+        run: node scripts/standardize-hwajak-pages.mjs
+
+      - name: 화법과 작문 원고 검증
+        run: node scripts/validate-hwajak-pages.mjs
+
       - name: 게시 대상 확인
         id: files
         shell: bash
@@ -37,13 +47,18 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "files=${{ inputs.file }}" >> "$GITHUB_OUTPUT"
           else
-            FILES=$(git diff --name-only HEAD^ HEAD -- ':(glob)wordpress-content/**/*.html' | tr '\n' ' ')
+            CHANGED=$(git diff --name-only HEAD^ HEAD)
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize|validate)-hwajak-pages\.mjs|scripts/hwajak-payload/|wordpress-content/2027-suteuk-hwajak-|\.github/workflows/wordpress-publish\.yml)'; then
+              FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-hwajak-*.html' | sort | tr '\n' ' ')
+            else
+              FILES=$(git diff --name-only HEAD^ HEAD -- ':(glob)wordpress-content/**/*.html' | tr '\n' ' ')
+              if printf '%s\n' "$FILES" | grep -q 'wordpress-content/2027-suteuk-reading-'; then
+                FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-reading-*.html' | sort | tr '\n' ' ')
+              fi
+            fi
             if [ -z "$FILES" ]; then
               echo "게시할 HTML 파일을 찾지 못했습니다." >&2
               exit 1
-            fi
-            if printf '%s\n' "$FILES" | grep -q 'wordpress-content/2027-suteuk-reading-'; then
-              FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-reading-*.html' | sort | tr '\n' ' ')
             fi
             echo "files=$FILES" >> "$GITHUB_OUTPUT"
           fi
