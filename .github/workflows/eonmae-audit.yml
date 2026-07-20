@@ -1,0 +1,30 @@
+name: 2027 언어와 매체 전수 점검
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/audit-eonmae-pages.mjs"
+      - ".github/workflows/eonmae-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 언어와 매체 42개 전수 검사
+        run: node scripts/audit-eonmae-pages.mjs
+      - name: 감사 보고서 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: eonmae-audit-report
+          path: scripts/eonmae-audit-report.json
