@@ -21,7 +21,7 @@ start = invalid[0][0]
 end = invalid[-1][0] + 1
 prefix = target[:start]
 suffix = target[end:]
-results: list[tuple[int, int, str, str]] = []
+results = []
 
 
 def make_decoded(replacement: str) -> bytes:
@@ -35,70 +35,82 @@ for first in ALPHABET:
         replacement = first + second
         try:
             decoded = make_decoded(replacement)
+            raw = zlib.decompress(decoded[10:-8], -zlib.MAX_WBITS)
+            text = raw.decode("utf-8", errors="replace")
+            replacements = text.count("�")
+            controls = sum(1 for ch in text if ord(ch) < 32 and ch not in "\n\r\t")
+            brace_gap = abs(text.count("{") - text.count("}"))
+            bracket_gap = abs(text.count("[") - text.count("]"))
+            quote_parity = text.count('"') % 2
+            try:
+                parsed = json.loads(text)
+                json_ok = isinstance(parsed, list) and len(parsed) == 57
+            except Exception:
+                json_ok = False
+            results.append({
+                "replacement": replacement,
+                "raw": raw,
+                "text": text,
+                "replacements": replacements,
+                "controls": controls,
+                "brace_gap": brace_gap,
+                "bracket_gap": bracket_gap,
+                "quote_parity": quote_parity,
+                "json_ok": json_ok,
+            })
         except Exception as exc:
-            results.append((-1, -1, replacement, f"base64:{exc}"))
-            continue
+            results.append({
+                "replacement": replacement,
+                "raw": b"",
+                "text": "",
+                "replacements": 10**9,
+                "controls": 10**9,
+                "brace_gap": 10**9,
+                "bracket_gap": 10**9,
+                "quote_parity": 1,
+                "json_ok": False,
+                "error": f"{type(exc).__name__}: {exc}",
+            })
 
-        inflater = zlib.decompressobj(16 + zlib.MAX_WBITS)
-        output_len = 0
-        consumed = 0
-        error = ""
-        step = 64
-        for offset in range(0, len(decoded), step):
-            block = decoded[offset : offset + step]
-            try:
-                output_len += len(inflater.decompress(block))
-                consumed = offset + len(block)
-            except zlib.error as exc:
-                consumed = offset
-                error = str(exc)
-                break
-        else:
-            try:
-                output_len += len(inflater.flush())
-                error = "success"
-            except zlib.error as exc:
-                error = str(exc)
-        results.append((consumed, output_len, replacement, error))
+results.sort(key=lambda item: (
+    not item["json_ok"],
+    item["replacements"],
+    item["controls"],
+    item["brace_gap"] + item["bracket_gap"],
+    item["quote_parity"],
+    item["replacement"],
+))
 
-results.sort(reverse=True)
 print(f"손상 구간: part02[{start}:{end}]={target[start:end]!r}; 후보 조합 {len(results)}개")
-for rank, (consumed, output_len, replacement, error) in enumerate(results[:30], 1):
-    print(f"{rank:02d}. replacement={replacement} consumed={consumed} output={output_len} error={error}")
+print("UTF-8·JSON 구조 품질 상위 후보")
+for rank, item in enumerate(results[:40], 1):
+    print(
+        f"{rank:02d}. replacement={item['replacement']} json={item['json_ok']} "
+        f"replacementChars={item['replacements']} controls={item['controls']} "
+        f"braceGap={item['brace_gap']} bracketGap={item['bracket_gap']} quoteParity={item['quote_parity']} "
+        f"bytes={len(item['raw'])}"
+    )
 
-print("\n상위 후보 JSON 분석")
-for rank, (_, _, replacement, _) in enumerate(results[:12], 1):
-    try:
-        decoded = make_decoded(replacement)
-        raw = zlib.decompress(decoded[10:-8], -zlib.MAX_WBITS)
-        try:
-            text = raw.decode("utf-8")
-            try:
-                data = json.loads(text)
-                print(f"{rank:02d}. replacement={replacement} JSON 성공 articles={len(data) if isinstance(data, list) else 'not-list'} chars={len(text)}")
-            except json.JSONDecodeError as exc:
-                left = max(0, exc.pos - 160)
-                right = min(len(text), exc.pos + 160)
-                context = text[left:right].replace("\n", "\\n")
-                print(f"{rank:02d}. replacement={replacement} JSON 오류 pos={exc.pos} line={exc.lineno} col={exc.colno} msg={exc.msg}")
-                print(f"    context={context!r}")
-        except UnicodeDecodeError as exc:
-            left = max(0, exc.start - 180)
-            right = min(len(raw), exc.end + 180)
-            context = raw[left:right].decode("utf-8", errors="replace").replace("\n", "\\n")
-            bad = raw[exc.start:exc.end].hex()
-            print(f"{rank:02d}. replacement={replacement} UTF-8 오류 start={exc.start} end={exc.end} bytes={bad} reason={exc.reason}")
-            print(f"    byte-context={context!r}")
-    except Exception as exc:
-        print(f"{rank:02d}. replacement={replacement} 분석 실패: {type(exc).__name__}: {exc}")
+best = results[0]
+best_raw = best["raw"]
+best_text = best["text"]
+print(f"선정 후보: {best['replacement']} replacementChars={best['replacements']} braceGap={best['brace_gap']} bracketGap={best['bracket_gap']}")
 
-best = results[0][2]
-best_raw = zlib.decompress(make_decoded(best)[10:-8], -zlib.MAX_WBITS)
-slice_start = 86000
-slice_end = 104000
-slice_text = best_raw[slice_start:slice_end].decode("utf-8", errors="replace")
-lines = [f"candidate={best}", f"byte-range={slice_start}:{slice_end}", ""]
+# 최초와 최후 손상 문자의 주변을 별도 파일에 저장합니다.
+positions = [i for i, ch in enumerate(best_text) if ch == "�"]
+if positions:
+    char_start = max(0, positions[0] - 3000)
+    char_end = min(len(best_text), positions[-1] + 3000)
+else:
+    char_start, char_end = 0, min(len(best_text), 12000)
+slice_text = best_text[char_start:char_end]
+lines = [
+    f"candidate={best['replacement']}",
+    f"replacementChars={best['replacements']}",
+    f"char-range={char_start}:{char_end}",
+    "",
+]
 for offset in range(0, len(slice_text), 240):
-    lines.append(f"[{slice_start + offset:06d}] {slice_text[offset:offset + 240]}")
+    lines.append(f"[{char_start + offset:06d}] {slice_text[offset:offset + 240]}")
 (ROOT / "scripts" / "hwajak-corrupt-slice.txt").write_text("\n".join(lines), encoding="utf-8")
-print(f"손상 원문 조각 저장: scripts/hwajak-corrupt-slice.txt ({slice_start}:{slice_end}, candidate={best})")
+print(f"손상 원문 조각 저장: scripts/hwajak-corrupt-slice.txt ({char_start}:{char_end})")
