@@ -1,11 +1,9 @@
 name: 2027 언어와 매체 전수 점검
 
 on:
-  push:
+  pull_request:
     branches: [main]
-    paths:
-      - "scripts/audit-eonmae-pages.mjs"
-      - ".github/workflows/eonmae-audit.yml"
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
