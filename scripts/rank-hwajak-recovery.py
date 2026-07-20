@@ -91,3 +91,14 @@ for rank, (_, _, replacement, _) in enumerate(results[:12], 1):
             print(f"    byte-context={context!r}")
     except Exception as exc:
         print(f"{rank:02d}. replacement={replacement} 분석 실패: {type(exc).__name__}: {exc}")
+
+best = results[0][2]
+best_raw = zlib.decompress(make_decoded(best)[10:-8], -zlib.MAX_WBITS)
+slice_start = 86000
+slice_end = 104000
+slice_text = best_raw[slice_start:slice_end].decode("utf-8", errors="replace")
+lines = [f"candidate={best}", f"byte-range={slice_start}:{slice_end}", ""]
+for offset in range(0, len(slice_text), 240):
+    lines.append(f"[{slice_start + offset:06d}] {slice_text[offset:offset + 240]}")
+(ROOT / "scripts" / "hwajak-corrupt-slice.txt").write_text("\n".join(lines), encoding="utf-8")
+print(f"손상 원문 조각 저장: scripts/hwajak-corrupt-slice.txt ({slice_start}:{slice_end}, candidate={best})")
