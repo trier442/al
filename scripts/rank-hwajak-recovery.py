@@ -71,17 +71,23 @@ for rank, (_, _, replacement, _) in enumerate(results[:12], 1):
     try:
         decoded = make_decoded(replacement)
         raw = zlib.decompress(decoded[10:-8], -zlib.MAX_WBITS)
-        text = raw.decode("utf-8")
         try:
-            data = json.loads(text)
-            print(f"{rank:02d}. replacement={replacement} JSON 성공 articles={len(data) if isinstance(data, list) else 'not-list'} chars={len(text)}")
-        except json.JSONDecodeError as exc:
-            left = max(0, exc.pos - 120)
-            right = min(len(text), exc.pos + 120)
-            context = text[left:right].replace("\n", "\\n")
-            print(f"{rank:02d}. replacement={replacement} JSON 오류 pos={exc.pos} line={exc.lineno} col={exc.colno} msg={exc.msg}")
-            print(f"    context={context!r}")
-    except UnicodeDecodeError as exc:
-        print(f"{rank:02d}. replacement={replacement} UTF-8 오류 start={exc.start} end={exc.end} reason={exc.reason}")
+            text = raw.decode("utf-8")
+            try:
+                data = json.loads(text)
+                print(f"{rank:02d}. replacement={replacement} JSON 성공 articles={len(data) if isinstance(data, list) else 'not-list'} chars={len(text)}")
+            except json.JSONDecodeError as exc:
+                left = max(0, exc.pos - 160)
+                right = min(len(text), exc.pos + 160)
+                context = text[left:right].replace("\n", "\\n")
+                print(f"{rank:02d}. replacement={replacement} JSON 오류 pos={exc.pos} line={exc.lineno} col={exc.colno} msg={exc.msg}")
+                print(f"    context={context!r}")
+        except UnicodeDecodeError as exc:
+            left = max(0, exc.start - 180)
+            right = min(len(raw), exc.end + 180)
+            context = raw[left:right].decode("utf-8", errors="replace").replace("\n", "\\n")
+            bad = raw[exc.start:exc.end].hex()
+            print(f"{rank:02d}. replacement={replacement} UTF-8 오류 start={exc.start} end={exc.end} bytes={bad} reason={exc.reason}")
+            print(f"    byte-context={context!r}")
     except Exception as exc:
         print(f"{rank:02d}. replacement={replacement} 분석 실패: {type(exc).__name__}: {exc}")
