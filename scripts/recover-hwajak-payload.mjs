@@ -10,16 +10,28 @@ const targetIndex = files.indexOf("part02.txt");
 const target = chunks[targetIndex];
 const matches = [...target.matchAll(/[^A-Za-z0-9+/=]+/g)];
 
+const crcTable = Array.from({ length: 256 }, (_, number) => {
+  let value = number;
+  for (let bit = 0; bit < 8; bit += 1) value = value & 1 ? 0xedb88320 ^ (value >>> 1) : value >>> 1;
+  return value >>> 0;
+});
+
+function crc32(buffer) {
+  let crc = 0xffffffff;
+  for (const byte of buffer) crc = crcTable[(crc ^ byte) & 0xff] ^ (crc >>> 8);
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
 function isValidData(data) {
   return Array.isArray(data) && data.length === 57 && data.every((article) =>
     article && typeof article === "object" &&
-    typeof article.slug === "string" &&
-    typeof article.title === "string" &&
-    typeof article.summary === "string" &&
+    typeof article.slug === "string" && article.slug.startsWith("2027-suteuk-hwajak-") &&
+    typeof article.title === "string" && article.title.length >= 2 &&
+    typeof article.summary === "string" && article.summary.length >= 650 &&
     Array.isArray(article.blankSpans) && article.blankSpans.length === 15 &&
     Array.isArray(article.flow) && article.flow.length === 4 &&
-    Array.isArray(article.points) && article.points.length === 10 &&
-    Array.isArray(article.facts10) && article.facts10.length === 10
+    Array.isArray(article.points) && article.points.length >= 10 &&
+    Array.isArray(article.facts10) && article.facts10.length >= 10
   );
 }
 
@@ -56,27 +68,39 @@ const successes = [];
 
 for (const first of alphabet) {
   for (const second of alphabet) {
-    const candidate = `${prefix}${first}${second}${suffix}`;
+    const replacement = `${first}${second}`;
+    const candidate = `${prefix}${replacement}${suffix}`;
     const candidateChunks = [...chunks];
     candidateChunks[targetIndex] = candidate;
     try {
       const decoded = Buffer.from(candidateChunks.join(""), "base64");
       if (decoded.length < 20 || decoded[0] !== 0x1f || decoded[1] !== 0x8b || decoded[3] !== 0) continue;
-      const json = inflateRawSync(decoded.subarray(10, -8)).toString("utf8");
+      const raw = inflateRawSync(decoded.subarray(10, -8));
+      const json = raw.toString("utf8");
+      if (Buffer.from(json, "utf8").length !== raw.length) continue;
       const data = JSON.parse(json);
       if (isValidData(data)) {
-        successes.push({ replacement: `${first}${second}`, data, jsonLength: json.length });
+        const expectedCrc = decoded.readUInt32LE(decoded.length - 8);
+        const expectedSize = decoded.readUInt32LE(decoded.length - 4);
+        successes.push({
+          replacement,
+          data,
+          jsonLength: json.length,
+          crcMatch: crc32(raw) === expectedCrc,
+          sizeMatch: (raw.length >>> 0) === expectedSize,
+        });
       }
     } catch {
-      // CRC가 손상되었더라도 DEFLATE 본문과 57개 JSON 구조를 모두 통과한 후보만 채택합니다.
+      // DEFLATE 본문과 57개 JSON 구조를 모두 통과한 후보만 채택합니다.
     }
   }
 }
 
-if (successes.length !== 1) {
-  throw new Error(`JSON 구조를 통과한 복원 후보가 1개여야 하지만 ${successes.length}개입니다: ${successes.map((item) => item.replacement).join(", ")}`);
+const exact = successes.filter((item) => item.crcMatch && item.sizeMatch);
+if (exact.length !== 1) {
+  throw new Error(`CRC·크기를 모두 통과한 후보가 1개여야 하지만 ${exact.length}개입니다. JSON 후보: ${successes.map((item) => `${item.replacement}(crc=${item.crcMatch},size=${item.sizeMatch})`).join(", ")}`);
 }
 
-const recovered = successes[0];
+const recovered = exact[0];
 const clean = writeCleanPayload(recovered.data);
 console.log(`화작 압축 데이터 복원 완료: index=${damaged.index}, damaged=${JSON.stringify(damaged[0])}, replacement=${recovered.replacement}, jsonLength=${recovered.jsonLength}, cleanBase64Length=${clean.cleanBase64Length}`);
