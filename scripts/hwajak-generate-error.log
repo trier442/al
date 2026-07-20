@@ -9,3 +9,34 @@ Error: 복원 후보가 1개여야 하지만 0개입니다:
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
 
 Node.js v22.23.1
+손상 구간: part02[7387:7391]='АҞӘА'; 후보 조합 4096개
+01. replacement=n8 consumed=68288 output=411541 error=Error -3 while decompressing data: incorrect data check
+02. replacement=X8 consumed=68288 output=411541 error=Error -3 while decompressing data: incorrect data check
+03. replacement=H8 consumed=68288 output=411541 error=Error -3 while decompressing data: incorrect data check
+04. replacement=38 consumed=68288 output=411541 error=Error -3 while decompressing data: incorrect data check
+05. replacement=ns consumed=68288 output=411540 error=Error -3 while decompressing data: incorrect data check
+06. replacement=Xs consumed=68288 output=411540 error=Error -3 while decompressing data: incorrect data check
+07. replacement=Hs consumed=68288 output=411540 error=Error -3 while decompressing data: incorrect data check
+08. replacement=3s consumed=68288 output=411540 error=Error -3 while decompressing data: incorrect data check
+09. replacement=zf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+10. replacement=ze consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+11. replacement=zd consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+12. replacement=zc consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+13. replacement=wf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+14. replacement=we consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+15. replacement=wd consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+16. replacement=wc consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+17. replacement=tf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+18. replacement=te consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+19. replacement=td consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+20. replacement=tc consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+21. replacement=t9 consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+22. replacement=t8 consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+23. replacement=t/ consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+24. replacement=t+ consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+25. replacement=sf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+26. replacement=se consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+27. replacement=sd consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+28. replacement=sc consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+29. replacement=rf consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
+30. replacement=re consumed=68288 output=411537 error=Error -3 while decompressing data: incorrect data check
