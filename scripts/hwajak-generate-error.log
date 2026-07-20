@@ -62,4 +62,5 @@ CRC·UTF-8·JSON 구조 품질 상위 후보
 49. replacement=EG crc=False size=True json=True replacementChars=892 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=87e18985 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
 50. replacement=Jn crc=False size=True json=True replacementChars=892 controls=0 braceGap=0 bracketGap=0 quoteParity=0 actualCRC=350f6b12 expectedCRC=e7c8fca2 actualSize=411353 expectedSize=411353
 완전 UTF-8 JSON 후보: 7개 = SH, UG, Zn, am, cG, dm, e2
+게시글별 후보 차이표 저장: scripts/hwajak-candidate-diff.txt, indexes=[13, 14, 15, 18, 21]
 완전 후보 차이 문맥 저장: scripts/hwajak-corrupt-slice.txt (44312:75369)
