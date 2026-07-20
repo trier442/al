@@ -1,35 +1,11 @@
-part01.txt: length=15182, mod4=2, start=H4sIAAKfXWoC/+y9, end=MSSN9LpjxYDABvR8, padding=0, invalid=0
-part02.txt: length=15184, mod4=0, start=QjPRlwfnxQlPnh6L, end=U3EsMYh0cGt9wP1s, padding=0, invalid=4
-  invalid index=7387, char="А", code=U+0410, context="LERB4s96mmIiАҞӘАutkSO0nbh"
-  invalid index=7388, char="Ҟ", code=U+049E, context="ERB4s96mmIiАҞӘАutkSO0nbhE"
-  invalid index=7389, char="Ә", code=U+04D8, context="RB4s96mmIiАҞӘАutkSO0nbhEw"
-  invalid index=7390, char="А", code=U+0410, context="B4s96mmIiАҞӘАutkSO0nbhEwx"
-part03.txt: length=15182, mod4=2, start=rx2VDmZl8oQPQTl2, end=qvuvo5V2jp02Wsm7, padding=0, invalid=0
-part04.txt: length=15182, mod4=2, start=DdF7g6V8TUV7vv11, end=LV7bTnLGt36cnSoM, padding=0, invalid=0
-part05.txt: length=15182, mod4=2, start=7CZNZLLtRV/SWUyZ, end=bO2y87aYCNzihsov, padding=0, invalid=0
-part06a.txt: length=7591, mod4=3, start=UOMAzO1Cw6Q0EBr7, end=8ttkIkfiGcYjjvPg, padding=0, invalid=0
-part06b.txt: length=7591, mod4=3, start=/LUwH072QGXODDmP, end=j/8DovzI59lGBgA=, padding=1, invalid=0
-joined: length=91094, mod4=2, start=H4sIAAKfXWoC/+y9, end=j/8DovzI59lGBgA=
-decoded: bytes=68316, header=1f8b0800029f5d6a02ff, tail=5fc8fff03a2fcc8e7d946060
-gunzip joined failed: Z_DATA_ERROR: invalid code lengths set
-gunzip decoded-parts failed: Z_BUF_ERROR: unexpected end of file
-node:internal/modules/run_main:123
-    triggerUncaughtException(
-    ^
+file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:48
+  throw new Error(`복원 후보가 1개여야 하지만 ${successes.length}개입니다: ${successes.map((item) => item.replacement).join(", ")}`);
+        ^
 
-Error: invalid code lengths set
-    at genericNodeError (node:internal/errors:983:15)
-    at wrappedFn (node:internal/errors:537:14)
-    at Zlib.zlibOnError [as onerror] (node:zlib:191:17)
-    at processChunkSync (node:zlib:430:12)
-    at zlibBufferSync (node:zlib:180:12)
-    at syncBufferWrapper (node:zlib:790:14)
-    at file:///home/runner/work/al/al/scripts/standardize-hwajak-pages.mjs:263:29
+Error: 복원 후보가 1개여야 하지만 0개입니다: 
+    at file:///home/runner/work/al/al/scripts/recover-hwajak-payload.mjs:48:9
     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
-    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
-  errno: -3,
-  code: 'Z_DATA_ERROR'
-}
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
 
 Node.js v22.23.1
