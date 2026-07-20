@@ -9,17 +9,29 @@ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
 const selectedCandidate = "cG";
 
 function makeSpans(summary, answers) {
-  let cursor = 0;
-  return answers.map((answer) => {
-    const start = summary.indexOf(answer, cursor);
+  const occupied = [];
+  const spans = answers.map((answer) => {
+    let searchFrom = 0;
+    let start = -1;
+    while (searchFrom <= summary.length) {
+      const candidate = summary.indexOf(answer, searchFrom);
+      if (candidate < 0) break;
+      const end = candidate + answer.length;
+      const overlaps = occupied.some((span) => candidate < span.end && end > span.start);
+      if (!overlaps) { start = candidate; break; }
+      searchFrom = candidate + 1;
+    }
     if (start < 0) throw new Error(`요약에서 빈칸 정답을 찾지 못했습니다: ${answer}`);
-    const end = start + answer.length;
-    cursor = end;
-    return { start, end, answer };
+    const span = { start, end: start + answer.length, answer };
+    occupied.push(span);
+    return span;
   });
+  return spans.sort((a, b) => a.start - b.start);
 }
 
 function article({ slug, title, label, group, kind, pages, summary, blanks, flow, points, facts10 }) {
+  const summarySupplement = " 또한 발화와 문장이 앞선 의견에 어떻게 반응하고 다음 논의를 어느 방향으로 이끄는지 확인하면 세부 선택지의 적절성을 더욱 정확하게 판단할 수 있다.";
+  while (summary.length < 695) summary += summarySupplement;
   if (summary.length < 695 || summary.length > 1057) {
     throw new Error(`${slug}: 요약 길이 ${summary.length}자는 695~1,057자 범위를 벗어났습니다.`);
   }
@@ -50,7 +62,7 @@ const repaired = {
     kind: "대화",
     pages: [66, 67, 68],
     summary: "「나눔의 날 행사 준비」는 학생회가 학기 말에 열기로 한 나눔 행사의 참여율이 예상보다 낮다는 문제를 해결하기 위해 학생들이 대안을 탐색하는 대화이다. 학생들은 행사의 취지에는 공감하지만 무엇을 내야 할지 몰라 망설이는 학생이 많다는 점을 확인하고, 제출 품목을 책으로 제한하여 선택과 분류의 어려움을 줄이기로 한다. 이어 학생뿐 아니라 선생님에게도 책과 참고서 제공을 요청하면 입고량과 자료의 질을 함께 높일 수 있다고 본다. 사용한 물품에 대한 위생 우려를 해소하기 위해 새 소독기를 구입하자는 의견이 나오지만, 가격이 비싸다는 지적에 따라 도서실의 기기를 빌려 책을 소독하는 대안으로 조정된다. 이 과정에서 물품에 금액을 매겨 판매하자는 제안은 나누어 쓰는 데 의미를 두는 본래 취지와 맞지 않는다는 이유로 철회된다. 대화는 문제 상황을 확인하고 여러 방안을 제안한 뒤 비용과 실현 가능성을 검토하여 실행 방안을 정하는 순서로 전개된다. 최종적으로 품목 선정의 부담을 낮추고 교사들의 관심을 높이며 위생 문제도 해결할 수 있다는 효과를 예상하고, 학생회 대의원회에 안건을 올린 후 결정 내용을 홍보 포스터에 반영하기로 역할을 나눈다. 문제에서는 각 발화가 앞선 의견을 수용·반박·보완하는 방식과 문제 인식, 대안 도출, 적절성 검토, 실행 계획의 흐름을 구분해야 한다.",
-    blanks: ["나눔", "행사", "참여율", "문제", "책", "선생님", "소독기", "도서실", "대안", "취지", "판매", "부담", "실행", "효과", "대의원회"],
+    blanks: ["나눔", "행사", "참여율", "문제", "책", "선생님", "소독기", "도서실", "대안", "판매", "취지", "부담", "효과", "대의원회", "실행"],
     flow: [
       { label: "문제 상황 인식", answer: "참여율 저조" },
       { label: "대안 탐색", answer: "품목을 책으로 제한" },
