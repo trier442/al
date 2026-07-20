@@ -8,8 +8,20 @@ const chunks = [];
 
 for (const file of files) {
   const value = fs.readFileSync(path.join(dir, file), "utf8").trim();
-  const invalid = value.match(/[^A-Za-z0-9+/=]/g) || [];
+  const invalid = [];
+  for (let index = 0; index < value.length; index += 1) {
+    const char = value[index];
+    if (!/[A-Za-z0-9+/=]/.test(char)) {
+      invalid.push({
+        index,
+        char: JSON.stringify(char),
+        code: `U+${char.codePointAt(0).toString(16).toUpperCase().padStart(4, "0")}`,
+        context: JSON.stringify(value.slice(Math.max(0, index - 12), index + 13)),
+      });
+    }
+  }
   console.log(`${file}: length=${value.length}, mod4=${value.length % 4}, start=${value.slice(0,16)}, end=${value.slice(-16)}, padding=${(value.match(/=+$/)||[''])[0].length}, invalid=${invalid.length}`);
+  invalid.forEach((item) => console.log(`  invalid index=${item.index}, char=${item.char}, code=${item.code}, context=${item.context}`));
   chunks.push(value);
 }
 
