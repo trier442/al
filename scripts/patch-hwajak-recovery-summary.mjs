@@ -5,6 +5,13 @@ const file = path.join(process.cwd(), "scripts", "recover-hwajak-payload.mjs");
 let source = fs.readFileSync(file, "utf8");
 let changed = false;
 
+const oldMakeSpans = `function makeSpans(summary, answers) {\n  let cursor = 0;\n  return answers.map((answer) => {\n    const start = summary.indexOf(answer, cursor);\n    if (start < 0) throw new Error(\`요약에서 빈칸 정답을 찾지 못했습니다: \${answer}\`);\n    const end = start + answer.length;\n    cursor = end;\n    return { start, end, answer };\n  });\n}`;
+const newMakeSpans = `function makeSpans(summary, answers) {\n  const occupied = [];\n  const spans = answers.map((answer) => {\n    let searchFrom = 0;\n    let start = -1;\n    while (searchFrom <= summary.length) {\n      const candidate = summary.indexOf(answer, searchFrom);\n      if (candidate < 0) break;\n      const end = candidate + answer.length;\n      const overlaps = occupied.some((span) => candidate < span.end && end > span.start);\n      if (!overlaps) { start = candidate; break; }\n      searchFrom = candidate + 1;\n    }\n    if (start < 0) throw new Error(\`요약에서 빈칸 정답을 찾지 못했습니다: \${answer}\`);\n    const span = { start, end: start + answer.length, answer };\n    occupied.push(span);\n    return span;\n  });\n  return spans.sort((a, b) => a.start - b.start);\n}`;
+if (source.includes(oldMakeSpans)) {
+  source = source.replace(oldMakeSpans, newMakeSpans);
+  changed = true;
+}
+
 const marker = "const summarySupplement =";
 if (!source.includes(marker)) {
   const before = `function article({ slug, title, label, group, kind, pages, summary, blanks, flow, points, facts10 }) {\n  if (summary.length < 695 || summary.length > 1057) {`;
@@ -30,7 +37,7 @@ for (const variant of variants) {
 
 if (changed) {
   fs.writeFileSync(file, source, "utf8");
-  console.log("화작 교정 요약 길이와 빈칸 순서를 보완했습니다.");
+  console.log("화작 교정 요약 길이와 빈칸 위치 자동 정렬을 적용했습니다.");
 } else {
-  console.log("화작 교정 요약 길이와 빈칸 순서는 이미 보완되어 있습니다.");
+  console.log("화작 교정 요약 길이와 빈칸 위치 자동 정렬은 이미 적용되어 있습니다.");
 }
