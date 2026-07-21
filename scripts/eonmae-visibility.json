@@ -3,5 +3,6 @@
   "scope": "2027-suteuk-eonmae",
   "expected_items": 43,
   "reason": "전체 재검수 전 임시 비공개",
-  "changed_at": "2026-07-21"
+  "changed_at": "2026-07-21",
+  "hide_run": 2
 }
