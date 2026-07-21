@@ -1,8 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { esc,meta,read,groupOf } from './eonmae-lib.mjs';
+import { getSourceProfile } from './eonmae-source-profiles.mjs';
 
 const CIRCLED=['①','②','③','④','⑤'];
+function sourceOf(page){return page.sourceProfile||(page.sourceProfile=getSourceProfile(page.slug));}
+function assertSourcePage(page){const p=sourceOf(page);if(p.forms.length<4||p.overview.length<3||p.facts.length<10||p.traps.length<5||p.steps.length<4)throw new Error(`${page.slug}: 원문형 해설 자료가 기준에 미달합니다.`);if(page.questions.length!==10)throw new Error(`${page.slug}: 원문형 변형문제가 10개가 아닙니다.`);}
 function blankSpans(text,terms){
   const occupied=[],out=[];
   for(const term of [...terms].sort((a,b)=>b.length-a.length)){
@@ -24,7 +27,7 @@ function renderSummary(page){
   out.push(esc(page.summary.slice(cursor)));return out.join('');
 }
 function renderSourceGuide(page){
-  const p=page.sourceProfile;
+  const p=sourceOf(page);
   const forms=p.forms.map((f,i)=>`<div class="source-form"><span>${i+1}</span><strong>${esc(f)}</strong></div>`).join('');
   const overview=p.overview.map(x=>`<p>${esc(x)}</p>`).join('');
   const steps=p.steps.map((x,i)=>`<li><b>${i+1}단계</b> ${esc(x)}</li>`).join('');
@@ -36,12 +39,13 @@ function renderQuestion(q){
   const answer=q.options.findIndex(o=>o.correct)+1;
   const choices=q.options.map((o,i)=>`<button type="button" class="choice" data-choice="${i+1}"><span>${CIRCLED[i]}</span>${esc(o.text)}</button>`).join('');
   const explanations=q.options.map((o,i)=>`<div class="choice-exp ${o.correct?'correct-exp':'wrong-exp'}" data-choice="${i+1}" hidden><strong>${CIRCLED[i]} ${o.correct?'정답 해설':'오답 해설'}</strong><p>${esc(o.explanation)}</p></div>`).join('');
-  return `<section class="q" data-answer="${answer}" data-q="${q.no}" data-source-model="${esc(q.sourceModel)}" data-archetype="${esc(q.archetype)}"><div class="qmeta"><span>원문 ${esc(q.sourcePages)}쪽</span><b>${esc(q.sourceModel)}</b><em>${esc(q.archetype)}</em></div><h3>${q.no}. ${esc(q.stem)}</h3><div class="view" data-view-chars="${q.view.length}"><strong>&lt;보기&gt;</strong>${q.viewHtml}</div><div class="choices">${choices}</div><p class="result" hidden aria-live="polite"></p><div class="choice-explanations" hidden>${explanations}</div></section>`;
+  return `<section class="q" data-answer="${answer}" data-q="${q.no}"><div class="qmeta" data-source-model="${esc(q.sourceModel)}" data-archetype="${esc(q.archetype)}"><span>원문 ${esc(q.sourcePages)}쪽</span><b>${esc(q.sourceModel)}</b><em>${esc(q.archetype)}</em></div><h3>${q.no}. ${esc(q.stem)}</h3><div class="view" data-view-chars="${q.view.length}"><strong>&lt;보기&gt;</strong>${q.viewHtml}</div><div class="choices">${choices}</div><p class="result" hidden aria-live="polite"></p><div class="choice-explanations" hidden>${explanations}</div></section>`;
 }
 export function renderPages(pages,contentDir,assetsDir){
   const style=fs.readFileSync(path.join(assetsDir,'eonmae-style.css'),'utf8');
   const browser=fs.readFileSync(path.join(assetsDir,'eonmae-browser.js'),'utf8');
   for(const page of pages){
+    assertSourcePage(page);
     const file=path.join(contentDir,`${page.slug}.html`),old=read(file);
     const revision=Number.parseInt(meta(old,'revision')||String(page.revision||1),10);
     const postId=meta(old,'post_id')||page.postId,type=meta(old,'type')||page.type||'page',categories=meta(old,'categories')||page.categories;
@@ -57,7 +61,7 @@ export function renderPages(pages,contentDir,assetsDir){
 }
 export function renderIndex(pages,contentDir){
   const groups=['개념 학습','언어','매체','통합','실전 학습'];const cards=new Map(groups.map(g=>[g,[]]));
-  for(const p of pages){const group=groupOf(p.crumb);cards.get(group).push(`<a class="card" data-key="${esc(`${p.title} ${p.crumb} ${p.concepts.map(c=>c.term).join(' ')} ${p.sourceProfile.forms.join(' ')}`)}" href="https://modukorean.co.kr/${p.slug}/"><small>${esc(p.crumb)} · 원문 ${esc(p.sourceProfile.pages)}쪽</small><strong>${esc(p.title)}</strong><span>원문 구조 해설 · 풀이 절차 · 오답 함정 · 원문형 변형문제 10제</span></a>`);}
+  for(const p of pages){const source=sourceOf(p);const group=groupOf(p.crumb);cards.get(group).push(`<a class="card" data-key="${esc(`${p.title} ${p.crumb} ${p.concepts.map(c=>c.term).join(' ')} ${source.forms.join(' ')}`)}" href="https://modukorean.co.kr/${p.slug}/"><small>${esc(p.crumb)} · 원문 ${esc(source.pages)}쪽</small><strong>${esc(p.title)}</strong><span>원문 구조 해설 · 풀이 절차 · 오답 함정 · 원문형 변형문제 10제</span></a>`);}
   const oldFile=path.join(contentDir,'2027-suteuk-eonmae-index.html'),old=read(oldFile),revision=Number.parseInt(meta(old,'revision')||'1',10),postId=meta(old,'post_id');
   const metadata=['<!-- title: 2027 수능특강 언어와 매체 전체 원문형 해설 및 변형문제 -->','<!-- slug: 2027-수능특강-언어와-매체-전체-해설-및-변형-문제 -->','<!-- status: publish -->','<!-- type: page -->',`<!-- revision: ${Number.isFinite(revision)?revision+1:2} -->`,postId?`<!-- post_id: ${postId} -->`:'','<!-- excerpt: 2027 수능특강 언어와 매체 42개 단원을 원문 자료 형식과 발문 유형에 맞춰 해설하고 420개 원문형 변형문제로 구성한 통합 목록입니다. -->'].filter(Boolean).join('\n');
   const sections=groups.map(g=>`<section class="group"><h2>${g} <small>(${cards.get(g).length}개)</small></h2><div class="grid">${cards.get(g).join('')}</div></section>`).join('');
