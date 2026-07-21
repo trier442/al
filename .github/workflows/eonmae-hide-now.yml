@@ -5,13 +5,13 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/eonmae-hide-now.yml"
-      - "scripts/hide-eonmae-fast.mjs"
+      - "scripts/hide-eonmae-index.mjs"
 
 permissions:
   contents: read
 
 jobs:
-  hide-now:
+  hide-index:
     runs-on: ubuntu-latest
     steps:
       - name: 저장소 가져오기
@@ -22,20 +22,20 @@ jobs:
         with:
           node-version: "22"
 
-      - name: 스크립트 검사
-        run: node --check scripts/hide-eonmae-fast.mjs
+      - name: 통합 목록 처리기 검사
+        run: node --check scripts/hide-eonmae-index.mjs
 
-      - name: WordPress 43개 즉시 비공개 및 공개 접근 검증
+      - name: WordPress 통합 목록 비공개 및 공개 접근 검증
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
-        run: node scripts/hide-eonmae-fast.mjs
+        run: node scripts/hide-eonmae-index.mjs | tee eonmae-index-hidden.json
 
       - name: 검증 결과 보관
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: eonmae-hidden-verification-now
-          path: scripts/eonmae-hidden-verification-fast.json
+          name: eonmae-index-hidden-verification
+          path: eonmae-index-hidden.json
           if-no-files-found: error
