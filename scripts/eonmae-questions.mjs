@@ -11,6 +11,11 @@ function plain(value=''){return String(value).replace(/<[^>]+>/g,' ').replace(/\
 function pick(list,start,count){const out=[];for(let i=0;i<count;i++)out.push(list[(start+i)%list.length]);return out;}
 function clip(text,max=175){const s=String(text).replace(/\s+/g,' ').trim();if(s.length<=max)return s;const cut=s.slice(0,max);const p=Math.max(cut.lastIndexOf('다.'),cut.lastIndexOf('.'),cut.lastIndexOf(','));return (p>80?cut.slice(0,p+1):cut.slice(0,max-1))+'…';}
 function answerAt(pageIndex,q){return (pageIndex*10+q)%5;}
+function particle(value,withFinal,withoutFinal){
+  const ch=[...String(value).trim()].at(-1)||'',code=ch.charCodeAt(0);
+  if(code<0xac00||code>0xd7a3)return withoutFinal;
+  return (code-0xac00)%28?withFinal:withoutFinal;
+}
 function formFor(profile,q){return profile.forms[q%profile.forms.length];}
 function stepFor(profile,q){return profile.steps[q%profile.steps.length];}
 function fact(profile,i){const text=profile.facts[i%profile.facts.length];return {text,truth:true,why:`원문 정제표에서 “${text}”로 확인되는 내용과 일치한다.`};}
@@ -68,9 +73,9 @@ function pairingQuestion(page,profile,q,pageIndex,variant='form-step'){
   const model=formFor(profile,q),a=answerAt(pageIndex,q);
   const forms=pick(profile.forms,q,5),steps=pick(profile.steps,q,5);
   const viewHtml=sourceBadge(profile,model)+`<p>${esc(profile.overview[q%profile.overview.length])}</p><div class="pairing-grid"><div><strong>자료 유형</strong>${forms.map((x,i)=>`<p><b>${ALPHA[i]}</b> ${esc(x)}</p>`).join('')}</div><div><strong>판단 기준</strong>${steps.map((x,i)=>`<p><b>${HANGUL[i]}</b> ${esc(x)}</p>`).join('')}</div></div>`+stepsHtml(profile);
-  const correct={text:`${forms[a]} — ${steps[a]}`,truth:true,why:`자료 유형 ${ALPHA[a]}와 판단 기준 ${HANGUL[a]}은 원문 정제표에서 같은 분석 단계로 연결된다.`,optionText:`${ALPHA[a]}의 ‘${forms[a]}’와 ${HANGUL[a]}의 ‘${steps[a]}’을 연결한다.`};
+  const correct={text:`${forms[a]} — ${steps[a]}`,truth:true,why:`자료 유형 ${ALPHA[a]}와 판단 기준 ${HANGUL[a]}은 원문 정제표에서 같은 분석 단계로 연결된다.`,optionText:`${ALPHA[a]}의 ‘${forms[a]}’${particle(forms[a],'과','와')} ${HANGUL[a]}의 ‘${steps[a]}’을 연결한다.`};
   const distractors=[];
-  for(let i=0;i<5;i++)if(i!==a){const wrong=(i+1)%5;distractors.push({text:`${forms[i]} — ${steps[wrong]}`,truth:false,why:`${forms[i]}의 실제 판단 기준은 “${steps[i]}”인데 “${steps[wrong]}”으로 바꾸어 연결했다.`,optionText:`${ALPHA[i]}의 ‘${forms[i]}’와 ${HANGUL[wrong]}의 ‘${steps[wrong]}’을 연결한다.`});}
+  for(let i=0;i<5;i++)if(i!==a){const wrong=(i+1)%5;distractors.push({text:`${forms[i]} — ${steps[wrong]}`,truth:false,why:`${forms[i]}의 실제 판단 기준은 “${steps[i]}”인데 “${steps[wrong]}”으로 바꾸어 연결했다.`,optionText:`${ALPHA[i]}의 ‘${forms[i]}’${particle(forms[i],'과','와')} ${HANGUL[wrong]}의 ‘${steps[wrong]}’을 연결한다.`});}
   const options=finalize(profile,q,pageIndex,model,correct,distractors);
   return {sourceModel:model,sourcePages:profile.pages,archetype:variant==='table'?'검토표 완성형':'짝짓기·표 완성형',viewHtml,view:plain(viewHtml),options,
     stem:variant==='table'?`<검토표>의 자료 유형과 판단 기준을 바르게 연결한 것은?`:`「${page.title}」의 원문 문항 원형과 풀이 기준을 바르게 짝지은 것은?`};
