@@ -22,7 +22,10 @@ const pages=files.map((name,index)=>{
   const spec=overrideSpec(slug,map[slug]);
   const page=applyPageOverrides(extractPage(path.join(CONTENT,name),defs,spec,index));
   page.summary=makeSummary(page);
-  page.questions=makeQuestions(page,index);
+  page.questions=makeQuestions(page,index).map(question=>({
+    ...question,
+    stem:question.stem.includes(page.title)?question.stem:`「${page.title}」 ${question.stem}`
+  }));
   return page;
 });
 
