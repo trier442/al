@@ -1,3 +1,5 @@
+import { getSourceProfile } from './eonmae-source-profiles.mjs';
+
 const LABELS=['㉠','㉡','㉢','㉣','㉤'];
 const ALPHA=['A','B','C','D','E'];
 const HANGUL=['ㄱ','ㄴ','ㄷ','ㄹ','ㅁ'];
@@ -111,7 +113,9 @@ function synthesisQuestion(page,profile,q,pageIndex){
 }
 
 export function makeQuestions(page,pageIndex){
-  const p=page.sourceProfile;if(!p)throw new Error(`${page.slug}: 원문 유형 정제표가 연결되지 않았습니다.`);
+  const p=page.sourceProfile||getSourceProfile(page.slug);
+  page.sourceProfile=p;
+  if(p.forms.length<4||p.overview.length<3||p.facts.length<10||p.traps.length<5||p.steps.length<4)throw new Error(`${page.slug}: 원문형 정제표의 문항 원형·해설·근거·함정·풀이 절차가 부족합니다.`);
   const builders=[
     ()=>contentQuestion(page,p,0,pageIndex,false),
     ()=>taggedQuestion(page,p,1,pageIndex,false),
@@ -124,5 +128,12 @@ export function makeQuestions(page,pageIndex){
     ()=>pairingQuestion(page,p,8,pageIndex,'table'),
     ()=>synthesisQuestion(page,p,9,pageIndex)
   ];
-  return builders.map((build,i)=>({no:i+1,...build()}));
+  const questions=builders.map((build,i)=>({no:i+1,...build()}));
+  const models=new Set(questions.map(q=>q.sourceModel)),archetypes=new Set(questions.map(q=>q.archetype));
+  if(models.size<4||archetypes.size<8)throw new Error(`${page.slug}: 원문 문항 원형 ${models.size}종, 변형 유형 ${archetypes.size}종으로 기준에 미달합니다.`);
+  for(const q of questions){
+    if(q.view.length<300||q.options.length!==5)throw new Error(`${page.slug} ${q.no}번: 원문형 보기 또는 선택지 구성이 부족합니다.`);
+    for(const option of q.options)if(option.explanation.length<150||!/(판정:.*근거:.*원문형 함정:.*풀이 절차:)/s.test(option.explanation))throw new Error(`${page.slug} ${q.no}번: 선택지별 판정·근거·함정·풀이 절차가 부족합니다.`);
+  }
+  return questions;
 }
