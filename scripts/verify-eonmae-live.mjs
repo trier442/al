@@ -4,12 +4,13 @@ import path from 'node:path';
 const ROOT=process.cwd();
 const DIR=path.join(ROOT,'wordpress-content');
 const BASE=(process.env.WP_URL||'https://modukorean.co.kr').replace(/\/$/,'');
+const MANUAL_SLUGS=new Set(['2027-suteuk-eonmae-c01']);
 const files=fs.readdirSync(DIR)
   .filter(name=>/^2027-suteuk-eonmae-(?!index)(?:c|l|m|i|p)\d{2}\.html$/.test(name))
+  .filter(name=>!MANUAL_SLUGS.has(name.replace(/\.html$/,'')))
   .sort();
 
 const required={
-  '2027-suteuk-eonmae-c01':['자료를 분석할 때에는 생산 목적과 예상 수용자를 확인','자료에 없는 효과를 덧붙이지 않는다'],
   '2027-suteuk-eonmae-l03':['일정한 뜻이나 문법적 기능을 지닌 가장 작은 말의 단위','일부 접미사는 품사를 바꾸기도 한다'],
   '2027-suteuk-eonmae-l05':['서술어 자릿수는 문장에 겉으로 나타난 성분의 수가 아니라','문맥에서 필수 성분이 생략되어도 그 성분이 의미상 복원'],
   '2027-suteuk-eonmae-l10':['형태와 결합 위치, 앞말과 서술어의 관계, 문맥을 함께 고려','담화는 하나의 규칙이 적용되는 현상이 아니므로'],
@@ -18,7 +19,6 @@ const required={
   '2027-suteuk-eonmae-i05':['자료에 제시되지 않은 평가 기준을 핵심 근거로 추가하지 말고','포스터의 QR 코드는 수용자가 관련 방송이나 추가 정보로 이동']
 };
 const forbidden={
-  '2027-suteuk-eonmae-c01':['문항은 기본형이나 원자료를 먼저 확인','자의성의 예외는 규칙의 적용 범위를 정밀하게 한정'],
   '2027-suteuk-eonmae-l03':['더 나누었을 때 뜻이 사라지는 지점을 찾고','의존 형태소의 예외는 규칙의 적용 범위를 정밀하게 한정'],
   '2027-suteuk-eonmae-l10':['조사는 형태보다 기능을 기준으로 판정한다','‘담화’의 예외는 규칙의 적용 범위를 정밀하게 한정'],
   '2027-suteuk-eonmae-i04':['광고·협찬 여부','온라인 결제','개인 사례를 보편적 효과로'],
@@ -44,16 +44,15 @@ async function get(url){
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),20000);
   try{
-    const res=await fetch(url,{signal:controller.signal,headers:{'user-agent':'modukorean-eonmae-deploy-verifier/1.0','cache-control':'no-cache','pragma':'no-cache'}});
+    const res=await fetch(url,{signal:controller.signal,headers:{'user-agent':'modukorean-eonmae-deploy-verifier/1.1','cache-control':'no-cache','pragma':'no-cache'}});
     if(!res.ok)throw new Error(`${res.status} ${res.statusText}: ${url}`);
     return {text:await res.text(),headers:Object.fromEntries(res.headers.entries())};
-  }finally{
-    clearTimeout(timer);
-  }
+  }finally{clearTimeout(timer);}
 }
 
 const results=[];
 const errors=[];
+if(files.length!==41)errors.push({slug:'_all',error:`범용 생성 실서비스 대상 ${files.length}/41`});
 for(const file of files){
   const local=fs.readFileSync(path.join(DIR,file),'utf8');
   const slug=file.replace(/\.html$/,'');
@@ -87,20 +86,14 @@ for(const file of files){
 }
 
 const report={
-  checked_at:new Date().toISOString(),
-  base_url:BASE,
-  expected_pages:42,
-  verified_pages:results.length,
-  rest_verified:results.filter(x=>x.rest).length,
-  public_verified:results.filter(x=>x.public_page).length,
-  total_questions:results.reduce((sum,x)=>sum+x.questions,0),
-  status:errors.length?'failure':'success',
-  errors,
-  pages:results
+  checked_at:new Date().toISOString(),base_url:BASE,expected_pages:41,verified_pages:results.length,
+  rest_verified:results.filter(x=>x.rest).length,public_verified:results.filter(x=>x.public_page).length,
+  total_questions:results.reduce((sum,x)=>sum+x.questions,0),manual_pages_excluded:[...MANUAL_SLUGS],
+  status:errors.length?'failure':'success',errors,pages:results
 };
 fs.writeFileSync(path.join(ROOT,'scripts','eonmae-live-verification.json'),JSON.stringify(report,null,2)+'\n','utf8');
 if(errors.length){
-  console.error(`실서비스 검증 실패 ${errors.length}건`);
+  console.error(`범용 생성 실서비스 검증 실패 ${errors.length}건`);
   process.exit(1);
 }
-console.log(`실서비스 검증 통과: REST ${report.rest_verified}/42, 공개 페이지 ${report.public_verified}/42, 문항 ${report.total_questions}개`);
+console.log(`범용 생성 실서비스 검증 통과: REST ${report.rest_verified}/41, 공개 페이지 ${report.public_verified}/41, 문항 ${report.total_questions}개`);
