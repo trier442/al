@@ -1,0 +1,40 @@
+name: 언어와 매체 즉시 비공개 일회성 실행
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/eonmae-hide-now.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  hide-now:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 43개 원고 상태 표시
+        run: node scripts/mark-eonmae-draft.mjs
+
+      - name: WordPress 43개 즉시 비공개 및 공개 접근 검증
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/hide-eonmae.mjs
+
+      - name: 검증 결과 보관
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eonmae-hidden-verification-now
+          path: scripts/eonmae-hidden-verification.json
+          if-no-files-found: error
