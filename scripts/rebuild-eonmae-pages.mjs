@@ -6,6 +6,7 @@ import { renderPages, renderIndex } from './eonmae-render.mjs';
 import { overrideSpec, applyPageOverrides } from './eonmae-overrides.mjs';
 import { getSourceProfile, profileCount } from './eonmae-source-profiles.mjs';
 
+// 원문 유형 기반 42개 글 전수 재생성·검증
 const ROOT=process.cwd();
 const CONTENT=path.join(ROOT,'wordpress-content');
 const ASSETS=path.join(ROOT,'scripts','eonmae-assets');
