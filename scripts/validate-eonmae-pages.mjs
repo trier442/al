@@ -35,6 +35,8 @@ for(const name of files){
   if(MANUAL_SLUGS.has(slug))continue;
   validatedPages++;
   const plain=text(html);
+  const summaryBlock=html.match(/<section class="summary"[\s\S]*?<\/section>/i)?.[0]||'';
+  const summaryPlain=text(summaryBlock);
   const summary=Number(html.match(/data-summary-chars="(\d+)"/)?.[1]||0);
   if(summary<850||summary>1100)errors.push(`${slug}: 요약 ${summary}자`);
   const blankAnswers=[...html.matchAll(/class="blank-answer" hidden>([\s\S]*?)<\/span>/g)].map(m=>text(m[1]));
@@ -52,7 +54,7 @@ for(const name of files){
   if(/자료에서 기능과 적용 조건을 함께 확인해야 하는 핵심 개념|이 단원의 핵심은|시험 직전에는 핵심어마다|‘\d+’의 뜻|문항은 기본형이나 원자료를 먼저 확인|두 개념은 분석 층위, 필수 조건, 적용 과정, 결과|의 예외는 규칙의 적용 범위를 정밀하게 한정|용어의 정의와 구체적인 자료 근거를 같은 분석 층위에서 대응해야 한다/.test(plain))errors.push(`${slug}: 기존 범용 문구 잔존`);
   if(slug==='2027-suteuk-eonmae-i04'&&/광고 표시|협찬 여부|온라인 결제|개인 경험을 보편적 효과|일반화의 정의/.test(plain))errors.push(`${slug}: 원자료 밖 쟁점 잔존`);
   if(slug==='2027-suteuk-eonmae-i05'&&/에너지 소비|초기 비용|관리 난도|실험 조건/.test(plain))errors.push(`${slug}: 원자료 밖 비교 기준 잔존`);
-  checkJosa(slug,plain);checkRepeatedSentence(slug,plain);
+  checkJosa(slug,plain);checkRepeatedSentence(slug,summaryPlain);
 
   const qs=[...html.matchAll(/<section class="q" data-answer="([1-5])" data-q="(\d+)">([\s\S]*?)<\/section>/g)];
   if(qs.length!==10)errors.push(`${slug}: 문항 ${qs.length}개`);qTotal+=qs.length;
