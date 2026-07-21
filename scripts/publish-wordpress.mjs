@@ -1,6 +1,18 @@
 import fs from "node:fs";
 import path from "node:path";
 
+const visibilityFile = path.join(process.cwd(), "scripts", "eonmae-visibility.json");
+const eonmaeVisibility = fs.existsSync(visibilityFile)
+  ? JSON.parse(fs.readFileSync(visibilityFile, "utf8"))
+  : { hidden: false };
+
+function assertEonmaePublishAllowed(file) {
+  const isEonmae = /^2027-suteuk-eonmae-.*\.html$/i.test(path.basename(file));
+  if (isEonmae && eonmaeVisibility.hidden && process.env.ALLOW_EONMAE_PUBLISH !== "PUBLISH") {
+    throw new Error(`${file}: 언어와 매체 전체가 비공개 상태입니다. 명시적 재게시 승인 없이 게시할 수 없습니다.`);
+  }
+}
+
 const required = ["WP_URL", "WP_USERNAME", "WP_APP_PASSWORD"];
 for (const key of required) {
   if (!process.env[key]) throw new Error(`${key} GitHub Secret이 없습니다.`);
@@ -86,6 +98,7 @@ async function uploadImage(file) {
 }
 
 async function publish(file) {
+  assertEonmaePublishAllowed(file);
   const { meta, content } = parseFile(file);
   const endpoint = `${baseUrl}/wp-json/wp/v2/${meta.type}`;
   const existing = meta.post_id
