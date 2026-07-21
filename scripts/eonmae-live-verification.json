@@ -1,0 +1,426 @@
+{
+  "checked_at": "2026-07-21T09:53:20.891Z",
+  "base_url": "https://modukorean.co.kr",
+  "expected_pages": 41,
+  "verified_pages": 41,
+  "rest_verified": 41,
+  "public_verified": 41,
+  "total_questions": 410,
+  "manual_pages_excluded": [
+    "2027-suteuk-eonmae-c01"
+  ],
+  "status": "success",
+  "errors": [],
+  "pages": [
+    {
+      "slug": "2027-suteuk-eonmae-c02",
+      "id": 824,
+      "modified_gmt": "2026-07-21T09:49:02",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-c02/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□□ 최소 대립쌍 은 두 단어의 □□□□ 음운 수가 같고 한 음운만 달라야 한다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-c03",
+      "id": 825,
+      "modified_gmt": "2026-07-21T09:49:06",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-c03/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 형태소 는 □□□□ 자립성 에 따라 자립 형태소와 의존 형태소로 나눌 수 있다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-c04",
+      "id": 826,
+      "modified_gmt": "2026-07-21T09:49:10",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-c04/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□□□ 서술어 자릿수 는 서술어가 필수적으로 요 □□□□ 구 하는 □□□□□ 문장 성분 의 수이다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-c05",
+      "id": 827,
+      "modified_gmt": "2026-07-21T09:49:13",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-c05/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 지시 표현 의 구체적 대상은 □□□□□ 발화 장면 이나 □□□□□ 앞뒤 문맥 을 통해 정해진다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-c06",
+      "id": 828,
+      "modified_gmt": "2026-07-21T09:49:17",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-c06/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□□ 복합 양식성 은 여러 기호 양식이 결합하여 의미를 만드는 특성이다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-c07",
+      "id": 829,
+      "modified_gmt": "2026-07-21T09:49:20",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-c07/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 언어 예절 은 상대와 상황에 맞는 표현을 선택하는 태도와 관련된다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-i01",
+      "id": 830,
+      "modified_gmt": "2026-07-21T09:49:23",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-i01/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "공연 일시와 장소, □□□□□ 예매 방법 은 안내 자료의 핵심 정보이다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-i02",
+      "id": 831,
+      "modified_gmt": "2026-07-21T09:49:27",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-i02/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 플뢰레 · □□□□ 에페 · □□□□ 사브르 는 □□□□□□□□ 유효 타격 부위 와 공격 규칙에 차이가 있다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-i03",
+      "id": 832,
+      "modified_gmt": "2026-07-21T09:49:32",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-i03/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 응급 대처 법은 □□□□□ 전문 기관 의 □□□□□ 최신 지침 을 출처와 함께 제시해야 한다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-i04",
+      "id": 833,
+      "modified_gmt": "2026-07-21T09:49:35",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-i04/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□□□ 텔레비전 방송 은 □□□□□ 현금 사용 방식의 배경과 장점, 실제 생활에서 겪을 수 있는 어려움을 함께 설명한다"
+    },
+    {
+      "slug": "2027-suteuk-eonmae-i05",
+      "id": 834,
+      "modified_gmt": "2026-07-21T09:49:38",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-i05/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□□ 아쿠아포닉스 는 □□□□□□ 물고기 양식 과 □□□□□ 수경 재배 를 결합하여 물과 □□□□ 영양분 을 순환시키는"
+    },
+    {
+      "slug": "2027-suteuk-eonmae-i06",
+      "id": 835,
+      "modified_gmt": "2026-07-21T09:49:42",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-i06/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 덤벙주초 는 □□□□ 자연석 을 크게 다듬지 않고 □□□□ 주춧돌 로 활용하는 방식과 관련된다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l01",
+      "id": 837,
+      "modified_gmt": "2026-07-21T09:49:48",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l01/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "‘ □□□□ 샘-숨 ’은 한 모음의 차이로 뜻이 구별되는 □□□□□□ 최소 대립쌍 이다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l02",
+      "id": 838,
+      "modified_gmt": "2026-07-21T09:49:52",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l02/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 단모음 은 발음 도중 □□□□□ 조음 기관 의 위치가 거의 변하지 않는다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l03",
+      "id": 839,
+      "modified_gmt": "2026-07-21T09:49:56",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l03/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 형태소 는 일정한 뜻이나 문법적 기능을 지닌 가장 작은 말의 단위이므로 단순히 더 나눌 수 없는 소리 조각과 구별해야"
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l04",
+      "id": 840,
+      "modified_gmt": "2026-07-21T09:49:59",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l04/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 접사 가 결합한 단어는 □□□□ 파생어 이고 둘 이상의 어근이 결합한 단어는 □□□□ 합성어 이다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l05",
+      "id": 841,
+      "modified_gmt": "2026-07-21T09:50:04",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l05/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□□□ 서술어 자릿수 는 문장에 겉으로 나타난 성분의 수가 아니라 서술어가 의미상 필수적으로 요구하는 성분의 수이다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l06",
+      "id": 842,
+      "modified_gmt": "2026-07-21T09:50:08",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l06/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "‘ □□□□□□□ 매우 아름다운 ’은 □□□□□□□□□ 주어·서술어 관계 가 없는 □□□□ 구 로 볼 수 있다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l07",
+      "id": 843,
+      "modified_gmt": "2026-07-21T09:50:12",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l07/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 관형사 는 조사와 결합하지 않고 □□□□ 체언 앞에서 그 체언을 꾸민다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l08",
+      "id": 844,
+      "modified_gmt": "2026-07-21T09:50:17",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l08/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 지시 표현 의 해석에는 발 □□□□ 화자 · □□□□ 청자 ·시간·장소 정보가 필요하다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l09",
+      "id": 845,
+      "modified_gmt": "2026-07-21T09:50:20",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l09/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 중세 국어 의 표기는 당시 음운 체계를 반영하므로 □□□□□ 현대 발음 만으로 읽어서는 안 된다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l10",
+      "id": 846,
+      "modified_gmt": "2026-07-21T09:50:24",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l10/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 격 조사 는 체언이 문장에서 주어·목적어·부사어 등 일정한 문법적 자격을 갖게 한다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l11",
+      "id": 847,
+      "modified_gmt": "2026-07-21T09:50:28",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l11/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "아래아의 소실은 모음 체계의 □□□□□ 대립 관계 변화와 관련된다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l12",
+      "id": 848,
+      "modified_gmt": "2026-07-21T09:50:32",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l12/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□□ 자동적 교체 는 같은 □□□□□ 음운 환경 에서 규칙적으로 예측할 수 있다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l13",
+      "id": 849,
+      "modified_gmt": "2026-07-21T09:50:35",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l13/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 의존 명사 는 홀로 쓰이기 어려워 관형어의 수식을 요구한다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l14",
+      "id": 850,
+      "modified_gmt": "2026-07-21T09:50:39",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l14/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 겹받침 은 한 음절의 종성 자리에 두 자음이 표기된 받침이며, 실제 발음은 뒤에 오는 형태소와 음운 환경에 따라 달라"
+    },
+    {
+      "slug": "2027-suteuk-eonmae-l15",
+      "id": 851,
+      "modified_gmt": "2026-07-21T09:50:42",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-l15/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 시제 는 □□□□ 발화시 를 기준으로 사건의 □□□□□□ 시간적 위치 를 나타낸다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m01",
+      "id": 852,
+      "modified_gmt": "2026-07-21T09:50:46",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m01/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 해식 동굴 □□□□ 영상 은 말로 설명한 □□□□□ 지형 정보 를 시각적으로 구체화한다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m02",
+      "id": 853,
+      "modified_gmt": "2026-07-21T09:50:49",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m02/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 후기 의 개인적 만족도는 모든 방문자에게 동일하게 적용되는 객관적 사실이 아니다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m03",
+      "id": 854,
+      "modified_gmt": "2026-07-21T09:50:52",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m03/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 화면 공유 는 참여자가 같은 자료를 보며 논의하게 한다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m04",
+      "id": 855,
+      "modified_gmt": "2026-07-21T09:50:55",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m04/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 사고 사례 는 문제의 심각성을 구체적으로 보여 주지만 일반화에는 추가 근거가 필요하다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m05",
+      "id": 856,
+      "modified_gmt": "2026-07-21T09:50:58",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m05/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 전문가 의 소속과 □□□□□ 자료 출처 는 신뢰성 판단의 근거가 된다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m06",
+      "id": 857,
+      "modified_gmt": "2026-07-21T09:51:02",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m06/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 답장 기능 은 특정 발화와 응답의 관계를 분명하게 한다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m07",
+      "id": 858,
+      "modified_gmt": "2026-07-21T09:51:06",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m07/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□□ 윤리적 소비 는 제품의 생산·사용·폐기 과정이 사회와 환경에 미치는 영향을 고려한다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m08",
+      "id": 859,
+      "modified_gmt": "2026-07-21T09:51:09",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m08/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 플랫폼 의 검색· □□□□□ 추천 배열 은 소비자의 선택에 영향을 줄 수 있다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m09",
+      "id": 860,
+      "modified_gmt": "2026-07-21T09:51:12",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m09/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "진행자의 □□□□□ 후속 질문 은 전문가 발언의 어려운 부분을 구체화할 수 있다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m10",
+      "id": 861,
+      "modified_gmt": "2026-07-21T09:51:15",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m10/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 전시 일정 과 장소는 관람 결정을 위한 필수 정보이다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m11",
+      "id": 862,
+      "modified_gmt": "2026-07-21T09:51:18",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m11/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□□ 우주 쓰레기 수치에는 측정 기준과 □□□□□ 추정 범위 를 함께 살펴야 한다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-m12",
+      "id": 863,
+      "modified_gmt": "2026-07-21T09:51:22",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-m12/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 리걸테크 는 □□□□□□ 법률 서비스 의 탐색과 □□□□□ 반복 업무 효율을 높일 수 있다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-p01",
+      "id": 864,
+      "modified_gmt": "2026-07-21T09:51:25",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-p01/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□ 대명사 는 명사를 대신하여 □□□□ 사람 · □□□□ 사물 · □□□□ 장소 등을 가리킨다."
+    },
+    {
+      "slug": "2027-suteuk-eonmae-p02",
+      "id": 865,
+      "modified_gmt": "2026-07-21T09:51:29",
+      "link": "https://modukorean.co.kr/2027-suteuk-eonmae-p02/",
+      "rest": true,
+      "public_page": true,
+      "questions": 10,
+      "fingerprint": "□□□□□ 규칙 활용 은 □□□□ 어간 과 □□□□ 어미 의 변화가 일반 □□□□□ 음운 규칙 으로 설명된다."
+    }
+  ]
+}
