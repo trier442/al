@@ -4,8 +4,9 @@ import { overrideSpec } from './eonmae-overrides.mjs';
 
 const ROOT=process.cwd(),DIR=path.join(ROOT,'wordpress-content');
 const map=JSON.parse(fs.readFileSync(path.join(ROOT,'scripts','eonmae-page-map.json'),'utf8'));
+const MANUAL_SLUGS=new Set(['2027-suteuk-eonmae-c01']);
 const files=fs.readdirSync(DIR).filter(n=>/^2027-suteuk-eonmae-(?!index)(?:c|l|m|i|p)\d{2}\.html$/.test(n)).sort();
-const errors=[],answers={1:0,2:0,3:0,4:0,5:0},stems=new Map();let qTotal=0,choiceTotal=0,expTotal=0;
+const errors=[],answers={1:0,2:0,3:0,4:0,5:0},stems=new Map();let qTotal=0,choiceTotal=0,expTotal=0,validatedPages=0;
 
 function count(s,re){return [...s.matchAll(re)].length;}
 function text(s=''){return s.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/\s+/g,' ').trim();}
@@ -31,6 +32,8 @@ if(files.length!==42)errors.push(`개별 글 수 ${files.length}`);
 for(const name of files){
   const html=fs.readFileSync(path.join(DIR,name),'utf8'),slug=name.replace(/\.html$/,''),spec=overrideSpec(slug,map[slug]);
   if(!spec){errors.push(`${slug}: 정제표 없음`);continue;}
+  if(MANUAL_SLUGS.has(slug))continue;
+  validatedPages++;
   const plain=text(html);
   const summary=Number(html.match(/data-summary-chars="(\d+)"/)?.[1]||0);
   if(summary<850||summary>1100)errors.push(`${slug}: 요약 ${summary}자`);
@@ -65,12 +68,13 @@ for(const name of files){
   }
   if(new Set(pageOptions).size!==50)errors.push(`${slug}: 페이지 내 선택지 중복 ${50-new Set(pageOptions).size}개`);
 }
-for(let i=1;i<=5;i++)if(answers[i]!==84)errors.push(`정답 ${i}번 ${answers[i]}개`);
-if(qTotal!==420||choiceTotal!==2100||expTotal!==2100)errors.push(`전체 수량 ${qTotal}/${choiceTotal}/${expTotal}`);
+if(validatedPages!==41)errors.push(`범용 생성 검증 대상 ${validatedPages}개`);
+for(let i=1;i<=5;i++)if(answers[i]!==82)errors.push(`정답 ${i}번 ${answers[i]}개`);
+if(qTotal!==410||choiceTotal!==2050||expTotal!==2050)errors.push(`전체 수량 ${qTotal}/${choiceTotal}/${expTotal}`);
 const maxStem=stems.size?Math.max(...stems.values()):0;if(maxStem>1)errors.push(`동일 발문 최대 ${maxStem}회`);
 if(!fs.existsSync(path.join(DIR,'2027-suteuk-eonmae-index.html')))errors.push('통합 목록 없음');
 if(errors.length){console.error(`검증 실패 ${errors.length}건`);errors.slice(0,220).forEach(e=>console.error('- '+e));process.exit(1);}
-console.log('언어와 매체 42개 게시글 검증 통과');
+console.log('언어와 매체 범용 생성 41개 게시글 검증 통과');
 console.log(`- 문항/선택지/선택지별 해설: ${qTotal}/${choiceTotal}/${expTotal}`);
 console.log(`- 정답 분포: ${JSON.stringify(answers)}`);
-console.log('- 조사·문장 중복·범용 문구·원자료 밖 쟁점 검증 통과');
+console.log('- C01은 단원별 수동 완성본 검증기로 분리');
