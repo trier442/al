@@ -1,180 +1,24 @@
-name: 2027 언어와 매체 단원별 교정·게시
+name: 2027 언어와 매체 게시 잠금
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - "scripts/eonmae-*.mjs"
-      - "scripts/eonmae-*.json"
-      - "scripts/validate-eonmae-*.mjs"
-      - "scripts/build-eonmae-c01.mjs"
-      - "scripts/eonmae-c01-source.b64"
-      - "scripts/verify-eonmae-live.mjs"
-      - "scripts/eonmae-assets/**"
-      - "wordpress-content/2027-suteuk-eonmae-*.html"
-      - ".github/workflows/eonmae-publish.yml"
-  push:
-    branches: [main]
-    paths:
-      - "scripts/eonmae-*.mjs"
-      - "scripts/eonmae-*.json"
-      - "scripts/validate-eonmae-*.mjs"
-      - "scripts/build-eonmae-c01.mjs"
-      - "scripts/eonmae-c01-source.b64"
-      - "scripts/verify-eonmae-live.mjs"
-      - "scripts/eonmae-assets/**"
-      - "wordpress-content/2027-suteuk-eonmae-*.html"
-      - ".github/workflows/eonmae-publish.yml"
   workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: eonmae-${{ github.ref }}
-  cancel-in-progress: true
+  contents: read
 
 jobs:
-  rebuild-validate-publish:
+  locked:
     runs-on: ubuntu-latest
     steps:
       - name: 저장소 가져오기
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
-      - name: Node.js 설정
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-
-      - name: 변경 범위 판별
-        id: scope
+      - name: 비공개 상태 확인
         shell: bash
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            MODE=all
-            BUILD_C01=true
-          else
-            CHANGED=$(git diff --name-only HEAD^ HEAD)
-            printf '%s\n' "$CHANGED"
-            ALLOWED='^(wordpress-content/2027-suteuk-eonmae-c01\.html|scripts/validate-eonmae-c01\.mjs|scripts/build-eonmae-c01\.mjs|scripts/eonmae-c01-source\.b64|scripts/rebuild-eonmae-pages\.mjs|scripts/validate-eonmae-pages\.mjs|scripts/verify-eonmae-live\.mjs|\.github/workflows/eonmae-publish\.yml)$'
-            UNSUPPORTED=$(printf '%s\n' "$CHANGED" | grep -Ev "$ALLOWED" || true)
-            if printf '%s\n' "$CHANGED" | grep -Eq '^(wordpress-content/2027-suteuk-eonmae-c01\.html|scripts/build-eonmae-c01\.mjs|scripts/eonmae-c01-source\.b64)$' && [ -z "$UNSUPPORTED" ]; then
-              MODE=c01
-            else
-              MODE=all
-            fi
-            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/build-eonmae-c01\.mjs|scripts/eonmae-c01-source\.b64)$'; then
-              BUILD_C01=true
-            else
-              BUILD_C01=false
-            fi
-          fi
-          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
-          echo "build_c01=$BUILD_C01" >> "$GITHUB_OUTPUT"
-          echo "실행 모드: $MODE / C01 생성: $BUILD_C01"
+          node -e "const s=require('./scripts/eonmae-visibility.json'); if(!s.hidden) process.exit(1); console.log('언어와 매체 전체 비공개 상태: 자동·수동 게시가 잠겨 있습니다.');"
 
-      - name: C01 원문형 완성본 생성
-        if: steps.scope.outputs.build_c01 == 'true'
-        run: node scripts/build-eonmae-c01.mjs
-
-      - name: 범용 생성 41개와 통합 목록 재생성
-        if: steps.scope.outputs.mode == 'all'
-        run: node scripts/rebuild-eonmae-pages.mjs
-
-      - name: 범용 생성 및 C01 완성본 전수 검증
-        if: steps.scope.outputs.mode == 'all'
-        shell: bash
+      - name: 게시 중지 안내
         run: |
-          set -o pipefail
-          node scripts/validate-eonmae-pages.mjs 2>&1 | tee eonmae-validation.log
-          node scripts/validate-eonmae-c01.mjs 2>&1 | tee -a eonmae-validation.log
-          git diff --check 2>&1 | tee -a eonmae-validation.log
-
-      - name: C01 단원 완성본 검증
-        if: steps.scope.outputs.mode == 'c01'
-        shell: bash
-        run: |
-          set -o pipefail
-          node scripts/validate-eonmae-c01.mjs 2>&1 | tee eonmae-validation.log
-          git diff --check 2>&1 | tee -a eonmae-validation.log
-
-      - name: 검증 로그 보관
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: eonmae-validation-log
-          path: eonmae-validation.log
-          if-no-files-found: ignore
-
-      - name: 게시 대상 확정
-        if: github.event_name != 'pull_request'
-        id: files
-        shell: bash
-        run: |
-          if [ "${{ steps.scope.outputs.mode }}" = "c01" ]; then
-            FILES="wordpress-content/2027-suteuk-eonmae-c01.html"
-            EXPECTED=1
-          else
-            FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-eonmae-*.html' | sort | tr '\n' ' ')
-            EXPECTED=43
-          fi
-          COUNT=$(printf '%s' "$FILES" | wc -w)
-          if [ "$COUNT" -ne "$EXPECTED" ]; then
-            echo "게시 대상은 ${EXPECTED}개여야 하지만 ${COUNT}개입니다." >&2
-            exit 1
-          fi
-          echo "files=$FILES" >> "$GITHUB_OUTPUT"
-          echo "게시 대상: ${COUNT}개"
-
-      - name: WordPress로 교정 자료 게시
-        if: github.event_name != 'pull_request'
-        env:
-          WP_URL: ${{ secrets.WP_URL }}
-          WP_USERNAME: ${{ secrets.WP_USERNAME }}
-          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
-        run: node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }}
-
-      - name: C01 WordPress REST·공개 페이지 검증
-        if: github.event_name != 'pull_request' && steps.scope.outputs.mode == 'c01'
-        env:
-          WP_URL: ${{ secrets.WP_URL }}
-        run: node scripts/validate-eonmae-c01.mjs --live
-
-      - name: 범용 41개와 C01 실서비스 검증
-        if: github.event_name != 'pull_request' && steps.scope.outputs.mode == 'all'
-        env:
-          WP_URL: ${{ secrets.WP_URL }}
-        run: |
-          node scripts/verify-eonmae-live.mjs
-          node scripts/validate-eonmae-c01.mjs --live
-
-      - name: 실서비스 검증 결과 보관
-        if: always() && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
-        with:
-          name: eonmae-live-verification
-          path: |
-            scripts/eonmae-live-verification.json
-            scripts/eonmae-c01-live-verification.json
-          if-no-files-found: ignore
-
-      - name: 생성 결과와 검증 기록 저장
-        if: github.event_name != 'pull_request'
-        continue-on-error: true
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if [ "${{ steps.scope.outputs.mode }}" = "c01" ]; then
-            git add wordpress-content/2027-suteuk-eonmae-c01.html scripts/eonmae-c01-live-verification.json
-          else
-            git add wordpress-content/2027-suteuk-eonmae-*.html scripts/eonmae-live-verification.json scripts/eonmae-c01-live-verification.json
-          fi
-          if git diff --cached --quiet; then
-            echo "저장할 생성·검증 결과가 없습니다."
-          else
-            git commit -m "언어와 매체 단원별 완성본 및 검증 반영 [skip ci]"
-            git push
-          fi
+          echo "개별 글 42개와 통합 목록 1개는 전체 재검수 전까지 게시하지 않습니다."
+          echo "단원별 완성본을 다시 공개할 때 별도의 승인된 게시 절차를 사용해야 합니다."
