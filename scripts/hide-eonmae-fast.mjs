@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+const required=['WP_URL','WP_USERNAME','WP_APP_PASSWORD'];
+for(const key of required)if(!process.env[key])throw new Error(`${key} GitHub Secret이 없습니다.`);
+const ROOT=process.cwd(),DIR=path.join(ROOT,'wordpress-content');
+const BASE=process.env.WP_URL.replace(/\/$/,'');
+const AUTH='Basic '+Buffer.from(`${process.env.WP_USERNAME}:${process.env.WP_APP_PASSWORD.replace(/\s/g,'')}`).toString('base64');
+const REPORT=path.join(ROOT,'scripts','eonmae-hidden-verification-fast.json');
+const files=fs.readdirSync(DIR).filter(n=>/^2027-suteuk-eonmae-(?:index|(?:c|l|m|i|p)\d{2})\.html$/.test(n)).sort();
+if(files.length!==43)throw new Error(`대상 ${files.length}개`);
+function meta(raw,key){return raw.match(new RegExp(`<!--\\s*${key}:\\s*([^\\n]*?)\\s*-->`,'i'))?.[1]?.trim()||'';}
+const targets=files.map(name=>{const raw=fs.readFileSync(path.join(DIR,name),'utf8');return {name,slug:meta(raw,'slug'),type:meta(raw,'type')==='post'?'posts':'pages',postId:Number(meta(raw,'post_id'))||0};});
+async function req(url,opt={},auth=true,timeout=20000){const c=new AbortController(),t=setTimeout(()=>c.abort(),timeout);try{const r=await fetch(url,{...opt,signal:c.signal,headers:{...(auth?{Authorization:AUTH}:{}),'cache-control':'no-cache',pragma:'no-cache',...(opt.headers||{})}});const text=await r.text();let data;try{data=text?JSON.parse(text):{};}catch{data={message:text};}if(!r.ok)throw new Error(`${r.status}: ${data?.message||text}`);return {r,text,data};}finally{clearTimeout(t);}}
+const items=[],errors=[],warnings=[];
+for(const x of targets){try{let id=x.postId;if(!id){const q=await req(`${BASE}/wp-json/wp/v2/${x.type}?slug=${encodeURIComponent(x.slug)}&context=edit&status=any&per_page=100&_fields=id,slug,status`);const exact=Array.isArray(q.data)?q.data.filter(v=>v.slug===x.slug):[];if(exact.length!==1)throw new Error(`조회 ${exact.length}개`);id=exact[0].id;}const u=await req(`${BASE}/wp-json/wp/v2/${x.type}/${id}`,{method:'POST',headers:{'content-type':'application/json; charset=utf-8'},body:JSON.stringify({status:'draft'})});if(u.data?.status!=='draft')throw new Error(`갱신 상태 ${u.data?.status}`);const e=await req(`${BASE}/wp-json/wp/v2/${x.type}/${id}?context=edit&_fields=id,slug,status,modified_gmt,link`);if(e.data?.status!=='draft')throw new Error(`검증 상태 ${e.data?.status}`);const a=await req(`${BASE}/wp-json/wp/v2/${x.type}?slug=${encodeURIComponent(x.slug)}&_fields=id,slug,status&_hide=${Date.now()}`,{},false);if(!Array.isArray(a.data)||a.data.length)throw new Error(`비인증 REST 노출 ${Array.isArray(a.data)?a.data.length:'비배열'}개`);items.push({...x,id,status:'draft',anonymous_rest_items:0,modified_gmt:e.data.modified_gmt,link:e.data.link});console.log(`draft 확인 ${items.length}/43: ${x.slug}`);}catch(err){errors.push({slug:x.slug,stage:'draft-rest',error:String(err?.message||err)});}}
+let cursor=0;
+async function publicWorker(){while(cursor<items.length){const i=cursor++,x=items[i];try{const c=new AbortController(),timer=setTimeout(()=>c.abort(),12000);let r,body;try{r=await fetch(`${BASE}/${encodeURI(x.slug)}/?_hidefast=${Date.now()}-${i}`,{signal:c.signal,redirect:'manual',headers:{'user-agent':'modukorean-hide-check/2.0','cache-control':'no-cache',pragma:'no-cache'}});body=await r.text();}finally{clearTimeout(timer);}const visible=r.status===200&&(/data-summary-chars=|data-manual-page="c01"|class="eix"|class="emx"/.test(body));x.public_http_status=r.status;x.public_content_hidden=!visible;if(visible)errors.push({slug:x.slug,stage:'public',error:`HTTP ${r.status} 기존 본문 노출`});}catch(err){x.public_check='warning';warnings.push({slug:x.slug,error:String(err?.message||err)});}}}
+await Promise.all(Array.from({length:6},()=>publicWorker()));
+const report={checked_at:new Date().toISOString(),base_url:BASE,requested_items:43,draft_items:items.length,anonymous_rest_visible_items:items.filter(x=>x.anonymous_rest_items>0).length,public_content_visible_items:items.filter(x=>x.public_content_hidden===false).length,public_checks_completed:items.filter(x=>typeof x.public_http_status==='number').length,status:errors.length?'failure':'success',errors,warnings,items};
+fs.writeFileSync(REPORT,JSON.stringify(report,null,2)+'\n','utf8');
+if(errors.length||items.length!==43){console.error(JSON.stringify(report,null,2));process.exit(1);}console.log(`비공개 완료: draft ${items.length}/43, 비인증 REST 노출 0, 공개 본문 노출 ${report.public_content_visible_items}`);
