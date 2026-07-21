@@ -5,6 +5,7 @@ import { makeQuestions } from './eonmae-questions.mjs';
 import { renderPages, renderIndex } from './eonmae-render.mjs';
 import { overrideSpec, applyPageOverrides } from './eonmae-overrides.mjs';
 
+// WordPress 재게시 트리거: 2026-07-21
 const ROOT=process.cwd();
 const CONTENT=path.join(ROOT,'wordpress-content');
 const ASSETS=path.join(ROOT,'scripts','eonmae-assets');
