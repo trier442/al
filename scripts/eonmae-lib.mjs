@@ -28,7 +28,11 @@ const DEFINITION_FIXES={
 };
 
 function unique(list){const out=[];for(const v of list){const s=String(v||'').replace(/\s+/g,' ').trim();if(s&&!out.includes(s))out.push(s);}return out;}
-function cleanSentence(s){return String(s).replace(/\s+/g,' ').replace(/표기의 글자 수와 실제 발음의 음절 수는 항상 일치하지 않을 수 있다/g,'표기의 글자 수와 실제 발음의 음절 수가 일치하지 않는 경우가 있다').replace(/\.([가-힣])/g,'. $1').replace(/다\.([가-힣])/g,'다. $1').trim();}
+function correctQuotedJosa(value){
+  const pairs={이:'이/가',가:'이/가',은:'은/는',는:'은/는',을:'을/를',를:'을/를',과:'과/와',와:'과/와'};
+  return String(value).replace(/‘([^’]+)’(이|가|은|는|을|를|과|와)/g,(all,term,particle)=>`‘${term}’${josa(term,pairs[particle])}`);
+}
+function cleanSentence(s){return correctQuotedJosa(String(s).replace(/\s+/g,' ').replace(/표기의 글자 수와 실제 발음의 음절 수는 항상 일치하지 않을 수 있다/g,'표기의 글자 수와 실제 발음의 음절 수가 일치하지 않는 경우가 있다').replace(/\.([가-힣])/g,'. $1').replace(/다\.([가-힣])/g,'다. $1').trim());}
 function sentenceSplit(text){return String(text).replace(/([.!?])\s*/g,'$1\n').split(/\n+/).map(cleanSentence).filter(s=>s.length>18);}
 function restoreBlanks(block){
   return String(block)
