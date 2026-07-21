@@ -7,6 +7,7 @@ on:
       - "scripts/eonmae-*.mjs"
       - "scripts/eonmae-*.json"
       - "scripts/eonmae-assets/**"
+      - "scripts/eonmae-source-data/**"
       - "wordpress-content/2027-suteuk-eonmae-*.html"
       - ".github/workflows/eonmae-publish.yml"
   push:
@@ -15,6 +16,7 @@ on:
       - "scripts/eonmae-*.mjs"
       - "scripts/eonmae-*.json"
       - "scripts/eonmae-assets/**"
+      - "scripts/eonmae-source-data/**"
       - "wordpress-content/2027-suteuk-eonmae-*.html"
       - ".github/workflows/eonmae-publish.yml"
   workflow_dispatch:
