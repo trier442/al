@@ -1,0 +1,103 @@
+name: 2027 언어와 매체 관리자 게시
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: read
+  pull-requests: read
+
+concurrency:
+  group: eonmae-c01-admin-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      github.actor == 'trier442' &&
+      github.event.issue.pull_request &&
+      github.event.comment.body == '/deploy-eonmae-c01'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 검증된 main 원고 가져오기
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 원고 재생성 및 검사
+        run: |
+          node scripts/build-eonmae-c01.mjs
+          node scripts/validate-eonmae-sequential.mjs
+          node scripts/validate-eonmae-c01.mjs
+
+      - name: 공개 2개·비공개 41개 상태 적용
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/sync-eonmae-visibility.mjs
+
+      - name: 통합 목록과 C01 게시
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          ALLOW_EONMAE_PUBLISH: PUBLISH_APPROVED
+        run: |
+          node scripts/publish-wordpress.mjs \
+            wordpress-content/2027-suteuk-eonmae-index.html \
+            wordpress-content/2027-suteuk-eonmae-c01.html
+
+      - name: 실서비스 본문 검증
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+        run: node scripts/validate-eonmae-c01.mjs --live
+
+      - name: 성공 확인서 저장
+        env:
+          TRIGGER_PR: ${{ github.event.issue.number }}
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const report=JSON.parse(fs.readFileSync('scripts/eonmae-sequential-verification.json','utf8'));
+          if(report.status!=='success'||report.approved_items!==2||report.hidden_items!==41){
+            throw new Error('공개 상태 검증 수치가 맞지 않습니다.');
+          }
+          const receipt={
+            deployed_at:new Date().toISOString(),
+            source_commit:process.env.GITHUB_SHA,
+            workflow_run_id:process.env.GITHUB_RUN_ID,
+            trigger_pr:Number(process.env.TRIGGER_PR),
+            trigger_command:'/deploy-eonmae-c01',
+            approved_items:report.approved_items,
+            hidden_items:report.hidden_items,
+            c01_version:'2026-07-23-v1',
+            c01_question_count:36,
+            index_slug:'2027-수능특강-언어와-매체-전체-해설-및-변형-문제',
+            c01_slug:'2027-suteuk-eonmae-c01',
+            status:'success'
+          };
+          fs.writeFileSync('scripts/eonmae-live-deploy-receipt.json',JSON.stringify(receipt,null,2)+'\n');
+          NODE
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/eonmae-sequential-verification.json scripts/eonmae-live-deploy-receipt.json
+          git commit -m "언어와 매체 C01 실서비스 배포 확인 [skip ci]"
+          git push origin HEAD:main
+
+      - name: 검증 결과 보관
+        uses: actions/upload-artifact@v4
+        with:
+          name: eonmae-c01-live-deploy
+          path: |
+            scripts/eonmae-sequential-verification.json
+            scripts/eonmae-live-deploy-receipt.json
+          if-no-files-found: error
