@@ -7,7 +7,10 @@ on:
     paths:
       - "wordpress-content/2027-suteuk-eonmae-c01.html"
       - "wordpress-content/2027-suteuk-eonmae-index.html"
-      - "scripts/eonmae-c01-source.b64"
+      - "scripts/eonmae-c01-source.part01"
+      - "scripts/eonmae-c01-source.part02"
+      - "scripts/eonmae-c01-source.part03"
+      - "scripts/eonmae-c01-source.part04"
       - "scripts/build-eonmae-c01.mjs"
       - "scripts/validate-eonmae-c01.mjs"
       - "scripts/validate-eonmae-sequential.mjs"
@@ -35,11 +38,11 @@ jobs:
         with:
           node-version: "22"
 
-      - name: 순차 공개 승인 범위 검증
-        run: node scripts/validate-eonmae-sequential.mjs
-
       - name: C01 원고 무결성 재생성
         run: node scripts/build-eonmae-c01.mjs
+
+      - name: 순차 공개 승인 범위 검증
+        run: node scripts/validate-eonmae-sequential.mjs
 
       - name: C01 내용·문항 검증
         run: node scripts/validate-eonmae-c01.mjs
