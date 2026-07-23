@@ -2,86 +2,33 @@ name: 2027 언어와 매체 공개 상태 적용
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
     branches: [main]
     paths:
-      - "scripts/hide-eonmae.mjs"
-      - "scripts/mark-eonmae-draft.mjs"
-      - "scripts/sync-eonmae-visibility.mjs"
-      - "scripts/eonmae-visibility.json"
-      - "scripts/eonmae-deploy-trigger.txt"
-      - "scripts/publish-wordpress.mjs"
-      - "scripts/build-eonmae-c01.mjs"
-      - "scripts/validate-eonmae-c01.mjs"
-      - "scripts/validate-eonmae-sequential.mjs"
-      - "scripts/eonmae-c01-source.part01"
-      - "scripts/eonmae-c01-source.part02"
-      - "scripts/eonmae-c01-source.part03"
-      - "scripts/eonmae-c01-source.part04"
-      - "wordpress-content/2027-suteuk-eonmae-index.html"
+      - "scripts/eonmae-direct-deploy.txt"
       - ".github/workflows/eonmae-hide.yml"
-      - ".github/workflows/eonmae-sequential-publish.yml"
-      - ".github/workflows/eonmae-deploy-target.yml"
-  push:
-    branches: [main]
-    paths:
-      - "scripts/hide-eonmae.mjs"
-      - "scripts/mark-eonmae-draft.mjs"
-      - "scripts/sync-eonmae-visibility.mjs"
-      - "scripts/eonmae-visibility.json"
-      - "scripts/publish-wordpress.mjs"
-      - "scripts/build-eonmae-c01.mjs"
-      - "scripts/validate-eonmae-c01.mjs"
-      - "scripts/validate-eonmae-sequential.mjs"
-      - "scripts/eonmae-c01-source.part01"
-      - "scripts/eonmae-c01-source.part02"
-      - "scripts/eonmae-c01-source.part03"
-      - "scripts/eonmae-c01-source.part04"
-      - "wordpress-content/2027-suteuk-eonmae-index.html"
-      - ".github/workflows/eonmae-hide.yml"
-      - ".github/workflows/eonmae-sequential-publish.yml"
-      - ".github/workflows/eonmae-deploy-target.yml"
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: eonmae-visibility-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  apply-visibility:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: 저장소 가져오기
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event_name == 'pull_request' && github.head_ref == 'agent/eonmae-deploy-trigger' && 'main' || github.sha }}
-          fetch-depth: 2
 
       - name: Node.js 설정
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
-      - name: 공개 방식과 배포 권한 확인
-        id: visibility
-        shell: bash
-        run: |
-          MODE=$(node -p "const s=require('./scripts/eonmae-visibility.json'); s.mode || (s.hidden ? 'hidden' : 'open')")
-          DEPLOY_ALLOWED=false
-          if [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]; then
-            DEPLOY_ALLOWED=true
-          elif [[ "${{ github.actor }}" == "trier442" && "${{ github.head_ref }}" == "agent/eonmae-deploy-trigger" && "${{ github.event.pull_request.head.repo.full_name }}" == "$GITHUB_REPOSITORY" ]]; then
-            DEPLOY_ALLOWED=true
-          fi
-          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
-          echo "deploy_allowed=$DEPLOY_ALLOWED" >> "$GITHUB_OUTPUT"
-          echo "현재 공개 방식: $MODE / 실서비스 배포 허용: $DEPLOY_ALLOWED"
-
-      - name: 순차 공개 원고 재생성 및 검사
-        if: steps.visibility.outputs.mode == 'sequential'
-        shell: bash
+      - name: 순차 공개 원고 검증
         run: |
           node scripts/build-eonmae-c01.mjs
           node scripts/validate-eonmae-sequential.mjs
@@ -89,16 +36,35 @@ jobs:
           node --check scripts/sync-eonmae-visibility.mjs
           node --check scripts/publish-wordpress.mjs
 
-      - name: 승인 항목 공개·나머지 비공개 동기화
-        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'sequential'
+  deploy:
+    if: github.event_name == 'pull_request' && github.head_ref == 'agent/eonmae-direct-deploy'
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: 검증된 main 원고 가져오기
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 원고 재생성 및 검사
+        run: |
+          node scripts/build-eonmae-c01.mjs
+          node scripts/validate-eonmae-sequential.mjs
+          node scripts/validate-eonmae-c01.mjs
+
+      - name: 공개 2개·비공개 41개 상태 적용
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
         run: node scripts/sync-eonmae-visibility.mjs
 
-      - name: 통합 목록과 승인된 C01 게시
-        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'sequential'
+      - name: 통합 목록과 C01 게시
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
@@ -109,28 +75,25 @@ jobs:
             wordpress-content/2027-suteuk-eonmae-index.html \
             wordpress-content/2027-suteuk-eonmae-c01.html
 
-      - name: 순차 공개 실서비스 검증
-        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'sequential'
+      - name: 실서비스 본문 검증
         env:
           WP_URL: ${{ secrets.WP_URL }}
         run: node scripts/validate-eonmae-c01.mjs --live
 
-      - name: 배포 성공 영수증 저장
-        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'sequential'
-        shell: bash
+      - name: 배포 확인서 생성
+        env:
+          TRIGGER_PR: ${{ github.event.pull_request.number }}
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const report=JSON.parse(fs.readFileSync('scripts/eonmae-sequential-verification.json','utf8'));
           if(report.status!=='success'||report.approved_items!==2||report.hidden_items!==41){
-            throw new Error('순차 공개 검증 수치가 맞지 않습니다.');
+            throw new Error('공개 상태 검증 수치가 맞지 않습니다.');
           }
           const receipt={
             deployed_at:new Date().toISOString(),
-            source_commit:process.env.GITHUB_SHA,
             workflow_run_id:process.env.GITHUB_RUN_ID,
-            trigger_event:process.env.GITHUB_EVENT_NAME,
-            mode:report.mode,
+            trigger_pr:Number(process.env.TRIGGER_PR),
             approved_items:report.approved_items,
             hidden_items:report.hidden_items,
             c01_version:'2026-07-23-v1',
@@ -141,47 +104,12 @@ jobs:
           };
           fs.writeFileSync('scripts/eonmae-live-deploy-receipt.json',JSON.stringify(receipt,null,2)+'\n');
           NODE
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/eonmae-sequential-verification.json scripts/eonmae-live-deploy-receipt.json
-          if git diff --cached --quiet; then
-            echo "새 배포 영수증 변경이 없습니다."
-          else
-            git commit -m "언어와 매체 C01 실서비스 배포 확인 [skip ci]"
-            git push origin HEAD:main
-          fi
 
-      - name: 전체 비공개 설정 검사
-        if: steps.visibility.outputs.mode == 'hidden'
-        shell: bash
-        run: |
-          node -e "const s=require('./scripts/eonmae-visibility.json'); if(!s.hidden || s.expected_items!==43) throw new Error('비공개 설정 오류');"
-          node --check scripts/mark-eonmae-draft.mjs
-          node --check scripts/hide-eonmae.mjs
-          node --check scripts/publish-wordpress.mjs
-
-      - name: 저장소 원고 43개를 draft로 표시
-        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'hidden'
-        run: node scripts/mark-eonmae-draft.mjs
-
-      - name: WordPress 전체 비공개
-        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'hidden'
-        env:
-          WP_URL: ${{ secrets.WP_URL }}
-          WP_USERNAME: ${{ secrets.WP_USERNAME }}
-          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
-        run: node scripts/hide-eonmae.mjs
-
-      - name: 전체 비공개 결과 저장
-        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'hidden'
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add wordpress-content/2027-suteuk-eonmae-*.html scripts/eonmae-hidden-verification.json
-          if git diff --cached --quiet; then
-            echo "저장할 변경이 없습니다."
-          else
-            git commit -m "언어와 매체 전체 비공개 상태 반영 [skip ci]"
-            git push origin HEAD:main
-          fi
+      - name: 배포 검증 결과 보관
+        uses: actions/upload-artifact@v4
+        with:
+          name: eonmae-c01-live-deploy
+          path: |
+            scripts/eonmae-sequential-verification.json
+            scripts/eonmae-live-deploy-receipt.json
+          if-no-files-found: error
