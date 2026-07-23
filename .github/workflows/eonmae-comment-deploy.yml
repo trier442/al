@@ -98,10 +98,41 @@ jobs:
             wordpress-content/2027-suteuk-eonmae-index.html \
             wordpress-content/2027-suteuk-eonmae-c01.html
 
-      - name: 실서비스 본문 검증
+      - name: C01 실서비스 본문 검증
         env:
           WP_URL: ${{ secrets.WP_URL }}
         run: node scripts/validate-eonmae-c01.mjs --live
+
+      - name: 통합 목록과 비공개 상태 최종 검증
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+        run: |
+          node --input-type=module <<'NODE'
+          const base=(process.env.WP_URL||'https://modukorean.co.kr').replace(/\/$/,'');
+          const indexSlug='2027-수능특강-언어와-매체-전체-해설-및-변형-문제';
+          async function getJson(url){
+            let last;
+            for(let attempt=1;attempt<=5;attempt++){
+              const res=await fetch(url+(url.includes('?')?'&':'?')+`_verify=${Date.now()}-${attempt}`,{
+                headers:{'cache-control':'no-cache',pragma:'no-cache','user-agent':'modukorean-eonmae-live-verifier/1.0'}
+              });
+              if(res.ok)return await res.json();
+              last=new Error(`${res.status} ${res.statusText}: ${url}`);
+              await new Promise(resolve=>setTimeout(resolve,attempt*1000));
+            }
+            throw last;
+          }
+          const index=await getJson(`${base}/wp-json/wp/v2/pages?slug=${encodeURIComponent(indexSlug)}&_fields=id,slug,status,content,link`);
+          if(!Array.isArray(index)||index.length!==1)throw new Error(`통합 목록 REST 결과가 ${Array.isArray(index)?index.length:'비배열'}개입니다.`);
+          const rendered=String(index[0]?.content?.rendered||'');
+          if(!rendered.includes('data-eonmae-index="sequential"'))throw new Error('통합 목록 순차 공개 표식이 없습니다.');
+          if(!rendered.includes('현재 1개'))throw new Error('통합 목록 현재 공개 수가 1개가 아닙니다.');
+          if(!rendered.includes('/2027-suteuk-eonmae-c01/'))throw new Error('통합 목록에 C01 링크가 없습니다.');
+          const c02=await getJson(`${base}/wp-json/wp/v2/pages?slug=2027-suteuk-eonmae-c02&_fields=id,slug,status`);
+          if(!Array.isArray(c02)||c02.length!==0)throw new Error('C02가 비인증 REST에 노출되어 있습니다.');
+          console.log(`통합 목록 공개 확인: ${index[0].link}`);
+          console.log('C02 이하 비공개 유지 확인');
+          NODE
 
       - name: 성공 확인서 저장
         env:
@@ -121,6 +152,8 @@ jobs:
             trigger_command:'/deploy-eonmae-c01',
             approved_items:report.approved_items,
             hidden_items:report.hidden_items,
+            pending_create_items:report.pending_create_items||0,
+            index_verified:true,
             c01_version:'2026-07-23-v1',
             c01_question_count:36,
             index_slug:'2027-수능특강-언어와-매체-전체-해설-및-변형-문제',
