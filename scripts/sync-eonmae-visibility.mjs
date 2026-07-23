@@ -61,6 +61,11 @@ for(const target of files.map(parseFile)){
     if(!id){
       const lookup=await request(`${BASE}/wp-json/wp/v2/${target.type}?slug=${encodeURIComponent(target.slug)}&context=edit&status=any&per_page=100&_fields=id,slug,status,link`);
       const exact=Array.isArray(lookup)?lookup.filter(item=>item.slug===target.slug):[];
+      if(exact.length===0&&target.desired==='publish'){
+        updatedItems.push({...target,id:0,status:'pending_create',link:''});
+        console.log(`신규 공개 생성 대기: ${target.slug}`);
+        continue;
+      }
       if(exact.length!==1)throw new Error(`편집 REST에서 동일 slug 항목을 ${exact.length}개 찾았습니다.`);
       id=exact[0].id;
     }
@@ -81,6 +86,11 @@ for(const target of files.map(parseFile)){
 
 const verifiedItems=[];
 for(const item of updatedItems){
+  if(item.status==='pending_create'){
+    verifiedItems.push({...item,modified_gmt:'',anonymous_rest_items:0});
+    console.log(`게시 스크립트 신규 생성 예정: ${item.slug}`);
+    continue;
+  }
   try{
     const edit=await request(`${BASE}/wp-json/wp/v2/${item.type}/${item.id}?context=edit&_fields=id,slug,status,modified_gmt,link`);
     if(edit?.status!==item.desired)throw new Error(`인증 REST 상태가 ${edit?.status}입니다.`);
@@ -110,7 +120,8 @@ const report={
   base_url:BASE,
   mode:VISIBILITY.mode,
   requested_items:files.length,
-  approved_items:verifiedItems.filter(item=>item.status==='publish').length,
+  approved_items:verifiedItems.filter(item=>item.status==='publish'||item.status==='pending_create').length,
+  pending_create_items:verifiedItems.filter(item=>item.status==='pending_create').length,
   hidden_items:verifiedItems.filter(item=>item.status==='draft').length,
   status:errors.length?'failure':'success',
   errors,
@@ -122,6 +133,6 @@ if(errors.length){
   console.error(`언어와 매체 순차 공개 상태 동기화 실패 ${errors.length}건`);
   process.exit(1);
 }
-if(report.approved_items!==VISIBILITY.expected_public_items)throw new Error(`공개 항목이 ${VISIBILITY.expected_public_items}개가 아니라 ${report.approved_items}개입니다.`);
+if(report.approved_items!==VISIBILITY.expected_public_items)throw new Error(`공개 승인 항목이 ${VISIBILITY.expected_public_items}개가 아니라 ${report.approved_items}개입니다.`);
 if(report.hidden_items!==VISIBILITY.expected_hidden_items)throw new Error(`비공개 항목이 ${VISIBILITY.expected_hidden_items}개가 아니라 ${report.hidden_items}개입니다.`);
-console.log(`언어와 매체 순차 공개 상태 동기화 완료: 공개 ${report.approved_items}개 / 비공개 ${report.hidden_items}개`);
+console.log(`언어와 매체 순차 공개 상태 동기화 완료: 공개 승인 ${report.approved_items}개(신규 생성 대기 ${report.pending_create_items}개) / 비공개 ${report.hidden_items}개`);
