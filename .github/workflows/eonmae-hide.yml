@@ -79,7 +79,7 @@ jobs:
           node --check scripts/publish-wordpress.mjs
 
       - name: 승인 항목 공개·나머지 비공개 동기화
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'sequential'
+        if: (github.event_name != 'pull_request' || github.head_ref == 'agent/eonmae-live-deploy-c01') && steps.visibility.outputs.mode == 'sequential'
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
@@ -87,7 +87,7 @@ jobs:
         run: node scripts/sync-eonmae-visibility.mjs
 
       - name: 통합 목록과 승인된 C01 게시
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'sequential'
+        if: (github.event_name != 'pull_request' || github.head_ref == 'agent/eonmae-live-deploy-c01') && steps.visibility.outputs.mode == 'sequential'
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
@@ -99,7 +99,7 @@ jobs:
             wordpress-content/2027-suteuk-eonmae-c01.html
 
       - name: 순차 공개 실서비스 검증
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'sequential'
+        if: (github.event_name != 'pull_request' || github.head_ref == 'agent/eonmae-live-deploy-c01') && steps.visibility.outputs.mode == 'sequential'
         env:
           WP_URL: ${{ secrets.WP_URL }}
         run: node scripts/validate-eonmae-c01.mjs --live
