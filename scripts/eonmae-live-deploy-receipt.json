@@ -1,0 +1,16 @@
+{
+  "deployed_at": "2026-07-23T08:19:06.793Z",
+  "source_commit": "a8ac304d061c9fe1b881279e52a1ecb4eb9c4238",
+  "workflow_run_id": "29990658845",
+  "trigger_pr": 116,
+  "trigger_command": "/deploy-eonmae-c01",
+  "approved_items": 2,
+  "hidden_items": 41,
+  "pending_create_items": 1,
+  "index_verified": true,
+  "c01_version": "2026-07-23-v1",
+  "c01_question_count": 36,
+  "index_slug": "2027-수능특강-언어와-매체-전체-해설-및-변형-문제",
+  "c01_slug": "2027-suteuk-eonmae-c01",
+  "status": "success"
+}
