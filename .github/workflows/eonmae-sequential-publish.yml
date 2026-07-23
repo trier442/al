@@ -1,0 +1,79 @@
+name: 2027 언어와 매체 순차 공개
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "wordpress-content/2027-suteuk-eonmae-c01.html"
+      - "wordpress-content/2027-suteuk-eonmae-index.html"
+      - "scripts/eonmae-c01-source.b64"
+      - "scripts/build-eonmae-c01.mjs"
+      - "scripts/validate-eonmae-c01.mjs"
+      - "scripts/validate-eonmae-sequential.mjs"
+      - "scripts/eonmae-visibility.json"
+      - "scripts/publish-wordpress.mjs"
+      - ".github/workflows/eonmae-sequential-publish.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: eonmae-sequential-publish
+  cancel-in-progress: false
+
+jobs:
+  validate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 순차 공개 승인 범위 검증
+        run: node scripts/validate-eonmae-sequential.mjs
+
+      - name: C01 원고 무결성 재생성
+        run: node scripts/build-eonmae-c01.mjs
+
+      - name: C01 내용·문항 검증
+        run: node scripts/validate-eonmae-c01.mjs
+
+      - name: 통합 목록과 C01만 WordPress에 공개
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          ALLOW_EONMAE_PUBLISH: PUBLISH_APPROVED
+        run: |
+          node scripts/publish-wordpress.mjs \
+            wordpress-content/2027-suteuk-eonmae-index.html \
+            wordpress-content/2027-suteuk-eonmae-c01.html
+
+      - name: 실서비스 공개 상태 검증
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+        run: |
+          node scripts/validate-eonmae-c01.mjs --live
+          node --input-type=module <<'NODE'
+          const base=(process.env.WP_URL||'https://modukorean.co.kr').replace(/\/$/,'');
+          const stamp=Date.now();
+          async function get(url){
+            const res=await fetch(url,{headers:{'cache-control':'no-cache','pragma':'no-cache','user-agent':'modukorean-sequential-verifier/1.0'}});
+            if(!res.ok)throw new Error(`${res.status} ${res.statusText}: ${url}`);
+            return await res.text();
+          }
+          const index=await get(`${base}/2027-수능특강-언어와-매체-전체-해설-및-변형-문제/?_deploy=${stamp}`);
+          if(!index.includes('data-eonmae-index="sequential"'))throw new Error('통합 목록 순차 공개 표식이 없습니다.');
+          if(!index.includes('현재 1개'))throw new Error('통합 목록의 현재 공개 수가 맞지 않습니다.');
+          const hiddenRes=await fetch(`${base}/wp-json/wp/v2/pages?slug=2027-suteuk-eonmae-c02&_fields=id,status&_deploy=${stamp}`,{headers:{'cache-control':'no-cache','pragma':'no-cache'}});
+          if(!hiddenRes.ok)throw new Error(`C02 REST 확인 실패: ${hiddenRes.status}`);
+          const hidden=await hiddenRes.json();
+          if(Array.isArray(hidden)&&hidden.length)throw new Error('C02가 비인증 REST에 노출되어 있습니다.');
+          console.log('통합 목록 1개 + C01 1개 공개, C02 이하 비공개 유지 확인');
+          NODE
