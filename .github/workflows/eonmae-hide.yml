@@ -8,6 +8,7 @@ on:
       - "scripts/mark-eonmae-draft.mjs"
       - "scripts/sync-eonmae-visibility.mjs"
       - "scripts/eonmae-visibility.json"
+      - "scripts/eonmae-deploy-trigger.txt"
       - "scripts/publish-wordpress.mjs"
       - "scripts/build-eonmae-c01.mjs"
       - "scripts/validate-eonmae-c01.mjs"
@@ -19,6 +20,7 @@ on:
       - "wordpress-content/2027-suteuk-eonmae-index.html"
       - ".github/workflows/eonmae-hide.yml"
       - ".github/workflows/eonmae-sequential-publish.yml"
+      - ".github/workflows/eonmae-deploy-target.yml"
   push:
     branches: [main]
     paths:
@@ -37,6 +39,7 @@ on:
       - "wordpress-content/2027-suteuk-eonmae-index.html"
       - ".github/workflows/eonmae-hide.yml"
       - ".github/workflows/eonmae-sequential-publish.yml"
+      - ".github/workflows/eonmae-deploy-target.yml"
   workflow_dispatch:
 
 permissions:
@@ -53,6 +56,7 @@ jobs:
       - name: 저장소 가져오기
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref == 'agent/eonmae-deploy-trigger' && 'main' || github.sha }}
           fetch-depth: 2
 
       - name: Node.js 설정
@@ -60,13 +64,20 @@ jobs:
         with:
           node-version: "22"
 
-      - name: 공개 방식 확인
+      - name: 공개 방식과 배포 권한 확인
         id: visibility
         shell: bash
         run: |
           MODE=$(node -p "const s=require('./scripts/eonmae-visibility.json'); s.mode || (s.hidden ? 'hidden' : 'open')")
+          DEPLOY_ALLOWED=false
+          if [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]; then
+            DEPLOY_ALLOWED=true
+          elif [[ "${{ github.actor }}" == "trier442" && "${{ github.head_ref }}" == "agent/eonmae-deploy-trigger" && "${{ github.event.pull_request.head.repo.full_name }}" == "$GITHUB_REPOSITORY" ]]; then
+            DEPLOY_ALLOWED=true
+          fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
-          echo "현재 공개 방식: $MODE"
+          echo "deploy_allowed=$DEPLOY_ALLOWED" >> "$GITHUB_OUTPUT"
+          echo "현재 공개 방식: $MODE / 실서비스 배포 허용: $DEPLOY_ALLOWED"
 
       - name: 순차 공개 원고 재생성 및 검사
         if: steps.visibility.outputs.mode == 'sequential'
@@ -79,7 +90,7 @@ jobs:
           node --check scripts/publish-wordpress.mjs
 
       - name: 승인 항목 공개·나머지 비공개 동기화
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'sequential'
+        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'sequential'
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
@@ -87,7 +98,7 @@ jobs:
         run: node scripts/sync-eonmae-visibility.mjs
 
       - name: 통합 목록과 승인된 C01 게시
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'sequential'
+        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'sequential'
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
@@ -99,22 +110,26 @@ jobs:
             wordpress-content/2027-suteuk-eonmae-c01.html
 
       - name: 순차 공개 실서비스 검증
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'sequential'
+        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'sequential'
         env:
           WP_URL: ${{ secrets.WP_URL }}
         run: node scripts/validate-eonmae-c01.mjs --live
 
       - name: 배포 성공 영수증 저장
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'sequential'
+        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'sequential'
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const report=JSON.parse(fs.readFileSync('scripts/eonmae-sequential-verification.json','utf8'));
+          if(report.status!=='success'||report.approved_items!==2||report.hidden_items!==41){
+            throw new Error('순차 공개 검증 수치가 맞지 않습니다.');
+          }
           const receipt={
             deployed_at:new Date().toISOString(),
             source_commit:process.env.GITHUB_SHA,
             workflow_run_id:process.env.GITHUB_RUN_ID,
+            trigger_event:process.env.GITHUB_EVENT_NAME,
             mode:report.mode,
             approved_items:report.approved_items,
             hidden_items:report.hidden_items,
@@ -133,7 +148,7 @@ jobs:
             echo "새 배포 영수증 변경이 없습니다."
           else
             git commit -m "언어와 매체 C01 실서비스 배포 확인 [skip ci]"
-            git push
+            git push origin HEAD:main
           fi
 
       - name: 전체 비공개 설정 검사
@@ -146,11 +161,11 @@ jobs:
           node --check scripts/publish-wordpress.mjs
 
       - name: 저장소 원고 43개를 draft로 표시
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'hidden'
+        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'hidden'
         run: node scripts/mark-eonmae-draft.mjs
 
       - name: WordPress 전체 비공개
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'hidden'
+        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'hidden'
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
@@ -158,7 +173,7 @@ jobs:
         run: node scripts/hide-eonmae.mjs
 
       - name: 전체 비공개 결과 저장
-        if: github.event_name != 'pull_request' && steps.visibility.outputs.mode == 'hidden'
+        if: steps.visibility.outputs.deploy_allowed == 'true' && steps.visibility.outputs.mode == 'hidden'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -168,5 +183,5 @@ jobs:
             echo "저장할 변경이 없습니다."
           else
             git commit -m "언어와 매체 전체 비공개 상태 반영 [skip ci]"
-            git push
+            git push origin HEAD:main
           fi
