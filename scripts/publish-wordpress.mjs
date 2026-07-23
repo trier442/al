@@ -7,9 +7,18 @@ const eonmaeVisibility = fs.existsSync(visibilityFile)
   : { hidden: false };
 
 function assertEonmaePublishAllowed(file) {
-  const isEonmae = /^2027-suteuk-eonmae-.*\.html$/i.test(path.basename(file));
-  if (isEonmae && eonmaeVisibility.hidden && process.env.ALLOW_EONMAE_PUBLISH !== "PUBLISH") {
-    throw new Error(`${file}: 언어와 매체 전체가 비공개 상태입니다. 명시적 재게시 승인 없이 게시할 수 없습니다.`);
+  const basename = path.basename(file);
+  const isEonmae = /^2027-suteuk-eonmae-.*\.html$/i.test(basename);
+  if (!isEonmae || !eonmaeVisibility.hidden) return;
+
+  const approved = new Set(Array.isArray(eonmaeVisibility.public_files) ? eonmaeVisibility.public_files : []);
+  const sequentialApproval =
+    eonmaeVisibility.mode === "sequential" &&
+    process.env.ALLOW_EONMAE_PUBLISH === "PUBLISH_APPROVED" &&
+    approved.has(basename);
+
+  if (!sequentialApproval) {
+    throw new Error(`${file}: 언어와 매체는 순차 공개 상태입니다. scripts/eonmae-visibility.json의 public_files에 등록된 검수 완료본만 게시할 수 있습니다.`);
   }
 }
 
@@ -43,8 +52,6 @@ async function wpFetch(url, options = {}) {
 function parseFile(file) {
   const raw = fs.readFileSync(file, "utf8");
   const meta = {};
-  // 게시 메타데이터만 제거한다. Gutenberg의 <!-- wp:html --> 같은 블록 표시는
-  // 본문에 남겨야 WordPress가 임의의 <p> 태그를 삽입하지 않는다.
   const pattern = /<!--\s*(title|slug|status|type|categories|revision|excerpt|featured_image|post_id)\s*:\s*(.*?)\s*-->/g;
   let match;
   while ((match = pattern.exec(raw))) meta[match[1]] = match[2].trim();
