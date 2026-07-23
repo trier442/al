@@ -60,11 +60,32 @@ jobs:
           node scripts/validate-eonmae-c01.mjs
 
       - name: 공개 2개·비공개 41개 상태 적용
+        id: sync
+        continue-on-error: true
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
-        run: node scripts/sync-eonmae-visibility.mjs
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/sync-eonmae-visibility.mjs 2>&1 | tee scripts/eonmae-sync.log
+
+      - name: 동기화 진단 자료 보관
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eonmae-sync-diagnostics-${{ github.run_id }}
+          path: |
+            scripts/eonmae-sync.log
+            scripts/eonmae-sequential-verification.json
+          if-no-files-found: warn
+
+      - name: 동기화 실패 중단
+        if: steps.sync.outcome == 'failure'
+        run: |
+          echo "WordPress 공개 상태 동기화가 실패했습니다. 진단 산출물을 확인하십시오."
+          exit 1
 
       - name: 통합 목록과 C01 게시
         env:
@@ -115,7 +136,7 @@ jobs:
       - name: 검증 결과 보관
         uses: actions/upload-artifact@v4
         with:
-          name: eonmae-c01-live-deploy
+          name: eonmae-c01-live-deploy-${{ github.run_id }}
           path: |
             scripts/eonmae-sequential-verification.json
             scripts/eonmae-live-deploy-started.json
