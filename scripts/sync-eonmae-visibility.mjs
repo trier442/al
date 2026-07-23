@@ -29,6 +29,7 @@ function parseFile(name){
   if(!slug||!title)throw new Error(`${name}: title 또는 slug 메타데이터가 없습니다.`);
   return {name,slug,title,type,postId,desired:approved.has(name)?'publish':'draft'};
 }
+function sleep(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
 
 async function request(url,options={},authenticated=true){
   const controller=new AbortController();
@@ -52,7 +53,7 @@ async function request(url,options={},authenticated=true){
   }finally{clearTimeout(timer);}
 }
 
-const items=[];
+const updatedItems=[];
 const errors=[];
 for(const target of files.map(parseFile)){
   try{
@@ -69,16 +70,38 @@ for(const target of files.map(parseFile)){
       body:JSON.stringify({status:target.desired})
     });
     if(updated?.status!==target.desired)throw new Error(`상태가 ${target.desired}(으)로 바뀌지 않았습니다: ${updated?.status}`);
-    const anon=await request(`${BASE}/wp-json/wp/v2/${target.type}?slug=${encodeURIComponent(target.slug)}&_fields=id,slug,status&_sync=${Date.now()}`,{},false);
-    const anonCount=Array.isArray(anon)?anon.length:-1;
-    if(target.desired==='publish'&&anonCount!==1)throw new Error(`공개 승인 항목의 비인증 REST 결과가 ${anonCount}개입니다.`);
-    if(target.desired==='draft'&&anonCount!==0)throw new Error(`비공개 항목이 비인증 REST에 ${anonCount}개 노출됩니다.`);
-    items.push({...target,id,status:updated.status,anonymous_rest_items:anonCount,link:updated.link||''});
-    console.log(`${target.desired==='publish'?'공개 유지':'비공개 전환'}: ${target.slug} (#${id})`);
+    updatedItems.push({...target,id,status:updated.status,link:updated.link||''});
+    console.log(`${target.desired==='publish'?'공개 설정':'비공개 설정'}: ${target.slug} (#${id})`);
   }catch(error){
     const message=String(error?.message||error);
-    errors.push({name:target.name,slug:target.slug,desired:target.desired,error:message});
-    console.error(`상태 동기화 실패: ${target.slug}: ${message}`);
+    errors.push({name:target.name,slug:target.slug,desired:target.desired,stage:'update',error:message});
+    console.error(`상태 변경 실패: ${target.slug}: ${message}`);
+  }
+}
+
+const verifiedItems=[];
+for(const item of updatedItems){
+  try{
+    const edit=await request(`${BASE}/wp-json/wp/v2/${item.type}/${item.id}?context=edit&_fields=id,slug,status,modified_gmt,link`);
+    if(edit?.status!==item.desired)throw new Error(`인증 REST 상태가 ${edit?.status}입니다.`);
+
+    let anonCount=-1;
+    for(let attempt=1;attempt<=5;attempt++){
+      const anon=await request(`${BASE}/wp-json/wp/v2/${item.type}?slug=${encodeURIComponent(item.slug)}&_fields=id,slug,status&_sync=${Date.now()}-${attempt}`,{},false);
+      anonCount=Array.isArray(anon)?anon.length:-1;
+      const expected=item.desired==='publish'?1:0;
+      if(anonCount===expected)break;
+      if(attempt<5)await sleep(1000*attempt);
+    }
+    if(item.desired==='publish'&&anonCount!==1)throw new Error(`공개 승인 항목의 비인증 REST 결과가 ${anonCount}개입니다.`);
+    if(item.desired==='draft'&&anonCount!==0)throw new Error(`비공개 항목이 비인증 REST에 ${anonCount}개 노출됩니다.`);
+
+    verifiedItems.push({...item,modified_gmt:edit.modified_gmt||'',anonymous_rest_items:anonCount});
+    console.log(`${item.desired==='publish'?'공개 확인':'비공개 확인'}: ${item.slug}`);
+  }catch(error){
+    const message=String(error?.message||error);
+    errors.push({name:item.name,slug:item.slug,desired:item.desired,stage:'verify',error:message});
+    console.error(`상태 검증 실패: ${item.slug}: ${message}`);
   }
 }
 
@@ -87,11 +110,11 @@ const report={
   base_url:BASE,
   mode:VISIBILITY.mode,
   requested_items:files.length,
-  approved_items:items.filter(item=>item.status==='publish').length,
-  hidden_items:items.filter(item=>item.status==='draft').length,
+  approved_items:verifiedItems.filter(item=>item.status==='publish').length,
+  hidden_items:verifiedItems.filter(item=>item.status==='draft').length,
   status:errors.length?'failure':'success',
   errors,
-  items
+  items:verifiedItems
 };
 fs.writeFileSync(REPORT,JSON.stringify(report,null,2)+'\n','utf8');
 
