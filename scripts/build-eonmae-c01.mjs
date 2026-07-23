@@ -4,12 +4,12 @@ import zlib from 'node:zlib';
 import crypto from 'node:crypto';
 
 const ROOT=process.cwd();
-const SOURCE=path.join(ROOT,'scripts','eonmae-c01-source.b64');
+const PARTS=[1,2,3,4].map(no=>path.join(ROOT,'scripts',`eonmae-c01-source.part${String(no).padStart(2,'0')}`));
 const OUTPUT=path.join(ROOT,'wordpress-content','2027-suteuk-eonmae-c01.html');
 const EXPECTED='3c9ebc50f1d2bf743aca25a5bd73b5e2a8d853ec12b84b62cf19c38cac1ec6a6';
 
-if(!fs.existsSync(SOURCE))throw new Error('C01 압축 원고를 찾지 못했습니다.');
-const encoded=fs.readFileSync(SOURCE,'utf8').replace(/\s+/g,'');
+for(const file of PARTS)if(!fs.existsSync(file))throw new Error(`C01 압축 원고 조각을 찾지 못했습니다: ${file}`);
+const encoded=PARTS.map(file=>fs.readFileSync(file,'utf8')).join('').replace(/\s+/g,'');
 const html=zlib.gunzipSync(Buffer.from(encoded,'base64')).toString('utf8');
 const actual=crypto.createHash('sha256').update(html).digest('hex');
 if(actual!==EXPECTED)throw new Error(`C01 원고 무결성 오류: ${actual}`);
