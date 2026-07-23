@@ -1,8 +1,15 @@
 {
   "hidden": true,
+  "mode": "sequential",
   "scope": "2027-suteuk-eonmae",
-  "expected_items": 43,
-  "reason": "전체 재검수 전 임시 비공개",
-  "changed_at": "2026-07-21",
-  "hide_run": 2
+  "public_files": [
+    "2027-suteuk-eonmae-index.html",
+    "2027-suteuk-eonmae-c01.html"
+  ],
+  "expected_public_items": 2,
+  "expected_hidden_items": 41,
+  "reason": "단원별 검수 완료본 순차 공개",
+  "changed_at": "2026-07-23",
+  "hide_run": 2,
+  "publish_run": 1
 }
