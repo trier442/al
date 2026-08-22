@@ -91,26 +91,62 @@ function mimeType(file) {
   })[ext] || "application/octet-stream";
 }
 
-async function uploadImage(file) {
-  if (!fs.existsSync(file)) throw new Error(`대표 이미지가 없습니다: ${file}`);
+async function uploadImage(file, title = "") {
+  let body;
+  let filename;
+  let contentType;
+
+  if (file.toLowerCase().endsWith(".b64")) {
+    if (!fs.existsSync(file)) throw new Error(`대표 이미지 base64 파일이 없습니다: ${file}`);
+    filename = path.basename(file, ".b64");
+    body = Buffer.from(fs.readFileSync(file, "utf8").replace(/\s/g, ""), "base64");
+    contentType = mimeType(filename);
+  } else {
+    if (!fs.existsSync(file)) throw new Error(`대표 이미지가 없습니다: ${file}`);
+    filename = path.basename(file);
+    body = fs.readFileSync(file);
+    contentType = mimeType(file);
+  }
+
   const data = await wpFetch(`${baseUrl}/wp-json/wp/v2/media`, {
     method: "POST",
     headers: {
-      "Content-Type": mimeType(file),
-      "Content-Disposition": `attachment; filename="${path.basename(file)}"`,
+      "Content-Type": contentType,
+      "Content-Disposition": `attachment; filename="${filename}"`,
     },
-    body: fs.readFileSync(file),
+    body,
   });
-  return data.id;
+
+  if (title && data.id) {
+    await wpFetch(`${baseUrl}/wp-json/wp/v2/media/${data.id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({ alt_text: title, title }),
+    });
+  }
+
+  return data;
 }
 
 async function publish(file) {
   assertEonmaePublishAllowed(file);
-  const { meta, content } = parseFile(file);
+  const { meta, content: rawContent } = parseFile(file);
   const endpoint = `${baseUrl}/wp-json/wp/v2/${meta.type}`;
   const existing = meta.post_id
     ? [{ id: meta.post_id }]
     : await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit`);
+
+  let content = rawContent;
+  let featuredMedia = 0;
+
+  if (!existing.length && meta.featured_image) {
+    const media = await uploadImage(meta.featured_image, meta.title);
+    featuredMedia = Number(media.id) || 0;
+    if (media.source_url) {
+      const escapedAlt = meta.title.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      content = `<figure class="wp-block-image size-full modu-featured-inline"><img src="${media.source_url}" alt="${escapedAlt}" /></figure>\n${content}`;
+    }
+  }
 
   const payload = meta.post_id
     ? { content }
@@ -124,8 +160,8 @@ async function publish(file) {
   if (!meta.post_id && meta.type === "posts" && meta.categories.length) {
     payload.categories = meta.categories;
   }
-  if (!meta.post_id && meta.featured_image) {
-    payload.featured_media = await uploadImage(meta.featured_image);
+  if (!meta.post_id && featuredMedia) {
+    payload.featured_media = featuredMedia;
   }
 
   const target = existing.length ? `${endpoint}/${existing[0].id}` : endpoint;
