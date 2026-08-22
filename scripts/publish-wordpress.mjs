@@ -144,12 +144,13 @@ async function publish(file) {
     : await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit`);
 
   let content = rawContent;
-  let featuredMedia = 0;
+  let featuredMedia = existing.length ? Number(existing[0].featured_media) || 0 : 0;
+  const needsFeaturedImage = Boolean(meta.featured_image) && !featuredMedia;
 
-  if (!existing.length && meta.featured_image) {
+  if (needsFeaturedImage) {
     const media = await uploadImage(meta.featured_image, meta.title);
     featuredMedia = Number(media.id) || 0;
-    if (media.source_url) {
+    if (media.source_url && !content.includes(media.source_url)) {
       const escapedAlt = meta.title.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
       content = `<figure class="wp-block-image size-full modu-featured-inline"><img src="${media.source_url}" alt="${escapedAlt}" /></figure>\n${content}`;
     }
@@ -164,12 +165,8 @@ async function publish(file) {
         content,
       };
   if (!meta.post_id && meta.excerpt) payload.excerpt = meta.excerpt;
-  if (!meta.post_id && meta.type === "posts" && meta.categories.length) {
-    payload.categories = meta.categories;
-  }
-  if (!meta.post_id && featuredMedia) {
-    payload.featured_media = featuredMedia;
-  }
+  if (!meta.post_id && meta.type === "posts" && meta.categories.length) payload.categories = meta.categories;
+  if (featuredMedia) payload.featured_media = featuredMedia;
 
   const target = existing.length ? `${endpoint}/${existing[0].id}` : endpoint;
   const result = await wpFetch(target, {
