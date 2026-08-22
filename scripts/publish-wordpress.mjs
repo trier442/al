@@ -96,7 +96,14 @@ async function uploadImage(file, title = "") {
   let filename;
   let contentType;
 
-  if (file.toLowerCase().endsWith(".b64")) {
+  if (file.startsWith("data:image/")) {
+    const match = /^data:(image\/(?:png|jpeg|webp|gif));base64,(.+)$/i.exec(file);
+    if (!match) throw new Error("대표 이미지 data URI 형식이 올바르지 않습니다.");
+    contentType = match[1].toLowerCase();
+    const ext = contentType === "image/jpeg" ? "jpg" : contentType.split("/")[1];
+    filename = `modu-korean-featured-${Date.now()}.${ext}`;
+    body = Buffer.from(match[2], "base64");
+  } else if (file.toLowerCase().endsWith(".b64")) {
     if (!fs.existsSync(file)) throw new Error(`대표 이미지 base64 파일이 없습니다: ${file}`);
     filename = path.basename(file, ".b64");
     body = Buffer.from(fs.readFileSync(file, "utf8").replace(/\s/g, ""), "base64");
