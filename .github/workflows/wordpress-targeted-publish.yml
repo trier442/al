@@ -1,0 +1,69 @@
+name: WordPress 선택 게시
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/wordpress-publish-targets.txt"
+      - ".github/workflows/wordpress-targeted-publish.yml"
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "게시할 wordpress-content HTML 파일 경로"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 게시 대상 확인
+        id: files
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.file }}" ]; then
+            FILES="${{ inputs.file }}"
+          else
+            if [ ! -f scripts/wordpress-publish-targets.txt ]; then
+              echo "scripts/wordpress-publish-targets.txt 파일이 없습니다." >&2
+              exit 1
+            fi
+            FILES=$(grep -vE '^\s*(#|$)' scripts/wordpress-publish-targets.txt | tr '\n' ' ')
+          fi
+
+          if [ -z "$FILES" ]; then
+            echo "게시할 HTML 파일을 찾지 못했습니다." >&2
+            exit 1
+          fi
+
+          for f in $FILES; do
+            case "$f" in
+              wordpress-content/*.html|wordpress-content/**/*.html) ;;
+              *) echo "허용되지 않은 게시 대상: $f" >&2; exit 1 ;;
+            esac
+            if [ ! -f "$f" ]; then
+              echo "게시 대상 파일이 없습니다: $f" >&2
+              exit 1
+            fi
+          done
+
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "게시 대상: $FILES"
+
+      - name: WordPress로 전송
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }}
