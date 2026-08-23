@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "scripts/wordpress-publish-targets.txt"
+      - "scripts/publish-wordpress.mjs"
       - ".github/workflows/wordpress-targeted-publish.yml"
   workflow_dispatch:
     inputs:
