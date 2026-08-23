@@ -14,7 +14,11 @@ on:
         default: ""
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: wordpress-targeted-publish
+  cancel-in-progress: true
 
 jobs:
   publish:
@@ -62,8 +66,56 @@ jobs:
           echo "게시 대상: $FILES"
 
       - name: WordPress로 전송
+        id: publish
+        continue-on-error: true
+        shell: bash
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
-        run: node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }}
+        run: |
+          set -o pipefail
+          node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }} 2>&1 | tee /tmp/wordpress-publish.log
+
+      - name: 게시 결과 기록
+        if: always() && steps.files.outcome == 'success'
+        shell: bash
+        env:
+          FILES: ${{ steps.files.outputs.files }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          EVENT_NAME: ${{ github.event_name }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          log_path = Path('/tmp/wordpress-publish.log')
+          output = log_path.read_text(encoding='utf-8', errors='replace') if log_path.exists() else ''
+          links = re.findall(r'(?:생성|갱신):\s+(https?://\S+)\s+\[', output)
+          data = {
+              'status': 'success' if os.environ.get('PUBLISH_OUTCOME') == 'success' else 'failure',
+              'published_at_utc': datetime.now(timezone.utc).isoformat(),
+              'event': os.environ.get('EVENT_NAME'),
+              'source_sha': os.environ.get('SOURCE_SHA'),
+              'files': os.environ.get('FILES', '').split(),
+              'wordpress_links': links,
+              'log': output.strip(),
+          }
+          Path('scripts/wordpress-last-publish.json').write_text(
+              json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/wordpress-last-publish.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record WordPress publish status [skip ci]"
+            git push origin HEAD:main
+          fi
+
+      - name: 게시 실패 처리
+        if: steps.publish.outcome != 'success'
+        run: exit 1
