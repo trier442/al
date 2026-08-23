@@ -44,7 +44,10 @@ async function wpFetch(url, options = {}) {
   let data;
   try { data = text ? JSON.parse(text) : {}; } catch { data = { message: text }; }
   if (!response.ok) {
-    throw new Error(`WordPress ${response.status}: ${data.message || text}`);
+    const detail = data && !Array.isArray(data) && data.message
+      ? data.message
+      : text.slice(0, 2000);
+    throw new Error(`WordPress ${response.status}: ${detail}`);
   }
   return data;
 }
@@ -148,11 +151,16 @@ async function publish(file) {
   const needsFeaturedImage = Boolean(meta.featured_image) && !featuredMedia;
 
   if (needsFeaturedImage) {
-    const media = await uploadImage(meta.featured_image, meta.title);
-    featuredMedia = Number(media.id) || 0;
-    if (media.source_url && !content.includes(media.source_url)) {
-      const escapedAlt = meta.title.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-      content = `<figure class="wp-block-image size-full modu-featured-inline"><img src="${media.source_url}" alt="${escapedAlt}" /></figure>\n${content}`;
+    try {
+      const media = await uploadImage(meta.featured_image, meta.title);
+      featuredMedia = Number(media.id) || 0;
+      if (media.source_url && !content.includes(media.source_url)) {
+        const escapedAlt = meta.title.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        content = `<figure class="wp-block-image size-full modu-featured-inline"><img src="${media.source_url}" alt="${escapedAlt}" /></figure>\n${content}`;
+      }
+    } catch (error) {
+      console.warn(`대표 이미지 업로드 경고: ${error.message}`);
+      console.warn("미디어 업로드가 차단되어도 본문 상단의 대표 비주얼 카드와 글 본문은 계속 게시합니다.");
     }
   }
 
