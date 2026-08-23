@@ -19,7 +19,7 @@ permissions:
 
 concurrency:
   group: wordpress-targeted-publish
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   publish:
@@ -74,14 +74,17 @@ jobs:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          FILES: ${{ steps.files.outputs.files }}
         run: |
           set -o pipefail
           node <<'NODE' 2>&1 | tee /tmp/wordpress-publish.log
+          const { spawnSync } = require('node:child_process');
           const baseUrl = process.env.WP_URL.replace(/\/$/, '');
           const password = process.env.WP_APP_PASSWORD.replace(/\s/g, '');
           const auth = 'Basic ' + Buffer.from(`${process.env.WP_USERNAME}:${password}`).toString('base64');
+          const files = (process.env.FILES || '').trim().split(/\s+/).filter(Boolean);
 
-          async function get(path, options = {}) {
+          async function request(path, options = {}) {
             const response = await fetch(baseUrl + path, {
               ...options,
               headers: { Authorization: auth, ...(options.headers || {}) },
@@ -90,48 +93,105 @@ jobs:
             const text = await response.text();
             let data;
             try { data = text ? JSON.parse(text) : null; } catch { data = text; }
-            return { status: response.status, location: response.headers.get('location'), data };
+            return { ok: response.ok, status: response.status, location: response.headers.get('location'), data };
           }
 
-          const me = await get('/wp-json/wp/v2/users/me?context=edit');
-          const caps = me.data?.capabilities || {};
-          console.log('WordPress taxonomy 권한:', JSON.stringify({
-            edit_posts: !!caps.edit_posts,
-            manage_categories: !!caps.manage_categories,
-            assign_categories: !!caps.assign_categories,
-            manage_post_tags: !!caps.manage_post_tags,
-            assign_post_tags: !!caps.assign_post_tags,
-            activate_plugins: !!caps.activate_plugins,
-            install_plugins: !!caps.install_plugins,
-          }));
-
-          const tax = await get('/wp-json/wp/v2/taxonomies?context=edit');
-          console.log('WordPress taxonomy assign_terms:', JSON.stringify({
-            category: tax.data?.category?.capabilities?.assign_terms,
-            post_tag: tax.data?.post_tag?.capabilities?.assign_terms,
-          }));
-
-          const options = await get('/wp-json/wp/v2/posts', { method: 'OPTIONS' });
-          const endpoints = options.data?.endpoints || [];
-          const createEndpoint = endpoints.find(item => Array.isArray(item.methods) && item.methods.includes('POST'));
-          console.log('WordPress categories arg:', JSON.stringify(createEndpoint?.args?.categories || null));
-          console.log('WordPress tags arg:', JSON.stringify(createEndpoint?.args?.tags || null));
-
-          const plugins = await get('/wp-json/wp/v2/plugins?context=edit');
-          if (Array.isArray(plugins.data)) {
-            console.log('WordPress plugins:', JSON.stringify(plugins.data.map(p => ({ plugin: p.plugin, status: p.status, name: p.name }))));
-          } else {
-            console.log('WordPress plugins endpoint:', JSON.stringify({ status: plugins.status, data: plugins.data }).slice(0, 5000));
+          async function setPluginStatus(plugin, status) {
+            const endpoint = '/wp-json/wp/v2/plugins/' + plugin.split('/').map(encodeURIComponent).join('/');
+            return request(endpoint, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json; charset=utf-8' },
+              body: JSON.stringify({ status }),
+            });
           }
 
-          const xml = await get('/xmlrpc.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/xml; charset=utf-8' },
-            body: '<?xml version="1.0"?><methodCall><methodName>system.listMethods</methodName><params></params></methodCall>',
-          });
-          console.log('WordPress XML-RPC 진단:', JSON.stringify({ status: xml.status, location: xml.location }));
+          async function taxonomyState() {
+            const [me, tax] = await Promise.all([
+              request('/wp-json/wp/v2/users/me?context=edit'),
+              request('/wp-json/wp/v2/taxonomies?context=edit'),
+            ]);
+            const caps = me.data?.capabilities || {};
+            const categoryCap = tax.data?.category?.capabilities?.assign_terms || '';
+            const tagCap = tax.data?.post_tag?.capabilities?.assign_terms || '';
+            return {
+              categoryCap,
+              tagCap,
+              canCategory: Boolean(caps[categoryCap]),
+              canTag: Boolean(caps[tagCap]),
+              assign_categories: Boolean(caps.assign_categories),
+              assign_post_tags: Boolean(caps.assign_post_tags),
+              edit_posts: Boolean(caps.edit_posts),
+            };
+          }
+
+          const candidates = [
+            'modukorean-site-manager/modukorean-site-manager',
+            'insert-headers-and-footers/ihaf',
+            'modu-hwajak-unit-editor/modu-hwajak-unit-editor',
+            'modu-hwajak-quality-rebuilder/modu-hwajak-quality-rebuilder',
+          ];
+
+          const pluginsResponse = await request('/wp-json/wp/v2/plugins?context=edit');
+          const activePlugins = new Set(
+            Array.isArray(pluginsResponse.data)
+              ? pluginsResponse.data.filter(p => p.status === 'active').map(p => p.plugin)
+              : []
+          );
+
+          console.log('게시 전 taxonomy 상태:', JSON.stringify(await taxonomyState()));
+          let pausedPlugin = '';
+          let publisherStatus = 1;
+
+          try {
+            for (const plugin of candidates) {
+              if (!activePlugins.has(plugin)) continue;
+              console.log(`원인 확인을 위해 잠시 비활성화: ${plugin}`);
+              const off = await setPluginStatus(plugin, 'inactive');
+              if (!off.ok) {
+                console.log(`비활성화 실패 ${plugin}: HTTP ${off.status} ${JSON.stringify(off.data).slice(0, 800)}`);
+                continue;
+              }
+
+              const state = await taxonomyState();
+              console.log(`비활성화 후 taxonomy 상태 ${plugin}: ${JSON.stringify(state)}`);
+              if (state.canCategory && state.canTag) {
+                pausedPlugin = plugin;
+                console.log(`원인 플러그인으로 판단: ${plugin}`);
+                break;
+              }
+
+              const on = await setPluginStatus(plugin, 'active');
+              console.log(`즉시 재활성화 ${plugin}: HTTP ${on.status}`);
+            }
+
+            if (!pausedPlugin) {
+              console.log('비표준 taxonomy 권한을 정상화하는 단일 플러그인을 찾지 못했습니다. 현재 상태에서 게시를 시도합니다.');
+            } else {
+              console.log(`게시 중에만 일시 중지 유지: ${pausedPlugin}`);
+            }
+
+            const child = spawnSync('node', ['scripts/publish-wordpress.mjs', ...files], {
+              env: process.env,
+              encoding: 'utf8',
+              maxBuffer: 20 * 1024 * 1024,
+            });
+            if (child.stdout) process.stdout.write(child.stdout);
+            if (child.stderr) process.stderr.write(child.stderr);
+            publisherStatus = Number.isInteger(child.status) ? child.status : 1;
+          } finally {
+            if (pausedPlugin) {
+              const on = await setPluginStatus(pausedPlugin, 'active');
+              console.log(`게시 후 재활성화 ${pausedPlugin}: HTTP ${on.status}`);
+              const verify = Array.isArray((await request('/wp-json/wp/v2/plugins?context=edit')).data)
+                ? (await request('/wp-json/wp/v2/plugins?context=edit')).data.find(p => p.plugin === pausedPlugin)?.status
+                : 'unknown';
+              console.log(`재활성화 확인 ${pausedPlugin}: ${verify}`);
+              if (!on.ok || verify !== 'active') publisherStatus = 1;
+            }
+          }
+
+          process.exit(publisherStatus);
           NODE
-          node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }} 2>&1 | tee -a /tmp/wordpress-publish.log
 
       - name: 게시 결과 기록
         if: always() && steps.files.outcome == 'success'
