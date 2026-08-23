@@ -78,7 +78,7 @@ jobs:
         run: |
           set -o pipefail
           node <<'NODE' 2>&1 | tee /tmp/wordpress-publish.log
-          const { spawnSync } = require('node:child_process');
+          const { spawnSync } = await import('node:child_process');
           const baseUrl = process.env.WP_URL.replace(/\/$/, '');
           const password = process.env.WP_APP_PASSWORD.replace(/\s/g, '');
           const auth = 'Basic ' + Buffer.from(`${process.env.WP_USERNAME}:${password}`).toString('base64');
@@ -182,8 +182,9 @@ jobs:
             if (pausedPlugin) {
               const on = await setPluginStatus(pausedPlugin, 'active');
               console.log(`게시 후 재활성화 ${pausedPlugin}: HTTP ${on.status}`);
-              const verify = Array.isArray((await request('/wp-json/wp/v2/plugins?context=edit')).data)
-                ? (await request('/wp-json/wp/v2/plugins?context=edit')).data.find(p => p.plugin === pausedPlugin)?.status
+              const pluginList = await request('/wp-json/wp/v2/plugins?context=edit');
+              const verify = Array.isArray(pluginList.data)
+                ? pluginList.data.find(p => p.plugin === pausedPlugin)?.status
                 : 'unknown';
               console.log(`재활성화 확인 ${pausedPlugin}: ${verify}`);
               if (!on.ok || verify !== 'active') publisherStatus = 1;
