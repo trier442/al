@@ -93,33 +93,34 @@ jobs:
             return { status: response.status, location: response.headers.get('location'), data };
           }
 
+          const me = await get('/wp-json/wp/v2/users/me?context=edit');
+          const caps = me.data?.capabilities || {};
+          console.log('WordPress taxonomy 권한:', JSON.stringify({
+            edit_posts: !!caps.edit_posts,
+            manage_categories: !!caps.manage_categories,
+            assign_categories: !!caps.assign_categories,
+            manage_post_tags: !!caps.manage_post_tags,
+            assign_post_tags: !!caps.assign_post_tags,
+          }));
+
           const tax = await get('/wp-json/wp/v2/taxonomies?context=edit');
-          if (tax.data && typeof tax.data === 'object' && !Array.isArray(tax.data)) {
-            const summary = {};
-            for (const [key, item] of Object.entries(tax.data)) {
-              summary[key] = {
-                slug: item.slug,
-                rest_base: item.rest_base,
-                types: item.types,
-                capabilities: item.capabilities,
-              };
-            }
-            console.log('WordPress post taxonomy 진단:', JSON.stringify(summary));
-          } else {
-            console.log('WordPress taxonomy 조회:', JSON.stringify(tax).slice(0, 3000));
-          }
+          console.log('WordPress taxonomy assign_terms:', JSON.stringify({
+            category: tax.data?.category?.capabilities?.assign_terms,
+            post_tag: tax.data?.post_tag?.capabilities?.assign_terms,
+          }));
 
           const options = await get('/wp-json/wp/v2/posts', { method: 'OPTIONS' });
           const endpoints = options.data?.endpoints || [];
           const createEndpoint = endpoints.find(item => Array.isArray(item.methods) && item.methods.includes('POST'));
-          console.log('WordPress posts POST args:', JSON.stringify(createEndpoint?.args || {}).slice(0, 8000));
+          console.log('WordPress categories arg:', JSON.stringify(createEndpoint?.args?.categories || null));
+          console.log('WordPress tags arg:', JSON.stringify(createEndpoint?.args?.tags || null));
 
           const xml = await get('/xmlrpc.php', {
             method: 'POST',
             headers: { 'Content-Type': 'text/xml; charset=utf-8' },
             body: '<?xml version="1.0"?><methodCall><methodName>system.listMethods</methodName><params></params></methodCall>',
           });
-          console.log('WordPress XML-RPC 진단:', JSON.stringify({ status: xml.status, location: xml.location, body: typeof xml.data === 'string' ? xml.data.slice(0, 500) : xml.data }).slice(0, 1500));
+          console.log('WordPress XML-RPC 진단:', JSON.stringify({ status: xml.status, location: xml.location }));
           NODE
           node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }} 2>&1 | tee -a /tmp/wordpress-publish.log
 
