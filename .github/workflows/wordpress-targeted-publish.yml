@@ -101,6 +101,8 @@ jobs:
             assign_categories: !!caps.assign_categories,
             manage_post_tags: !!caps.manage_post_tags,
             assign_post_tags: !!caps.assign_post_tags,
+            activate_plugins: !!caps.activate_plugins,
+            install_plugins: !!caps.install_plugins,
           }));
 
           const tax = await get('/wp-json/wp/v2/taxonomies?context=edit');
@@ -114,6 +116,13 @@ jobs:
           const createEndpoint = endpoints.find(item => Array.isArray(item.methods) && item.methods.includes('POST'));
           console.log('WordPress categories arg:', JSON.stringify(createEndpoint?.args?.categories || null));
           console.log('WordPress tags arg:', JSON.stringify(createEndpoint?.args?.tags || null));
+
+          const plugins = await get('/wp-json/wp/v2/plugins?context=edit');
+          if (Array.isArray(plugins.data)) {
+            console.log('WordPress plugins:', JSON.stringify(plugins.data.map(p => ({ plugin: p.plugin, status: p.status, name: p.name }))));
+          } else {
+            console.log('WordPress plugins endpoint:', JSON.stringify({ status: plugins.status, data: plugins.data }).slice(0, 5000));
+          }
 
           const xml = await get('/xmlrpc.php', {
             method: 'POST',
