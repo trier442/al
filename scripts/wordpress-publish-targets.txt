@@ -1,0 +1,3 @@
+# 이 파일에 한 줄당 하나씩 WordPress에 게시할 HTML 경로를 적습니다.
+wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html
+wordpress-content/2018-june-korean-reading-monetary-policy-07-10.html
