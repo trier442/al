@@ -76,7 +76,52 @@ jobs:
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
         run: |
           set -o pipefail
-          node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }} 2>&1 | tee /tmp/wordpress-publish.log
+          node <<'NODE' 2>&1 | tee /tmp/wordpress-publish.log
+          const baseUrl = process.env.WP_URL.replace(/\/$/, '');
+          const password = process.env.WP_APP_PASSWORD.replace(/\s/g, '');
+          const auth = 'Basic ' + Buffer.from(`${process.env.WP_USERNAME}:${password}`).toString('base64');
+
+          async function get(path, options = {}) {
+            const response = await fetch(baseUrl + path, {
+              ...options,
+              headers: { Authorization: auth, ...(options.headers || {}) },
+              redirect: 'manual',
+            });
+            const text = await response.text();
+            let data;
+            try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+            return { status: response.status, location: response.headers.get('location'), data };
+          }
+
+          const tax = await get('/wp-json/wp/v2/taxonomies?context=edit');
+          if (tax.data && typeof tax.data === 'object' && !Array.isArray(tax.data)) {
+            const summary = {};
+            for (const [key, item] of Object.entries(tax.data)) {
+              summary[key] = {
+                slug: item.slug,
+                rest_base: item.rest_base,
+                types: item.types,
+                capabilities: item.capabilities,
+              };
+            }
+            console.log('WordPress post taxonomy 진단:', JSON.stringify(summary));
+          } else {
+            console.log('WordPress taxonomy 조회:', JSON.stringify(tax).slice(0, 3000));
+          }
+
+          const options = await get('/wp-json/wp/v2/posts', { method: 'OPTIONS' });
+          const endpoints = options.data?.endpoints || [];
+          const createEndpoint = endpoints.find(item => Array.isArray(item.methods) && item.methods.includes('POST'));
+          console.log('WordPress posts POST args:', JSON.stringify(createEndpoint?.args || {}).slice(0, 8000));
+
+          const xml = await get('/xmlrpc.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/xml; charset=utf-8' },
+            body: '<?xml version="1.0"?><methodCall><methodName>system.listMethods</methodName><params></params></methodCall>',
+          });
+          console.log('WordPress XML-RPC 진단:', JSON.stringify({ status: xml.status, location: xml.location, body: typeof xml.data === 'string' ? xml.data.slice(0, 500) : xml.data }).slice(0, 1500));
+          NODE
+          node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }} 2>&1 | tee -a /tmp/wordpress-publish.log
 
       - name: 게시 결과 기록
         if: always() && steps.files.outcome == 'success'
