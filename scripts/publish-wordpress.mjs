@@ -52,6 +52,29 @@ async function wpFetch(url, options = {}) {
   return data;
 }
 
+async function logAuthCapabilities() {
+  try {
+    const me = await wpFetch(`${baseUrl}/wp-json/wp/v2/users/me?context=edit`);
+    const capabilities = me.capabilities || {};
+    const keys = [
+      "read",
+      "edit_posts",
+      "publish_posts",
+      "delete_posts",
+      "upload_files",
+      "manage_categories",
+      "edit_others_posts",
+      "edit_published_posts",
+      "unfiltered_html",
+    ];
+    const summary = Object.fromEntries(keys.map(key => [key, Boolean(capabilities[key])]));
+    console.log(`WordPress 인증 사용자: id=${me.id}, name=${me.name || ""}, roles=${(me.roles || []).join(",")}`);
+    console.log(`WordPress 핵심 권한: ${JSON.stringify(summary)}`);
+  } catch (error) {
+    console.warn(`WordPress 인증 사용자 권한 확인 실패: ${error.message}`);
+  }
+}
+
 function parseFile(file) {
   const raw = fs.readFileSync(file, "utf8");
   const meta = {};
@@ -188,4 +211,5 @@ async function publish(file) {
 
 const files = process.argv.slice(2);
 if (!files.length) throw new Error("게시할 HTML 파일이 없습니다.");
+await logAuthCapabilities();
 for (const file of files) await publish(file);
