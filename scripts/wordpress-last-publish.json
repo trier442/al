@@ -1,8 +1,8 @@
 {
   "status": "failure",
-  "published_at_utc": "2026-08-23T04:26:53.897891+00:00",
+  "published_at_utc": "2026-08-23T04:28:40.814089+00:00",
   "event": "push",
-  "source_sha": "f65a78520c6d6b1769b7c2a044548300d8f70b4e",
+  "source_sha": "caf285eee98b421413e2acf8aae1c3b94174335a",
   "files": [
     "wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html",
     "wordpress-content/2018-june-korean-reading-monetary-policy-07-10.html"
