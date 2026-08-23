@@ -1,0 +1,106 @@
+name: WordPress REST 진단
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/wordpress-rest-diagnostic.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: WordPress REST 구조 진단
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const baseUrl = process.env.WP_URL.replace(/\/$/, '');
+          const username = process.env.WP_USERNAME;
+          const password = process.env.WP_APP_PASSWORD.replace(/\s/g, '');
+          const auth = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64');
+
+          async function request(path, options = {}) {
+            const response = await fetch(baseUrl + path, {
+              ...options,
+              headers: { Authorization: auth, ...(options.headers || {}) },
+              redirect: 'manual',
+            });
+            const text = await response.text();
+            let data;
+            try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+            return {
+              status: response.status,
+              location: response.headers.get('location'),
+              data,
+            };
+          }
+
+          const output = {};
+          output.me = await request('/wp-json/wp/v2/users/me?context=edit');
+          output.taxonomies = await request('/wp-json/wp/v2/taxonomies?context=edit');
+          output.post_type = await request('/wp-json/wp/v2/types/post?context=edit');
+          output.posts_options = await request('/wp-json/wp/v2/posts', { method: 'OPTIONS' });
+          output.xmlrpc = await request('/xmlrpc.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/xml; charset=utf-8' },
+            body: '<?xml version="1.0"?><methodCall><methodName>system.listMethods</methodName><params></params></methodCall>',
+          });
+
+          function compactTaxonomies(value) {
+            const data = value?.data;
+            if (!data || typeof data !== 'object' || Array.isArray(data)) return value;
+            const items = {};
+            for (const [key, tax] of Object.entries(data)) {
+              items[key] = {
+                name: tax.name,
+                slug: tax.slug,
+                rest_base: tax.rest_base,
+                types: tax.types,
+                capabilities: tax.capabilities,
+                visibility: tax.visibility,
+              };
+            }
+            return { status: value.status, location: value.location, data: items };
+          }
+
+          output.taxonomies = compactTaxonomies(output.taxonomies);
+          if (output.posts_options?.data && typeof output.posts_options.data === 'object') {
+            const schema = output.posts_options.data?.schema || output.posts_options.data;
+            output.posts_options = {
+              status: output.posts_options.status,
+              location: output.posts_options.location,
+              endpoints: output.posts_options.data?.endpoints,
+              schema,
+            };
+          }
+          if (typeof output.xmlrpc.data === 'string' && output.xmlrpc.data.length > 5000) {
+            output.xmlrpc.data = output.xmlrpc.data.slice(0, 5000);
+          }
+          fs.writeFileSync('scripts/wordpress-rest-diagnostic.json', JSON.stringify(output, null, 2) + '\n');
+          NODE
+
+      - name: 진단 결과 저장
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/wordpress-rest-diagnostic.json
+          git commit -m "Record WordPress REST diagnostic [skip ci]" || true
+          git push origin HEAD:main
