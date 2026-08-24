@@ -1,0 +1,131 @@
+name: WordPress 실제 본문 발행 진단
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/wordpress-publish-content-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 실제 원고 본문으로 WordPress 발행 진단
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          node <<'NODE' > /tmp/wp-publish-content-probe.json
+          import fs from 'node:fs';
+
+          const baseUrl = process.env.WP_URL.replace(/\/$/, '');
+          const password = process.env.WP_APP_PASSWORD.replace(/\s/g, '');
+          const auth = 'Basic ' + Buffer.from(`${process.env.WP_USERNAME}:${password}`).toString('base64');
+          const sourceFile = 'wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html';
+
+          async function request(path, options = {}) {
+            const response = await fetch(baseUrl + path, {
+              ...options,
+              headers: { Authorization: auth, ...(options.headers || {}) },
+              redirect: 'manual',
+            });
+            const text = await response.text();
+            let data;
+            try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+            return { ok: response.ok, status: response.status, location: response.headers.get('location'), data };
+          }
+
+          function parseFile(file) {
+            const raw = fs.readFileSync(file, 'utf8');
+            const meta = {};
+            const pattern = /<!--\s*(title|slug|status|type|categories|revision|excerpt|featured_image|post_id)\s*:\s*(.*?)\s*-->/g;
+            let match;
+            while ((match = pattern.exec(raw))) meta[match[1]] = match[2].trim();
+            return { meta, content: raw.replace(pattern, '').trim() };
+          }
+
+          async function createAndCleanup(name, payload) {
+            const created = await request('/wp-json/wp/v2/posts', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json; charset=utf-8' },
+              body: JSON.stringify(payload),
+            });
+            const entry = {
+              name,
+              payload_summary: {
+                title: payload.title,
+                slug: payload.slug,
+                status: payload.status,
+                content_length: payload.content?.length || 0,
+                excerpt_length: payload.excerpt?.length || 0,
+              },
+              status: created.status,
+              ok: created.ok,
+              response: created.data,
+            };
+            if (created.ok && created.data?.id) {
+              const removed = await request(`/wp-json/wp/v2/posts/${created.data.id}?force=true`, { method: 'DELETE' });
+              entry.cleanup = { status: removed.status, ok: removed.ok, response: removed.data };
+            }
+            return entry;
+          }
+
+          const { meta, content } = parseFile(sourceFile);
+          const result = {
+            checked_at: new Date().toISOString(),
+            source_file: sourceFile,
+            source_content_length: content.length,
+            probes: [],
+          };
+
+          result.probes.push(await createAndCleanup('publish_minimal', {
+            title: '__modu_probe_publish_minimal__',
+            slug: '__modu_probe_publish_minimal__',
+            status: 'publish',
+            content: '<p>publish probe</p>',
+            excerpt: 'publish probe',
+          }));
+
+          result.probes.push(await createAndCleanup('real_content_draft', {
+            title: '__modu_probe_real_content_draft__',
+            slug: '__modu_probe_real_content_draft__',
+            status: 'draft',
+            content,
+            excerpt: meta.excerpt || '',
+          }));
+
+          result.probes.push(await createAndCleanup('real_content_publish', {
+            title: '__modu_probe_real_content_publish__',
+            slug: '__modu_probe_real_content_publish__',
+            status: 'publish',
+            content,
+            excerpt: meta.excerpt || '',
+          }));
+
+          console.log(JSON.stringify(result, null, 2));
+          NODE
+          cat /tmp/wp-publish-content-probe.json
+
+      - name: 진단 결과 저장
+        run: |
+          cp /tmp/wp-publish-content-probe.json scripts/wordpress-publish-content-probe.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/wordpress-publish-content-probe.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record WordPress publish content probe [skip ci]"
+            git push origin HEAD:main
+          fi
