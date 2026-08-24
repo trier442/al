@@ -45,91 +45,11 @@ async function wpFetch(url, options = {}) {
   try { data = text ? JSON.parse(text) : {}; } catch { data = { message: text }; }
   if (!response.ok) {
     const detail = data && !Array.isArray(data) && data.message
-      ? data.message
+      ? `${data.code ? `${data.code}: ` : ""}${data.message}`
       : text.slice(0, 2000);
     throw new Error(`WordPress ${response.status}: ${detail}`);
   }
   return data;
-}
-
-function xmlEscape(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
-
-function xmlDecode(value) {
-  return String(value)
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'")
-    .replace(/&amp;/g, "&");
-}
-
-function xmlRpcValue(value) {
-  if (typeof value === "boolean") return `<value><boolean>${value ? 1 : 0}</boolean></value>`;
-  if (Number.isInteger(value)) return `<value><int>${value}</int></value>`;
-  if (Array.isArray(value)) {
-    return `<value><array><data>${value.map(xmlRpcValue).join("")}</data></array></value>`;
-  }
-  if (value && typeof value === "object") {
-    const members = Object.entries(value)
-      .filter(([, memberValue]) => memberValue !== undefined && memberValue !== null)
-      .map(([name, memberValue]) => `<member><name>${xmlEscape(name)}</name>${xmlRpcValue(memberValue)}</member>`)
-      .join("");
-    return `<value><struct>${members}</struct></value>`;
-  }
-  return `<value><string>${xmlEscape(value ?? "")}</string></value>`;
-}
-
-async function xmlRpcCall(methodName, params) {
-  const body = `<?xml version="1.0" encoding="UTF-8"?>\n<methodCall><methodName>${xmlEscape(methodName)}</methodName><params>${params.map(value => `<param>${xmlRpcValue(value)}</param>`).join("")}</params></methodCall>`;
-  const response = await fetch(`${baseUrl}/xmlrpc.php`, {
-    method: "POST",
-    headers: { "Content-Type": "text/xml; charset=utf-8" },
-    body,
-  });
-  const text = await response.text();
-  if (!response.ok) throw new Error(`WordPress XML-RPC HTTP ${response.status}: ${text.slice(0, 1000)}`);
-  if (/<fault>/i.test(text)) {
-    const fault = text.match(/<name>faultString<\/name>\s*<value>(?:<string>)?([\s\S]*?)(?:<\/string>)?<\/value>/i);
-    throw new Error(`WordPress XML-RPC fault: ${xmlDecode((fault?.[1] || text).replace(/<[^>]+>/g, "").trim()).slice(0, 1000)}`);
-  }
-  return text;
-}
-
-function parseXmlRpcPostId(xml) {
-  const match = xml.match(/<value>\s*(?:<string>|<int>|<i4>)?\s*(\d+)\s*(?:<\/string>|<\/int>|<\/i4>)?\s*<\/value>/i);
-  const id = Number(match?.[1]);
-  if (!Number.isInteger(id) || id <= 0) throw new Error(`XML-RPC 게시물 ID를 읽지 못했습니다: ${xml.slice(0, 1000)}`);
-  return id;
-}
-
-async function createPostViaXmlRpc(meta, content, featuredMedia = 0) {
-  const postType = meta.type === "pages" ? "page" : "post";
-  const post = {
-    post_type: postType,
-    post_status: meta.status,
-    post_title: meta.title,
-    post_content: content,
-    post_excerpt: meta.excerpt,
-    post_name: meta.slug,
-  };
-  if (featuredMedia) post.post_thumbnail = featuredMedia;
-
-  const xml = await xmlRpcCall("wp.newPost", [0, wpUsername, wpPassword, post]);
-  const id = parseXmlRpcPostId(xml);
-
-  try {
-    const created = await wpFetch(`${baseUrl}/wp-json/wp/v2/${meta.type}/${id}?context=edit`);
-    return { id, link: created.link || `${baseUrl}/?p=${id}` };
-  } catch {
-    return { id, link: `${baseUrl}/?p=${id}` };
-  }
 }
 
 async function logAuthCapabilities() {
@@ -241,6 +161,14 @@ async function uploadImage(file, title = "") {
   return data;
 }
 
+function escapedHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 async function publish(file) {
   assertEonmaePublishAllowed(file);
   const { meta, content: rawContent } = parseFile(file);
@@ -249,52 +177,53 @@ async function publish(file) {
     ? [{ id: meta.post_id }]
     : await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit`);
 
-  let content = rawContent;
-  let featuredMedia = existing.length ? Number(existing[0].featured_media) || 0 : 0;
-  const needsFeaturedImage = Boolean(meta.featured_image) && !featuredMedia;
-
-  if (needsFeaturedImage) {
-    try {
-      const media = await uploadImage(meta.featured_image, meta.title);
-      featuredMedia = Number(media.id) || 0;
-      if (media.source_url && !content.includes(media.source_url)) {
-        const escapedAlt = meta.title.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        content = `<figure class="wp-block-image size-full modu-featured-inline"><img src="${media.source_url}" alt="${escapedAlt}" /></figure>\n${content}`;
-      }
-    } catch (error) {
-      console.warn(`대표 이미지 업로드 경고: ${error.message}`);
-      console.warn("미디어 업로드가 차단되어도 본문 상단의 대표 비주얼 카드와 글 본문은 계속 게시합니다.");
-    }
-  }
-
+  const isExisting = existing.length > 0;
+  const target = isExisting ? `${endpoint}/${existing[0].id}` : endpoint;
   const payload = meta.post_id
-    ? { content }
+    ? { content: rawContent }
     : {
         title: meta.title,
         slug: meta.slug,
         status: meta.status,
-        content,
+        content: rawContent,
       };
+
   if (!meta.post_id && meta.excerpt) payload.excerpt = meta.excerpt;
   if (!meta.post_id && meta.type === "posts" && meta.categories.length) payload.categories = meta.categories;
-  if (featuredMedia) payload.featured_media = featuredMedia;
 
-  const target = existing.length ? `${endpoint}/${existing[0].id}` : endpoint;
+  // 핵심: 글을 먼저 생성/갱신한다. 대표 이미지 업로드 실패가 글 발행 자체를 막지 않게 한다.
+  const result = await wpFetch(target, {
+    method: "POST",
+    headers: { "Content-Type": "application/json; charset=utf-8" },
+    body: JSON.stringify(payload),
+  });
+
+  const postId = Number(result.id || existing[0]?.id) || 0;
+  console.log(`${isExisting ? "갱신" : "생성"}: ${result.link} [${meta.status}]`);
+
+  const existingFeatured = Number(result.featured_media || existing[0]?.featured_media) || 0;
+  const needsFeaturedImage = Boolean(meta.featured_image) && !existingFeatured && postId;
+  if (!needsFeaturedImage) return;
+
   try {
-    const result = await wpFetch(target, {
+    const media = await uploadImage(meta.featured_image, meta.title);
+    const featuredMedia = Number(media.id) || 0;
+    if (!featuredMedia) throw new Error("업로드된 대표 이미지 ID를 확인하지 못했습니다.");
+
+    let content = rawContent;
+    if (media.source_url && !content.includes(media.source_url)) {
+      content = `<figure class="wp-block-image size-full modu-featured-inline"><img src="${media.source_url}" alt="${escapedHtml(meta.title)}" /></figure>\n${content}`;
+    }
+
+    await wpFetch(`${endpoint}/${postId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=utf-8" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ featured_media: featuredMedia, content }),
     });
-    console.log(`${existing.length ? "갱신" : "생성"}: ${result.link} [${meta.status}]`);
+    console.log(`대표 이미지 연결: post_id=${postId}, media_id=${featuredMedia}`);
   } catch (error) {
-    if (!existing.length && /WordPress 403:/.test(error.message)) {
-      console.warn(`REST 글 생성이 차단되어 XML-RPC로 재시도합니다: ${error.message}`);
-      const result = await createPostViaXmlRpc(meta, content, featuredMedia);
-      console.log(`생성: ${result.link} [${meta.status}] (XML-RPC, post_id=${result.id})`);
-      return;
-    }
-    throw error;
+    console.warn(`대표 이미지 업로드/연결 경고: ${error.message}`);
+    console.warn("대표 이미지가 차단되어도 글은 이미 WordPress에 정상 게시되었습니다.");
   }
 }
 
