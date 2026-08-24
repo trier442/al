@@ -97,8 +97,10 @@ function parseFile(file) {
       excerpt: meta.excerpt || "",
       categories: (meta.categories || "")
         .split(",")
-        .map(v => Number(v.trim()))
-        .filter(Number.isInteger),
+        .map(v => v.trim())
+        .filter(Boolean)
+        .map(Number)
+        .filter(v => Number.isInteger(v) && v > 0),
       featured_image: meta.featured_image || "",
       post_id: Number(meta.post_id) || 0,
     },
@@ -191,7 +193,6 @@ async function publish(file) {
   if (!meta.post_id && meta.excerpt) payload.excerpt = meta.excerpt;
   if (!meta.post_id && meta.type === "posts" && meta.categories.length) payload.categories = meta.categories;
 
-  // 핵심: 글을 먼저 생성/갱신한다. 대표 이미지 업로드 실패가 글 발행 자체를 막지 않게 한다.
   const result = await wpFetch(target, {
     method: "POST",
     headers: { "Content-Type": "application/json; charset=utf-8" },
