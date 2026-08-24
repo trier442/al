@@ -1,0 +1,1863 @@
+{
+  "checked_at": "2026-08-24T08:34:48.366Z",
+  "probes": [
+    {
+      "name": "minimal",
+      "request": {
+        "title": "__modu_probe_minimal__",
+        "status": "draft"
+      },
+      "status": 201,
+      "ok": true,
+      "response": {
+        "id": 1946,
+        "date": "2026-08-23T23:34:54",
+        "date_gmt": "2026-08-24T08:34:54",
+        "guid": {
+          "rendered": "https://modukorean.co.kr/?p=1946",
+          "raw": "https://modukorean.co.kr/?p=1946"
+        },
+        "modified": "2026-08-23T23:34:54",
+        "modified_gmt": "2026-08-24T08:34:54",
+        "password": "",
+        "slug": "",
+        "status": "draft",
+        "type": "post",
+        "link": "https://modukorean.co.kr/?p=1946",
+        "title": {
+          "raw": "__modu_probe_minimal__",
+          "rendered": "__modu_probe_minimal__"
+        },
+        "content": {
+          "raw": "",
+          "rendered": "",
+          "protected": false,
+          "block_version": 0
+        },
+        "excerpt": {
+          "raw": "",
+          "rendered": "",
+          "protected": false
+        },
+        "author": 1,
+        "featured_media": 0,
+        "comment_status": "open",
+        "ping_status": "open",
+        "sticky": false,
+        "template": "",
+        "format": "standard",
+        "meta": {
+          "site-sidebar-layout": "default",
+          "site-content-layout": "",
+          "ast-site-content-layout": "default",
+          "site-content-style": "default",
+          "site-sidebar-style": "default",
+          "ast-global-header-display": "",
+          "ast-banner-title-visibility": "",
+          "ast-main-header-display": "",
+          "ast-hfb-above-header-display": "",
+          "ast-hfb-below-header-display": "",
+          "ast-hfb-mobile-header-display": "",
+          "site-post-title": "",
+          "ast-breadcrumbs-content": "",
+          "ast-featured-img": "",
+          "footer-sml-layout": "",
+          "ast-disable-related-posts": "",
+          "theme-transparent-header-meta": "",
+          "adv-header-id-meta": "",
+          "stick-header-meta": "",
+          "header-above-stick-meta": "",
+          "header-main-stick-meta": "",
+          "header-below-stick-meta": "",
+          "astra-migrate-meta-layouts": "default",
+          "ast-page-background-enabled": "default",
+          "ast-page-background-meta": {
+            "desktop": {
+              "background-color": "var(--ast-global-color-5)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "tablet": {
+              "background-color": "",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "mobile": {
+              "background-color": "",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            }
+          },
+          "ast-content-background-meta": {
+            "desktop": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "tablet": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "mobile": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            }
+          },
+          "footnotes": ""
+        },
+        "categories": [
+          1
+        ],
+        "tags": [],
+        "permalink_template": "https://modukorean.co.kr/%postname%/",
+        "generated_slug": "__modu_probe_minimal__",
+        "class_list": [
+          "post-1946",
+          "post",
+          "type-post",
+          "status-draft",
+          "format-standard",
+          "hentry",
+          "category-uncategorized"
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/types/post"
+            }
+          ],
+          "author": [
+            {
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/users/1"
+            }
+          ],
+          "replies": [
+            {
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/comments?post=1946"
+            }
+          ],
+          "version-history": [
+            {
+              "count": 0,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946/revisions"
+            }
+          ],
+          "wp:attachment": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/media?parent=1946"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "category",
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/categories?post=1946"
+            },
+            {
+              "taxonomy": "post_tag",
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/tags?post=1946"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946"
+            }
+          ],
+          "wp:action-sticky": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946"
+            }
+          ],
+          "wp:action-assign-author": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946"
+            }
+          ],
+          "wp:action-create-categories": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946"
+            }
+          ],
+          "wp:action-assign-categories": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946"
+            }
+          ],
+          "wp:action-create-tags": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946"
+            }
+          ],
+          "wp:action-assign-tags": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1946"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      "cleanup": {
+        "status": 200,
+        "ok": true,
+        "response": {
+          "deleted": true,
+          "previous": {
+            "id": 1946,
+            "date": "2026-08-23T23:34:54",
+            "date_gmt": "2026-08-24T08:34:54",
+            "guid": {
+              "rendered": "https://modukorean.co.kr/?p=1946",
+              "raw": "https://modukorean.co.kr/?p=1946"
+            },
+            "modified": "2026-08-23T23:34:54",
+            "modified_gmt": "2026-08-24T08:34:54",
+            "password": "",
+            "slug": "",
+            "status": "draft",
+            "type": "post",
+            "link": "https://modukorean.co.kr/?p=1946",
+            "title": {
+              "raw": "__modu_probe_minimal__",
+              "rendered": "__modu_probe_minimal__"
+            },
+            "content": {
+              "raw": "",
+              "rendered": "",
+              "protected": false,
+              "block_version": 0
+            },
+            "excerpt": {
+              "raw": "",
+              "rendered": "",
+              "protected": false
+            },
+            "author": 1,
+            "featured_media": 0,
+            "comment_status": "open",
+            "ping_status": "open",
+            "sticky": false,
+            "template": "",
+            "format": "standard",
+            "meta": {
+              "site-sidebar-layout": "default",
+              "site-content-layout": "",
+              "ast-site-content-layout": "default",
+              "site-content-style": "default",
+              "site-sidebar-style": "default",
+              "ast-global-header-display": "",
+              "ast-banner-title-visibility": "",
+              "ast-main-header-display": "",
+              "ast-hfb-above-header-display": "",
+              "ast-hfb-below-header-display": "",
+              "ast-hfb-mobile-header-display": "",
+              "site-post-title": "",
+              "ast-breadcrumbs-content": "",
+              "ast-featured-img": "",
+              "footer-sml-layout": "",
+              "ast-disable-related-posts": "",
+              "theme-transparent-header-meta": "",
+              "adv-header-id-meta": "",
+              "stick-header-meta": "",
+              "header-above-stick-meta": "",
+              "header-main-stick-meta": "",
+              "header-below-stick-meta": "",
+              "astra-migrate-meta-layouts": "default",
+              "ast-page-background-enabled": "default",
+              "ast-page-background-meta": {
+                "desktop": {
+                  "background-color": "var(--ast-global-color-5)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "tablet": {
+                  "background-color": "",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "mobile": {
+                  "background-color": "",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                }
+              },
+              "ast-content-background-meta": {
+                "desktop": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "tablet": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "mobile": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                }
+              },
+              "footnotes": ""
+            },
+            "categories": [
+              1
+            ],
+            "tags": [],
+            "permalink_template": "https://modukorean.co.kr/%postname%/",
+            "generated_slug": "__modu_probe_minimal__",
+            "class_list": [
+              "post-1946",
+              "post",
+              "type-post",
+              "status-draft",
+              "format-standard",
+              "hentry",
+              "category-uncategorized"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "empty_categories",
+      "request": {
+        "title": "__modu_probe_empty_categories__",
+        "status": "draft",
+        "categories": []
+      },
+      "status": 201,
+      "ok": true,
+      "response": {
+        "id": 1947,
+        "date": "2026-08-23T23:34:58",
+        "date_gmt": "2026-08-24T08:34:58",
+        "guid": {
+          "rendered": "https://modukorean.co.kr/?p=1947",
+          "raw": "https://modukorean.co.kr/?p=1947"
+        },
+        "modified": "2026-08-23T23:34:58",
+        "modified_gmt": "2026-08-24T08:34:58",
+        "password": "",
+        "slug": "",
+        "status": "draft",
+        "type": "post",
+        "link": "https://modukorean.co.kr/?p=1947",
+        "title": {
+          "raw": "__modu_probe_empty_categories__",
+          "rendered": "__modu_probe_empty_categories__"
+        },
+        "content": {
+          "raw": "",
+          "rendered": "",
+          "protected": false,
+          "block_version": 0
+        },
+        "excerpt": {
+          "raw": "",
+          "rendered": "",
+          "protected": false
+        },
+        "author": 1,
+        "featured_media": 0,
+        "comment_status": "open",
+        "ping_status": "open",
+        "sticky": false,
+        "template": "",
+        "format": "standard",
+        "meta": {
+          "site-sidebar-layout": "default",
+          "site-content-layout": "",
+          "ast-site-content-layout": "default",
+          "site-content-style": "default",
+          "site-sidebar-style": "default",
+          "ast-global-header-display": "",
+          "ast-banner-title-visibility": "",
+          "ast-main-header-display": "",
+          "ast-hfb-above-header-display": "",
+          "ast-hfb-below-header-display": "",
+          "ast-hfb-mobile-header-display": "",
+          "site-post-title": "",
+          "ast-breadcrumbs-content": "",
+          "ast-featured-img": "",
+          "footer-sml-layout": "",
+          "ast-disable-related-posts": "",
+          "theme-transparent-header-meta": "",
+          "adv-header-id-meta": "",
+          "stick-header-meta": "",
+          "header-above-stick-meta": "",
+          "header-main-stick-meta": "",
+          "header-below-stick-meta": "",
+          "astra-migrate-meta-layouts": "default",
+          "ast-page-background-enabled": "default",
+          "ast-page-background-meta": {
+            "desktop": {
+              "background-color": "var(--ast-global-color-5)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "tablet": {
+              "background-color": "",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "mobile": {
+              "background-color": "",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            }
+          },
+          "ast-content-background-meta": {
+            "desktop": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "tablet": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "mobile": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            }
+          },
+          "footnotes": ""
+        },
+        "categories": [],
+        "tags": [],
+        "permalink_template": "https://modukorean.co.kr/%postname%/",
+        "generated_slug": "__modu_probe_empty_categories__",
+        "class_list": [
+          "post-1947",
+          "post",
+          "type-post",
+          "status-draft",
+          "format-standard",
+          "hentry"
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/types/post"
+            }
+          ],
+          "author": [
+            {
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/users/1"
+            }
+          ],
+          "replies": [
+            {
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/comments?post=1947"
+            }
+          ],
+          "version-history": [
+            {
+              "count": 0,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947/revisions"
+            }
+          ],
+          "wp:attachment": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/media?parent=1947"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "category",
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/categories?post=1947"
+            },
+            {
+              "taxonomy": "post_tag",
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/tags?post=1947"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947"
+            }
+          ],
+          "wp:action-sticky": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947"
+            }
+          ],
+          "wp:action-assign-author": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947"
+            }
+          ],
+          "wp:action-create-categories": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947"
+            }
+          ],
+          "wp:action-assign-categories": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947"
+            }
+          ],
+          "wp:action-create-tags": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947"
+            }
+          ],
+          "wp:action-assign-tags": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1947"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      "cleanup": {
+        "status": 200,
+        "ok": true,
+        "response": {
+          "deleted": true,
+          "previous": {
+            "id": 1947,
+            "date": "2026-08-23T23:34:58",
+            "date_gmt": "2026-08-24T08:34:58",
+            "guid": {
+              "rendered": "https://modukorean.co.kr/?p=1947",
+              "raw": "https://modukorean.co.kr/?p=1947"
+            },
+            "modified": "2026-08-23T23:34:58",
+            "modified_gmt": "2026-08-24T08:34:58",
+            "password": "",
+            "slug": "",
+            "status": "draft",
+            "type": "post",
+            "link": "https://modukorean.co.kr/?p=1947",
+            "title": {
+              "raw": "__modu_probe_empty_categories__",
+              "rendered": "__modu_probe_empty_categories__"
+            },
+            "content": {
+              "raw": "",
+              "rendered": "",
+              "protected": false,
+              "block_version": 0
+            },
+            "excerpt": {
+              "raw": "",
+              "rendered": "",
+              "protected": false
+            },
+            "author": 1,
+            "featured_media": 0,
+            "comment_status": "open",
+            "ping_status": "open",
+            "sticky": false,
+            "template": "",
+            "format": "standard",
+            "meta": {
+              "site-sidebar-layout": "default",
+              "site-content-layout": "",
+              "ast-site-content-layout": "default",
+              "site-content-style": "default",
+              "site-sidebar-style": "default",
+              "ast-global-header-display": "",
+              "ast-banner-title-visibility": "",
+              "ast-main-header-display": "",
+              "ast-hfb-above-header-display": "",
+              "ast-hfb-below-header-display": "",
+              "ast-hfb-mobile-header-display": "",
+              "site-post-title": "",
+              "ast-breadcrumbs-content": "",
+              "ast-featured-img": "",
+              "footer-sml-layout": "",
+              "ast-disable-related-posts": "",
+              "theme-transparent-header-meta": "",
+              "adv-header-id-meta": "",
+              "stick-header-meta": "",
+              "header-above-stick-meta": "",
+              "header-main-stick-meta": "",
+              "header-below-stick-meta": "",
+              "astra-migrate-meta-layouts": "default",
+              "ast-page-background-enabled": "default",
+              "ast-page-background-meta": {
+                "desktop": {
+                  "background-color": "var(--ast-global-color-5)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "tablet": {
+                  "background-color": "",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "mobile": {
+                  "background-color": "",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                }
+              },
+              "ast-content-background-meta": {
+                "desktop": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "tablet": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "mobile": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                }
+              },
+              "footnotes": ""
+            },
+            "categories": [],
+            "tags": [],
+            "permalink_template": "https://modukorean.co.kr/%postname%/",
+            "generated_slug": "__modu_probe_empty_categories__",
+            "class_list": [
+              "post-1947",
+              "post",
+              "type-post",
+              "status-draft",
+              "format-standard",
+              "hentry"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "empty_tags",
+      "request": {
+        "title": "__modu_probe_empty_tags__",
+        "status": "draft",
+        "tags": []
+      },
+      "status": 201,
+      "ok": true,
+      "response": {
+        "id": 1948,
+        "date": "2026-08-23T23:35:01",
+        "date_gmt": "2026-08-24T08:35:01",
+        "guid": {
+          "rendered": "https://modukorean.co.kr/?p=1948",
+          "raw": "https://modukorean.co.kr/?p=1948"
+        },
+        "modified": "2026-08-23T23:35:01",
+        "modified_gmt": "2026-08-24T08:35:01",
+        "password": "",
+        "slug": "",
+        "status": "draft",
+        "type": "post",
+        "link": "https://modukorean.co.kr/?p=1948",
+        "title": {
+          "raw": "__modu_probe_empty_tags__",
+          "rendered": "__modu_probe_empty_tags__"
+        },
+        "content": {
+          "raw": "",
+          "rendered": "",
+          "protected": false,
+          "block_version": 0
+        },
+        "excerpt": {
+          "raw": "",
+          "rendered": "",
+          "protected": false
+        },
+        "author": 1,
+        "featured_media": 0,
+        "comment_status": "open",
+        "ping_status": "open",
+        "sticky": false,
+        "template": "",
+        "format": "standard",
+        "meta": {
+          "site-sidebar-layout": "default",
+          "site-content-layout": "",
+          "ast-site-content-layout": "default",
+          "site-content-style": "default",
+          "site-sidebar-style": "default",
+          "ast-global-header-display": "",
+          "ast-banner-title-visibility": "",
+          "ast-main-header-display": "",
+          "ast-hfb-above-header-display": "",
+          "ast-hfb-below-header-display": "",
+          "ast-hfb-mobile-header-display": "",
+          "site-post-title": "",
+          "ast-breadcrumbs-content": "",
+          "ast-featured-img": "",
+          "footer-sml-layout": "",
+          "ast-disable-related-posts": "",
+          "theme-transparent-header-meta": "",
+          "adv-header-id-meta": "",
+          "stick-header-meta": "",
+          "header-above-stick-meta": "",
+          "header-main-stick-meta": "",
+          "header-below-stick-meta": "",
+          "astra-migrate-meta-layouts": "default",
+          "ast-page-background-enabled": "default",
+          "ast-page-background-meta": {
+            "desktop": {
+              "background-color": "var(--ast-global-color-5)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "tablet": {
+              "background-color": "",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "mobile": {
+              "background-color": "",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            }
+          },
+          "ast-content-background-meta": {
+            "desktop": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "tablet": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "mobile": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            }
+          },
+          "footnotes": ""
+        },
+        "categories": [
+          1
+        ],
+        "tags": [],
+        "permalink_template": "https://modukorean.co.kr/%postname%/",
+        "generated_slug": "__modu_probe_empty_tags__",
+        "class_list": [
+          "post-1948",
+          "post",
+          "type-post",
+          "status-draft",
+          "format-standard",
+          "hentry",
+          "category-uncategorized"
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/types/post"
+            }
+          ],
+          "author": [
+            {
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/users/1"
+            }
+          ],
+          "replies": [
+            {
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/comments?post=1948"
+            }
+          ],
+          "version-history": [
+            {
+              "count": 0,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948/revisions"
+            }
+          ],
+          "wp:attachment": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/media?parent=1948"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "category",
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/categories?post=1948"
+            },
+            {
+              "taxonomy": "post_tag",
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/tags?post=1948"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948"
+            }
+          ],
+          "wp:action-sticky": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948"
+            }
+          ],
+          "wp:action-assign-author": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948"
+            }
+          ],
+          "wp:action-create-categories": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948"
+            }
+          ],
+          "wp:action-assign-categories": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948"
+            }
+          ],
+          "wp:action-create-tags": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948"
+            }
+          ],
+          "wp:action-assign-tags": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1948"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      "cleanup": {
+        "status": 200,
+        "ok": true,
+        "response": {
+          "deleted": true,
+          "previous": {
+            "id": 1948,
+            "date": "2026-08-23T23:35:01",
+            "date_gmt": "2026-08-24T08:35:01",
+            "guid": {
+              "rendered": "https://modukorean.co.kr/?p=1948",
+              "raw": "https://modukorean.co.kr/?p=1948"
+            },
+            "modified": "2026-08-23T23:35:01",
+            "modified_gmt": "2026-08-24T08:35:01",
+            "password": "",
+            "slug": "",
+            "status": "draft",
+            "type": "post",
+            "link": "https://modukorean.co.kr/?p=1948",
+            "title": {
+              "raw": "__modu_probe_empty_tags__",
+              "rendered": "__modu_probe_empty_tags__"
+            },
+            "content": {
+              "raw": "",
+              "rendered": "",
+              "protected": false,
+              "block_version": 0
+            },
+            "excerpt": {
+              "raw": "",
+              "rendered": "",
+              "protected": false
+            },
+            "author": 1,
+            "featured_media": 0,
+            "comment_status": "open",
+            "ping_status": "open",
+            "sticky": false,
+            "template": "",
+            "format": "standard",
+            "meta": {
+              "site-sidebar-layout": "default",
+              "site-content-layout": "",
+              "ast-site-content-layout": "default",
+              "site-content-style": "default",
+              "site-sidebar-style": "default",
+              "ast-global-header-display": "",
+              "ast-banner-title-visibility": "",
+              "ast-main-header-display": "",
+              "ast-hfb-above-header-display": "",
+              "ast-hfb-below-header-display": "",
+              "ast-hfb-mobile-header-display": "",
+              "site-post-title": "",
+              "ast-breadcrumbs-content": "",
+              "ast-featured-img": "",
+              "footer-sml-layout": "",
+              "ast-disable-related-posts": "",
+              "theme-transparent-header-meta": "",
+              "adv-header-id-meta": "",
+              "stick-header-meta": "",
+              "header-above-stick-meta": "",
+              "header-main-stick-meta": "",
+              "header-below-stick-meta": "",
+              "astra-migrate-meta-layouts": "default",
+              "ast-page-background-enabled": "default",
+              "ast-page-background-meta": {
+                "desktop": {
+                  "background-color": "var(--ast-global-color-5)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "tablet": {
+                  "background-color": "",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "mobile": {
+                  "background-color": "",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                }
+              },
+              "ast-content-background-meta": {
+                "desktop": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "tablet": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "mobile": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                }
+              },
+              "footnotes": ""
+            },
+            "categories": [
+              1
+            ],
+            "tags": [],
+            "permalink_template": "https://modukorean.co.kr/%postname%/",
+            "generated_slug": "__modu_probe_empty_tags__",
+            "class_list": [
+              "post-1948",
+              "post",
+              "type-post",
+              "status-draft",
+              "format-standard",
+              "hentry",
+              "category-uncategorized"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "category_1",
+      "request": {
+        "title": "__modu_probe_category_1__",
+        "status": "draft",
+        "categories": [
+          1
+        ]
+      },
+      "status": 201,
+      "ok": true,
+      "response": {
+        "id": 1949,
+        "date": "2026-08-23T23:35:06",
+        "date_gmt": "2026-08-24T08:35:06",
+        "guid": {
+          "rendered": "https://modukorean.co.kr/?p=1949",
+          "raw": "https://modukorean.co.kr/?p=1949"
+        },
+        "modified": "2026-08-23T23:35:06",
+        "modified_gmt": "2026-08-24T08:35:06",
+        "password": "",
+        "slug": "",
+        "status": "draft",
+        "type": "post",
+        "link": "https://modukorean.co.kr/?p=1949",
+        "title": {
+          "raw": "__modu_probe_category_1__",
+          "rendered": "__modu_probe_category_1__"
+        },
+        "content": {
+          "raw": "",
+          "rendered": "",
+          "protected": false,
+          "block_version": 0
+        },
+        "excerpt": {
+          "raw": "",
+          "rendered": "",
+          "protected": false
+        },
+        "author": 1,
+        "featured_media": 0,
+        "comment_status": "open",
+        "ping_status": "open",
+        "sticky": false,
+        "template": "",
+        "format": "standard",
+        "meta": {
+          "site-sidebar-layout": "default",
+          "site-content-layout": "",
+          "ast-site-content-layout": "default",
+          "site-content-style": "default",
+          "site-sidebar-style": "default",
+          "ast-global-header-display": "",
+          "ast-banner-title-visibility": "",
+          "ast-main-header-display": "",
+          "ast-hfb-above-header-display": "",
+          "ast-hfb-below-header-display": "",
+          "ast-hfb-mobile-header-display": "",
+          "site-post-title": "",
+          "ast-breadcrumbs-content": "",
+          "ast-featured-img": "",
+          "footer-sml-layout": "",
+          "ast-disable-related-posts": "",
+          "theme-transparent-header-meta": "",
+          "adv-header-id-meta": "",
+          "stick-header-meta": "",
+          "header-above-stick-meta": "",
+          "header-main-stick-meta": "",
+          "header-below-stick-meta": "",
+          "astra-migrate-meta-layouts": "default",
+          "ast-page-background-enabled": "default",
+          "ast-page-background-meta": {
+            "desktop": {
+              "background-color": "var(--ast-global-color-5)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "tablet": {
+              "background-color": "",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "mobile": {
+              "background-color": "",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            }
+          },
+          "ast-content-background-meta": {
+            "desktop": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "tablet": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            },
+            "mobile": {
+              "background-color": "var(--ast-global-color-4)",
+              "background-image": "",
+              "background-repeat": "repeat",
+              "background-position": "center center",
+              "background-size": "auto",
+              "background-attachment": "scroll",
+              "background-type": "",
+              "background-media": "",
+              "overlay-type": "",
+              "overlay-color": "",
+              "overlay-opacity": "",
+              "overlay-gradient": ""
+            }
+          },
+          "footnotes": ""
+        },
+        "categories": [
+          1
+        ],
+        "tags": [],
+        "permalink_template": "https://modukorean.co.kr/%postname%/",
+        "generated_slug": "__modu_probe_category_1__",
+        "class_list": [
+          "post-1949",
+          "post",
+          "type-post",
+          "status-draft",
+          "format-standard",
+          "hentry",
+          "category-uncategorized"
+        ],
+        "_links": {
+          "self": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949",
+              "targetHints": {
+                "allow": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "PATCH",
+                  "DELETE"
+                ]
+              }
+            }
+          ],
+          "collection": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts"
+            }
+          ],
+          "about": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/types/post"
+            }
+          ],
+          "author": [
+            {
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/users/1"
+            }
+          ],
+          "replies": [
+            {
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/comments?post=1949"
+            }
+          ],
+          "version-history": [
+            {
+              "count": 0,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949/revisions"
+            }
+          ],
+          "wp:attachment": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/media?parent=1949"
+            }
+          ],
+          "wp:term": [
+            {
+              "taxonomy": "category",
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/categories?post=1949"
+            },
+            {
+              "taxonomy": "post_tag",
+              "embeddable": true,
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/tags?post=1949"
+            }
+          ],
+          "wp:action-publish": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949"
+            }
+          ],
+          "wp:action-unfiltered-html": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949"
+            }
+          ],
+          "wp:action-sticky": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949"
+            }
+          ],
+          "wp:action-assign-author": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949"
+            }
+          ],
+          "wp:action-create-categories": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949"
+            }
+          ],
+          "wp:action-assign-categories": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949"
+            }
+          ],
+          "wp:action-create-tags": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949"
+            }
+          ],
+          "wp:action-assign-tags": [
+            {
+              "href": "https://modukorean.co.kr/wp-json/wp/v2/posts/1949"
+            }
+          ],
+          "curies": [
+            {
+              "name": "wp",
+              "href": "https://api.w.org/{rel}",
+              "templated": true
+            }
+          ]
+        }
+      },
+      "cleanup": {
+        "status": 200,
+        "ok": true,
+        "response": {
+          "deleted": true,
+          "previous": {
+            "id": 1949,
+            "date": "2026-08-23T23:35:06",
+            "date_gmt": "2026-08-24T08:35:06",
+            "guid": {
+              "rendered": "https://modukorean.co.kr/?p=1949",
+              "raw": "https://modukorean.co.kr/?p=1949"
+            },
+            "modified": "2026-08-23T23:35:06",
+            "modified_gmt": "2026-08-24T08:35:06",
+            "password": "",
+            "slug": "",
+            "status": "draft",
+            "type": "post",
+            "link": "https://modukorean.co.kr/?p=1949",
+            "title": {
+              "raw": "__modu_probe_category_1__",
+              "rendered": "__modu_probe_category_1__"
+            },
+            "content": {
+              "raw": "",
+              "rendered": "",
+              "protected": false,
+              "block_version": 0
+            },
+            "excerpt": {
+              "raw": "",
+              "rendered": "",
+              "protected": false
+            },
+            "author": 1,
+            "featured_media": 0,
+            "comment_status": "open",
+            "ping_status": "open",
+            "sticky": false,
+            "template": "",
+            "format": "standard",
+            "meta": {
+              "site-sidebar-layout": "default",
+              "site-content-layout": "",
+              "ast-site-content-layout": "default",
+              "site-content-style": "default",
+              "site-sidebar-style": "default",
+              "ast-global-header-display": "",
+              "ast-banner-title-visibility": "",
+              "ast-main-header-display": "",
+              "ast-hfb-above-header-display": "",
+              "ast-hfb-below-header-display": "",
+              "ast-hfb-mobile-header-display": "",
+              "site-post-title": "",
+              "ast-breadcrumbs-content": "",
+              "ast-featured-img": "",
+              "footer-sml-layout": "",
+              "ast-disable-related-posts": "",
+              "theme-transparent-header-meta": "",
+              "adv-header-id-meta": "",
+              "stick-header-meta": "",
+              "header-above-stick-meta": "",
+              "header-main-stick-meta": "",
+              "header-below-stick-meta": "",
+              "astra-migrate-meta-layouts": "default",
+              "ast-page-background-enabled": "default",
+              "ast-page-background-meta": {
+                "desktop": {
+                  "background-color": "var(--ast-global-color-5)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "tablet": {
+                  "background-color": "",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "mobile": {
+                  "background-color": "",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                }
+              },
+              "ast-content-background-meta": {
+                "desktop": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "tablet": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                },
+                "mobile": {
+                  "background-color": "var(--ast-global-color-4)",
+                  "background-image": "",
+                  "background-repeat": "repeat",
+                  "background-position": "center center",
+                  "background-size": "auto",
+                  "background-attachment": "scroll",
+                  "background-type": "",
+                  "background-media": "",
+                  "overlay-type": "",
+                  "overlay-color": "",
+                  "overlay-opacity": "",
+                  "overlay-gradient": ""
+                }
+              },
+              "footnotes": ""
+            },
+            "categories": [
+              1
+            ],
+            "tags": [],
+            "permalink_template": "https://modukorean.co.kr/%postname%/",
+            "generated_slug": "__modu_probe_category_1__",
+            "class_list": [
+              "post-1949",
+              "post",
+              "type-post",
+              "status-draft",
+              "format-standard",
+              "hentry",
+              "category-uncategorized"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "user": {
+    "status": 200,
+    "id": 1,
+    "name": "admin",
+    "roles": [
+      "administrator"
+    ],
+    "capabilities": {
+      "edit_posts": true,
+      "publish_posts": true,
+      "manage_categories": true,
+      "assign_categories": false,
+      "assign_post_tags": false
+    }
+  },
+  "taxonomies": {
+    "category_assign_terms": "assign_categories",
+    "post_tag_assign_terms": "assign_post_tags"
+  }
+}
