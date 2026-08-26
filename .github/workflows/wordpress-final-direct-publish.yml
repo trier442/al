@@ -1,5 +1,5 @@
 name: WordPress 최종 직접 발행
-# target: 2018학년도 6월 모평 11~14번 문학적 시간·고풍 의상·결빙의 아버지
+# target: 2018학년도 6월 모평 1~6번 율곡 이이 재검수본
 
 on:
   push:
@@ -23,7 +23,40 @@ jobs:
         with:
           node-version: "22"
 
-      - name: 다음 글 직접 발행
+      - name: 원문 근거 재검수 교정
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html')
+          s = p.read_text(encoding='utf-8')
+          pairs = [
+              ('변화 가능한 현실·기질·법제와 관련', '시간·공간 속에서 변화하는 물질적 요소이며, 기질 차이의 설명과 연결'),
+              ("변하지 않는 원리인 ‘이’를 제대로 구현하기 위해 ‘기’의 영역에 해당하는 현실의 잘못된 제도와 법령은 고쳐야 한다", "변하지 않는 원리인 ‘이’를 제대로 구현하기 위해, 조종성헌에 해당하지 않으면서 폐단을 낳는 법령은 고쳐야 한다"),
+          ]
+          changed = 0
+          for old, new in pairs:
+              if old in s:
+                  s = s.replace(old, new, 1)
+                  changed += 1
+              elif new not in s:
+                  raise SystemExit(f'검수 대상 문구를 찾지 못했습니다: {old}')
+          p.write_text(s, encoding='utf-8')
+          print(f'재검수 교정 확인: {changed}건 신규 반영')
+          PY
+
+      - name: 검수본 저장소 반영
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Audit 2018 June Yulgok post against source [skip ci]"
+            git push origin HEAD:main
+          fi
+
+      - name: 검수 완료 글 직접 발행
         id: publish
         continue-on-error: true
         env:
@@ -33,7 +66,7 @@ jobs:
         run: |
           set -o pipefail
           node scripts/publish-wordpress.mjs \
-            wordpress-content/2018-june-korean-literature-literary-time-gopung-gyeolbing-11-14.html \
+            wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html \
             2>&1 | tee /tmp/wordpress-final-publish.log
 
       - name: 결과 저장
@@ -46,7 +79,6 @@ jobs:
           import json, os, re
           from pathlib import Path
           from datetime import datetime, timezone
-
           log_path = Path('/tmp/wordpress-final-publish.log')
           output = log_path.read_text(encoding='utf-8', errors='replace') if log_path.exists() else ''
           links = re.findall(r'(?:생성|갱신):\s+(https?://\S+)\s+\[', output)
@@ -54,19 +86,20 @@ jobs:
               'status': 'success' if os.environ.get('OUTCOME') == 'success' else 'failure',
               'published_at_utc': datetime.now(timezone.utc).isoformat(),
               'source_sha': os.environ.get('SOURCE_SHA'),
+              'scope': '2018학년도 6월 모의평가 1~6번 율곡 이이 재검수',
+              'verified_answers': {'1':5,'2':2,'3':3,'4':1,'5':2,'6':1},
+              'corrections': [
+                  '법제를 기의 영역이라고 단정하는 표현 제거',
+                  '조종성헌에 해당하지 않는 폐단 있는 법령이라는 원문 범위로 수정'
+              ],
               'wordpress_links': links,
               'log': output.strip(),
           }
-          Path('scripts/wordpress-final-publish.json').write_text(
-              json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
-          )
+          Path('scripts/wordpress-final-publish.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PY
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add scripts/wordpress-final-publish.json
           if ! git diff --cached --quiet; then
-            git commit -m "Record final WordPress publication [skip ci]"
+            git commit -m "Record audited WordPress publication [skip ci]"
             git push origin HEAD:main
           fi
 
