@@ -1,0 +1,104 @@
+name: Audit Yulgok first post
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/audit-yulgok-first-post.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Apply source-grounded corrections
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html')
+          s = p.read_text(encoding='utf-8')
+          replacements = [
+              (
+                  '변화 가능한 현실·기질·법제와 관련',
+                  '시간·공간 속에서 변화하는 물질적 요소이며, 기질 차이의 설명과 연결'
+              ),
+              (
+                  "변하지 않는 원리인 ‘이’를 제대로 구현하기 위해 ‘기’의 영역에 해당하는 현실의 잘못된 제도와 법령은 고쳐야 한다",
+                  "변하지 않는 원리인 ‘이’를 제대로 구현하기 위해, 조종성헌에 해당하지 않으면서 폐단을 낳는 법령은 고쳐야 한다"
+              ),
+          ]
+          for old, new in replacements:
+              if old not in s:
+                  raise SystemExit(f'검수 교정 대상 문구를 찾지 못했습니다: {old}')
+              s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+          print('검수 교정 2건 반영 완료')
+          PY
+
+      - name: Commit audited source
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html
+          git commit -m "Audit 2018 June Yulgok post against source [skip ci]"
+          git push origin HEAD:main
+
+      - name: Publish audited post to WordPress
+        id: publish
+        continue-on-error: true
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/publish-wordpress.mjs wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html 2>&1 | tee /tmp/audit-yulgok-publish.log
+
+      - name: Record audit result
+        if: always()
+        shell: bash
+        env:
+          OUTCOME: ${{ steps.publish.outcome }}
+        run: |
+          python - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          from datetime import datetime, timezone
+          log = Path('/tmp/audit-yulgok-publish.log').read_text(encoding='utf-8', errors='replace') if Path('/tmp/audit-yulgok-publish.log').exists() else ''
+          links = re.findall(r'(?:생성|갱신):\s+(https?://\S+)\s+\[', log)
+          data = {
+              'checked_at_utc': datetime.now(timezone.utc).isoformat(),
+              'scope': '2018학년도 6월 모의평가 국어 1~6번 율곡 이이',
+              'source': '2027 마더텅 수능기출 모의고사 28회 1회 p.7~8 / 정답표',
+              'verified_answers': {'1':5,'2':2,'3':3,'4':1,'5':2,'6':1},
+              'corrections': [
+                  '법제를 기(氣)의 영역이라고 단정하던 표현 제거',
+                  '폐단 있는 법령은 조종성헌에 해당하지 않는다는 원문 범위로 표현 수정'
+              ],
+              'publish_status': 'success' if os.environ.get('OUTCOME') == 'success' else 'failure',
+              'wordpress_links': links,
+              'log': log.strip(),
+          }
+          Path('scripts/audit-yulgok-first-post.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+          git add scripts/audit-yulgok-first-post.json
+          git commit -m "Record Yulgok post audit result [skip ci]"
+          git push origin HEAD:main
+
+      - name: Fail if publish failed
+        if: steps.publish.outcome != 'success'
+        run: exit 1
