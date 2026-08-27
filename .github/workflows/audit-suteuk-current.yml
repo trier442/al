@@ -50,8 +50,8 @@ jobs:
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
         run: |
-          node - <<'NODE'
-          const fs = require('fs');
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
           const target = fs.readFileSync('.audit-target','utf8').trim();
           const html = fs.readFileSync(target,'utf8');
           const meta = Object.fromEntries([...html.matchAll(/^<!--\s*([a-z_]+):\s*(.*?)\s*-->$/gmi)].map(m=>[m[1],m[2]]));
