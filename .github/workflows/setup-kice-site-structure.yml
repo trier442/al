@@ -1,0 +1,41 @@
+name: 평가원·수능 기출 구조 정리
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/setup-kice-site-structure.yml"
+      - "scripts/setup-kice-wordpress.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: WordPress 카테고리·메인·중복 글 정리
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/setup-kice-wordpress.mjs
+
+      - name: 카테고리 ID와 결과 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/kice-site-structure.json wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html wordpress-content/2018-june-korean-reading-monetary-policy-07-10.html wordpress-content/2018-june-korean-literature-literary-time-gopung-gyeolbing-11-14.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Record KICE category structure [skip ci]"
+            git push origin HEAD:main
+          fi
