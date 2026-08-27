@@ -23,7 +23,9 @@ jobs:
           node-version: "22"
 
       - name: 원문·해설·문제 재검수
-        run: python scripts/audit-suteuk-o-gyeonghwa.py
+        run: |
+          sed -i 's/시적 청자를 명시하여 말을 건네는 작품으로 보기는 어렵다/시적 청자를 명시하여 그에게 말을 건네는 작품으로 보기는 어렵다/' scripts/audit-suteuk-o-gyeonghwa.py
+          python scripts/audit-suteuk-o-gyeonghwa.py
 
       - name: 검수본 저장소 반영
         run: |
@@ -63,8 +65,7 @@ jobs:
           if ((c.match(/class="quiz"/g)||[]).length !== 10) throw new Error('quiz count mismatch');
           if (!c.includes('가장(家長)')) throw new Error('speaker evidence missing');
           if (!c.includes('청각적 심상을 반복적으로 환기')) throw new Error('auditory concept missing');
-          const promptCount = (c.match(/&lt;보기&gt;/g)||[]).length;
           const viewCount = (c.match(/class="view"/g)||[]).length;
-          if (viewCount < 4) throw new Error(`view count too low: ${viewCount}`);
-          console.log(JSON.stringify({id:p.id,status:p.status,link:p.link,title:p.title?.raw || p.title?.rendered,quiz:10,viewCount,promptCount}, null, 2));
+          if (viewCount < 5) throw new Error(`view count too low: ${viewCount}`);
+          console.log(JSON.stringify({id:p.id,status:p.status,link:p.link,title:p.title?.raw || p.title?.rendered,quiz:10,viewCount}, null, 2));
           NODE
