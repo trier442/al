@@ -1,0 +1,68 @@
+name: 김소월 길 구형 중복 글 비공개
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/hide-legacy-kim-sowol-gil.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  hide-legacy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 구형 김소월 길 글 검증 후 draft 전환
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const base = process.env.WP_URL.replace(/\/$/, '');
+          const auth = 'Basic ' + Buffer.from(`${process.env.WP_USERNAME}:${process.env.WP_APP_PASSWORD}`).toString('base64');
+          const headers = { Authorization: auth, 'Content-Type': 'application/json' };
+          const id = 132;
+          const r0 = await fetch(`${base}/wp-json/wp/v2/posts/${id}?context=edit`, {headers});
+          if (!r0.ok) throw new Error(`legacy read ${r0.status}: ${await r0.text()}`);
+          const old = await r0.json();
+          const title = old.title?.rendered || '';
+          if (!title.includes('김소월') || !title.includes('길') || old.slug === '2027-suteuk-kim-sowol-gil') {
+            throw new Error(`ID ${id} is not the expected legacy post: ${old.slug} / ${title}`);
+          }
+          const r1 = await fetch(`${base}/wp-json/wp/v2/posts/${id}`, {
+            method: 'POST', headers, body: JSON.stringify({status:'draft'})
+          });
+          if (!r1.ok) throw new Error(`legacy draft ${r1.status}: ${await r1.text()}`);
+          const updated = await r1.json();
+          const canonicalResp = await fetch(`${base}/wp-json/wp/v2/posts?slug=2027-suteuk-kim-sowol-gil&status=publish&context=edit`, {headers});
+          if (!canonicalResp.ok) throw new Error(`canonical check ${canonicalResp.status}`);
+          const canonical = await canonicalResp.json();
+          if (canonical.length !== 1) throw new Error(`canonical count=${canonical.length}`);
+          const anonOld = await fetch(`${base}/wp-json/wp/v2/posts?slug=${encodeURIComponent(old.slug)}&status=publish`);
+          const anonOldData = await anonOld.json();
+          if (!Array.isArray(anonOldData) || anonOldData.length !== 0) throw new Error('legacy post still anonymously published');
+          const report = {
+            checked_at: new Date().toISOString(),
+            legacy: {id:updated.id, slug:updated.slug, status:updated.status, title:updated.title?.rendered},
+            canonical: {id:canonical[0].id, slug:canonical[0].slug, status:canonical[0].status, link:canonical[0].link, title:canonical[0].title?.rendered},
+            anonymous_legacy_publish_count: anonOldData.length
+          };
+          fs.writeFileSync('scripts/audit-suteuk-kim-sowol-gil-legacy.json', JSON.stringify(report, null, 2)+'\n');
+          console.log(JSON.stringify(report, null, 2));
+          JS
+      - name: 결과 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+          git add scripts/audit-suteuk-kim-sowol-gil-legacy.json
+          git commit -m "Record legacy Kim Sowol Gil cleanup [skip ci]"
+          git push origin HEAD:main
