@@ -1,0 +1,58 @@
+name: 수능특강 문학 길 보기 누락 수정
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-suteuk-gil-viewbox.yml'
+      - 'scripts/fix-suteuk-gil-missing-view.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 보기 누락 수정 및 검증
+        run: node scripts/fix-suteuk-gil-missing-view.mjs
+      - name: 수정본 저장소 반영
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wordpress-content/2027-suteuk-kim-sowol-gil.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Fix missing view in Kim Sowol Gil quiz"
+            git push
+          fi
+      - name: WordPress 실제 글 갱신
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/publish-wordpress.mjs wordpress-content/2027-suteuk-kim-sowol-gil.html
+      - name: 공개 글 보기 표시 확인
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          node --input-type=module <<'NODE'
+          const base=(process.env.WP_URL||'').replace(/\/$/,'');
+          const auth='Basic '+Buffer.from(process.env.WP_USERNAME+':'+process.env.WP_APP_PASSWORD).toString('base64');
+          const slug='2027-suteuk-kim-sowol-gil';
+          const r=await fetch(`${base}/wp-json/wp/v2/posts?slug=${slug}&context=edit`,{headers:{Authorization:auth}});
+          if(!r.ok) throw new Error(`REST ${r.status}`);
+          const posts=await r.json();
+          if(posts.length!==1) throw new Error(`canonical 글 수 ${posts.length}`);
+          const html=posts[0].content.raw||posts[0].content.rendered||'';
+          const q7=html.match(/<section class="quiz" data-answer="4"><h3>7\.[\s\S]*?<\/section>/)?.[0]||'';
+          if(!q7.includes('class="view"')) throw new Error('7번 실제 WordPress 본문에 <보기>가 없습니다.');
+          if(!q7.includes('일제 강점기')) throw new Error('7번 보기 본문이 WordPress에 반영되지 않았습니다.');
+          console.log(`확인 완료: ${posts[0].link}`);
+          NODE
