@@ -1,0 +1,71 @@
+name: 2027 수능특강 문학 현재 작품 검수
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/audit-suteuk-current.py'
+      - '.github/workflows/audit-suteuk-current.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 현재 작품 원문·해설·문제 검수
+        run: python scripts/audit-suteuk-current.py
+      - name: 검수본 저장소 반영
+        run: |
+          TARGET=$(cat .audit-target)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$TARGET"
+          if ! git diff --cached --quiet; then
+            git commit -m "Audit current Suteuk literature post"
+            git push
+          fi
+      - name: WordPress 실제 글 갱신
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          TARGET=$(cat .audit-target)
+          node scripts/publish-wordpress.mjs "$TARGET"
+      - name: 공개 상태 검증
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const target = fs.readFileSync('.audit-target','utf8').trim();
+          const html = fs.readFileSync(target,'utf8');
+          const meta = Object.fromEntries([...html.matchAll(/^<!--\s*([a-z_]+):\s*(.*?)\s*-->$/gmi)].map(m=>[m[1],m[2]]));
+          const base = process.env.WP_URL.replace(/\/$/, '');
+          const auth = 'Basic ' + Buffer.from(`${process.env.WP_USERNAME}:${process.env.WP_APP_PASSWORD.replace(/\s/g,'')}`).toString('base64');
+          let url;
+          if (meta.post_id) url = `${base}/wp-json/wp/v2/posts/${meta.post_id}?context=edit`;
+          else url = `${base}/wp-json/wp/v2/posts?slug=${encodeURIComponent(meta.slug)}&context=edit`;
+          const r = await fetch(url,{headers:{Authorization:auth}});
+          if (!r.ok) throw new Error(`REST ${r.status}`);
+          const data = await r.json();
+          const p = Array.isArray(data) ? data[0] : data;
+          if (!p || p.status !== 'publish') throw new Error(`publish verification failed`);
+          const c = p.content?.raw || p.content?.rendered || '';
+          if (!c.includes('수능특강 6강 핵심 문항 연결')) throw new Error('EBS section missing');
+          if (!c.includes('늦되어도 충분히 성취할 수 있다는 삶의 이치')) throw new Error('core theme missing');
+          if (c.includes('두려워할 율') || c.includes('전전긍긍')) throw new Error('wrong legacy interpretation remains');
+          if ((c.match(/class="quiz"/g)||[]).length !== 10) throw new Error('quiz count mismatch');
+          console.log(JSON.stringify({id:p.id,status:p.status,link:p.link,title:p.title?.raw || p.title?.rendered,target},null,2));
+          NODE
