@@ -108,6 +108,14 @@ function parseFile(file) {
   };
 }
 
+function sanitizeEditorialNotes(content) {
+  return String(content)
+    .replace(/<([a-z][\w-]*)\b[^>]*class=["'][^"']*\bcopyright-note\b[^"']*["'][^>]*>[\s\S]*?<\/\1>\s*/gi, "")
+    .replace(/<p\b[^>]*>\s*※?\s*지문과 문항은[\s\S]*?새로 작성했습니다\.?\s*<\/p>\s*/gi, "")
+    .replace(/\.modu-exam-post\s+\.copyright-note\{[^}]*\}/g, "")
+    .trim();
+}
+
 function mimeType(file) {
   const ext = path.extname(file).toLowerCase();
   return ({
@@ -173,7 +181,9 @@ function escapedHtml(value) {
 
 async function publish(file) {
   assertEonmaePublishAllowed(file);
-  const { meta, content: rawContent } = parseFile(file);
+  const parsed = parseFile(file);
+  const meta = parsed.meta;
+  const rawContent = sanitizeEditorialNotes(parsed.content);
   const endpoint = `${baseUrl}/wp-json/wp/v2/${meta.type}`;
   const existing = meta.post_id
     ? [{ id: meta.post_id }]
