@@ -1,0 +1,155 @@
+name: 2027 수능특강 문학 김소월 길 검수
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/audit-suteuk-kim-sowol-gil.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 김소월 길 원문·해설·문제 교정
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('wordpress-content/2027-suteuk-kim-sowol-gil.html')
+          s = p.read_text(encoding='utf-8')
+
+          s = s.replace('<!-- revision: 3 -->', '<!-- revision: 4 -->')
+          s = s.replace(
+              '<header class="sut-hero"><p class="sut-kicker">2027 수능특강 문학 · 교과서 개념 · 월곡답가형 통일 구성</p><h1>김소월 「길」 원문·상세 해설 및 변형문제</h1><p>교재 수록 원문과 공식 해설을 대조하여 작품의 상황, 시상 전개, 표현 효과, 시대적 맥락을 구체적으로 정리했습니다. 문제는 작품의 실제 구절을 근거로 판단하도록 새로 구성했습니다.</p>',
+              '<header class="sut-hero"><p class="sut-kicker">2027 수능특강 문학 · 1부 교과서 개념 학습 · 1강</p><h1>김소월 「길」 원문·상세 해설 및 변형문제</h1><p>고향을 잃고 정처 없이 떠도는 나그네의 비애를 중심으로 3음보 율격의 변주, 대화하듯 건네는 말투, ‘기러기’와 ‘열 십자’의 대비를 정리합니다.</p>'
+          )
+
+          s = s.replace('‘어제도’ 나그네 집에서 까마귀 울음을 들으며 밤을 새운 화자의 외롭고 불안한 처지를 제시합니다.', '‘어제도’ 나그네 집에서 ‘가마귀’ 울음을 들으며 밤을 새운 화자의 외롭고 불안한 처지를 제시합니다.')
+          s = s.replace('기러기에게 공중의 길을 물으며 자유롭게 나아가는 존재에 대한 부러움과 자조를 드러냅니다.', '기러기에게 공중의 길을 물으며 자유롭게 비상하는 기러기와 방향을 잃은 자신의 처지가 대비되도록 합니다.')
+
+          old = '''<p>화자의 고향은 ‘정주 곽산’이라는 구체적인 지명으로 제시됩니다. 그곳은 차와 배가 다니므로 물리적으로 단절된 오지가 아닙니다. 그런데도 화자는 돌아가지 못합니다. 이 대목은 고향으로 가는 교통수단을 몰라서 헤매는 것이 아니라, 현실적 사정 때문에 삶의 뿌리로 돌아갈 수 없는 인물임을 보여 줍니다. 따라서 이 작품의 ‘길’은 단순한 도로가 아니라 끝없이 이어지는 유랑의 행로이자 방향을 상실한 삶의 표상입니다.</p>'''
+          new = '''<p>화자의 고향은 ‘정주 곽산’이라는 구체적인 지명으로 제시됩니다. 그곳이 ‘차 가고 배 가는 곳’이라는 사실을 화자도 알고 있지만 화자는 고향으로 가지 못합니다. 작품은 귀향할 수 없는 구체적인 이유를 직접 밝히지 않습니다. 따라서 이 대목의 핵심은 교통편의 부재가 아니라, 갈 수 있는 곳임을 알면서도 고향에 가지 못하는 화자의 처지가 부각된다는 데 있습니다. 이 작품에서 ‘길’은 끝없이 이어지는 나그네의 여정이며, 일제 강점기의 고단하고 불안한 현실 속에서 고향에 가지 못하는 유랑민의 삶의 행로를 표상합니다.</p>'''
+          assert old in s, 'overview paragraph not found'
+          s = s.replace(old, new)
+
+          old = '''<div class="feature"><b>3. 의문형 표현의 반복</b><br>‘어디로 갈까’, ‘산으로 올라갈까 / 들로 갈까’, ‘공중엔 길 있어서 잘 가는가?’는 답을 얻기 위한 질문이라기보다 갈 곳을 정하지 못하는 내면을 드러내는 자문입니다.</div>'''
+          new = '''<div class="feature"><b>3. 의문형 표현과 대화 형식</b><br>‘어디로 갈까’, ‘산으로 올라갈까 / 들로 갈까’는 행선지를 정하지 못한 화자의 방황을 드러냅니다. 반면 ‘공중엔 길 있어서 잘 가는가?’는 ‘저 기러기’를 청자로 삼아 묻는 말로, 청자를 상정한 대화 형식을 보여 주면서 기러기와 화자의 처지를 대비하는 데 기여합니다.</div>'''
+          assert old in s, 'feature 3 not found'
+          s = s.replace(old, new)
+
+          old = '''<div class="feature"><b>4. 청각적 심상과 음성 상징어</b><br>‘가마귀 가왁가왁’은 까마귀의 울음소리를 직접 들려주어 적막한 밤의 분위기를 감각화합니다. 어둡고 불길한 정조가 유랑민의 불안과 결합합니다.</div>'''
+          new = '''<div class="feature"><b>4. 청각적 심상과 음성 상징어</b><br>‘가마귀 가왁가왁’은 울음소리를 청각적으로 제시하여 밤을 지새우는 화자의 처지를 감각적으로 드러냅니다. ‘어제도’와 결합하여 끝없는 여정 속 화자의 외로움과 불안한 심리를 부각합니다.</div>'''
+          assert old in s, 'feature 4 not found'
+          s = s.replace(old, new)
+
+          s = s.replace('산과 들이라는 공간적 선택지는 있지만 화자를 받아 줄 공동체와 삶의 자리가 없습니다. 물리적 길의 부재보다 관계와 정착 기반의 상실이 중요합니다.', '산과 들이라는 공간적 선택지는 제시되지만 화자에게는 ‘오라는 곳’이 없습니다. 따라서 화자는 뚜렷한 목적지를 정하지 못한 채 방황합니다.')
+          s = s.replace('교통수단이 존재한다는 정보는 고향의 물리적 접근 가능성을 보여 줍니다. 그럼에도 돌아가지 못하므로 화자의 장애가 단순한 거리 문제가 아님을 부각합니다.', '‘차 가고 배 가는 곳’이라는 말은 화자가 고향에 갈 수 있는 방법을 알고 있음을 보여 줍니다. 그럼에도 고향에 가지 못하는 화자의 처지가 부각됩니다. 작품은 그 구체적인 이유까지 설명하지 않습니다.')
+
+          old = '''<div class="point"><b>9. 의문형의 성격</b><br>질문은 실제 정보를 구하는 기능보다 화자의 불확실성, 자조, 막막함을 표출하는 기능이 큽니다. 작품 안에서 질문에 응답하는 상대는 없습니다.</div>'''
+          new = '''<div class="point"><b>9. 의문형과 청자의 존재</b><br>‘어디로 갈까’, ‘산으로 올라갈까 / 들로 갈까’는 행선지를 정하지 못한 화자의 방황을 드러냅니다. ‘공중엔 길 있어서 잘 가는가?’는 ‘저 기러기’에게 건네는 질문이므로 형식적으로는 청자를 상정한 대화에 해당합니다. 작품 안에서 기러기의 응답은 제시되지 않습니다.</div>'''
+          assert old in s, 'point 9 not found'
+          s = s.replace(old, new)
+
+          # 교재 원문 문항과 사이트 학습 내용을 연결하는 최소 확인표
+          marker = '  <section class="box">\n    <h2 id="lit-quiz">선택형 변형문제 10제</h2>'
+          check = '''  <section class="box">\n    <h2 id="lit-ebs-check">수능특강 핵심 문항 확인</h2>\n    <div class="point"><b>01 표현과 형식</b><br>정답 ④. ‘공중엔 길 있어서 잘 가는가?’의 의문형 종결을 시 전체의 율격적 통일성을 위한 장치라고 보는 것은 적절하지 않습니다.</div>\n    <div class="point"><b>02 ‘길’의 의미와 시대적 맥락</b><br>정답 ②. 이 작품의 ‘길’을 관념적인 인생 탐색이나 종교적 진리 추구로 보는 것이 아니라, 목적지 없이 이어지는 나그네의 여정과 유랑민의 삶의 행로로 이해해야 합니다.</div>\n    <div class="point"><b>03 대비되는 대상과 공간</b><br>㉠ 기러기 · ㉡ 열 십자. 공중에서 자유롭게 비상하는 기러기와 ‘열 십자’ 한가운데에서 방황하는 화자가 대비됩니다.</div>\n  </section>\n\n'''
+          if 'id="lit-ebs-check"' not in s:
+              assert marker in s, 'quiz marker not found'
+              s = s.replace(marker, check + marker)
+              s = s.replace('<a href="#lit-points">출제 포인트</a><a href="#lit-quiz">변형문제</a>', '<a href="#lit-points">출제 포인트</a><a href="#lit-ebs-check">교재 문항</a><a href="#lit-quiz">변형문제</a>')
+
+          # 2번은 EBS 1번의 핵심인 리듬/표현 판단과 가깝게 교정
+          pat2 = re.compile(r'<section class="quiz" data-answer="2"><h3>2\.[\s\S]*?</section>\n<section class="quiz" data-answer="5"><h3>3\.', re.M)
+          rep2 = '''<section class="quiz" data-answer="4"><h3>2. 이 작품의 표현과 형식을 이해한 내용으로 적절하지 않은 것은?</h3><div class="choices"><button type="button" class="choice" data-choice="1">① ‘어제도 / 하룻밤 / 나그네 집에’처럼 세 마디의 호흡을 형성하여 리듬감을 드러내는 부분이 있다.</button><button type="button" class="choice" data-choice="2">② 연마다 시행의 길이를 달리하는 변주는 고정된 음절수보다 작품 내부의 반복과 변화를 통해 리듬을 형성한다.</button><button type="button" class="choice" data-choice="3">③ ‘-오’, ‘-소’ 계열의 종결 표현을 반복하여 청자를 상정한 말투를 드러내고 리듬감 형성에도 기여한다.</button><button type="button" class="choice" data-choice="4">④ ‘공중엔 길 있어서 잘 가는가?’의 의문형 종결은 각 연의 끝을 동일한 음절수로 맞추어 정형적인 율격을 유지하기 위한 것이다.</button><button type="button" class="choice" data-choice="5">⑤ ‘가왁가왁’, ‘갈래갈래’처럼 동일한 말을 중첩하여 소리나 대상의 상태를 감각적으로 부각하고 시적 의미를 강화한다.</button></div><div class="feedback" role="status" aria-live="polite"></div><div class="solution"><p class="answer">정답 ④</p><ol><li>① 세 마디 호흡을 통해 전통적 3음보 율격을 환기하는 부분이 있으므로 적절합니다.</li><li>② 시행 길이의 변주는 현대시의 내적 리듬 형성과 관련되므로 적절합니다.</li><li>③ ‘-오’, ‘-소’의 반복은 청자에게 말을 건네는 방식과 리듬 형성에 모두 관여합니다.</li><li>④ 각 연의 음절수가 동일하게 고정되어 있지 않습니다. 해당 의문형 종결을 정형적 율격 유지의 장치로 보는 것은 적절하지 않습니다.</li><li>⑤ 동일한 말의 중첩은 감각적 형상화와 의미 강조에 기여하므로 적절합니다.</li></ol></div></section>\n<section class="quiz" data-answer="5"><h3>3.'''
+          s2, n = pat2.subn(rep2, s, count=1)
+          assert n == 1, f'quiz2 replacement count={n}'
+          s = s2
+
+          # 9번 누락된 <보기> 복구
+          old9 = '<section class="quiz" data-answer="5"><h3>9. &lt;보기&gt;의 설명 중 적절한 것만을 고른 것은?</h3><div class="choices">'
+          new9 = '''<section class="quiz" data-answer="5"><h3>9. &lt;보기&gt;의 설명 중 적절한 것만을 고른 것은?</h3><div class="view"><b>&lt;보기&gt;</b><br>ㄱ. ‘어제도-오늘은-또’의 시간 표현은 화자의 유랑이 반복되고 있음을 드러낸다.<br>ㄴ. ‘산’과 ‘들’은 화자가 자유롭게 선택하여 정착할 수 있는 두 목적지를 의미한다.<br>ㄷ. ‘말 마소’, ‘여보소’는 청자를 상정한 대화적 말투를 형성한다.<br>ㄹ. ‘열 십자 복판’은 여러 길이 있어도 자신이 갈 길을 찾지 못하는 화자의 방향 상실을 공간적으로 드러낸다.</div><div class="choices">'''
+          assert old9 in s, 'quiz9 marker not found'
+          s = s.replace(old9, new9, 1)
+
+          # 이중 정답 표기 정리
+          s = re.sub(r'<p class="answer">정답 ([①②③④⑤])</p><span class="answer">정답 \1</span>', r'<p class="answer">정답 \1</p>', s)
+
+          banned = ['월곡답가형 통일 구성', '교재 수록 원문과 공식 해설을 대조하여', '어둡고 불길한 정조', '내면을 드러내는 자문입니다']
+          for x in banned:
+              assert x not in s, f'banned text remains: {x}'
+          assert 'id="lit-ebs-check"' in s
+          assert 'ㄱ. ‘어제도-오늘은-또’' in s
+          assert 'data-answer="4"><h3>2. 이 작품의 표현과 형식을' in s
+          assert '가마귀 가왁가왁 울며 새었소.' in s
+          assert '또몇십리' in s
+          assert '열 십자(十字) 복판에 내가 섰소.' in s
+
+          p.write_text(s, encoding='utf-8')
+          print('교정 완료:', p)
+          PY
+
+      - name: 검수본 저장소 반영
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wordpress-content/2027-suteuk-kim-sowol-gil.html
+          git commit -m "Audit 2027 Suteuk Kim Sowol Gil [skip ci]"
+          git push origin HEAD:main
+
+      - name: WordPress 실제 글 갱신
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          node scripts/publish-wordpress.mjs wordpress-content/2027-suteuk-kim-sowol-gil.html
+
+      - name: WordPress 공개 상태 및 중복 점검
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const base = process.env.WP_URL.replace(/\/$/, '');
+          const auth = 'Basic ' + Buffer.from(`${process.env.WP_USERNAME}:${process.env.WP_APP_PASSWORD}`).toString('base64');
+          const headers = { Authorization: auth };
+          async function j(url) {
+            const r = await fetch(url, {headers});
+            const t = await r.text();
+            if (!r.ok) throw new Error(`${r.status} ${t.slice(0,500)}`);
+            return JSON.parse(t);
+          }
+          const exact = await j(`${base}/wp-json/wp/v2/posts?slug=2027-suteuk-kim-sowol-gil&status=publish&context=edit`);
+          const search = await j(`${base}/wp-json/wp/v2/posts?search=${encodeURIComponent('김소월 길')}&status=publish&per_page=20&context=edit`);
+          if (exact.length !== 1) throw new Error(`canonical published post count=${exact.length}`);
+          const report = {
+            checked_at: new Date().toISOString(),
+            canonical: exact.map(x => ({id:x.id, slug:x.slug, status:x.status, link:x.link, title:x.title?.rendered})),
+            matching_published_posts: search.map(x => ({id:x.id, slug:x.slug, status:x.status, link:x.link, title:x.title?.rendered})),
+            count: search.length
+          };
+          fs.writeFileSync('scripts/audit-suteuk-kim-sowol-gil-live.json', JSON.stringify(report, null, 2) + '\n');
+          console.log(JSON.stringify(report, null, 2));
+          JS
+
+      - name: 공개 점검 결과 저장
+        run: |
+          git pull --rebase origin main
+          git add scripts/audit-suteuk-kim-sowol-gil-live.json
+          git commit -m "Record live audit for Kim Sowol Gil [skip ci]"
+          git push origin HEAD:main
