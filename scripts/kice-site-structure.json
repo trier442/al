@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-08-27T10:16:25.441Z",
+  "categories": {
+    "root": {
+      "id": 31,
+      "name": "고3 / N수",
+      "link": "https://modukorean.co.kr/category/grade-3-nsu/"
+    },
+    "kice": {
+      "id": 32,
+      "name": "평가원·수능 기출 분석",
+      "link": "https://modukorean.co.kr/category/grade-3-nsu/kice-suneung-analysis/"
+    },
+    "year2018": {
+      "id": 33,
+      "name": "2018학년도",
+      "link": "https://modukorean.co.kr/category/grade-3-nsu/kice-suneung-analysis/kice-2018/"
+    },
+    "june2018": {
+      "id": 34,
+      "name": "6월 모의평가",
+      "link": "https://modukorean.co.kr/category/grade-3-nsu/kice-suneung-analysis/kice-2018/kice-2018-june/"
+    }
+  },
+  "hub": {
+    "id": 2146,
+    "link": "https://modukorean.co.kr/kice-korean-analysis/"
+  },
+  "posts": [
+    {
+      "slug": "2018-june-korean-reading-yulgok-sugichiin-01-06",
+      "label": "1~6번 · 율곡 이이의 수기치인·이기론",
+      "id": 2023,
+      "link": "https://modukorean.co.kr/2018-june-korean-reading-yulgok-sugichiin-01-06/"
+    },
+    {
+      "slug": "2018-june-korean-reading-monetary-policy-07-10",
+      "label": "7~10번 · 통화 정책과 공개 시장 운영",
+      "id": 2024,
+      "link": "https://modukorean.co.kr/2018-june-korean-reading-monetary-policy-07-10/"
+    },
+    {
+      "slug": "2018-june-korean-literature-literary-time-gopung-gyeolbing-11-14",
+      "label": "11~14번 · 문학적 시간·고풍 의상·결빙의 아버지",
+      "id": 2069,
+      "link": "https://modukorean.co.kr/2018-june-korean-literature-literary-time-gopung-gyeolbing-11-14/"
+    }
+  ],
+  "duplicate_action": "trashed:2070",
+  "homepage": {
+    "updated": true,
+    "id": 9,
+    "link": "https://modukorean.co.kr/",
+    "reason": "static-front-page"
+  }
+}
