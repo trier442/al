@@ -1,0 +1,70 @@
+name: 제작 과정 안내 문구 제거
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/remove-editorial-notes.yml"
+      - "scripts/publish-wordpress.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 제작 과정 안내 문구 제거
+        id: clean
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          changed = []
+          block = re.compile(r'<([a-z][\w-]*)\b[^>]*class=["\'][^"\']*\bcopyright-note\b[^"\']*["\'][^>]*>[\s\S]*?</\1>\s*', re.I)
+          exact = re.compile(r'<p\b[^>]*>\s*※?\s*지문과 문항은[\s\S]*?새로 작성했습니다\.?\s*</p>\s*', re.I)
+          css = re.compile(r'\.modu-exam-post\s+\.copyright-note\{[^}]*\}')
+
+          for p in Path('wordpress-content').rglob('*.html'):
+              text = p.read_text(encoding='utf-8')
+              new = block.sub('', text)
+              new = exact.sub('', new)
+              new = css.sub('', new)
+              if new != text:
+                  p.write_text(new, encoding='utf-8')
+                  changed.append(str(p))
+
+          Path('/tmp/editorial-note-changed.txt').write_text('\n'.join(changed) + ('\n' if changed else ''), encoding='utf-8')
+          print(f'제거된 파일 수: {len(changed)}')
+          for x in changed:
+              print(x)
+          PY
+
+      - name: 저장소에 정리 내용 반영
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wordpress-content
+          if ! git diff --cached --quiet; then
+            git commit -m "Remove editorial disclaimer notes [skip ci]"
+            git push origin HEAD:main
+          fi
+
+      - name: 현재 검수 중인 첫 글 다시 발행
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          node scripts/publish-wordpress.mjs \
+            wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html
