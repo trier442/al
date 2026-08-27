@@ -22,7 +22,10 @@ jobs:
         with:
           node-version: '22'
       - name: 현재 작품 원문·해설·문제 검수
-        run: python scripts/audit-suteuk-current.py
+        run: |
+          sed -i "s/html = f'''/html = '''/" scripts/audit-suteuk-current.py
+          sed -i "/# basic integrity checks/i html = html.replace('{css}', css)" scripts/audit-suteuk-current.py
+          python scripts/audit-suteuk-current.py
       - name: 검수본 저장소 반영
         run: |
           TARGET=$(cat .audit-target)
@@ -61,7 +64,7 @@ jobs:
           if (!r.ok) throw new Error(`REST ${r.status}`);
           const data = await r.json();
           const p = Array.isArray(data) ? data[0] : data;
-          if (!p || p.status !== 'publish') throw new Error(`publish verification failed`);
+          if (!p || p.status !== 'publish') throw new Error('publish verification failed');
           const c = p.content?.raw || p.content?.rendered || '';
           if (!c.includes('수능특강 6강 핵심 문항 연결')) throw new Error('EBS section missing');
           if (!c.includes('늦되어도 충분히 성취할 수 있다는 삶의 이치')) throw new Error('core theme missing');
