@@ -24,7 +24,6 @@ jobs:
           node-version: "22"
 
       - name: 제작 과정 안내 문구 제거
-        id: clean
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -44,7 +43,6 @@ jobs:
                   p.write_text(new, encoding='utf-8')
                   changed.append(str(p))
 
-          Path('/tmp/editorial-note-changed.txt').write_text('\n'.join(changed) + ('\n' if changed else ''), encoding='utf-8')
           print(f'제거된 파일 수: {len(changed)}')
           for x in changed:
               print(x)
@@ -60,11 +58,45 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: 현재 검수 중인 첫 글 다시 발행
+      - name: 독서 1~6번과 7~10번 다시 발행
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
         run: |
           node scripts/publish-wordpress.mjs \
-            wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html
+            wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html \
+            wordpress-content/2018-june-korean-reading-monetary-policy-07-10.html
+
+      - name: 문학 11~14번 실제 공개 글(-2) 동기화
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const base = process.env.WP_URL.replace(/\/$/, '');
+          const auth = 'Basic ' + Buffer.from(`${process.env.WP_USERNAME}:${process.env.WP_APP_PASSWORD.replace(/\s/g,'')}`).toString('base64');
+          const file = 'wordpress-content/2018-june-korean-literature-literary-time-gopung-gyeolbing-11-14.html';
+          const raw = fs.readFileSync(file, 'utf8');
+          const metaPattern = /<!--\s*(title|slug|status|type|categories|revision|excerpt|featured_image|post_id)\s*:\s*(.*?)\s*-->/g;
+          let title = '';
+          let m;
+          while ((m = metaPattern.exec(raw))) if (m[1] === 'title') title = m[2].trim();
+          const content = raw.replace(metaPattern, '').trim();
+          const slug = '2018-june-korean-literature-literary-time-gopung-gyeolbing-11-14-2';
+          const list = await fetch(`${base}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&context=edit`, {headers:{Authorization:auth}});
+          if (!list.ok) throw new Error(`조회 실패 HTTP ${list.status}: ${await list.text()}`);
+          const posts = await list.json();
+          if (!posts.length) throw new Error(`실제 공개 글 slug를 찾지 못했습니다: ${slug}`);
+          const id = posts[0].id;
+          const res = await fetch(`${base}/wp-json/wp/v2/posts/${id}`, {
+            method:'POST',
+            headers:{Authorization:auth,'Content-Type':'application/json; charset=utf-8'},
+            body:JSON.stringify({content, ...(title ? {title} : {})})
+          });
+          if (!res.ok) throw new Error(`갱신 실패 HTTP ${res.status}: ${await res.text()}`);
+          const post = await res.json();
+          console.log(`갱신: ${post.link}`);
+          NODE
