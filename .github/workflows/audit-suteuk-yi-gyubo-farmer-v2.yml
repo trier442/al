@@ -1,0 +1,66 @@
+name: 2027 수능특강 문학 이규보 농부 검수 v2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/audit-suteuk-yi-gyubo-farmer-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 원문·해설·문제 재검수
+        run: python scripts/audit-suteuk-yi-gyubo-farmer-v2.py
+      - name: 검수본 저장소 반영
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wordpress-content/2027-suteuk-yi-gyubo-farmer.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Audit Yi Gyubo farmer post against EBS source v2"
+            git push
+          fi
+      - name: WordPress 실제 글 갱신
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/publish-wordpress.mjs wordpress-content/2027-suteuk-yi-gyubo-farmer.html
+      - name: 공개 상태 검증
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          node - <<'NODE'
+          const base = process.env.WP_URL.replace(/\/$/, '');
+          const auth = 'Basic ' + Buffer.from(`${process.env.WP_USERNAME}:${process.env.WP_APP_PASSWORD.replace(/\s/g,'')}`).toString('base64');
+          const slug = '2027-suteuk-yi-gyubo-farmer';
+          const r = await fetch(`${base}/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&context=edit`, {headers:{Authorization:auth}});
+          if (!r.ok) throw new Error(`REST ${r.status}`);
+          const posts = await r.json();
+          if (posts.length !== 1) throw new Error(`canonical count=${posts.length}`);
+          const p = posts[0];
+          const c = p.content?.raw || p.content?.rendered || '';
+          if (p.status !== 'publish') throw new Error(`status=${p.status}`);
+          if (!c.includes('수능특강 2강 핵심 문항 연결')) throw new Error('EBS section missing');
+          if (!c.includes('03번에서 바로 이와 같은 해석이 부적절')) throw new Error('EBS 03 logic missing');
+          if ((c.match(/class="quiz"/g)||[]).length !== 10) throw new Error('quiz count mismatch');
+          const quizBlocks = c.match(/<section class="quiz"[\s\S]*?<\/section>/g) || [];
+          for (const b of quizBlocks) {
+            const h = (b.match(/<h3>([\s\S]*?)<\/h3>/)||[])[1] || '';
+            if ((h.includes('&lt;보기&gt;') || h.includes('<보기>')) && !b.includes('class="view"')) throw new Error('view box missing');
+          }
+          console.log(JSON.stringify({id:p.id,status:p.status,link:p.link,title:p.title?.raw || p.title?.rendered}, null, 2));
+          NODE
