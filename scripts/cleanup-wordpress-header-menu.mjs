@@ -35,6 +35,19 @@ function norm(text) {
     .toLowerCase();
 }
 
+function menuIds(item) {
+  const value = item?.menus;
+  if (Array.isArray(value)) return value.map(Number).filter(Boolean);
+  if (value == null || value === "") return [];
+  if (typeof value === "object") {
+    if (Array.isArray(value.ids)) return value.ids.map(Number).filter(Boolean);
+    const id = Number(value.id ?? value.menu ?? 0);
+    return id ? [id] : [];
+  }
+  const id = Number(value);
+  return id ? [id] : [];
+}
+
 const canonicalDefs = [
   { key: "home", title: "홈", aliases: ["홈"] },
   { key: "g1", title: "고1 국어", aliases: ["고1국어"] },
@@ -77,7 +90,7 @@ if (locations && typeof locations === "object") {
 
 if (!menuId) {
   const scored = menus.map(menu => {
-    const items = allItems.filter(i => (i.menus || []).map(Number).includes(Number(menu.id)));
+    const items = allItems.filter(i => menuIds(i).includes(Number(menu.id)));
     const top = items.filter(i => Number(i.parent) === 0);
     const score = top.reduce((n, i) => n + (aliases.has(norm(rawTitle(i))) ? 1 : 0), 0);
     return { menu, score, itemCount: items.length };
@@ -91,7 +104,7 @@ if (!menuId) {
 }
 
 const activeMenu = menus.find(m => Number(m.id) === menuId);
-let items = allItems.filter(i => (i.menus || []).map(Number).includes(menuId));
+let items = allItems.filter(i => menuIds(i).includes(menuId));
 items.sort((a, b) => Number(a.menu_order) - Number(b.menu_order) || Number(a.id) - Number(b.id));
 
 console.log(`Active menu: ${activeMenu?.name || menuId} (#${menuId})${locationName ? ` @ ${locationName}` : ""}`);
@@ -112,7 +125,6 @@ const deleted = [];
 const updated = [];
 const keepers = new Map();
 
-// 1) 상단 메뉴의 중복 항목을 제거하고 표기를 통일합니다.
 const topItems = items.filter(i => Number(i.parent) === 0);
 for (const item of topItems) {
   const def = aliases.get(norm(rawTitle(item)));
@@ -129,7 +141,6 @@ for (const item of topItems) {
   }
 }
 
-// 2) 상단에 잘못 올라온 '2027 수능완성 언어와 매체'는 고3/N수 하위로 1개만 유지합니다.
 const ebsTitleNorm = norm("2027 수능완성 언어와 매체");
 const g3 = keepers.get("g3");
 const ebsItems = items.filter(i => norm(rawTitle(i)) === ebsTitleNorm);
@@ -147,7 +158,6 @@ if (ebsItems.length && g3) {
   }
 }
 
-// 3) 핵심 상단 메뉴 순서를 고정합니다. 존재하는 항목만 건드립니다.
 const desiredKeys = ["home", "g1", "g3", "search", "guide", "report", "download"];
 for (let index = 0; index < desiredKeys.length; index++) {
   const item = keepers.get(desiredKeys[index]);
@@ -159,7 +169,6 @@ for (let index = 0; index < desiredKeys.length; index++) {
   }
 }
 
-// 4) 새 페이지가 자동으로 상단 메뉴에 붙는 설정이 켜져 있으면 끕니다.
 if (activeMenu && activeMenu.auto_add === true) {
   try {
     await request(`/wp-json/wp/v2/menus/${menuId}`, {
