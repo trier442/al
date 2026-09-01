@@ -60,7 +60,7 @@ jobs:
             fi
           else
             CHANGED=$(git diff --name-only HEAD^ HEAD)
-            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|wordpress-content/2027-suteuk-hwajak-|\.github/workflows/wordpress-publish\.yml)'; then
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|wordpress-content/2027-suteuk-hwajak-)'; then
               FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-hwajak-*.html' | sort | tr '\n' ' ')
             else
               FILES=$(git diff --name-only HEAD^ HEAD -- ':(glob)wordpress-content/**/*.html' | tr '\n' ' ')
@@ -69,17 +69,39 @@ jobs:
               fi
             fi
           fi
-          if [ -z "$FILES" ]; then
-            echo "게시할 HTML 파일을 찾지 못했습니다." >&2
-            exit 1
-          fi
           echo "files=$FILES" >> "$GITHUB_OUTPUT"
-          echo "게시 대상: $(printf '%s' "$FILES" | wc -w)개"
+          if [ -z "$FILES" ]; then
+            echo "게시 대상 HTML 변경 없음 — 게시 단계 생략"
+          else
+            echo "게시 대상: $(printf '%s' "$FILES" | wc -w)개"
+          fi
 
       - name: WordPress로 전송
         if: steps.files.outputs.files != ''
+        shell: bash
         env:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
-        run: node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }}
+        run: |
+          set -o pipefail
+          FILES="${{ steps.files.outputs.files }}"
+          MAX_ATTEMPTS=6
+          for ATTEMPT in $(seq 1 $MAX_ATTEMPTS); do
+            echo "WordPress 게시 시도 ${ATTEMPT}/${MAX_ATTEMPTS}"
+            set +e
+            timeout --signal=TERM 75s node scripts/publish-wordpress.mjs $FILES 2>&1 | tee "/tmp/wordpress-publish-attempt-${ATTEMPT}.log"
+            STATUS=${PIPESTATUS[0]}
+            set -e
+            if [ "$STATUS" -eq 0 ]; then
+              echo "WordPress 게시 확인 완료 — success"
+              exit 0
+            fi
+            if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
+              WAIT=$((ATTEMPT * 15))
+              echo "게시 실패/시간초과(status=$STATUS). ${WAIT}초 후 자동 재시도합니다."
+              sleep "$WAIT"
+            fi
+          done
+          echo "WordPress 게시가 ${MAX_ATTEMPTS}회 모두 실패했습니다." >&2
+          exit 1
