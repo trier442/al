@@ -24,6 +24,11 @@ permissions:
 
 jobs:
   publish:
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        runner_slot: [1, 2, 3, 4, 5, 6, 7, 8]
     runs-on: ubuntu-latest
     steps:
       - name: 저장소 가져오기
@@ -90,6 +95,6 @@ jobs:
         run: |
           set -o pipefail
           FILES="${{ steps.files.outputs.files }}"
-          echo "WordPress 게시 시도 — 이 runner에서 40초 안에 연결되지 않으면 새 runner로 재실행합니다."
-          timeout --signal=TERM 40s node scripts/publish-wordpress.mjs $FILES
+          echo "WordPress 복구 runner ${{ matrix.runner_slot }}/8 게시 시도"
+          timeout --signal=TERM 35s node scripts/publish-wordpress.mjs $FILES
           echo "WordPress 게시 확인 완료 — success"
