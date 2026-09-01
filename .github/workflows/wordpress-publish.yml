@@ -6,7 +6,6 @@ on:
     paths:
       - "wordpress-content/**/*.html"
       - "wordpress-content/images/**"
-      - "scripts/publish-wordpress.mjs"
       - "scripts/standardize-hwajak-pages.mjs"
       - "scripts/fix-hwajak-pages.mjs"
       - "scripts/validate-hwajak-pages.mjs"
@@ -25,11 +24,7 @@ permissions:
 
 jobs:
   publish:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - name: 저장소 가져오기
         uses: actions/checkout@v4
@@ -73,10 +68,6 @@ jobs:
                 FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-reading-*.html' | sort | tr '\n' ' ')
               fi
             fi
-            if [ -z "$FILES" ] && printf '%s' "${{ github.event.head_commit.message }}" | grep -Fq '[retry-hodong]'; then
-              FILES="wordpress-content/2027-suteuk-kim-geumwon-hodongseorakgi.html"
-              echo "복구 재시도 대상 지정: $FILES"
-            fi
           fi
           echo "files=$FILES" >> "$GITHUB_OUTPUT"
           if [ -z "$FILES" ]; then
@@ -96,6 +87,20 @@ jobs:
         run: |
           set -o pipefail
           FILES="${{ steps.files.outputs.files }}"
-          echo "WordPress 교차 OS 복구 runner: ${{ matrix.os }}"
-          node scripts/publish-wordpress.mjs $FILES
-          echo "WordPress 게시 확인 완료 — success"
+          for ATTEMPT in 1 2; do
+            echo "WordPress 즉시 게시 시도 ${ATTEMPT}/2"
+            set +e
+            node scripts/publish-wordpress.mjs $FILES
+            STATUS=$?
+            set -e
+            if [ "$STATUS" -eq 0 ]; then
+              echo "WordPress 게시 확인 완료 — success"
+              exit 0
+            fi
+            if [ "$ATTEMPT" -eq 1 ]; then
+              echo "첫 시도 실패 — 15초 뒤 한 번 더 시도합니다."
+              sleep 15
+            fi
+          done
+          echo "즉시 게시가 실패했습니다. scripts/wordpress-publish-targets.txt에 대상을 두면 WordPress 자동 복구 게시가 시간별로 재시도합니다." >&2
+          exit 1
