@@ -90,22 +90,6 @@ jobs:
         run: |
           set -o pipefail
           FILES="${{ steps.files.outputs.files }}"
-          MAX_ATTEMPTS=6
-          for ATTEMPT in $(seq 1 $MAX_ATTEMPTS); do
-            echo "WordPress 게시 시도 ${ATTEMPT}/${MAX_ATTEMPTS}"
-            set +e
-            timeout --signal=TERM 75s node scripts/publish-wordpress.mjs $FILES 2>&1 | tee "/tmp/wordpress-publish-attempt-${ATTEMPT}.log"
-            STATUS=${PIPESTATUS[0]}
-            set -e
-            if [ "$STATUS" -eq 0 ]; then
-              echo "WordPress 게시 확인 완료 — success"
-              exit 0
-            fi
-            if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
-              WAIT=$((ATTEMPT * 15))
-              echo "게시 실패/시간초과(status=$STATUS). ${WAIT}초 후 자동 재시도합니다."
-              sleep "$WAIT"
-            fi
-          done
-          echo "WordPress 게시가 ${MAX_ATTEMPTS}회 모두 실패했습니다." >&2
-          exit 1
+          echo "WordPress 게시 시도 — 이 runner에서 40초 안에 연결되지 않으면 새 runner로 재실행합니다."
+          timeout --signal=TERM 40s node scripts/publish-wordpress.mjs $FILES
+          echo "WordPress 게시 확인 완료 — success"
