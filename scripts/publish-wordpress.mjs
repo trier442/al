@@ -1,5 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
+import dns from "node:dns";
+
+dns.setDefaultResultOrder("ipv4first");
 
 const visibilityFile = path.join(process.cwd(), "scripts", "eonmae-visibility.json");
 const eonmaeVisibility = fs.existsSync(visibilityFile)
@@ -31,25 +34,34 @@ const baseUrl = process.env.WP_URL.replace(/\/$/, "");
 const wpUsername = process.env.WP_USERNAME;
 const wpPassword = process.env.WP_APP_PASSWORD.replace(/\s/g, "");
 const auth = "Basic " + Buffer.from(`${wpUsername}:${wpPassword}`).toString("base64");
+const requestTimeoutMs = Math.max(10000, Number(process.env.WP_REQUEST_TIMEOUT_MS || 65000));
 
 async function wpFetch(url, options = {}) {
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      Authorization: auth,
-      ...(options.headers || {}),
-    },
-  });
-  const text = await response.text();
-  let data;
-  try { data = text ? JSON.parse(text) : {}; } catch { data = { message: text }; }
-  if (!response.ok) {
-    const detail = data && !Array.isArray(data) && data.message
-      ? `${data.code ? `${data.code}: ` : ""}${data.message}`
-      : text.slice(0, 2000);
-    throw new Error(`WordPress ${response.status}: ${detail}`);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(new Error(`WordPress 요청 제한 시간 ${requestTimeoutMs}ms 초과`)), requestTimeoutMs);
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: options.signal || controller.signal,
+      headers: {
+        Authorization: auth,
+        "Connection": "close",
+        ...(options.headers || {}),
+      },
+    });
+    const text = await response.text();
+    let data;
+    try { data = text ? JSON.parse(text) : {}; } catch { data = { message: text }; }
+    if (!response.ok) {
+      const detail = data && !Array.isArray(data) && data.message
+        ? `${data.code ? `${data.code}: ` : ""}${data.message}`
+        : text.slice(0, 2000);
+      throw new Error(`WordPress ${response.status}: ${detail}`);
+    }
+    return data;
+  } finally {
+    clearTimeout(timeout);
   }
-  return data;
 }
 
 async function logAuthCapabilities() {
