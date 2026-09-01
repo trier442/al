@@ -1,4 +1,3 @@
-# 이 파일에 한 줄당 하나씩 WordPress에 게시할 HTML 경로를 적습니다.
-# retrigger: 2026-08-24 17:42 KST
-wordpress-content/2018-june-korean-reading-yulgok-sugichiin-01-06.html
-wordpress-content/2018-june-korean-reading-monetary-policy-07-10.html
+# WordPress 선택 게시 대상
+# 2026-09-01: 2027 수능특강 문학 극·수필 06 검수본
+wordpress-content/2027-suteuk-kim-geumwon-hodongseorakgi.html
