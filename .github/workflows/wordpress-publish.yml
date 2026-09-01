@@ -23,8 +23,11 @@ permissions:
   contents: read
 
 jobs:
-  publish:
+  publish_1:
     runs-on: ubuntu-latest
+    outputs:
+      files: ${{ steps.files.outputs.files }}
+      published: ${{ steps.result.outputs.published }}
     steps:
       - name: 저장소 가져오기
         uses: actions/checkout@v4
@@ -80,8 +83,10 @@ jobs:
             echo "게시 대상: $(printf '%s' "$FILES" | wc -w)개"
           fi
 
-      - name: WordPress로 전송
+      - name: WordPress 전송 1차
+        id: wp
         if: steps.files.outputs.files != ''
+        continue-on-error: true
         shell: bash
         env:
           WP_URL: ${{ secrets.WP_URL }}
@@ -89,23 +94,147 @@ jobs:
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
         run: |
           set -o pipefail
-          FILES="${{ steps.files.outputs.files }}"
-          MAX_ATTEMPTS=6
-          for ATTEMPT in $(seq 1 $MAX_ATTEMPTS); do
-            echo "WordPress 게시 시도 ${ATTEMPT}/${MAX_ATTEMPTS}"
-            set +e
-            timeout --signal=TERM 75s node scripts/publish-wordpress.mjs $FILES 2>&1 | tee "/tmp/wordpress-publish-attempt-${ATTEMPT}.log"
-            STATUS=${PIPESTATUS[0]}
-            set -e
-            if [ "$STATUS" -eq 0 ]; then
-              echo "WordPress 게시 확인 완료 — success"
-              exit 0
-            fi
-            if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
-              WAIT=$((ATTEMPT * 15))
-              echo "게시 실패/시간초과(status=$STATUS). ${WAIT}초 후 자동 재시도합니다."
-              sleep "$WAIT"
-            fi
-          done
-          echo "WordPress 게시가 ${MAX_ATTEMPTS}회 모두 실패했습니다." >&2
+          timeout --signal=TERM 45s node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }}
+
+      - name: 1차 결과
+        id: result
+        if: always()
+        shell: bash
+        run: |
+          if [ -z "${{ steps.files.outputs.files }}" ]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          elif [ "${{ steps.wp.outcome }}" = "success" ]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+            echo "1차 runner에서 WordPress 연결 실패 — 새 runner로 넘깁니다."
+          fi
+
+  publish_2:
+    needs: publish_1
+    if: needs.publish_1.outputs.published != 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.result.outputs.published }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node scripts/standardize-hwajak-pages.mjs
+      - run: node scripts/fix-hwajak-pages.mjs
+      - run: node scripts/validate-hwajak-pages.mjs
+      - run: node scripts/lint-hwajak-language.mjs
+      - name: WordPress 전송 2차 · 새 runner
+        id: wp
+        continue-on-error: true
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          set -o pipefail
+          timeout --signal=TERM 45s node scripts/publish-wordpress.mjs ${{ needs.publish_1.outputs.files }}
+      - name: 2차 결과
+        id: result
+        if: always()
+        shell: bash
+        run: |
+          if [ "${{ steps.wp.outcome }}" = "success" ]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish_3:
+    needs: [publish_1, publish_2]
+    if: always() && needs.publish_1.outputs.published != 'true' && needs.publish_2.outputs.published != 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.result.outputs.published }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node scripts/standardize-hwajak-pages.mjs
+      - run: node scripts/fix-hwajak-pages.mjs
+      - run: node scripts/validate-hwajak-pages.mjs
+      - run: node scripts/lint-hwajak-language.mjs
+      - name: WordPress 전송 3차 · 새 runner
+        id: wp
+        continue-on-error: true
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          set -o pipefail
+          timeout --signal=TERM 45s node scripts/publish-wordpress.mjs ${{ needs.publish_1.outputs.files }}
+      - name: 3차 결과
+        id: result
+        if: always()
+        shell: bash
+        run: |
+          if [ "${{ steps.wp.outcome }}" = "success" ]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish_4:
+    needs: [publish_1, publish_2, publish_3]
+    if: always() && needs.publish_1.outputs.published != 'true' && needs.publish_2.outputs.published != 'true' && needs.publish_3.outputs.published != 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.result.outputs.published }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node scripts/standardize-hwajak-pages.mjs
+      - run: node scripts/fix-hwajak-pages.mjs
+      - run: node scripts/validate-hwajak-pages.mjs
+      - run: node scripts/lint-hwajak-language.mjs
+      - name: WordPress 전송 4차 · 새 runner
+        id: wp
+        continue-on-error: true
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          set -o pipefail
+          timeout --signal=TERM 45s node scripts/publish-wordpress.mjs ${{ needs.publish_1.outputs.files }}
+      - name: 4차 결과
+        id: result
+        if: always()
+        shell: bash
+        run: |
+          if [ "${{ steps.wp.outcome }}" = "success" ]; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  confirm:
+    needs: [publish_1, publish_2, publish_3, publish_4]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: 최종 게시 판정
+        shell: bash
+        run: |
+          if [ "${{ needs.publish_1.outputs.published }}" = "true" ] || \
+             [ "${{ needs.publish_2.outputs.published }}" = "true" ] || \
+             [ "${{ needs.publish_3.outputs.published }}" = "true" ] || \
+             [ "${{ needs.publish_4.outputs.published }}" = "true" ]; then
+            echo "WordPress 게시 최종 확인: success"
+            exit 0
+          fi
+          echo "서로 다른 runner 4대에서 모두 WordPress 연결에 실패했습니다." >&2
           exit 1
