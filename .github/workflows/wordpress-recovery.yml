@@ -1,0 +1,119 @@
+name: WordPress 자동 복구 게시
+
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wordpress-recovery-publish
+  cancel-in-progress: false
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 복구 대상·현재 상태 확인
+        id: state
+        shell: bash
+        run: |
+          TARGET=$(grep -vE '^\s*(#|$)' scripts/wordpress-publish-targets.txt | head -n 1)
+          if [ -z "$TARGET" ]; then
+            echo "복구 게시 대상이 없습니다." >&2
+            exit 1
+          fi
+          echo "target=$TARGET" >> "$GITHUB_OUTPUT"
+
+          NEEDS_RETRY=$(TARGET="$TARGET" python - <<'PY'
+          import json, os
+          from pathlib import Path
+          target=os.environ['TARGET']
+          p=Path('scripts/wordpress-last-publish.json')
+          if not p.exists():
+              print('true')
+              raise SystemExit
+          try:
+              data=json.loads(p.read_text(encoding='utf-8'))
+          except Exception:
+              print('true')
+              raise SystemExit
+          ok=(data.get('status')=='success' and target in (data.get('files') or []) and bool(data.get('wordpress_links')))
+          print('false' if ok else 'true')
+          PY
+          )
+          echo "needs_retry=$NEEDS_RETRY" >> "$GITHUB_OUTPUT"
+          if [ "$NEEDS_RETRY" = "true" ]; then
+            echo "WordPress 복구 게시 필요: $TARGET"
+          else
+            echo "이미 WordPress 게시 성공이 기록되어 있어 재시도를 생략합니다: $TARGET"
+          fi
+
+      - name: WordPress 복구 게시
+        id: publish
+        if: steps.state.outputs.needs_retry == 'true'
+        continue-on-error: true
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: "65000"
+          TARGET: ${{ steps.state.outputs.target }}
+        run: |
+          set -o pipefail
+          node scripts/publish-wordpress.mjs "$TARGET" 2>&1 | tee /tmp/wordpress-recovery.log
+
+      - name: 복구 결과 기록
+        if: always() && steps.state.outputs.needs_retry == 'true'
+        shell: bash
+        env:
+          TARGET: ${{ steps.state.outputs.target }}
+          PUBLISH_OUTCOME: ${{ steps.publish.outcome }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          from datetime import datetime, timezone
+          output=Path('/tmp/wordpress-recovery.log').read_text(encoding='utf-8',errors='replace') if Path('/tmp/wordpress-recovery.log').exists() else ''
+          links=re.findall(r'(?:생성|갱신):\s+(https?://\S+)\s+\[',output)
+          data={
+            'status':'success' if os.environ.get('PUBLISH_OUTCOME')=='success' and links else 'failure',
+            'published_at_utc':datetime.now(timezone.utc).isoformat(),
+            'event':'scheduled_recovery',
+            'source_sha':os.environ.get('SOURCE_SHA'),
+            'files':[os.environ['TARGET']],
+            'wordpress_links':links,
+            'log':output.strip(),
+          }
+          Path('scripts/wordpress-last-publish.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/wordpress-last-publish.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record WordPress recovery status [skip ci]"
+            git push origin HEAD:main
+          fi
+
+      - name: 복구 성공 확인
+        if: always() && steps.state.outputs.needs_retry == 'true'
+        shell: bash
+        run: |
+          STATUS=$(python -c "import json; print(json.load(open('scripts/wordpress-last-publish.json',encoding='utf-8')).get('status','failure'))")
+          if [ "$STATUS" != "success" ]; then
+            echo "WordPress 서버 연결이 아직 복구되지 않았습니다. 다음 시간대에 자동 재시도합니다." >&2
+            exit 1
+          fi
+          echo "WordPress 게시 최종 확인: success"
