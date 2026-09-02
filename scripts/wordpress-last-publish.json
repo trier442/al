@@ -1,13 +1,41 @@
 {
   "status": "success",
-  "published_at_utc": "2026-09-01T17:47:59.230454+00:00",
-  "event": "scheduled_recovery",
-  "source_sha": "5bb5604d7598def6da36a088fef53f57cdb1433e",
+  "published_at_utc": "2026-09-02T14:46:13.349122+00:00",
+  "event": "push",
+  "source_sha": "f757b876417e06ebd852b0421721476f4b087fcd",
   "files": [
-    "wordpress-content/2027-suteuk-kim-geumwon-hodongseorakgi.html"
+    "wordpress-content/2027-suteuk-kim-geumwon-hodongseorakgi.html",
+    "wordpress-content/2027-suteuk-kim-seokju-haegapwagi.html",
+    "wordpress-content/2027-suteuk-lee-sang-mountain-village.html",
+    "wordpress-content/2027-suteuk-kim-changhyeop-sanmin.html",
+    "wordpress-content/2027-suteuk-anonymous-hapgangjeongga.html",
+    "wordpress-content/2027-suteuk-lee-cheom-eunggyeseol.html",
+    "wordpress-content/2027-suteuk-anonymous-gyenyeoga.html",
+    "wordpress-content/2027-suteuk-jeong-yakyong-sangron.html",
+    "wordpress-content/2027-suteuk-lee-hangbok-heogyun-preface.html",
+    "wordpress-content/2027-suteuk-lee-changdong-poetry.html",
+    "wordpress-content/2027-suteuk-heo-nanseolheon-gyuwonga.html",
+    "wordpress-content/2027-suteuk-anonymous-inhyeonwanghujeon.html",
+    "wordpress-content/2027-suteuk-im-yuhu-mokdongga.html",
+    "wordpress-content/2027-suteuk-lee-jeong-punggye-yukga.html",
+    "wordpress-content/2027-suteuk-kim-siseup-eunhyeonron.html"
   ],
   "wordpress_links": [
-    "https://modukorean.co.kr/2027-suteuk-kim-geumwon-hodongseorakgi/"
+    "https://modukorean.co.kr/2027-suteuk-kim-geumwon-hodongseorakgi/",
+    "https://modukorean.co.kr/2027-suteuk-kim-seokju-haegapwagi/",
+    "https://modukorean.co.kr/2027-suteuk-lee-sang-mountain-village-journey/",
+    "https://modukorean.co.kr/2027-suteuk-kim-changhyeop-sanmin/",
+    "https://modukorean.co.kr/2027-suteuk-anonymous-hapgangjeongga/",
+    "https://modukorean.co.kr/2027-suteuk-lee-cheom-eunggyeseol/",
+    "https://modukorean.co.kr/2027-suteuk-anonymous-gyenyeoga/",
+    "https://modukorean.co.kr/2027-suteuk-jeong-yakyong-sangron/",
+    "https://modukorean.co.kr/2027-suteuk-lee-hangbok-heogyun-collection-preface/",
+    "https://modukorean.co.kr/2027-suteuk-lee-changdong-poetry/",
+    "https://modukorean.co.kr/2027-suteuk-heo-nanseolheon-gyuwonga/",
+    "https://modukorean.co.kr/2027-suteuk-anonymous-inhyeonwanghujeon/",
+    "https://modukorean.co.kr/2027-suteuk-im-yuhu-mokdongga/",
+    "https://modukorean.co.kr/2027-suteuk-lee-jeong-punggye-yukga/",
+    "https://modukorean.co.kr/2027-suteuk-kim-siseup-gogeum-gunja-eunhyeonron/"
   ],
-  "log": "WordPress 인증 사용자: id=1, name=admin, roles=administrator\nWordPress 핵심 권한: {\"read\":true,\"edit_posts\":true,\"publish_posts\":true,\"delete_posts\":true,\"upload_files\":true,\"manage_categories\":true,\"edit_others_posts\":true,\"edit_published_posts\":true,\"unfiltered_html\":true}\n갱신: https://modukorean.co.kr/2027-suteuk-kim-geumwon-hodongseorakgi/ [publish]"
+  "log": "게시 전 taxonomy 상태: {\"categoryCap\":\"assign_categories\",\"tagCap\":\"assign_post_tags\",\"canCategory\":false,\"canTag\":false,\"assign_categories\":false,\"assign_post_tags\":false,\"edit_posts\":true}\n원인 확인을 위해 잠시 비활성화: modukorean-site-manager/modukorean-site-manager\n비활성화 후 taxonomy 상태 modukorean-site-manager/modukorean-site-manager: {\"categoryCap\":\"assign_categories\",\"tagCap\":\"assign_post_tags\",\"canCategory\":false,\"canTag\":false,\"assign_categories\":false,\"assign_post_tags\":false,\"edit_posts\":true}\n즉시 재활성화 modukorean-site-manager/modukorean-site-manager: HTTP 200\n원인 확인을 위해 잠시 비활성화: insert-headers-and-footers/ihaf\n비활성화 후 taxonomy 상태 insert-headers-and-footers/ihaf: {\"categoryCap\":\"assign_categories\",\"tagCap\":\"assign_post_tags\",\"canCategory\":false,\"canTag\":false,\"assign_categories\":false,\"assign_post_tags\":false,\"edit_posts\":true}\n즉시 재활성화 insert-headers-and-footers/ihaf: HTTP 200\n원인 확인을 위해 잠시 비활성화: modu-hwajak-unit-editor/modu-hwajak-unit-editor\n비활성화 후 taxonomy 상태 modu-hwajak-unit-editor/modu-hwajak-unit-editor: {\"categoryCap\":\"assign_categories\",\"tagCap\":\"assign_post_tags\",\"canCategory\":false,\"canTag\":false,\"assign_categories\":false,\"assign_post_tags\":false,\"edit_posts\":true}\n즉시 재활성화 modu-hwajak-unit-editor/modu-hwajak-unit-editor: HTTP 200\n원인 확인을 위해 잠시 비활성화: modu-hwajak-quality-rebuilder/modu-hwajak-quality-rebuilder\n비활성화 후 taxonomy 상태 modu-hwajak-quality-rebuilder/modu-hwajak-quality-rebuilder: {\"categoryCap\":\"assign_categories\",\"tagCap\":\"assign_post_tags\",\"canCategory\":false,\"canTag\":false,\"assign_categories\":false,\"assign_post_tags\":false,\"edit_posts\":true}\n즉시 재활성화 modu-hwajak-quality-rebuilder/modu-hwajak-quality-rebuilder: HTTP 200\n비표준 taxonomy 권한을 정상화하는 단일 플러그인을 찾지 못했습니다. 현재 상태에서 게시를 시도합니다.\nWordPress 인증 사용자: id=1, name=admin, roles=administrator\nWordPress 핵심 권한: {\"read\":true,\"edit_posts\":true,\"publish_posts\":true,\"delete_posts\":true,\"upload_files\":true,\"manage_categories\":true,\"edit_others_posts\":true,\"edit_published_posts\":true,\"unfiltered_html\":true}\n갱신: https://modukorean.co.kr/2027-suteuk-kim-geumwon-hodongseorakgi/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-kim-seokju-haegapwagi/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-lee-sang-mountain-village-journey/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-kim-changhyeop-sanmin/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-anonymous-hapgangjeongga/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-lee-cheom-eunggyeseol/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-anonymous-gyenyeoga/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-jeong-yakyong-sangron/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-lee-hangbok-heogyun-collection-preface/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-lee-changdong-poetry/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-heo-nanseolheon-gyuwonga/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-anonymous-inhyeonwanghujeon/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-im-yuhu-mokdongga/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-lee-jeong-punggye-yukga/ [publish]\n갱신: https://modukorean.co.kr/2027-suteuk-kim-siseup-gogeum-gunja-eunhyeonron/ [publish]"
 }
