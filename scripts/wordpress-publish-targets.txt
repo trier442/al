@@ -1,3 +1,17 @@
 # WordPress 선택 게시 대상
-# 2026-09-01: 2027 수능특강 문학 극·수필 06 검수본
+# EBS 원문항/원문제 제거 재발행 대상
 wordpress-content/2027-suteuk-kim-geumwon-hodongseorakgi.html
+wordpress-content/2027-suteuk-kim-seokju-haegapwagi.html
+wordpress-content/2027-suteuk-lee-sang-mountain-village.html
+wordpress-content/2027-suteuk-kim-changhyeop-sanmin.html
+wordpress-content/2027-suteuk-anonymous-hapgangjeongga.html
+wordpress-content/2027-suteuk-lee-cheom-eunggyeseol.html
+wordpress-content/2027-suteuk-anonymous-gyenyeoga.html
+wordpress-content/2027-suteuk-jeong-yakyong-sangron.html
+wordpress-content/2027-suteuk-lee-hangbok-heogyun-preface.html
+wordpress-content/2027-suteuk-lee-changdong-poetry.html
+wordpress-content/2027-suteuk-heo-nanseolheon-gyuwonga.html
+wordpress-content/2027-suteuk-anonymous-inhyeonwanghujeon.html
+wordpress-content/2027-suteuk-im-yuhu-mokdongga.html
+wordpress-content/2027-suteuk-lee-jeong-punggye-yukga.html
+wordpress-content/2027-suteuk-kim-siseup-eunhyeonron.html
