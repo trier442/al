@@ -1,0 +1,47 @@
+name: 갈래 복합 02 원고 생성
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/complex02-*-source.part*"
+      - "scripts/build-complex02.mjs"
+      - ".github/workflows/build-complex02.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-complex02
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 원고 생성 및 무결성 검증
+        run: node scripts/build-complex02.mjs
+
+      - name: 생성본 커밋
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wordpress-content/2027-suteuk-anonymous-gyenyeoga.html wordpress-content/2027-suteuk-jeong-yakyong-sangron.html
+          if git diff --cached --quiet; then
+            echo "생성본 변경 없음"
+            exit 0
+          fi
+          git commit -m "Rebuild genre-complex 02 from verified EBS source"
+          git push origin HEAD:main
