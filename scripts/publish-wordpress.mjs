@@ -128,6 +128,33 @@ function sanitizeEditorialNotes(content) {
     .trim();
 }
 
+function stripEbsOriginalQuestions(content) {
+  let text = String(content ?? "");
+
+  text = text.replace(/<a\b[^>]*href=["']#ebs["'][^>]*>[\s\S]*?<\/a>\s*/gi, "");
+
+  const headingRe = /<h2\b([^>]*)>([\s\S]*?)<\/h2>/gi;
+  const headings = [...text.matchAll(headingRe)];
+  for (let i = headings.length - 1; i >= 0; i--) {
+    const match = headings[i];
+    const attrs = match[1] || "";
+    const headingText = (match[2] || "")
+      .replace(/<[^>]+>/g, "")
+      .replace(/&nbsp;/g, " ")
+      .trim();
+    const isOriginalQuestionHeading =
+      /EBS\s*원문(?:제|항)/i.test(headingText) ||
+      (/\bid=["']ebs["']/i.test(attrs) && /(?:문제|문항)/.test(headingText));
+
+    if (!isOriginalQuestionHeading) continue;
+    const start = match.index;
+    const end = i + 1 < headings.length ? headings[i + 1].index : text.length;
+    text = text.slice(0, start) + text.slice(end);
+  }
+
+  return text.trim();
+}
+
 function mimeType(file) {
   const ext = path.extname(file).toLowerCase();
   return ({
@@ -195,7 +222,7 @@ async function publish(file) {
   assertEonmaePublishAllowed(file);
   const parsed = parseFile(file);
   const meta = parsed.meta;
-  const rawContent = sanitizeEditorialNotes(parsed.content);
+  const rawContent = stripEbsOriginalQuestions(sanitizeEditorialNotes(parsed.content));
   const endpoint = `${baseUrl}/wp-json/wp/v2/${meta.type}`;
   const existing = meta.post_id
     ? [{ id: meta.post_id }]
