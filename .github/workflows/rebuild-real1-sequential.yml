@@ -1,4 +1,4 @@
-name: Rebuild Real1 Sequential
+name: Rebuild Suteuk Sequential
 
 on:
   push:
@@ -32,14 +32,15 @@ jobs:
           echo "target=$TARGET" >> "$GITHUB_OUTPUT"
           python - "$TARGET" <<'PY'
           from pathlib import Path
-          import sys
+          import re, sys
           p=Path(sys.argv[1]); s=p.read_text()
-          assert 'revision: 2' in s
+          m=re.search(r'<!-- revision: (\d+) -->', s)
+          assert m and int(m.group(1)) >= 2
           assert s.count('class="quiz"') == 10
           assert s.count('class="choice"') == 50
           assert '수능특강 수록 제시문 전문' in s
           assert 'EBS 원문항' not in s and '수능특강 원문제' not in s
-          print('validated', p, len(s))
+          print('validated', p, len(s), 'revision', m.group(1))
           PY
 
       - name: Commit rebuilt post
@@ -52,7 +53,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No content change"
           else
-            git commit -m "Rebuild 실전 1회 $(basename "$TARGET" .html)"
+            git commit -m "Rebuild 수특 $(basename "$TARGET" .html)"
             git push
           fi
 
