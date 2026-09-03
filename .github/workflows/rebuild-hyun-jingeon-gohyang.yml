@@ -1,0 +1,139 @@
+name: Rebuild Hyun Jingeon Gohyang
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/rebuild-hyun-jingeon-gohyang.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Rebuild post
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('wordpress-content/2027-suteuk-hyun-jingeon-gohyang.html')
+          s = p.read_text(encoding='utf-8')
+
+          s = s.replace('<!-- title: [2027 수능특강 문학] 현진건 「고향」 원문·상세 해설 및 변형문제 -->', '<!-- title: [2027 수능특강 문학] 현진건 「고향」 작품 수록 부분·상세 해설 및 변형문제 -->')
+          s = s.replace('<!-- revision: 2 -->', '<!-- revision: 3 -->')
+          s = re.sub(r'<!-- excerpt: .*? -->', '<!-- excerpt: 2027 수능특강 문학 9강 현진건 「고향」의 수록 제시문 전문, 핵심 내용, 상세 해설, 출제 포인트 15개와 자체 제작 수능형 변형문제 10제를 정리했습니다. -->', s, count=1)
+          s = s.replace('<h1>현진건 「고향」 원문·상세 해설 및 변형문제</h1>', '<h1>현진건 「고향」 작품 수록 부분·상세 해설 및 변형문제</h1>')
+          s = s.replace('<a href="#lit-text">원문</a>', '<a href="#lit-text">작품 수록 부분</a>')
+          s = s.replace('<a href="#lit-core">핵심 정리</a>', '<a href="#lit-core">핵심 내용</a>')
+          s = s.replace('<a href="#lit-ebs">핵심 문항</a>', '<a href="#lit-points">출제 포인트</a>')
+          s = s.replace('<h2 id="lit-text">수능특강 수록 원문</h2>', '<h2 id="lit-text">수능특강 수록 제시문 전문</h2>')
+          s = s.replace('<h2 id="lit-core">핵심 정리</h2>', '<h2 id="lit-core">핵심 내용</h2>')
+
+          # 교재 화면을 다시 대조해 수록 제시문 오기와 OCR 흔적을 교정한다.
+          replacements = {
+            '그의 집안은 살기 좋다는 바람에서 간도로 이사를 갔었다.': '그의 집안은 살기 좋다는 바람에 서간도로 이사를 갔었다.',
+            '그의 집안은 살기 좋다는 바람에 간도로 이사를 갔었다.': '그의 집안은 살기 좋다는 바람에 서간도로 이사를 갔었다.',
+            '벌이는 조금 나았으나 외롭고 젊은 몸은 자연히 방탕해졌다.': '벌이는 조금 나았으나 외롭고 젊은 몸은 저절로 방탕해졌다.',
+            '벌린 입이 담쳐지지 않았다.': '벌린 입이 닫혀지지 않았다.',
+            '눈은 폭 들어가고': '눈은 푹 들어가고',
+            '서로 붙잡고 많이 울으섰겠지요?': '서로 붙잡고 많이 울으셨제요?',
+            '고향 → 간도 → 신의주': '고향 → 서간도 → 신의주',
+            '특히 간도 이주도': '특히 서간도 이주도',
+            '간도·신의주·안동현·일본 유랑': '서간도·신의주·안동현·일본 유랑',
+            '간도에서 부모를 잃은 뒤': '서간도에서 부모를 잃은 뒤',
+            '고향에서 간도로 옮긴 것은': '고향에서 서간도로 옮긴 것은',
+          }
+          for a,b in replacements.items():
+              s = s.replace(a,b)
+
+          # 교재 문항 표식은 작품 자체의 일부가 아니므로 게시문에서는 제거한다.
+          for mark in '㉠㉡㉢㉣㉤':
+              s = s.replace(mark, '')
+
+          # 교재 실제 발문·정답을 요약해 둔 예전 섹션은 완전히 제거한다.
+          s = re.sub(r'<section class="box"><h2 id="lit-ebs">.*?</section>\s*(?=<section class="box"><h2 id="lit-quiz">)', '', s, flags=re.S)
+
+          # 기존 상세 해설 7개 뒤에 추가 해설을 보강한다.
+          extra_analysis = '''
+          <div class="point"><h3>8. 스물여섯의 얼굴에 새겨진 가난과 고생</h3><p>‘그’의 실제 나이는 스물여섯이지만, 작품은 열일곱에 고향을 떠난 뒤의 가난과 노동이 한 사람의 얼굴을 얼마나 빨리 늙게 하는지 직접 환기합니다. 외양은 단순한 인물 묘사가 아니라 식민지 현실이 몸에 남긴 시간의 흔적입니다.</p></div>
+          <div class="point"><h3>9. 부모의 죽음은 빈곤의 극한을 구체화한다</h3><p>아버지는 타국에서 병으로 죽고, 어머니는 영양 부족과 심한 노동에 지쳐 죽습니다. 특히 ‘흰죽 한 모금도 못 자셨다’는 직접 발화는 가난을 추상적 상황이 아니라 생존에 필요한 최소한의 음식조차 얻지 못하는 현실로 체감하게 합니다.</p></div>
+          <div class="point"><h3>10. 공간이 넓어질수록 정착지는 사라진다</h3><p>고향에서 서간도, 신의주, 안동현, 일본으로 이동 범위는 계속 넓어지지만 생활은 안정되지 않습니다. 이 역설은 근대적 이동의 자유를 보여 주는 것이 아니라 생존 기반을 잃은 유이민이 끊임없이 밀려나는 삶을 보여 줍니다.</p></div>
+          <div class="point"><h3>11. 옛 혼인 상대의 서사가 피해의 범위를 확장한다</h3><p>‘그’가 농민 수탈과 유랑의 피해자라면, 옛 혼인 상대는 빈곤 때문에 유곽에 팔려 가 장기간 착취당한 여성입니다. 두 삶을 병치함으로써 작품은 식민지 시대의 폭력이 한 종류의 피해에 그치지 않고 민중의 삶 전체에 광범위하게 작동했음을 드러냅니다.</p></div>
+          <div class="point"><h3>12. ‘눈물도 안 나오드마’는 감정의 부재가 아니다</h3><p>재회한 두 사람이 울지도 못했다는 말은 서로에 대한 정이 사라졌다는 뜻이 아닙니다. 오랫동안 누적된 상실과 고통 때문에 즉각적인 눈물조차 나오지 않을 만큼 감정이 소진된 상태로 읽어야 합니다. 이어지는 술과 한숨이 그 억눌린 슬픔을 대신합니다.</p></div>
+          <div class="point"><h3>13. 직접 인용과 요약 서술의 교차</h3><p>감정이 폭발하는 순간은 ‘그’의 경상도 방언을 직접 인용하고, 오랜 세월의 유랑 과정은 ‘나’가 요약해 전달합니다. 직접 인용은 인물의 목소리와 현장감을 살리고, 요약 서술은 긴 시간을 압축해 사건의 인과 관계를 선명하게 만듭니다.</p></div>
+          <div class="point"><h3>14. 사실주의적 성격은 구체성에서 강화된다</h3><p>동양 척식 회사, 중간 소작인, 소출의 비율, 서간도와 일본의 노동 공간처럼 구체적인 역사·경제 정보가 개인의 생활사와 결합됩니다. 이 때문에 ‘그’의 비극은 막연한 가난 이야기가 아니라 1920년대 식민지 조선의 사회 구조가 만들어 낸 현실로 읽힙니다.</p></div>
+          <div class="point"><h3>15. 수록 부분과 작품 전체의 결말을 구분해야 한다</h3><p>수능특강 수록 제시문은 ‘나’와 ‘그’가 한됫병을 마시는 장면에서 끝납니다. 교재의 작품 해제는 작품 전체의 결말에 신민요가 삽입되어 주제가 압축된다고 설명합니다. 따라서 수록 부분의 직접 근거를 묻는 경우와 작품 전체의 특징을 묻는 경우를 구별해야 합니다.</p></div>'''
+          s = re.sub(r'(<section class="box"><h2 id="lit-analysis">상세 해설</h2>.*?)(</section>)', lambda m: m.group(1) + extra_analysis + m.group(2), s, count=1, flags=re.S)
+
+          points = '''<section class="box"><h2 id="lit-points">출제 포인트 15</h2><ol>
+          <li>한·중·일 복장이 뒤섞인 외양은 유랑 생활의 흔적이며 식민지 유이민의 정체성을 시각화한다.</li>
+          <li>‘나’의 태도는 흥미와 거리감에서 미안함, 연민, 공감과 유대감으로 변화한다.</li>
+          <li>역둔토가 동양 척식 회사 소유가 된 것은 고향 공동체 붕괴의 직접적 역사 배경이다.</li>
+          <li>중간 소작인의 이중 착취로 실작인의 몫이 소출의 3할도 남지 않는 구조를 파악해야 한다.</li>
+          <li>고향→서간도→신의주→안동현→일본→고향→서울의 이동은 생존을 위한 유랑 경로다.</li>
+          <li>스물여섯의 실제 나이와 늙어 보이는 외양의 간극은 가난과 고생의 파괴력을 드러낸다.</li>
+          <li>부모의 죽음은 타국 생활의 빈곤, 영양 부족, 고된 노동과 직접 연결된다.</li>
+          <li>‘고향이 통 없어졌드마’는 단순한 변화가 아니라 공동체의 완전한 붕괴를 뜻한다.</li>
+          <li>폐허를 무덤과 해골에 비유하여 고향의 죽음과 상실감을 극대화한다.</li>
+          <li>‘조선의 얼굴’은 ‘그’의 개인사를 식민지 조선 민중의 보편적 비극으로 확장하는 표현이다.</li>
+          <li>옛 혼인 상대의 유곽 경험은 빈곤과 착취가 여성의 삶까지 파괴한 현실을 보여 준다.</li>
+          <li>‘눈물도 안 나오드마’는 슬픔의 부재가 아니라 극심한 고통 뒤의 감정적 소진을 암시한다.</li>
+          <li>직접 인용은 인물의 목소리와 감정을 살리고, 요약 서술은 긴 유랑사를 압축한다.</li>
+          <li>기차 안 현재와 ‘그’의 과거사가 결합된 액자식 구성은 서술자의 인식 변화를 함께 보여 준다.</li>
+          <li>사실주의적 성격은 구체적인 역사·경제 현실을 개인의 삶과 결합해 드러내는 데서 나타난다.</li>
+          </ol></section>'''
+          s = s.replace('<section class="box"><h2 id="lit-quiz">수능형 변형문제 10제</h2>', points + '<section class="box"><h2 id="lit-quiz">자체 제작 수능형 변형문제 10제</h2><p class="view">아래 10문항은 작품의 수록 제시문과 작품 해설을 바탕으로 새로 만든 연습 문항입니다. 교재의 실제 발문이나 선택지를 옮긴 것이 아닙니다.</p>')
+
+          # 자체 제작 문제 해설에서 예전 편집 흔적을 제거한다.
+          s = s.replace('EBS 해설도 말할 수 없는 심한 고통과 연결해 이해한다.', '장기간 누적된 상실과 고통으로 감정이 소진된 상태와 연결해 이해할 수 있다.')
+          s = s.replace('EBS 문항도 의복 문화를 사회·문화적 맥락 탐구 대상으로 제시한다.', '의복 문화는 인물의 첫인상과 시대적 이동 경험을 연결해 해석할 수 있는 사회·문화적 맥락이다.')
+          s = s.replace('EBS가 제시한 주제 ‘일제 강점기 조선 민중의 참혹한 삶에 관한 폭로’와 정확히 연결된다.', '작품 전체의 중심 주제인 식민지 조선 민중의 참혹한 삶에 대한 폭로와 정확히 연결된다.')
+          s = s.replace('9강의 사회·문화적 맥락 문제에서 당시 한·중·일의 의복 문화를 조사하는 계획이 적절한 이유도 여기에 있습니다.', '당시 한·중·일의 의복 문화를 함께 살피면 이 낯선 외양이 유랑의 흔적이라는 점을 더 분명하게 이해할 수 있습니다.')
+
+          assert '<!-- revision: 3 -->' in s
+          assert 'id="lit-ebs"' not in s
+          assert '수능특강 9강 핵심 문항 연결' not in s
+          assert '수능특강 수록 제시문 전문' in s
+          assert s.count('class="quiz"') == 10
+          assert s.count('class="choice"') == 50
+          assert '출제 포인트 15' in s
+          assert 'EBS 원문항' not in s and '수능특강 원문제' not in s
+          p.write_text(s, encoding='utf-8')
+          print('rebuilt', p, len(s))
+          PY
+      - name: Commit rebuilt post
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add wordpress-content/2027-suteuk-hyun-jingeon-gohyang.html
+          git commit -m 'Rebuild 수특 현진건 고향' || true
+          git push
+      - name: Publish to WordPress
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: '65000'
+        shell: bash
+        run: |
+          for ATTEMPT in 1 2; do
+            echo "WordPress publish attempt ${ATTEMPT}/2"
+            if node scripts/publish-wordpress.mjs wordpress-content/2027-suteuk-hyun-jingeon-gohyang.html; then
+              echo 'WordPress 게시 확인 완료 — success'
+              exit 0
+            fi
+            sleep 15
+          done
+          exit 1
