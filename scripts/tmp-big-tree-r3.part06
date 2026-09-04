@@ -1,0 +1,31 @@
+/strong> ‘나’는 “서운했다. 정말 서운했다”처럼 자신의 감정을 직접 밝힌다.</li>
+<li><strong>④</strong> 오히려 식모이기 때문에 집 안의 일상을 가까이서 관찰한다.</li>
+<li><strong>⑤</strong> 미래 사건을 전지적으로 예고하는 서술은 나타나지 않는다.</li>
+</ol></div></section>
+<section class="quiz" data-answer="4"><div class="qtitle">9. ‘나’가 김 박사를 바라보는 태도를 가장 정확하게 설명한 것은?</div><div class="choices">
+<button type="button" class="choice" data-choice="1">① 처음부터 끝까지 김 박사의 모든 행동을 혐오한다.</button>
+<button type="button" class="choice" data-choice="2">② 사회적으로 유명하다는 이유만으로 그의 사생활도 모두 모범적이라고 믿는다. 따라서 가까이서 확인한 모순 역시 일시적인 오해라고 판단한다.</button>
+<button type="button" class="choice" data-choice="3">③ 월급이 오르지 않자 김 박사의 공적 업적도 전부 거짓이라고 단정한다.</button>
+<button type="button" class="choice" data-choice="4">④ 유명 인사를 가까이 모신다는 자부심과, 가까이서 본 모순에 대한 실망·혼란을 함께 지닌다.</button>
+<button type="button" class="choice" data-choice="5">⑤ 김 박사의 행동을 이해한 뒤 아무런 의문 없이 그를 떠난다.</button>
+</div><div class="feedback" role="status" aria-live="polite"></div><div class="solution"><div class="answer">정답 ④</div><ol class="option-notes">
+<li><strong>①</strong> ‘나’는 김 박사 집에서 일하는 것을 자랑스럽게 여기기도 한다.</li>
+<li><strong>②</strong> 가까이서 본 ‘헬렐레한 구석’ 때문에 그의 정체를 의심한다.</li>
+<li><strong>③</strong> ‘나’는 그의 전체를 단정하지 못하고 마지막에 “모르겠다”고 한다.</li>
+<li><strong>④</strong> 정답. 존경과 자부심, 실망과 혼란이 공존하는 양가적 태도가 풍자를 단순한 욕설이 아니라 생활 관찰로 만든다.</li>
+<li><strong>⑤</strong> 결말까지 의문이 해소되지 않으며 집을 떠나는 장면도 제시되지 않는다.</li>
+</ol></div></section>
+<section class="quiz" data-answer="1"><div class="qtitle">10. EBS 해제에 비추어 이 작품의 주제를 가장 적절하게 정리한 것은?</div><div class="choices">
+<button type="button" class="choice" data-choice="1">① 사회적으로 존경받는 지식인의 공적 언행과 사적 생활이 어긋나는 표리부동함에 대한 풍자</button>
+<button type="button" class="choice" data-choice="2">② 가난한 식모가 노력으로 상류층에 진입하는 성공담</button>
+<button type="button" class="choice" data-choice="3">③ 가족 구성원들이 대화를 통해 갈등을 완전히 해결하는 과정 그 결과 가족 구성원들이 서로의 처지를 이해하고 생활 방식까지 바꾸게 된다.</button>
+<button type="button" class="choice" data-choice="4">④ 자연의 아름다움을 가까이서 관찰해야 한다는 교훈</button>
+<button type="button" class="choice" data-choice="5">⑤ 전화 예절의 중요성을 강조하는 생활 지침</button>
+</div><div class="feedback" role="status" aria-live="polite"></div><div class="solution"><div class="answer">정답 ①</div><ol class="option-notes">
+<li><strong>①</strong> 정답. EBS가 제시한 주제는 “지식인의 표리부동한 모습에 대한 풍자”이다.</li>
+<li><strong>②</strong> ‘나’가 신분 상승에 성공하는 서사는 제시되지 않는다.</li>
+<li><strong>③</strong> 가족 간 대화의 부재가 오히려 김 박사의 주장과 실제의 모순으로 제시된다.</li>
+<li><strong>④</strong> 천방산과 큰 나무는 사회적 인물 판단의 거리 문제를 비유한다.</li>
+<li><strong>⑤</strong> 전화 장면은 예절 교육이 아니라 김 박사의 외적 태도와 내적 실체의 대비를 보여 주는 장치다.</li>
+</ol></div></section>
+</section></article><script>document.querySelectorAll('.sut-lit .quiz').forEach(q=>{q.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const a=Number(q.dataset.answer),c=Number(b.dataset.choice),ok=a===c;b.classList.add(ok?'correct':'wrong');if(!ok){const x=q.querySelector('.choice[data-choice="'+a+'"]');if(x)x.classList.add('correct')}const f=q.querySelector('.feedback');f.textContent=ok?'정답입니다.':'정답을 확인하고 해설까지 읽어 보세요.';f.classList.add('show',ok?'ok':'no');q.querySelector('.solution').classList.add('show')}))})</script>
