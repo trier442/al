@@ -1,0 +1,65 @@
+name: 장춘정기 재검수 조립 게시
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/tmp-jang-rev3.yml"
+      - "scripts/tmp-jang-rev3.part1"
+      - "scripts/tmp-jang-rev3.part2"
+      - "scripts/tmp-jang-rev3.part3"
+      - "scripts/tmp-jang-rev3.part4"
+
+permissions:
+  contents: write
+
+jobs:
+  assemble-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 원고 조립 및 무결성 확인
+        shell: bash
+        run: |
+          TARGET="wordpress-content/2027-suteuk-gi-daeseung-jangchunjeonggi.html"
+          cat scripts/tmp-jang-rev3.part1 scripts/tmp-jang-rev3.part2 scripts/tmp-jang-rev3.part3 scripts/tmp-jang-rev3.part4 > "$TARGET"
+          ACTUAL=$(sha256sum "$TARGET" | awk '{print $1}')
+          EXPECTED="9c12dda5002f7e2c7fba6e8274ce398eed4e1d8be8ea668f4ab2912561d1f886"
+          echo "assembled sha256=$ACTUAL"
+          test "$ACTUAL" = "$EXPECTED"
+          grep -q '<!-- revision: 3 -->' "$TARGET"
+          test "$(grep -o 'class="quiz" data-answer=' "$TARGET" | wc -l)" -eq 10
+          test "$(grep -o 'class="choice" data-choice=' "$TARGET" | wc -l)" -eq 50
+          test "$(grep -o '<li><strong>[①②③④⑤]</strong>' "$TARGET" | wc -l)" -eq 50
+
+      - name: 최종 원고 커밋 및 임시 파일 정리
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm scripts/tmp-jang-rev3.part1 scripts/tmp-jang-rev3.part2 scripts/tmp-jang-rev3.part3 scripts/tmp-jang-rev3.part4 .github/workflows/tmp-jang-rev3.yml
+          git add wordpress-content/2027-suteuk-gi-daeseung-jangchunjeonggi.html
+          git commit -m "실전1회 장춘정기 EBS 원본 기준 전수 재검수 교정"
+          git push origin HEAD:main
+          echo "FINAL_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: WordPress로 전송
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: "65000"
+        run: |
+          node scripts/publish-wordpress.mjs wordpress-content/2027-suteuk-gi-daeseung-jangchunjeonggi.html
+          echo "WordPress 게시 확인 완료 — success"
+          echo "최종 콘텐츠 커밋: $FINAL_COMMIT"
