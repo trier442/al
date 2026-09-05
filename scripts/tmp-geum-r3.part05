@@ -1,0 +1,60 @@
+<button class="choice" data-choice="2">② 두 사람의 재능과 장단점을 세세하게 비교한 뒤 한 사람만 골라 특별히 등용하려는 뜻</button>
+<button class="choice" data-choice="3">③ 김희경은 귀하고 장수정은 가치가 낮다고 차등 평가하려는 뜻</button>
+<button class="choice" data-choice="4">④ 두 사람이 같은 가문의 형제라고 오해하고 함께 쓰려는 뜻</button>
+<button class="choice" data-choice="5">⑤ 장수정의 여성 정체를 알고 혼인을 명하려는 뜻</button>
+<div class="feedback"></div><div class="solution">
+<span class="answer">정답 ①</span><ol class="option-notes">
+<li><strong>①</strong> 이어지는 말에서 임금은 ‘이 두 사람을 모두 쓰려고 한다’고 직접 밝힌다.</li>
+<li><strong>②</strong> 비교 후 한 사람을 버리는 것이 아니라 두 사람 모두 등용한다.</li>
+<li><strong>③</strong> 옥과 진주 모두 귀한 소재로, 차등 평가가 핵심이 아니다.</li>
+<li><strong>④</strong> 두 사람을 형제로 오해했다는 내용은 없다.</li>
+<li><strong>⑤</strong> 이 장면에서 임금이 장선빙의 여성 정체를 안다고 볼 근거가 없다.</li>
+</ol></div></div>
+<div class="quiz" data-answer="3"><div class="qtitle">6. 다음 중 장선빙의 비범성과 영웅적 형상을 강화하는 요소로 가장 거리가 먼 것은?</div>
+<button class="choice" data-choice="1">① 초월적 존재가 환혼주로 죽음의 위기에서 구해 주는 사건</button>
+<button class="choice" data-choice="2">② 이영이 장선빙을 신선의 풍격과 단산의 봉황에 빗대는 묘사</button>
+<button class="choice" data-choice="3">③ 장선빙이 자신의 능력이 부족하다고 판단해 과거 응시를 중단하는 행동</button>
+<button class="choice" data-choice="4">④ 남성 신분으로 과거에 참여해 뛰어난 인재로 인정받는 과정</button>
+<button class="choice" data-choice="5">⑤ 관직을 얻은 뒤에도 자신의 판단을 유보하고 다른 인물의 지시에 따라 부친 문제를 처리하는 모습</button>
+<div class="feedback"></div><div class="solution">
+<span class="answer">정답 ③</span><ol class="option-notes">
+<li><strong>①</strong> 초월적 도움은 여성 영웅의 비범한 운명을 강화한다.</li>
+<li><strong>②</strong> 비범한 외모와 기상을 강조하여 영웅성을 부각한다.</li>
+<li><strong>③</strong> 장선빙은 과거를 포기하지 않고 참여하여 급제하므로 작품 내용과 어긋난다.</li>
+<li><strong>④</strong> 남장을 활용해 공적 영역에 진입하고 능력을 인정받는 핵심 사건이다.</li>
+<li><strong>⑤</strong> 가문의 문제를 주도적으로 해결하는 영웅적 활약에 해당한다.</li>
+</ol></div></div>
+<div class="quiz" data-answer="5"><div class="qtitle">7. 장선빙이 장원의 푸른 옷을 입고 태학사의 홀을 든 모습이 보여 주는 변화로 가장 적절한 것은?</div>
+<button class="choice" data-choice="1">① 남장을 그만두고 여성 정체를 공식적으로 밝힌 변화</button>
+<button class="choice" data-choice="2">② 김희경과의 정혼 관계가 이미 임금과 주변 인물에게 공식적으로 인정되어 모든 갈등이 해결된 변화</button>
+<button class="choice" data-choice="3">③ 이영의 양자 관계가 끝나고 홀로 살아가게 된 변화</button>
+<button class="choice" data-choice="4">④ 초월적 세계로 돌아갈 준비를 마쳤다는 변화</button>
+<button class="choice" data-choice="5">⑤ 남성 신분으로 과거에 급제해 공적 지위와 사회적 인정을 획득한 변화</button>
+<div class="feedback"></div><div class="solution">
+<span class="answer">정답 ⑤</span><ol class="option-notes">
+<li><strong>①</strong> 복식과 홀은 여성 정체 공개가 아니라 관직 획득을 보여 준다.</li>
+<li><strong>②</strong> 설랑과 영춘은 오히려 정혼 문제를 걱정한다.</li>
+<li><strong>③</strong> 양자 관계 종료를 뜻하는 표지가 아니다.</li>
+<li><strong>④</strong> 이 장면은 현실의 관직과 사회적 지위에 관한 것이다.</li>
+<li><strong>⑤</strong> 푸른 옷과 홀은 장원 급제와 태학사 제수의 결과를 가시화한다.</li>
+</ol></div></div>
+<div class="quiz" data-answer="2"><div class="qtitle">8. 설랑과 영춘이 장선빙의 급제를 기뻐하면서도 한숨을 쉬는 이유를 가장 적절하게 추론한 것은?</div>
+<button class="choice" data-choice="1">① 장자영의 신원이 장선빙의 급제 때문에 오히려 더 어려워져 가문의 명예 회복이 불가능해졌다고 판단했기 때문</button>
+<button class="choice" data-choice="2">② 남장 신분의 지속과 김희경과의 정혼 관계가 앞으로 충돌할 수 있다고 보았기 때문</button>
+<button class="choice" data-choice="3">③ 이영이 장선빙을 양자로 삼은 일을 임금이 벌할까 두려웠기 때문</button>
+<button class="choice" data-choice="4">④ 김희경이 과거에 낙방해 장선빙과 신분 차가 커졌기 때문</button>
+<button class="choice" data-choice="5">⑤ 환혼주의 효력이 사라져 장선빙이 다시 죽을까 걱정했기 때문</button>
+<div class="feedback"></div><div class="solution">
+<span class="answer">정답 ②</span><ol class="option-notes">
+<li><strong>①</strong> 장선빙은 오히려 부친 신원을 위해 급제했고 실제로 상소한다.</li>
+<li><strong>②</strong> 두 사람은 ‘나중에 어쩌시려고’와 ‘당초의 맹약’을 직접 문제 삼는다.</li>
+<li><strong>③</strong> 이영의 양자 관계에 대한 처벌을 걱정하는 장면은 없다.</li>
+<li><strong>④</strong> 김희경도 장선빙과 함께 급제했다.</li>
+<li><strong>⑤</strong> 환혼주의 지속 여부를 걱정하는 내용은 없다.</li>
+</ol></div></div>
+<div class="quiz" data-answer="4"><div class="qtitle">9. 수록 대목에서 장선빙이 애정 문제와 가문 문제를 대하는 태도의 차이를 가장 정확하게 설명한 것은?</div>
+<button class="choice" data-choice="1">① 정혼 문제만 급히 해결하고 부친의 원통함은 뒤로 미룬다</button>
+<button class="choice" data-choice="2">② 두 문제 모두 설랑과 영춘에게 맡기고 스스로 판단하지 않는다</button>
+<button class="choice" data-choice="3">③ 가문의 억울함은 이미 완전히 풀렸다고 생각하여 더는 관심을 두지 않고 김희경과의 재회만을 최우선으로 삼는다</button>
+<button class="choice" data-choice="4">④ 정혼 문제는 이후에 답할 일로 미루고 부친의 신원에는 즉시 적극적으로 나선다</button>
+<button class="choice" data-choice="5">⑤ 가문 문제와 애정 문제 모두 포기하고 관직 생활만 선택한다</button>
