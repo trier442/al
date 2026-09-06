@@ -1,0 +1,91 @@
+name: 실전2회 15~17 고전시가 재검수 조립 게시
+
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-real2-1517-r5.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 원고 조립 및 무결성 확인
+        shell: bash
+        run: |
+          set -euo pipefail
+          GY='wordpress-content/2027-suteuk-gyususangsagok.html'
+          PK='wordpress-content/2027-suteuk-park-hyogwan-sangsamong.html'
+
+          cat scripts/tmp-real2-1517-gyusu.c0 scripts/tmp-real2-1517-gyusu.c1 scripts/tmp-real2-1517-gyusu.c2 scripts/tmp-real2-1517-gyusu.c3 scripts/tmp-real2-1517-gyusu.c4 | base64 -d | gzip -d > "$GY"
+          cat scripts/tmp-real2-1517-parkh.c0 scripts/tmp-real2-1517-parkh.c1 scripts/tmp-real2-1517-parkh.c2 scripts/tmp-real2-1517-parkh.c3 | base64 -d | gzip -d > "$PK"
+
+          test "$(sha256sum "$GY" | awk '{print $1}')" = 'dab474a91c7098d522f07e69d092d01d8f6ed048e688b30ced681c69660e62b9'
+          test "$(sha256sum "$PK" | awk '{print $1}')" = 'c70efba080b8c60700c2660e348493cd335b261186386c4e8675554ffd2c7059'
+
+          for f in "$GY" "$PK"; do
+            grep -q '<!-- revision: 5 -->' "$f"
+            test "$(grep -o 'class=\"quiz\"' "$f" | wc -l)" -eq 10
+            test "$(grep -o 'class=\"choice\"' "$f" | wc -l)" -eq 50
+            test "$(grep -o '<li><strong>[①②③④⑤]</strong>' "$f" | wc -l)" -eq 50
+            ANSWERS="$(grep -o 'data-answer=\"[1-5]\"' "$f" | sed -E 's/[^1-5]//g' | paste -sd' ' -)"
+            test "$ANSWERS" = '3 5 2 4 1 3 5 2 4 1'
+          done
+
+          grep -q '남성이 주체인 상사곡' "$GY"
+          grep -q '남의 아내가 된' "$GY"
+          grep -q '귀뚜라미의 넋' "$PK"
+
+          echo "gyusu sha256=$(sha256sum "$GY" | awk '{print $1}')"
+          echo "park sha256=$(sha256sum "$PK" | awk '{print $1}')"
+
+      - name: 최종 원고 커밋 및 임시 파일 정리
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm \
+            scripts/tmp-real2-1517-gyusu.c0 \
+            scripts/tmp-real2-1517-gyusu.c1 \
+            scripts/tmp-real2-1517-gyusu.c2 \
+            scripts/tmp-real2-1517-gyusu.c3 \
+            scripts/tmp-real2-1517-gyusu.c4 \
+            scripts/tmp-real2-1517-parkh.c0 \
+            scripts/tmp-real2-1517-parkh.c1 \
+            scripts/tmp-real2-1517-parkh.c2 \
+            scripts/tmp-real2-1517-parkh.c3 \
+            .github/workflows/tmp-real2-1517-r5.yml
+          git add \
+            wordpress-content/2027-suteuk-gyususangsagok.html \
+            wordpress-content/2027-suteuk-park-hyogwan-sangsamong.html
+          git commit -m '실전2회 15~17 고전시가 EBS 원본 기준 전수 재검수 교정'
+          git push origin HEAD:main
+          echo "FINAL_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: WordPress로 전송
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: '65000'
+        run: |
+          set -euo pipefail
+          node scripts/publish-wordpress.mjs \
+            wordpress-content/2027-suteuk-gyususangsagok.html \
+            wordpress-content/2027-suteuk-park-hyogwan-sangsamong.html
+          echo 'WordPress 게시 확인 완료 — success'
+          echo "최종 콘텐츠 커밋: $FINAL_COMMIT"
