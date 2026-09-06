@@ -1,0 +1,67 @@
+name: 실전2회 고향 재검수 조립 게시
+
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-gohyang-r5.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 원고 조립 및 무결성 확인
+        shell: bash
+        run: |
+          set -euo pipefail
+          TARGET='wordpress-content/2027-suteuk-lee-kiyoung-gohyang.html'
+          cat scripts/tmp-gohyang-r5.part0 scripts/tmp-gohyang-r5.part1 scripts/tmp-gohyang-r5.part2 scripts/tmp-gohyang-r5.part3 | base64 -d | gzip -d > "$TARGET"
+          test "$(sha256sum "$TARGET" | awk '{print $1}')" = '2764143edf2f8339fbd3a5c4ad533c8cd9c9c92452e50639a9aa8a1d95781915'
+          grep -q '<!-- revision: 5 -->' "$TARGET"
+          grep -q '일제 강점기 농촌 현실과 이를 극복해 나가는 농민 의식의 성장' "$TARGET"
+          grep -q '\[중략 부분 줄거리\]' "$TARGET"
+          ! grep -q '<p>\[A\]</p>' "$TARGET"
+          test "$(grep -o 'class=\"quiz\"' "$TARGET" | wc -l)" -eq 10
+          test "$(grep -o 'class=\"choice\"' "$TARGET" | wc -l)" -eq 50
+          test "$(grep -o '<li><strong>[①②③④⑤]</strong>' "$TARGET" | wc -l)" -eq 50
+          ANSWERS="$(grep -o 'data-answer=\"[1-5]\"' "$TARGET" | sed -E 's/[^1-5]//g' | paste -sd' ' -)"
+          test "$ANSWERS" = '3 5 2 4 1 3 5 2 4 1'
+          echo "sha256=$(sha256sum "$TARGET" | awk '{print $1}')"
+          echo "answers=$ANSWERS"
+
+      - name: 최종 원고 커밋 및 임시 파일 정리
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm scripts/tmp-gohyang-r5.part0 scripts/tmp-gohyang-r5.part1 scripts/tmp-gohyang-r5.part2 scripts/tmp-gohyang-r5.part3 .github/workflows/tmp-gohyang-r5.yml
+          git add wordpress-content/2027-suteuk-lee-kiyoung-gohyang.html
+          git commit -m '실전2회 이기영 고향 EBS 원본 기준 전수 재검수 교정'
+          git push origin HEAD:main
+          echo "FINAL_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: WordPress로 전송
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: '65000'
+        run: |
+          set -euo pipefail
+          node scripts/publish-wordpress.mjs wordpress-content/2027-suteuk-lee-kiyoung-gohyang.html
+          echo 'WordPress 게시 확인 완료 — success'
+          echo "최종 콘텐츠 커밋: $FINAL_COMMIT"
