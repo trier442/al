@@ -30,9 +30,9 @@ jobs:
           MOON='wordpress-content/2027-suteuk-moon-junghui-flow.html'
           HEO='wordpress-content/2027-suteuk-heo-gyun-hanjeongnok-seo.html'
 
-          base64 -d scripts/tmp-lit2-0510-park.gz.b64 | gzip -d > "$PARK"
-          base64 -d scripts/tmp-lit2-0510-moon.gz.b64 | gzip -d > "$MOON"
-          base64 -d scripts/tmp-lit2-0510-heo.gz.b64 | gzip -d > "$HEO"
+          base64 -d scripts/tmp-lit2-0510-park.part00 | gzip -d > "$PARK"
+          base64 -d scripts/tmp-lit2-0510-moon.full.b64 | gzip -d > "$MOON"
+          base64 -d scripts/tmp-lit2-0510-heo.full.b64 | gzip -d > "$HEO"
 
           test "$(sha256sum "$PARK" | awk '{print $1}')" = '8756fff12a2855fbb423b85d6c8d7c995e9e6de68b93c3ac8568a62f470b2bc3'
           test "$(sha256sum "$MOON" | awk '{print $1}')" = '2f2da18c2085fab526c833251536ed4cc7139c9aaa91659126a0cfa1eb594ff8'
@@ -56,7 +56,14 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm scripts/tmp-lit2-0510-park.gz.b64 scripts/tmp-lit2-0510-moon.gz.b64 scripts/tmp-lit2-0510-heo.gz.b64 .github/workflows/tmp-lit2-0510-r3.yml
+          git rm \
+            scripts/tmp-lit2-0510-park.gz.b64 \
+            scripts/tmp-lit2-0510-moon.gz.b64 \
+            scripts/tmp-lit2-0510-heo.gz.b64 \
+            scripts/tmp-lit2-0510-park.part00 \
+            scripts/tmp-lit2-0510-moon.full.b64 \
+            scripts/tmp-lit2-0510-heo.full.b64 \
+            .github/workflows/tmp-lit2-0510-r3.yml
           git add wordpress-content/2027-suteuk-park-mokwol-mountain.html wordpress-content/2027-suteuk-moon-junghui-flow.html wordpress-content/2027-suteuk-heo-gyun-hanjeongnok-seo.html
           git commit -m '실전2회 05~10 갈래복합 EBS 원본 기준 전수 재검수 교정'
           git push origin HEAD:main
