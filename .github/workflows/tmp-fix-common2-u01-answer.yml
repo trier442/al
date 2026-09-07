@@ -1,0 +1,102 @@
+name: 비상 공통국어2 1-1 정답보기 수정
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/tmp-fix-common2-u01-answer.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fix-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 정답보기와 공개 문구 수정
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('wordpress-content/bisang-kangho-common2-u01-ai.html')
+          text=p.read_text(encoding='utf-8')
+          text=text.replace('<!-- revision: 2 -->','<!-- revision: 3 -->',1)
+          text=text.replace('<!-- title: 비상 강호영 공통국어2 1-1 「인공 지능을 보는 다양한 관점」 교과서·자습서·평가문제집 통합 해설 -->','<!-- title: 비상 강호영 공통국어2 1-1 「인공 지능을 보는 다양한 관점」 통합 해설 및 내신 대비 -->')
+          repls={
+            '자습서 8~31쪽':'1-1 학습 범위',
+            '교과서·자습서·평가문제집':'학습 내용',
+            '교과서·지도서·자습서·평가문제집':'학습 내용',
+            '교사용 교과서·지도서':'학습 내용',
+            '평가문제집·소단원 평가에서 확인해야 할 유형':'시험에서 자주 확인하는 유형',
+            '평가문제집과 소단원 평가가 확인하는 학습 목표를 바탕으로 새롭게 구성한 문제입니다.':'학습 목표를 바탕으로 새롭게 구성한 문제입니다.',
+            '평가문제집과 소단원 평가':'학교 시험',
+            '평가문제집·소단원 평가':'학교 시험',
+            '평가문제집':'문제',
+            '자습서':'학습 자료',
+            '지도서':'해설 자료',
+            '교사용 교과서':'학습 자료',
+            '교과서가 강조한':'이 단원에서 강조하는',
+            '교과서의 핵심 개념':'핵심 개념',
+            '교과서에서':'학습 내용에서',
+            '교과서가':'이 단원이',
+            '교과서의':'학습 내용의',
+            '교과서':'학습 내용',
+            '소단원 평가':'학교 시험',
+          }
+          for a,b in repls.items(): text=text.replace(a,b)
+          pat=re.compile(r'<div class="sa"><strong>(.*?)</strong><br><button type="button" class="show-answer">정답 보기</button><div class="ans">(.*?)</div></div>',re.S)
+          def conv(m):
+            return f'<div class="sa"><strong>{m.group(1)}</strong><details class="answer-toggle"><summary>정답 보기</summary><div class="ans">{m.group(2)}</div></details></div>'
+          text,n=pat.subn(conv,text)
+          assert n==15, n
+          needle='.kh2 .sa .ans{display:none;margin-top:9px;padding:9px 11px;border-radius:8px;background:#e9f6ed}.kh2 .sa .ans.show{display:block}\n'
+          extra='.kh2 .answer-toggle{margin-top:9px}.kh2 .answer-toggle summary{display:inline-block;padding:7px 11px;border:1px solid #7aa48a;border-radius:8px;background:#f3faf5;cursor:pointer;font-weight:800;list-style:none}.kh2 .answer-toggle summary::-webkit-details-marker{display:none}.kh2 .answer-toggle .ans{display:block;margin-top:9px;padding:9px 11px;border-radius:8px;background:#e9f6ed}\n'
+          assert needle in text
+          text=text.replace(needle,needle+extra,1)
+          text=re.sub(r"\n document\.querySelectorAll\('\.kh2 \.show-answer'\)\.forEach\(function\(btn\)\{\n  btn\.addEventListener\('click',function\(\)\{var a=btn\.nextElementSibling;a\.classList\.toggle\('show'\);btn\.textContent=a\.classList\.contains\('show'\)\?'정답 닫기':'정답 보기';\}\);\n \}\);",'',text)
+          for term in ['평가문제집','자습서','지도서','교사용 교과서','소단원 평가']:
+            assert term not in text, term
+          assert text.count('class="answer-toggle"')==15
+          assert text.count('class="sa"')==15
+          assert text.count('class="q"')==10
+          assert text.count('class="choice"')==50
+          assert 'class="show-answer"' not in text
+          assert '<!-- revision: 3 -->' in text
+          p.write_text(text,encoding='utf-8')
+          PY
+
+      - name: 수정 내용 커밋 및 임시 워크플로 제거
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/tmp-fix-common2-u01-answer.yml
+          git add wordpress-content/bisang-kangho-common2-u01-ai.html
+          git commit -m '비상 공통국어2 1-1 정답보기 오류 및 공개 문구 수정'
+          git push origin HEAD:main
+          echo "FINAL_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: WordPress로 전송
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: "65000"
+        run: |
+          set -euo pipefail
+          node scripts/publish-wordpress.mjs wordpress-content/bisang-kangho-common2-u01-ai.html
+          echo 'WordPress 게시 확인 완료 — success'
+          echo "최종 콘텐츠 커밋: $FINAL_COMMIT"
