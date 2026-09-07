@@ -118,7 +118,7 @@ async function updateItem(item, payload) {
 }
 
 async function deleteItem(item) {
-  return await request(`/wp-json/wp/v2/menu-items/${item.id}?force=true`, { method: "DELETE" });
+  return await request(`/wp-json/wp/v2/menu-items/${item.id}?force=true`, { method: "DELETE" }, { allow404: true });
 }
 
 async function createItem(payload) {
@@ -155,16 +155,16 @@ for (const def of canonicalDefs) {
     for (const child of duplicateChildren) {
       const sameChild = items.find(i => Number(i.parent) === Number(keeper.id) && norm(rawTitle(i)) === norm(rawTitle(child)));
       if (sameChild) {
-        await deleteItem(child);
-        deleted.push(`${child.id}:${rawTitle(child)}(duplicate child)`);
+        const gone = await deleteItem(child);
+        if (gone) deleted.push(`${child.id}:${rawTitle(child)}(duplicate child)`);
       } else {
         await updateItem(child, { parent: Number(keeper.id) });
         child.parent = Number(keeper.id);
         updated.push(`${child.id}:parent→${keeper.id}`);
       }
     }
-    await deleteItem(duplicate);
-    deleted.push(`${duplicate.id}:${rawTitle(duplicate)}`);
+    const gone = await deleteItem(duplicate);
+    if (gone) deleted.push(`${duplicate.id}:${rawTitle(duplicate)}`);
   }
 }
 
@@ -198,8 +198,8 @@ async function ensurePageChild({ title, slug, parent }) {
 
   for (const item of candidates) {
     if (Number(item.id) === Number(keeper.id)) continue;
-    await deleteItem(item);
-    deleted.push(`${item.id}:${rawTitle(item)}`);
+    const gone = await deleteItem(item);
+    if (gone) deleted.push(`${item.id}:${rawTitle(item)}`);
   }
 }
 
@@ -215,13 +215,16 @@ if (ebsItems.length && g3) {
   const existingChild = ebsItems.find(i => Number(i.parent) === Number(g3.id));
   const keeper = existingChild || ebsItems[0];
   if (Number(keeper.parent) !== Number(g3.id)) {
-    await updateItem(keeper, { parent: Number(g3.id) });
-    updated.push(`${keeper.id}:parent→${g3.id}`);
+    const refreshed = await request(`/wp-json/wp/v2/menu-items/${keeper.id}?context=edit`, {}, { allow404: true });
+    if (refreshed) {
+      await updateItem(refreshed, { parent: Number(g3.id) });
+      updated.push(`${keeper.id}:parent→${g3.id}`);
+    }
   }
   for (const item of ebsItems) {
     if (Number(item.id) === Number(keeper.id)) continue;
-    await deleteItem(item);
-    deleted.push(`${item.id}:${rawTitle(item)}`);
+    const gone = await deleteItem(item);
+    if (gone) deleted.push(`${item.id}:${rawTitle(item)}`);
   }
 }
 
@@ -230,8 +233,9 @@ for (let index = 0; index < desiredKeys.length; index++) {
   const item = keepers.get(desiredKeys[index]);
   if (!item) continue;
   const desiredOrder = index + 1;
-  if (Number(item.menu_order) !== desiredOrder) {
-    await updateItem(item, { menu_order: desiredOrder });
+  const refreshed = await request(`/wp-json/wp/v2/menu-items/${item.id}?context=edit`, {}, { allow404: true });
+  if (refreshed && Number(refreshed.menu_order) !== desiredOrder) {
+    await updateItem(refreshed, { menu_order: desiredOrder });
     updated.push(`${item.id}:order→${desiredOrder}`);
   }
 }
