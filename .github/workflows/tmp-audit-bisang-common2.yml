@@ -1,0 +1,84 @@
+name: 비상 공통국어2 14개 최종 감사
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-audit-bisang-common2.yml'
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: 14개 게시물 구조 및 표현 감사
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re, html
+          from pathlib import Path
+          files = [
+            'wordpress-content/bisang-kangho-common2-u01-ai.html',
+            'wordpress-content/bisang-kangho-common2-u02-empathy.html',
+            'wordpress-content/bisang-kangho-common2-u03-cheongsan.html',
+            'wordpress-content/bisang-kangho-common2-u04-sipnyeon.html',
+            'wordpress-content/bisang-kangho-common2-u05-sokmiin.html',
+            'wordpress-content/bisang-kangho-common2-u06-azalea.html',
+            'wordpress-content/bisang-kangho-common2-u07-chunhyang.html',
+            'wordpress-content/bisang-kangho-common2-u08-up.html',
+            'wordpress-content/bisang-kangho-common2-u09-multimodal.html',
+            'wordpress-content/bisang-kangho-common2-u10-report.html',
+            'wordpress-content/bisang-kangho-common2-u11-change.html',
+            'wordpress-content/bisang-kangho-common2-u12-orthography.html',
+            'wordpress-content/bisang-kangho-common2-u13-negotiation.html',
+            'wordpress-content/bisang-kangho-common2-u14-argument.html',
+          ]
+          banned = ['자습서','평가문제집','지도서','교사용 교과서','시험 대비 정리','선생님의 보충 설명','정리 노트의 내용으로']
+          bad_stems = ['주의해야 할 점','공부 방법','시험에서 가장 중요한 태도','시험에서 중요한 태도']
+          def strip_tags(x):
+              x=re.sub(r'<script[\s\S]*?</script>',' ',x,flags=re.I)
+              x=re.sub(r'<style[\s\S]*?</style>',' ',x,flags=re.I)
+              x=re.sub(r'<[^>]+>',' ',x)
+              return re.sub(r'\s+',' ',html.unescape(x)).strip()
+          failures=[]
+          print('FILE|REV|SUMMARY_CHARS|BLANKS|SHORTQ|MCQ|DETAILS|SCRIPT_CHOICE|BANNED|BADSTEM|INDEX')
+          for f in files:
+              s=Path(f).read_text(encoding='utf-8')
+              rev=(re.search(r'<!--\s*revision:\s*(\d+)\s*-->',s) or [None,'0'])[1]
+              # summary area: from heading containing 핵심 내용 정리 to next h2
+              m=re.search(r'<h2[^>]*>[^<]*핵심 내용 정리[^<]*</h2>([\s\S]*?)(?=<h2|</section>)',s,re.I)
+              if not m:
+                  # broader section fallback
+                  m=re.search(r'<section[^>]*>(?:(?!</section>)[\s\S])*?<h2[^>]*>[^<]*핵심[^<]*</h2>([\s\S]*?)</section>',s,re.I)
+              summary=strip_tags(m.group(1)) if m else ''
+              blanks=len(re.findall(r'class="[^"]*blank',s))
+              shortq=len(re.findall(r'<article class="shortq"',s)) + len(re.findall(r'class="short"',s))
+              mcq=len(re.findall(r'<article class="q"',s))
+              details=len(re.findall(r'<details',s,re.I))
+              script_choice=bool(re.search(r"addEventListener\('click'",s) and re.search(r'data-correct|\.choice',s))
+              b=[x for x in banned if x in s]
+              bs=[x for x in bad_stems if x in s]
+              index='비상-강호영-공통국어2' in s
+              print(f'{Path(f).name}|{rev}|{len(summary)}|{blanks}|{shortq}|{mcq}|{details}|{int(script_choice)}|{",".join(b) or "-"}|{",".join(bs) or "-"}|{int(index)}')
+              if int(rev)<2: failures.append((f,'revision<2'))
+              if len(summary)<420: failures.append((f,f'핵심정리 {len(summary)}자'))
+              if blanks<4: failures.append((f,f'빈칸 {blanks}'))
+              if mcq<10: failures.append((f,f'객관식 {mcq}'))
+              if b: failures.append((f,'금지표현:'+','.join(b)))
+              if bs: failures.append((f,'부적절발문:'+','.join(bs)))
+              if not index: failures.append((f,'목차 링크 없음'))
+          idx=Path('wordpress-content/bisang-kangho-common2-index.html').read_text(encoding='utf-8')
+          hrefs=re.findall(r'href="https://modukorean\.co\.kr/(bisang-kangho-common2-u\d{2}-[^/]+)/"',idx)
+          print('INDEX_CARD_COUNT=',len(hrefs),'UNIQUE=',len(set(hrefs)))
+          if len(hrefs)!=14 or len(set(hrefs))!=14: failures.append(('INDEX','14개 링크 불일치'))
+          print('FAILURES=',failures)
+          PY
+      - name: 감사 워크플로 정리
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/tmp-audit-bisang-common2.yml
+          git commit -m '비상 공통국어2 최종 감사 임시 작업 정리'
+          git push origin HEAD:main
