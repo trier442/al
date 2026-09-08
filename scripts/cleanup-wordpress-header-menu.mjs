@@ -209,6 +209,12 @@ await ensurePageChild({
   parent: g1,
 });
 
+await ensurePageChild({
+  title: "비상 박영민 공통국어2",
+  slug: "bisang-park-common2-index",
+  parent: g1,
+});
+
 const ebsTitleNorm = norm("2027 수능완성 언어와 매체");
 const ebsItems = items.filter(i => norm(rawTitle(i)) === ebsTitleNorm);
 if (ebsItems.length && g3) {
@@ -282,6 +288,8 @@ if (remainingDuplicates.length) {
 if (g1) {
   const kangho = finalItems.filter(i => Number(i.parent) === Number(g1.id) && norm(rawTitle(i)) === norm("비상 강호영 공통국어2"));
   if (kangho.length !== 1) throw new Error(`비상 강호영 공통국어2 하위 메뉴 수가 ${kangho.length}개입니다.`);
+  const park = finalItems.filter(i => Number(i.parent) === Number(g1.id) && norm(rawTitle(i)) === norm("비상 박영민 공통국어2"));
+  if (park.length !== 1) throw new Error(`비상 박영민 공통국어2 하위 메뉴 수가 ${park.length}개입니다.`);
 }
 
 console.log("Header menu cleanup completed successfully.");
