@@ -24,8 +24,8 @@ jobs:
           P0='scripts/tmp-bisang-common2-u52-argument.part00'
           P1='scripts/tmp-bisang-common2-u52-argument.part01'
           T='wordpress-content/bisang-kangho-common2-u14-argument.html'
-          test "$(sha256sum "$P0" | awk '{print $1}')" = '276d6af7f32079fb966877b2c3f00aff5b74a398b10e8a58aa24412af5284a8a'
-          test "$(sha256sum "$P1" | awk '{print $1}')" = '492c5b54b4b884323759350531e944fa35d94d05d05bce458652f5cc1ba4db57'
+          test "$(sha256sum "$P0" | awk '{print $1}')" = '48d6b5232fb6e1393e5daaeb7ab42e0ac5a422b7e31ea73f9d12d324e9bded42'
+          test "$(sha256sum "$P1" | awk '{print $1}')" = '4a62a9b402977ed4690c03d4165ebc59dec17dac0c1c2cd4bf09b7bb1f98e4e4'
           cat "$P0" "$P1" | base64 -d | gzip -d > "$T"
           test "$(sha256sum "$T" | awk '{print $1}')" = '24277a932c7bd3cbff06837b4e54190c007657b693eee09f6f9888a9137fa85f'
           grep -q '<!-- revision: 2 -->' "$T"
