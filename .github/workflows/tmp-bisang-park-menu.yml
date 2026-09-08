@@ -1,0 +1,55 @@
+name: 비상 박영민 공통국어2 메뉴 연결
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-bisang-park-menu.yml'
+permissions:
+  contents: write
+jobs:
+  menu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 메뉴 정리 스크립트에 박영민 목차 추가
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/cleanup-wordpress-header-menu.mjs')
+          s=p.read_text(encoding='utf-8')
+          marker='''await ensurePageChild({\n  title: "비상 강호영 공통국어2",\n  slug: "비상-강호영-공통국어2",\n  parent: g1,\n});\n'''
+          add='''\nawait ensurePageChild({\n  title: "비상 박영민 공통국어2",\n  slug: "bisang-park-common2-index",\n  parent: g1,\n});\n'''
+          if 'title: "비상 박영민 공통국어2"' not in s:
+              assert marker in s
+              s=s.replace(marker,marker+add,1)
+          verify='''  const kangho = finalItems.filter(i => Number(i.parent) === Number(g1.id) && norm(rawTitle(i)) === norm("비상 강호영 공통국어2"));\n  if (kangho.length !== 1) throw new Error(`비상 강호영 공통국어2 하위 메뉴 수가 ${kangho.length}개입니다.`);\n'''
+          verify_add='''  const park = finalItems.filter(i => Number(i.parent) === Number(g1.id) && norm(rawTitle(i)) === norm("비상 박영민 공통국어2"));\n  if (park.length !== 1) throw new Error(`비상 박영민 공통국어2 하위 메뉴 수가 ${park.length}개입니다.`);\n'''
+          if 'const park = finalItems.filter' not in s:
+              assert verify in s
+              s=s.replace(verify,verify+verify_add,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+          grep -q '비상 박영민 공통국어2' scripts/cleanup-wordpress-header-menu.mjs
+      - name: WordPress 상단 메뉴 반영
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/cleanup-wordpress-header-menu.mjs
+      - name: 스크립트 커밋 및 임시 작업 정리
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm .github/workflows/tmp-bisang-park-menu.yml
+          git add scripts/cleanup-wordpress-header-menu.mjs
+          git commit -m '비상 박영민 공통국어2 상단 메뉴 연결'
+          git push origin HEAD:main
+          echo "FINAL_COMMIT=$(git rev-parse HEAD)"
