@@ -1,0 +1,131 @@
+name: 비상 공통국어2 편집 메타 문구 제거
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-bisang-common2-remove-editorial-notes.yml'
+permissions:
+  contents: write
+jobs:
+  clean-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 학생용 페이지의 편집 메타 문구 제거
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import re, html
+          from pathlib import Path
+
+          files = sorted(Path('wordpress-content').glob('bisang-kangho-common2-u*.html'))
+          files += [
+              Path('wordpress-content/bisang-park-common2-u01-longing.html'),
+              Path('wordpress-content/bisang-park-common2-u02-dream.html'),
+          ]
+          changed=[]
+
+          def plain(x):
+              return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',x))).strip()
+
+          def is_meta(t):
+              meta_phrases = [
+                  '필요한 문항', '문제 구성', '문항 구성', '편집 지침', '편집 원칙',
+                  '정답 배열', '정답 번호', '선택지 길이', '가장 긴 선택지',
+                  '직접 판단하도록 구성했습니다', '묻도록 구성했습니다',
+                  '중심으로 구성했습니다', '적용해 판단하도록 구성했습니다',
+                  '짧은 <보기>를 제시했습니다', '짧은 <보기>를 제시하였습니다'
+              ]
+              if any(x in t for x in meta_phrases):
+                  return True
+              if ('구성했습니다' in t or '제시했습니다' in t) and any(k in t for k in ['문항','문제','보기','제재','자료','규정','선택지']):
+                  return True
+              return False
+
+          for p in files:
+              if not p.exists():
+                  continue
+              s=p.read_text(encoding='utf-8')
+              before=s
+
+              # 문제/객관식/변형문제 제목 바로 뒤에 붙은 제작·편집 안내 문단만 제거한다.
+              pat=re.compile(r'(<h2[^>]*>[\s\S]*?(?:객관식|변형문제|문제)[\s\S]*?</h2>)\s*(<p[^>]*>[\s\S]*?</p>)', re.I)
+              def repl(m):
+                  t=plain(m.group(2))
+                  return m.group(1) if is_meta(t) else m.group(0)
+              s=pat.sub(repl,s)
+
+              # 명시적으로 편집 메모 성격인 독립 문단도 제거한다.
+              patp=re.compile(r'<p[^>]*>[\s\S]*?</p>', re.I)
+              s=patp.sub(lambda m: '' if is_meta(plain(m.group(0))) else m.group(0), s)
+
+              if s != before:
+                  def bump(m):
+                      return f'<!-- revision: {int(m.group(1))+1} -->'
+                  s,n=re.subn(r'<!--\s*revision:\s*(\d+)\s*-->', bump, s, count=1)
+                  if n != 1:
+                      raise RuntimeError(f'revision marker missing: {p}')
+                  p.write_text(s,encoding='utf-8')
+                  changed.append(str(p))
+
+          print('CHANGED_COUNT',len(changed))
+          for x in changed: print('CHANGED',x)
+          Path('/tmp/changed.txt').write_text('\n'.join(changed),encoding='utf-8')
+          PY
+      - name: 공개 문구 재검사
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import re, html
+          from pathlib import Path
+          files=sorted(Path('wordpress-content').glob('bisang-kangho-common2-u*.html'))+[Path('wordpress-content/bisang-park-common2-u01-longing.html'),Path('wordpress-content/bisang-park-common2-u02-dream.html')]
+          bad=[]
+          for p in files:
+              if not p.exists(): continue
+              s=p.read_text(encoding='utf-8')
+              text=html.unescape(re.sub(r'<[^>]+>',' ',s))
+              for phrase in ['필요한 문항에만 짧은 <보기>를 제시했습니다','필요한 문항에는 짧은 <보기>를 제시했습니다','정답 배열','선택지 길이','가장 긴 선택지','문제 구성 원칙']:
+                  if phrase in text:
+                      bad.append((p.name,phrase))
+          if bad:
+              raise SystemExit(f'public editorial notes remain: {bad}')
+          print('PUBLIC_EDITORIAL_NOTE_CHECK_OK')
+          PY
+      - name: 최종 수정 커밋 및 임시 작업 정리
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          CHANGED=$(cat /tmp/changed.txt)
+          git rm .github/workflows/tmp-bisang-common2-remove-editorial-notes.yml
+          if [ -n "$CHANGED" ]; then
+            printf '%s\n' "$CHANGED" | xargs git add
+          fi
+          git commit -m '비상 공통국어2 학생용 편집 메타 문구 제거'
+          git push origin HEAD:main
+          echo "FINAL_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          printf '%s\n' "$CHANGED" > /tmp/publish.txt
+      - name: 수정된 WordPress 페이지 재발행
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: 65000
+        run: |
+          set -euo pipefail
+          FILES=$(cat /tmp/publish.txt | tr '\n' ' ')
+          if [ -n "$FILES" ]; then
+            node scripts/publish-wordpress.mjs $FILES
+          fi
+          echo 'WordPress 재발행 확인 완료 — success'
+          echo "최종 콘텐츠 커밋: $FINAL_COMMIT"
