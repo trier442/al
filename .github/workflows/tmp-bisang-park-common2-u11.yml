@@ -1,0 +1,95 @@
+name: 비상 박영민 공통국어2 1-1 구축
+on:
+  push:
+    paths:
+      - '.github/workflows/tmp-bisang-park-common2-u11.yml'
+permissions:
+  contents: write
+jobs:
+  rebuild-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 원고 복원 및 검증
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat scripts/tmp-bisang-park-u01.part0 scripts/tmp-bisang-park-u01.part1 | base64 -d | gzip -d > wordpress-content/bisang-park-common2-u01-longing.html
+          cat scripts/tmp-bisang-park-u02.part0 scripts/tmp-bisang-park-u02.part1 | base64 -d | gzip -d > wordpress-content/bisang-park-common2-u02-dream.html
+          cat scripts/tmp-bisang-park-index.part0 | base64 -d | gzip -d > wordpress-content/bisang-park-common2-index.html
+          test "$(sha256sum wordpress-content/bisang-park-common2-u01-longing.html | awk '{print $1}')" = '6a573ed4897670ae7bd0436fd352ce5145e77f35aa8280cee730c2a72acf8ba3'
+          test "$(sha256sum wordpress-content/bisang-park-common2-u02-dream.html | awk '{print $1}')" = '25494e0dca463d8f08b581106bbe99f6c7c4ec4fd659a10e9e67748163cf11d4'
+          test "$(sha256sum wordpress-content/bisang-park-common2-index.html | awk '{print $1}')" = '4f7a71001e2c42b959b6dd36af676876b425dab813afd788b9350239b0e9dfec'
+          python - <<'PY'
+          import re, html
+          from pathlib import Path
+          files=[
+            Path('wordpress-content/bisang-park-common2-u01-longing.html'),
+            Path('wordpress-content/bisang-park-common2-u02-dream.html')
+          ]
+          circles='①②③④⑤'
+          forbidden=['자습서','평가문제집','지도서','교사용 교과서','시험 대비','선생님의 보충 설명']
+          for p in files:
+              s=p.read_text(encoding='utf-8')
+              assert '<!-- revision: 1 -->' in s, p
+              assert not any(x in s for x in forbidden), (p,[x for x in forbidden if x in s])
+              assert len(re.findall(r'<article class="shortq">',s))==15, p
+              arts=re.findall(r'<article class="q">([\s\S]*?)</article>',s)
+              assert len(arts)==10, (p,len(arts))
+              answers=[]
+              choice_total=0
+              for i,a in enumerate(arts,1):
+                  m=re.search(r'<b>정답 ([①②③④⑤])</b>',a)
+                  assert m, (p,i)
+                  ans=circles.index(m.group(1))+1
+                  answers.append(ans)
+                  opts=[re.sub(r'<[^>]+>','',html.unescape(x)).strip() for x in re.findall(r'<div class="choice">([\s\S]*?)</div>',a)]
+                  assert len(opts)==5,(p,i,len(opts))
+                  choice_total += len(opts)
+                  lens=[len(x) for x in opts]
+                  assert lens[ans-1] < max(l for j,l in enumerate(lens) if j!=ans-1),(p,i,lens)
+                  assert '<details' in a and '정답·해설 보기' in a,(p,i)
+              assert choice_total==50,(p,choice_total)
+              assert answers==[3,5,2,4,1,3,5,2,4,1],(p,answers)
+              blanks=len(re.findall(r'class="blank"',s))
+              assert blanks>=6,(p,blanks)
+              print(p.name,'OK','answers=',answers,'blanks=',blanks)
+          idx=Path('wordpress-content/bisang-park-common2-index.html').read_text(encoding='utf-8')
+          assert 'bisang-park-common2-u01-longing' in idx
+          assert 'bisang-park-common2-u02-dream' in idx
+          assert '<!-- revision: 1 -->' in idx
+          print('INDEX OK')
+          PY
+          echo "u01 sha256=$(sha256sum wordpress-content/bisang-park-common2-u01-longing.html | awk '{print $1}')"
+          echo "u02 sha256=$(sha256sum wordpress-content/bisang-park-common2-u02-dream.html | awk '{print $1}')"
+          echo "index sha256=$(sha256sum wordpress-content/bisang-park-common2-index.html | awk '{print $1}')"
+      - name: 최종 콘텐츠 커밋 및 임시 파일 정리
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm scripts/tmp-bisang-park-u01.part0 scripts/tmp-bisang-park-u01.part1 scripts/tmp-bisang-park-u02.part0 scripts/tmp-bisang-park-u02.part1 scripts/tmp-bisang-park-index.part0 .github/workflows/tmp-bisang-park-common2-u11.yml
+          git add wordpress-content/bisang-park-common2-u01-longing.html wordpress-content/bisang-park-common2-u02-dream.html wordpress-content/bisang-park-common2-index.html
+          git commit -m '비상 박영민 공통국어2 1-1 문학의 해석과 생활화 구축'
+          git push origin HEAD:main
+          echo "FINAL_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+      - name: WordPress 3개 재발행
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: 65000
+        run: |
+          set -euo pipefail
+          node scripts/publish-wordpress.mjs wordpress-content/bisang-park-common2-index.html wordpress-content/bisang-park-common2-u01-longing.html wordpress-content/bisang-park-common2-u02-dream.html
+          echo 'WordPress 3개 게시 확인 완료 — success'
+          echo "최종 콘텐츠 커밋: $FINAL_COMMIT"
