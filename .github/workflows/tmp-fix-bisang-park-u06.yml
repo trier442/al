@@ -1,5 +1,5 @@
 name: 비상 박영민 공통국어2 2-2 최종 검수
-# retry: option-length validation repaired
+# retry: q2 and q6 option-length validation repaired
 on:
   push:
     branches: [main]
