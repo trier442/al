@@ -11,11 +11,14 @@ on:
       - "scripts/validate-hwajak-pages.mjs"
       - "scripts/lint-hwajak-language.mjs"
       - "scripts/hwajak-payload/**"
+      - "scripts/standardize-common2-pages.mjs"
+      - "scripts/verify-common2-seo.mjs"
+      - "scripts/publish-wordpress.mjs"
       - ".github/workflows/wordpress-publish.yml"
   workflow_dispatch:
     inputs:
       file:
-        description: "게시할 HTML 파일 경로 또는 ALL_HWAJAK"
+        description: "게시할 HTML 파일 경로, ALL_HWAJAK 또는 ALL_COMMON2"
         required: true
         default: "ALL_HWAJAK"
 
@@ -36,6 +39,9 @@ jobs:
         with:
           node-version: "22"
 
+      - name: 공통국어2 순차 링크 및 SEO 메타 보정
+        run: node scripts/standardize-common2-pages.mjs
+
       - name: 화법과 작문 57개 원고 생성
         run: node scripts/standardize-hwajak-pages.mjs
 
@@ -52,15 +58,22 @@ jobs:
         id: files
         shell: bash
         run: |
+          COMMON2=false
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             if [ "${{ inputs.file }}" = "ALL_HWAJAK" ]; then
               FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-hwajak-*.html' | sort | tr '\n' ' ')
+            elif [ "${{ inputs.file }}" = "ALL_COMMON2" ]; then
+              FILES=$(find wordpress-content -maxdepth 1 -type f \( -name 'bisang-park-common2-u*.html' -o -name 'bisang-park-common2-index.html' \) | sort -V | tr '\n' ' ')
+              COMMON2=true
             else
               FILES="${{ inputs.file }}"
             fi
           else
             CHANGED=$(git diff --name-only HEAD^ HEAD)
-            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|wordpress-content/2027-suteuk-hwajak-)'; then
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-common2-pages|verify-common2-seo|publish-wordpress)\.mjs|\.github/workflows/wordpress-publish\.yml)$'; then
+              FILES=$(find wordpress-content -maxdepth 1 -type f \( -name 'bisang-park-common2-u*.html' -o -name 'bisang-park-common2-index.html' \) | sort -V | tr '\n' ' ')
+              COMMON2=true
+            elif printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|wordpress-content/2027-suteuk-hwajak-)'; then
               FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-hwajak-*.html' | sort | tr '\n' ' ')
             else
               FILES=$(git diff --name-only HEAD^ HEAD -- ':(glob)wordpress-content/**/*.html' | tr '\n' ' ')
@@ -69,7 +82,12 @@ jobs:
               fi
             fi
           fi
+
+          if printf '%s\n' "$FILES" | grep -q 'wordpress-content/bisang-park-common2-'; then
+            COMMON2=true
+          fi
           echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "common2=$COMMON2" >> "$GITHUB_OUTPUT"
           if [ -z "$FILES" ]; then
             echo "게시 대상 HTML 변경 없음 — 게시 단계 생략"
           else
@@ -104,3 +122,9 @@ jobs:
           done
           echo "즉시 게시가 실패했습니다. scripts/wordpress-publish-targets.txt에 대상을 두면 WordPress 자동 복구 게시가 시간별로 재시도합니다." >&2
           exit 1
+
+      - name: 공통국어2 공개 페이지 SEO 검증
+        if: steps.files.outputs.common2 == 'true'
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+        run: node scripts/verify-common2-seo.mjs
