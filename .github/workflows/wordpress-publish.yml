@@ -13,6 +13,7 @@ on:
       - "scripts/hwajak-payload/**"
       - "scripts/standardize-common2-pages.mjs"
       - "scripts/verify-common2-seo.mjs"
+      - "scripts/inspect-common2-seo-capabilities.mjs"
       - "scripts/publish-wordpress.mjs"
       - ".github/workflows/wordpress-publish.yml"
   workflow_dispatch:
@@ -70,7 +71,7 @@ jobs:
             fi
           else
             CHANGED=$(git diff --name-only HEAD^ HEAD)
-            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-common2-pages|verify-common2-seo|publish-wordpress)\.mjs|\.github/workflows/wordpress-publish\.yml)$'; then
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-common2-pages|verify-common2-seo|inspect-common2-seo-capabilities|publish-wordpress)\.mjs|\.github/workflows/wordpress-publish\.yml)$'; then
               FILES=$(find wordpress-content -maxdepth 1 -type f \( -name 'bisang-park-common2-u*.html' -o -name 'bisang-park-common2-index.html' \) | sort -V | tr '\n' ' ')
               COMMON2=true
             elif printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|wordpress-content/2027-suteuk-hwajak-)'; then
@@ -128,3 +129,11 @@ jobs:
         env:
           WP_URL: ${{ secrets.WP_URL }}
         run: node scripts/verify-common2-seo.mjs
+
+      - name: WordPress SEO 기능 탐지
+        if: steps.files.outputs.common2 == 'true'
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/inspect-common2-seo-capabilities.mjs
