@@ -14,6 +14,7 @@ on:
       - "scripts/standardize-common2-pages.mjs"
       - "scripts/verify-common2-seo.mjs"
       - "scripts/inspect-common2-seo-capabilities.mjs"
+      - "scripts/ensure-common2-meta-description-plugin.mjs"
       - "scripts/publish-wordpress.mjs"
       - ".github/workflows/wordpress-publish.yml"
   workflow_dispatch:
@@ -71,7 +72,7 @@ jobs:
             fi
           else
             CHANGED=$(git diff --name-only HEAD^ HEAD)
-            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-common2-pages|verify-common2-seo|inspect-common2-seo-capabilities|publish-wordpress)\.mjs|\.github/workflows/wordpress-publish\.yml)$'; then
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-common2-pages|verify-common2-seo|inspect-common2-seo-capabilities|ensure-common2-meta-description-plugin|publish-wordpress)\.mjs|\.github/workflows/wordpress-publish\.yml)$'; then
               FILES=$(find wordpress-content -maxdepth 1 -type f \( -name 'bisang-park-common2-u*.html' -o -name 'bisang-park-common2-index.html' \) | sort -V | tr '\n' ' ')
               COMMON2=true
             elif printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|wordpress-content/2027-suteuk-hwajak-)'; then
@@ -123,6 +124,14 @@ jobs:
           done
           echo "즉시 게시가 실패했습니다. scripts/wordpress-publish-targets.txt에 대상을 두면 WordPress 자동 복구 게시가 시간별로 재시도합니다." >&2
           exit 1
+
+      - name: 공통국어2 meta description 출력 활성화
+        if: steps.files.outputs.common2 == 'true'
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/ensure-common2-meta-description-plugin.mjs
 
       - name: 공통국어2 공개 페이지 SEO 검증
         if: steps.files.outputs.common2 == 'true'
