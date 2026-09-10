@@ -8,6 +8,10 @@ const baseUrl = process.env.WP_URL.replace(/\/$/, "");
 const auth = "Basic " + Buffer.from(`${process.env.WP_USERNAME}:${process.env.WP_APP_PASSWORD.replace(/\s/g, "")}`).toString("base64");
 const pluginsEndpoint = `${baseUrl}/wp-json/wp/v2/plugins`;
 const targetSlug = "raechal-seo-connector";
+const legacySlug = "비상-박영민-공통국어2";
+const canonicalSlug = "bisang-park-common2-index";
+const canonicalUrl = `${baseUrl}/${canonicalSlug}/`;
+const legacyDescription = "비상 박영민 공통국어2의 기존 주소입니다. 최신 단원별 해설·핵심 정리·내신 변형문제는 새 통합 학습 목차에서 확인할 수 있습니다.";
 const slugs = [
   "bisang-park-common2-u01-longing","bisang-park-common2-u02-dream","bisang-park-common2-u03-creative-brain","bisang-park-common2-u04-creativity-truth","bisang-park-common2-u05-language-media-change","bisang-park-common2-u06-orthography","bisang-park-common2-u07-media-perspectives","bisang-park-common2-u08-report-writing","bisang-park-common2-u09-seogyeong","bisang-park-common2-u10-jaemangmaega","bisang-park-common2-u11-jindallaekkot","bisang-park-common2-u12-ganghosasiga","bisang-park-common2-u13-sangchungok","bisang-park-common2-u14-nonbat","bisang-park-common2-u15-bombom","bisang-park-common2-u16-heungbojeon","bisang-park-common2-u17-consumption","bisang-park-common2-u18-negotiation","bisang-park-common2-u19-argument-writing"
 ];
@@ -27,7 +31,7 @@ async function request(url, options = {}) {
 async function publicHtml(slug) {
   const response = await fetch(`${baseUrl}/${slug}/?common2_meta_check=${Date.now()}_${Math.random()}`, {
     redirect: "follow",
-    headers: { "User-Agent": "ModuKorean-SEO-Meta/2.0", "Cache-Control": "no-cache" },
+    headers: { "User-Agent": "ModuKorean-SEO-Meta/2.1", "Cache-Control": "no-cache" },
   });
   const html = await response.text();
   if (!response.ok) throw new Error(`${slug}: public HTTP ${response.status}`);
@@ -47,7 +51,7 @@ function titleOf(html) {
   return m ? stripHtml(m[1]) : "";
 }
 function canonicalsOf(html) {
-  return [...html.matchAll(/<link\b[^>]*rel=["'][^"']*canonical[^"']*["'][^>]*href=["']([^"']+)["'][^>]*>/gi)].map(m => m[1]);
+  return [...html.matchAll(/<link\b[^>]*rel=["'][^"']*canonical[^"']*["'][^>]*href=["']([^"']+)["'][^>]*>/gi)].map(m => decodeEntities(m[1]));
 }
 function descriptionsOf(html) {
   const a = [...html.matchAll(/<meta\b[^>]*name=["']description["'][^>]*content=["']([^"']*)["'][^>]*>/gi)].map(m => decodeEntities(m[1]).trim());
@@ -57,7 +61,14 @@ function descriptionsOf(html) {
 function noindexOf(html) {
   return [...html.matchAll(/<meta\b[^>]*name=["'](?:robots|googlebot)["'][^>]*content=["']([^"']*)["'][^>]*>/gi)].some(m => /\bnoindex\b/i.test(m[1]));
 }
-function normalizeUrl(value) { return String(value || "").replace(/[?#].*$/, "").replace(/\/$/, "").toLowerCase(); }
+function normalizeUrl(value) {
+  try {
+    const url = new URL(String(value || ""), baseUrl);
+    return decodeURIComponent(url.href).replace(/[?#].*$/, "").replace(/\/$/, "").toLowerCase();
+  } catch {
+    return decodeURIComponent(String(value || "")).replace(/[?#].*$/, "").replace(/\/$/, "").toLowerCase();
+  }
+}
 function selfHref(plugin) {
   const self = plugin?._links?.self;
   if (Array.isArray(self) && self[0]?.href) return self[0].href;
@@ -71,6 +82,11 @@ async function setPluginStatus(plugin, status) {
   const href = selfHref(plugin);
   if (!href) throw new Error(`${plugin?.name || plugin?.plugin || "플러그인"}: REST self 링크가 없습니다.`);
   return request(href, { method: "POST", body: JSON.stringify({ status }) });
+}
+async function findPage(slug) {
+  const pages = await request(`${baseUrl}/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&context=edit&per_page=1`);
+  if (!Array.isArray(pages) || !pages[0]?.id) throw new Error(`${slug}: WordPress 페이지를 찾지 못했습니다.`);
+  return pages[0];
 }
 
 // 1) 앞선 시험용 VS Meta Description은 설명을 출력하지 못했으므로 먼저 정리한다.
@@ -119,13 +135,12 @@ try {
 }
 
 const touched = [];
+let legacyTouched = null;
 let failure = null;
 try {
   // 4) 각 페이지의 WordPress excerpt를 해당 페이지의 SEO description 필드에만 기록한다.
   for (const slug of slugs) {
-    const pages = await request(`${baseUrl}/wp-json/wp/v2/pages?slug=${encodeURIComponent(slug)}&context=edit&per_page=1`);
-    if (!Array.isArray(pages) || !pages[0]?.id) throw new Error(`${slug}: WordPress 페이지를 찾지 못했습니다.`);
-    const page = pages[0];
+    const page = await findPage(slug);
     const excerpt = stripHtml(page.excerpt?.raw || page.excerpt?.rendered || "");
     if (excerpt.length < 30) throw new Error(`${slug}: excerpt가 너무 짧습니다(${excerpt.length}자).`);
     await request(`${baseUrl}/wp-json/wp/v2/pages/${page.id}`, {
@@ -136,9 +151,23 @@ try {
     console.log(`description 저장: ${slug} | ${excerpt.length}자`);
   }
 
+  // 5) 검색엔진에 먼저 잡힌 기존 한글 주소는 새 통합 목차를 canonical로 지정해 신호를 한 주소로 모은다.
+  const legacyPage = await findPage(legacySlug);
+  legacyTouched = { id: legacyPage.id, slug: legacySlug };
+  await request(`${baseUrl}/wp-json/wp/v2/pages/${legacyPage.id}`, {
+    method: "POST",
+    body: JSON.stringify({
+      meta: {
+        _raechal_seo_description: legacyDescription,
+        _raechal_seo_canonical_url: canonicalUrl,
+      },
+    }),
+  });
+  console.log(`legacy canonical 저장: ${legacySlug} → ${canonicalUrl}`);
+
   await new Promise(resolve => setTimeout(resolve, 2500));
 
-  // 5) 공개 HTML을 전수 검사한다. 설명 외 title/canonical/robots가 바뀌면 즉시 실패 처리한다.
+  // 6) 공개 HTML을 전수 검사한다. 설명 외 title/canonical/robots가 바뀌면 즉시 실패 처리한다.
   const descriptions = [];
   for (const slug of slugs) {
     const html = await publicHtml(slug);
@@ -161,6 +190,17 @@ try {
   const unique = new Set(descriptions);
   if (unique.size !== slugs.length) throw new Error(`meta description 고유성 실패: ${unique.size}/${slugs.length}`);
   console.log(`공통국어2 meta description 공개 검증 완료: ${slugs.length}/${slugs.length}개, 고유 ${unique.size}개 — success`);
+
+  const legacyHtml = await publicHtml(legacySlug);
+  const legacyCanonicals = canonicalsOf(legacyHtml);
+  const legacyDescriptions = descriptionsOf(legacyHtml);
+  const legacyIssues = [];
+  if (legacyCanonicals.length !== 1) legacyIssues.push(`canonical ${legacyCanonicals.length}개`);
+  else if (normalizeUrl(legacyCanonicals[0]) !== normalizeUrl(canonicalUrl)) legacyIssues.push(`canonical 불일치 ${legacyCanonicals[0]}`);
+  if (legacyDescriptions.length !== 1) legacyIssues.push(`meta description ${legacyDescriptions.length}개`);
+  if (noindexOf(legacyHtml)) legacyIssues.push("noindex 감지");
+  if (legacyIssues.length) throw new Error(`${legacySlug}: ${legacyIssues.join(", ")}`);
+  console.log(`✅ 이전 한글 주소 canonical 통합 확인: ${legacySlug} → ${canonicalUrl}`);
 } catch (error) {
   failure = error;
 }
@@ -171,6 +211,14 @@ if (failure) {
     try {
       await request(`${baseUrl}/wp-json/wp/v2/pages/${item.id}`, { method: "POST", body: JSON.stringify({ meta: { _raechal_seo_description: "" } }) });
     } catch (error) { console.log(`${item.slug} meta 롤백 경고: ${error.message}`); }
+  }
+  if (legacyTouched) {
+    try {
+      await request(`${baseUrl}/wp-json/wp/v2/pages/${legacyTouched.id}`, {
+        method: "POST",
+        body: JSON.stringify({ meta: { _raechal_seo_description: "", _raechal_seo_canonical_url: "" } }),
+      });
+    } catch (error) { console.log(`${legacySlug} canonical 롤백 경고: ${error.message}`); }
   }
   try {
     const latest = (await listPlugins()).find(p => String(p.plugin || "").startsWith(`${targetSlug}/`) || /Raechal SEO Connector/i.test(p.name || ""));
