@@ -9,9 +9,9 @@
 </style>
 <div class="ks">
 <header class="hero">
-<p class="crumb">4. 다양한 생각을 아우르는 힘 · 4-2 · 평가문제집 224~241쪽</p>
+<p class="crumb">4. 다양한 생각을 아우르는 힘 · 4-2</p>
 <h1>공동 보고서 쓰기 — 온라인 캠페인 참여 실태 조사 보고서</h1>
-<p>천재 김수학 공통국어2 평가문제집의 실제 보고서·자료·문항 해설을 기준으로 쓰기 과정과 자료 활용, 고쳐쓰기, 쓰기 윤리, 협력적 태도를 정리했습니다.</p>
+<p>천재 김수학 공통국어2 교재의 실제 보고서·자료·문항 해설을 기준으로 쓰기 과정과 자료 활용, 고쳐쓰기, 쓰기 윤리, 협력적 태도를 정리했습니다.</p>
 </header>
 
 <section>
@@ -75,7 +75,7 @@
 <h3>③ 참여 방법</h3>
 <p>‘게시글에 댓글을 달거나 해시태그만 올림’이 <strong>52%</strong>로 가장 높다. 따라서 온라인에서 표시만 하고 실제 생활의 실천으로 이어지지 않는 참여가 적지 않다는 문제를 제기할 수 있다.</p>
 <h3>④ 참여 횟수</h3>
-<p>평가문제집 해설은 온라인 캠페인 참여자 124명 중 <strong>94명이 1~2회만 참여</strong>한 점을 근거로, 상당수가 일회적·단기적 참여에 그쳤음을 판단하게 한다.</p>
+<p>교재 해설은 온라인 캠페인 참여자 124명 중 <strong>94명이 1~2회만 참여</strong>한 점을 근거로, 상당수가 일회적·단기적 참여에 그쳤음을 판단하게 한다.</p>
 </div>
 </section>
 
@@ -227,7 +227,7 @@
 <button class="choice">② 참여 여부보다 해시태그 수를 늘리는 것이 중요하다.</button>
 <button class="choice">③ 캠페인의 역사적 기원을 최대한 길게 소개해야 한다.</button>
 <button class="choice">④ 유행을 따르는 동기라면 캠페인의 취지는 고려할 필요가 없다.</button>
-<button class="choice" data-correct="1">⑤ 온라인에서 반응을 표시하는 데 그치지 말고 캠페인의 취지를 이해하여 실제 사회 참여와 실천으로 이어 가야 한다.</button></div><div class="feedback"></div><div class="solution"><b>정답 ⑤</b><p>평가문제집 해설은 온라인 캠페인이 근본적 해결 노력이나 실제 사회 참여로 이어지지 않는 경우가 있음을 지적하는 자료를 이 항목에 활용하도록 한다.</p></div></article>
+<button class="choice" data-correct="1">⑤ 온라인에서 반응을 표시하는 데 그치지 말고 캠페인의 취지를 이해하여 실제 사회 참여와 실천으로 이어 가야 한다.</button></div><div class="feedback"></div><div class="solution"><b>정답 ⑤</b><p>교재 해설은 온라인 캠페인이 근본적 해결 노력이나 실제 사회 참여로 이어지지 않는 경우가 있음을 지적하는 자료를 이 항목에 활용하도록 한다.</p></div></article>
 
 <article class="q" data-answer="3"><h3>10. 이 보고서의 자료와 결론의 관계를 가장 정확하게 설명한 것은?</h3><div class="choices">
 <button class="choice">① 결론은 조사 자료와 독립적이므로 필자의 인상만 제시하면 된다.</button>
@@ -254,13 +254,7 @@
 (function(){
 document.querySelectorAll('.ks .blank').forEach(function(b){b.addEventListener('click',function(){var o=b.classList.toggle('open');b.textContent=o?b.dataset.answer:'□□□□';});});
 document.querySelectorAll('.ks .q').forEach(function(q){
- q.querySelectorAll('.choice').forEach(function(c){
-  c.addEventListener('click',function(){
-   q.querySelectorAll('.choice').forEach(function(x){x.classList.remove('correct','wrong');});
-   var ok=c.dataset.correct==='1'; c.classList.add(ok?'correct':'wrong');
-   var f=q.querySelector('.feedback'); f.textContent=ok?'정답입니다.':'오답입니다. 정답은 '+q.dataset.answer+'번입니다.'; f.className='feedback show '+(ok?'ok':'no');
-   q.querySelector('.solution').classList.add('show');
-  });
+ q.querySelectorAll('.choice').forEach(function(c){  c.addEventListener('click',function(){  q.querySelectorAll('.choice').forEach(function(x){x.classList.remove('correct','wrong');});  var ok=c.dataset.correct==='1'; c.classList.add(ok?'correct':'wrong');  var f=q.querySelector('.feedback'); f.textContent=ok?'정답입니다.':'오답입니다. 정답은 '+q.dataset.answer+'번입니다.'; f.className='feedback show '+(ok?'ok':'no');  q.querySelector('.solution').classList.add('show');  });
  });
 });
 })();
