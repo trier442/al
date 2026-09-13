@@ -1,0 +1,44 @@
+name: 공통국어2 공개 문구 정리
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/clean-common2-public-copy.mjs'
+      - '.github/workflows/clean-common2-public-copy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 공개 페이지 문구 정리
+        run: node scripts/clean-common2-public-copy.mjs
+
+      - name: 변경 내용 커밋
+        shell: bash
+        run: |
+          FILES=$(git diff --name-only -- wordpress-content/cheonja-kimsuhak-common2\*.html wordpress-content/mirae-sinyusik-common2\*.html | tr '\n' ' ')
+          if [ -z "$FILES" ]; then
+            echo "정리할 공개 문구 없음"
+            exit 0
+          fi
+          echo "수정 파일: $FILES"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add $FILES
+          git commit -m "공통국어2 공개 페이지에서 부교재·편집 문구 삭제"
+          git push
