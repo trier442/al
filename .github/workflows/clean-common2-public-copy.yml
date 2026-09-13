@@ -29,17 +29,50 @@ jobs:
       - name: 공개 페이지 문구 정리
         run: node scripts/clean-common2-public-copy.mjs
 
+      - name: WordPress 반영 대상 준비
+        id: targets
+        shell: bash
+        run: |
+          FILES=$(find wordpress-content -maxdepth 1 -type f \( -name 'cheonja-kimsuhak-common2*.html' -o -name 'mirae-sinyusik-common2*.html' \) | sort -V | tr '\n' ' ')
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "WordPress 반영 대상: $(printf '%s' "$FILES" | wc -w)개"
+
       - name: 변경 내용 커밋
         shell: bash
         run: |
-          FILES=$(git diff --name-only -- wordpress-content/cheonja-kimsuhak-common2\*.html wordpress-content/mirae-sinyusik-common2\*.html | tr '\n' ' ')
-          if [ -z "$FILES" ]; then
-            echo "정리할 공개 문구 없음"
+          CHANGED=$(git diff --name-only -- wordpress-content/cheonja-kimsuhak-common2\*.html wordpress-content/mirae-sinyusik-common2\*.html | tr '\n' ' ')
+          if [ -z "$CHANGED" ]; then
+            echo "저장소에 추가로 커밋할 변경 없음"
             exit 0
           fi
-          echo "수정 파일: $FILES"
+          echo "수정 파일: $CHANGED"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add $FILES
+          git add $CHANGED
           git commit -m "공통국어2 공개 페이지에서 부교재·편집 문구 삭제"
           git push
+
+      - name: WordPress 즉시 반영
+        if: steps.targets.outputs.files != ''
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: '65000'
+        run: |
+          set -o pipefail
+          FILES="${{ steps.targets.outputs.files }}"
+          for ATTEMPT in 1 2; do
+            echo "WordPress 즉시 반영 시도 ${ATTEMPT}/2"
+            set +e
+            node scripts/publish-wordpress.mjs $FILES
+            STATUS=$?
+            set -e
+            if [ "$STATUS" -eq 0 ]; then
+              echo "WordPress 공개 문구 정리 반영 완료 — success"
+              exit 0
+            fi
+            if [ "$ATTEMPT" -eq 1 ]; then sleep 15; fi
+          done
+          exit 1
