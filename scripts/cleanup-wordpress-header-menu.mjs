@@ -203,17 +203,16 @@ async function ensurePageChild({ title, slug, parent }) {
   }
 }
 
-await ensurePageChild({
-  title: "비상 강호영 공통국어2",
-  slug: "비상-강호영-공통국어2",
-  parent: g1,
-});
+const g1TextbookPages = [
+  { title: "비상 강호영 공통국어2", slug: "비상-강호영-공통국어2" },
+  { title: "비상 박영민 공통국어2", slug: "bisang-park-common2-index" },
+  { title: "천재 김수학 공통국어2", slug: "천재-김수학-공통국어2" },
+  { title: "미래엔 신유식 공통국어2", slug: "미래엔-신유식-공통국어2" },
+];
 
-await ensurePageChild({
-  title: "비상 박영민 공통국어2",
-  slug: "bisang-park-common2-index",
-  parent: g1,
-});
+for (const textbook of g1TextbookPages) {
+  await ensurePageChild({ ...textbook, parent: g1 });
+}
 
 const ebsTitleNorm = norm("2027 수능완성 언어와 매체");
 const ebsItems = items.filter(i => norm(rawTitle(i)) === ebsTitleNorm);
@@ -286,10 +285,10 @@ if (remainingDuplicates.length) {
 }
 
 if (g1) {
-  const kangho = finalItems.filter(i => Number(i.parent) === Number(g1.id) && norm(rawTitle(i)) === norm("비상 강호영 공통국어2"));
-  if (kangho.length !== 1) throw new Error(`비상 강호영 공통국어2 하위 메뉴 수가 ${kangho.length}개입니다.`);
-  const park = finalItems.filter(i => Number(i.parent) === Number(g1.id) && norm(rawTitle(i)) === norm("비상 박영민 공통국어2"));
-  if (park.length !== 1) throw new Error(`비상 박영민 공통국어2 하위 메뉴 수가 ${park.length}개입니다.`);
+  for (const textbook of g1TextbookPages) {
+    const matches = finalItems.filter(i => Number(i.parent) === Number(g1.id) && norm(rawTitle(i)) === norm(textbook.title));
+    if (matches.length !== 1) throw new Error(`${textbook.title} 하위 메뉴 수가 ${matches.length}개입니다.`);
+  }
 }
 
 console.log("Header menu cleanup completed successfully.");
