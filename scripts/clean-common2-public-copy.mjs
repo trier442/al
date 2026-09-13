@@ -25,7 +25,7 @@ function clean(text) {
   out = out.replace(/자습서\s*·\s*교사용\s*교과서\s*·\s*평가문제집/gi, '교재');
   out = out.replace(/자습서\s*·\s*평가문제집/gi, '교재');
   out = out.replace(/평가문제집\s*·\s*자습서/gi, '교재');
-  out = out.replace(/\b자습서\b/gi, '교재');
+  out = out.replace(/자습서/gi, '교재');
   out = out.replace(/평가문제집/gi, '교재');
   out = out.replace(/교재\s*·\s*교재/gi, '교재');
   out = out.replace(/교재\s*범위에\s*맞춰/gi, '학습 범위에 맞춰');
