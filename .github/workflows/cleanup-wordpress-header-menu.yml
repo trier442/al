@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/cleanup-wordpress-header-menu.mjs'
+      - 'scripts/ensure-common2-textbook-menu.mjs'
       - '.github/workflows/cleanup-wordpress-header-menu.yml'
   workflow_dispatch:
 
@@ -24,3 +25,9 @@ jobs:
           WP_USERNAME: ${{ secrets.WP_USERNAME }}
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
         run: node scripts/cleanup-wordpress-header-menu.mjs
+      - name: 공통국어2 교과서 7종 카테고리 구성
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/ensure-common2-textbook-menu.mjs
