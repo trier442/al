@@ -11,6 +11,7 @@ on:
       - "scripts/validate-hwajak-pages.mjs"
       - "scripts/lint-hwajak-language.mjs"
       - "scripts/hwajak-payload/**"
+      - "scripts/hwajak-overrides/**"
       - "scripts/standardize-common2-pages.mjs"
       - "scripts/verify-common2-seo.mjs"
       - "scripts/inspect-common2-seo-capabilities.mjs"
@@ -50,6 +51,17 @@ jobs:
       - name: 화법과 작문 문장 보정
         run: node scripts/fix-hwajak-pages.mjs
 
+      - name: 화법과 작문 개별 정밀 원고 반영
+        shell: bash
+        run: |
+          if [ -d scripts/hwajak-overrides ]; then
+            for OVERRIDE in scripts/hwajak-overrides/2027-suteuk-hwajak-*.html; do
+              [ -e "$OVERRIDE" ] || continue
+              cp "$OVERRIDE" "wordpress-content/$(basename "$OVERRIDE")"
+              echo "override 적용: $(basename "$OVERRIDE")"
+            done
+          fi
+
       - name: 화법과 작문 구성 검증
         run: node scripts/validate-hwajak-pages.mjs
 
@@ -75,7 +87,7 @@ jobs:
             if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-common2-pages|verify-common2-seo|inspect-common2-seo-capabilities|ensure-common2-meta-description-plugin|publish-wordpress)\.mjs|\.github/workflows/wordpress-publish\.yml)$'; then
               FILES=$(find wordpress-content -maxdepth 1 -type f \( -name 'bisang-park-common2-u*.html' -o -name 'bisang-park-common2-index.html' \) | sort -V | tr '\n' ' ')
               COMMON2=true
-            elif printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|wordpress-content/2027-suteuk-hwajak-)'; then
+            elif printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|scripts/hwajak-overrides/|wordpress-content/2027-suteuk-hwajak-)'; then
               FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-hwajak-*.html' | sort | tr '\n' ' ')
             else
               FILES=$(git diff --name-only HEAD^ HEAD -- ':(glob)wordpress-content/**/*.html' | tr '\n' ' ')
