@@ -43,16 +43,37 @@ jobs:
         with:
           node-version: "22"
 
+      - name: 변경 영역 확인
+        id: scope
+        shell: bash
+        run: |
+          HWAJAK=false
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "${{ inputs.file }}" = "ALL_HWAJAK" ] || printf '%s\n' "${{ inputs.file }}" | grep -q '^wordpress-content/2027-suteuk-hwajak-'; then
+              HWAJAK=true
+            fi
+          else
+            CHANGED=$(git diff --name-only HEAD^ HEAD)
+            if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|apply-hwajak-text-patches|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|scripts/hwajak-overrides/|wordpress-content/2027-suteuk-hwajak-)'; then
+              HWAJAK=true
+            fi
+          fi
+          echo "hwajak=$HWAJAK" >> "$GITHUB_OUTPUT"
+          echo "화법과 작문 처리: $HWAJAK"
+
       - name: 공통국어2 순차 링크 및 SEO 메타 보정
         run: node scripts/standardize-common2-pages.mjs
 
       - name: 화법과 작문 57개 원고 생성
+        if: steps.scope.outputs.hwajak == 'true'
         run: node scripts/standardize-hwajak-pages.mjs
 
       - name: 화법과 작문 문장 보정
+        if: steps.scope.outputs.hwajak == 'true'
         run: node scripts/fix-hwajak-pages.mjs
 
       - name: 화법과 작문 개별 정밀 원고 반영
+        if: steps.scope.outputs.hwajak == 'true'
         shell: bash
         run: |
           if [ -d scripts/hwajak-overrides ]; then
@@ -64,12 +85,15 @@ jobs:
           fi
 
       - name: 화법과 작문 원문 비수록형 해설 보정
+        if: steps.scope.outputs.hwajak == 'true'
         run: node scripts/apply-hwajak-text-patches.mjs
 
       - name: 화법과 작문 구성 검증
+        if: steps.scope.outputs.hwajak == 'true'
         run: node scripts/validate-hwajak-pages.mjs
 
       - name: 화법과 작문 언어 검증
+        if: steps.scope.outputs.hwajak == 'true'
         run: node scripts/lint-hwajak-language.mjs
 
       - name: 게시 대상 확인
