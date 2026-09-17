@@ -46,7 +46,7 @@ jobs:
       - name: 공통 원문 비수록형 해설 보정
         run: node scripts/apply-hwajak-text-patches.mjs
 
-      - name: 이번 글 정밀 보정
+      - name: 누적 단일 정밀 보정 전체 적용
         shell: bash
         run: |
           CHANGED=$(git diff --name-only HEAD^ HEAD -- 'scripts/hwajak-single/*.mjs')
@@ -54,7 +54,8 @@ jobs:
             echo "변경된 화작 단일 보정 스크립트가 없습니다." >&2
             exit 1
           fi
-          for PATCH in $CHANGED; do
+          for PATCH in scripts/hwajak-single/*.mjs; do
+            [ -e "$PATCH" ] || continue
             node "$PATCH"
           done
 
