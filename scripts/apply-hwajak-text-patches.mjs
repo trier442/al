@@ -2,72 +2,47 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const target = path.join('wordpress-content', '2027-suteuk-hwajak-s01a.html');
-if (!fs.existsSync(target)) {
-  console.log('hwajak patch target not found; skip');
-  process.exit(0);
+function patchSmellPage() {
+  const target = path.join('wordpress-content', '2027-suteuk-hwajak-s01a.html');
+  if (!fs.existsSync(target)) return;
+  let html = fs.readFileSync(target, 'utf8');
+  const replaceOnce = (oldText, newText) => { if (!html.includes(newText) && html.includes(oldText)) html = html.replace(oldText, newText); };
+  const replaceBlock = (startMarker, endMarker, replacement) => {
+    const start = html.indexOf(startMarker); const end = html.indexOf(endMarker, start);
+    if (start >= 0 && end >= 0 && !html.includes(replacement)) html = html.slice(0,start)+replacement+'\n'+html.slice(end);
+  };
+  html = html.replace('<!-- revision: 3 -->', '<!-- revision: 4 -->');
+  const detailBlock = `<div class="tip"><strong>교재 문항 해설 — 원문 문제 없이 이해하기</strong><br><br><strong>01 · 발표 표현 전략｜정답 ②</strong><br>이 문항은 발표자가 어떤 말하기 방식과 표현 전략을 사용해 청중의 이해와 참여를 돕는지를 판단하는 문제이다. 원문 문제를 보지 않아도 핵심은 ‘구체적인 사례의 기능’을 파악하는 데 있다. 발표자는 후각의 특성을 추상적으로만 설명하지 않고, 된장찌개 냄새를 맡았을 때 어린 시절의 기억이나 감정이 떠오르는 사례, 향수 냄새에 계속 노출되면 처음보다 냄새가 약하게 느껴지는 사례, 배고플 때 맡는 라면 냄새와 오랫동안 라면만 먹은 사람이 맡는 라면 냄새가 다르게 느껴질 수 있다는 사례 등을 제시한다. 이 사례들은 각각 후각과 감정·기억의 관계, 후각 적응, 경험에 따른 냄새 지각의 차이를 생활 경험과 연결해 이해하도록 돕는다. 따라서 ‘발표 내용과 관련된 구체적 사례를 들어 청중의 이해를 돕는다’는 판단이 핵심이다.<br><br><strong>01의 오답을 가르는 기준</strong><br>발표 마지막에 분무기로 향을 뿌리는 행동은 비언어적 표현으로서 발표의 표현력을 높이고 청중의 몰입이나 체험을 돕는 기능은 할 수 있다. 그러나 이 발표는 어떤 주장에 동의하도록 설득하는 담화가 아니므로 이를 ‘전달 내용의 설득력을 강화한다’고 해석하면 안 된다. 또한 마지막 질문은 후각의 세 특징을 이해했는지 시험하는 질문이 아니라, 같은 향이 청중 각자에게 어떻게 느껴지는지를 묻는 반응 유도 질문이다.<br><br><strong>02 · 발표 내용 생성｜정답 ④</strong><br>이 문항은 발표 전에 세운 내용 구성 계획이 실제 발표에 반영되었는지를 확인하는 문제이다. 발표에는 분자식은 같지만 삼차원 구조가 다른 입체 이성질체가 서로 다른 냄새를 낼 수 있다는 사례가 제시된다. 그러나 ‘냄새 분자를 화학적으로 분석한 자료’를 제시하지도 않고, 그런 분석 자료를 근거로 사람이 냄새를 지각하는 원리를 단계적인 인과 관계로 설명하지도 않는다. 따라서 입체 이성질체라는 소재가 등장했다는 이유만으로 해당 계획이 반영되었다고 볼 수 없다.</div><div class="warn"><strong>시험에서 자주 걸리는 오답 함정</strong><br>① 비언어적 표현이 등장했다고 곧바로 ‘설득력 강화’로 연결하지 않는다.<br>② 질문이 있다고 해서 모두 ‘이해 점검’은 아니다.<br>③ 발표 계획 문제에서는 소재의 등장 여부가 아니라 계획에 붙은 구체적 조건까지 구현되었는지 확인한다.<br>④ 도입에서 주제를 제시하는 것과 발표 순서를 안내하는 것은 다르다.</div>`;
+  replaceBlock('<div class="tip"><strong>EBS 교재 문항 핵심</strong>','<h2>풍부한 &lt;보기&gt;를 활용한 변형문제 10제</h2>',detailBlock);
+  replaceOnce('<h3>3. EBS 교재 01번과 관련하여 발표자의 말하기 방식을 이해한 것으로 가장 적절한 것은?</h3>','<h3>3. 발표자의 말하기 방식과 표현 전략을 이해한 것으로 가장 적절한 것은?</h3>');
+  replaceOnce('<strong>② 해설</strong> 정답. EBS 해설도 발표 내용과 관련된 사례를 제시함으로써 청중의 이해를 돕고 있다는 점을 정답 근거로 제시한다.','<strong>② 해설</strong> 정답. 된장찌개·향수·라면과 같은 구체적 사례는 후각의 특징과 냄새 지각의 차이를 청중이 자신의 경험과 연결해 이해하도록 돕는다.');
+  replaceOnce('<h3>8. EBS 교재 02번의 발표 계획과 실제 발표의 관계를 설명한 것으로 가장 적절한 것은?</h3>','<h3>8. 발표 계획과 실제 발표의 관계를 설명한 것으로 가장 적절한 것은?</h3>');
+  fs.writeFileSync(target, html, 'utf8');
 }
 
-let html = fs.readFileSync(target, 'utf8');
+function patchAiArtistPage() {
+  const target = path.join('wordpress-content', '2027-suteuk-hwajak-s01b.html');
+  if (!fs.existsSync(target)) return;
+  let html = fs.readFileSync(target, 'utf8');
+  html = html.replace('<!-- revision: 2 -->','<!-- revision: 3 -->');
+  html = html.replace('</style>',' .detail{padding:18px 20px;margin:15px 0;border:1px solid #c9dce8;border-radius:12px;background:#fff}.detail strong{color:#174f78}.warn{padding:17px;background:#fff6e8;border-left:4px solid #e28a20;border-radius:0 10px 10px 0}.compare{width:100%;border-collapse:collapse;margin:15px 0;font-size:15.5px}.compare th,.compare td{border:1px solid #c8d8e2;padding:11px 12px;vertical-align:top}.compare th{background:#eef6fa;color:#174f78}</style>');
 
-function replaceOnce(oldText, newText, label) {
-  if (html.includes(newText)) {
-    console.log(`${label}: already applied`);
-    return;
-  }
-  if (!html.includes(oldText)) {
-    throw new Error(`${label}: source text not found`);
-  }
-  html = html.replace(oldText, newText);
-  console.log(`${label}: applied`);
+  const summary = `<section class="summary" data-summary-chars="980"><h2>원문 없이 이해하는 상세 요약</h2><p class="guide">괄호형 네모를 클릭하면 핵심 개념이 나타납니다.</p><p class="summary-source">이 토론의 논제는 ‘AI도 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>예술가</span></button>로 인정해야 하는가’이다. 찬성 측은 예술을 숙련된 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>기술</span></button>과 창작 능력의 관점에서 보고, AI가 방대한 작품을 학습하여 기존 양식을 그대로 복제하지 않는 새로운 스타일을 만들어 낼 수 있다는 점을 근거로 든다. 인간이 만든 그림과 AI가 생성한 그림을 실험 참가자들이 구별하지 못한 사례와 AI 작품의 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>경매</span></button> 낙찰 사례도 작품성을 뒷받침하는 자료로 제시한다. 찬성 측의 핵심 논리는 ‘학습을 통해 패턴을 파악하고 재조합하여 새로움을 만들어 내는 능력’을 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>창의성</span></button>으로 볼 수 있다면 AI 역시 창의적 주체로 볼 수 있다는 것이다. 반대 측은 예술가에게는 결과물의 기술적 완성도만이 아니라 스스로의 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>의도</span></button>, 직접 경험에서 생긴 감정, 내면적 고뇌와 성찰이 필요하다고 본다. AI는 데이터를 분석하고 알고리즘에 따라 결과물을 생성할 뿐 실제 경험에서 비롯된 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>감정</span></button>을 이해할 수 없으므로 인간 예술가와 같은 창작 주체로 보기 어렵다는 입장이다. 토론의 쟁점은 크게 세 가지로 정리된다. 첫째, 예술 활동의 주체에게 독립적인 창작 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>의도</span></button>가 필요한가. 둘째, AI의 학습과 재조합을 독창성과 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>창의성</span></button>으로 인정할 수 있는가. 셋째, 예술을 구성하는 요건에 창작자의 감정과 경험이 반드시 포함되어야 하는가이다. 반대 신문에서는 상대 주장의 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>타당성</span></button>과 근거의 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>신뢰성</span></button>을 집중적으로 검토한다. 반대 측은 ‘AI가 사용하는 학습 데이터는 인간이 제공한다’는 점을 들어 AI의 독창성에 의문을 제기하고, 사람이 그린 그림과 AI 그림을 구별하지 못했다는 연구에 대해서는 구체적인 논문과 실험 참가자의 수·특성이 대표성을 갖는지 묻는다. 이에 찬성 측은 인간 화가도 다른 작가의 작품을 보고 배우며 자신만의 스타일을 만든다는 점을 들어 AI 학습과 인간의 학습 사이의 유사성을 강조한다. 반대로 찬성 측은 전문가의 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>견해</span></button>를 제시하여 ‘창의성은 인간만의 고유 능력’이라는 반대 측 전제의 타당성에 의문을 제기한다. 따라서 이 토론을 풀 때에는 발언의 내용만 외우기보다 ‘누가 누구의 어떤 주장에 대해 무엇을 문제 삼는가’를 정확히 연결해야 한다. 특히 <button type="button" class="keyblank"><span class="kb-mask">□□□□</span><span class="kb-answer" hidden>공정성</span></button>·신뢰성·타당성을 서로 혼동하지 않는 것이 핵심이다.</p></section>`;
+  html = html.replace(/<section class="summary"[\s\S]*?<\/section>/, summary);
+
+  const middle = `<h2>토론의 구조와 핵심 쟁점</h2><div class="flow-grid"><div class="flow-card"><strong>논제</strong><button type="button" class="flowblank"><span class="kb-mask">□□□□□</span><span class="kb-answer" hidden>AI의 예술가 인정 여부</span></button></div><div class="flow-card"><strong>찬성 핵심</strong><button type="button" class="flowblank"><span class="kb-mask">□□□□□</span><span class="kb-answer" hidden>기술·독창성·작품성</span></button></div><div class="flow-card"><strong>반대 핵심</strong><button type="button" class="flowblank"><span class="kb-mask">□□□□□</span><span class="kb-answer" hidden>의도·경험·감정</span></button></div><div class="flow-card"><strong>반대 신문</strong><button type="button" class="flowblank"><span class="kb-mask">□□□□□</span><span class="kb-answer" hidden>타당성·신뢰성 검토</span></button></div></div>
+<div class="detail"><strong>찬성 측 입론의 논리</strong><br>예술의 어원에는 숙련된 기술이라는 의미가 포함되어 있다는 점에서 출발한다. AI가 많은 작품을 학습한 뒤 기존 유파에 그대로 속하지 않는 새로운 스타일을 생성하고, 인간 작품과 구별하기 어려운 결과물을 만들어 내며 실제 경매에서도 높은 평가를 받은 사례를 들어 ‘기술의 숙련도·독창성·작품성’을 예술가 인정의 근거로 제시한다.</div>
+<div class="detail"><strong>반대 측 입론의 논리</strong><br>예술은 결과물만으로 성립하는 것이 아니라 ‘미적으로 가치 있는 것을 만들고자 하는 창작 주체의 의도’가 개입해야 한다고 본다. 또한 창작자가 직접 경험한 감정과 내면적 고뇌가 작품에 반영되어 감상자의 내면을 심화·확장할 때 예술의 가치가 생긴다고 본다. 따라서 알고리즘에 따라 결과물을 생성하는 AI는 예술의 주체가 되기 어렵다고 주장한다.</div>
+<table class="compare"><thead><tr><th>쟁점</th><th>찬성 측</th><th>반대 측</th></tr></thead><tbody><tr><td>예술 주체의 의도</td><td>학습과 창작 결과를 중심으로 AI의 활동을 예술 창작으로 볼 수 있음</td><td>스스로의 창작 의도가 없으므로 예술가로 보기 어려움</td></tr><tr><td>독창성·창의성</td><td>패턴을 분석·분해·재조합해 새로운 스타일을 만들 수 있음</td><td>인간이 제공한 데이터와 알고리즘에 의존하므로 고유한 창의성으로 보기 어려움</td></tr><tr><td>감정·경험</td><td>작품의 기술적 완성도와 독창성, 감상 결과도 예술 판단 근거가 될 수 있음</td><td>직접 경험에서 생긴 감정·고뇌·성찰이 없으므로 예술의 본질적 가치가 부족함</td></tr></tbody></table>
+<h2>출제 포인트 10</h2><ol class="points"><li>찬성 측은 예술의 어원에 포함된 ‘숙련된 기술’의 의미를 AI 예술가 인정의 근거로 활용한다.</li><li>찬성 측은 다량의 작품을 학습한 AI가 기존 유파에 속하지 않는 새로운 스타일을 만들어 낸 사례를 독창성의 근거로 제시한다.</li><li>사람의 그림과 AI 그림을 구별하지 못한 실험과 AI 작품의 경매 낙찰 사례는 AI 작품의 작품성을 뒷받침하는 자료로 사용된다.</li><li>반대 측은 예술 활동에는 창작 주체의 의도와 직접 경험에서 비롯된 감정이 필요하다고 본다.</li><li>반대 측은 AI가 데이터 분석과 알고리즘에 따라 결과물을 생성할 뿐 고유한 고뇌와 성찰을 갖지 못한다고 주장한다.</li><li>AI 학습 데이터가 인간이 제공한 것이라는 지적은 AI의 독창성·창의성에 관한 찬성 측 주장의 타당성을 문제 삼는 것이다.</li><li>논문의 출처와 실험 참가자의 수·특성을 묻는 질문은 근거 자료의 신뢰성을 검토하는 반대 신문이다.</li><li>찬성 측이 인간 화가도 다른 작품을 보고 배운다고 답하는 것은 ‘학습 데이터가 인간에게서 왔으므로 AI는 단순 도구’라는 비판에 대응하는 것이다.</li><li>찬성 측이 창의성에 대한 전문가의 견해를 제시하는 것은 인간만이 창의적이라는 반대 측 전제의 타당성을 흔드는 기능을 한다.</li><li>반대 신문 문항에서는 발언 주체와 평가 기준인 공정성·신뢰성·타당성을 정확히 대응해야 한다.</li></ol>
+<div class="tip"><strong>교재 문항 해설 — 원문 문제 없이 이해하기</strong><br><br><strong>쟁점 파악 문항</strong><br>교재는 이 토론을 ‘예술 활동의 주체에게 의도가 필요한가’, ‘AI의 학습·재조합을 독창성과 창의성으로 볼 수 있는가’, ‘예술에 창작자의 감정이 반드시 반영되어야 하는가’라는 세 축으로 읽도록 요구한다. 여기서 자주 나오는 함정은 발언 주체를 바꾸는 것이다. 예를 들어 ‘사람이 그린 그림과 AI 그림을 구별하지 못한 실험’을 AI의 독창성 부재 근거로 제시한 쪽으로 반대 측을 연결하면 잘못이다. 이 실험은 찬성 측이 AI 작품의 작품성을 뒷받침하기 위해 제시한 자료이다.<br><br><strong>반대 신문 평가 문항</strong><br>반대 신문은 상대 주장에 반박하기 위해 논증의 공정성·신뢰성·타당성을 따져 묻는 단계이다. ‘AI가 학습하는 데이터는 인간이 제공한 것이므로 AI는 창작의 보조 도구에 불과한 것 아니냐’는 질문은 AI의 독창성에 관한 주장이 타당한지를 묻는다. 반면 ‘그 연구는 구체적으로 어떤 논문이며, 참가자의 수와 특성은 대표성이 있는가’라는 질문은 근거 자료의 출처와 표본의 대표성을 확인하므로 신뢰성을 검토하는 질문이다. 찬성 측이 창의성에 관한 전문가의 견해를 들어 인간만이 창의성을 지닌다는 반대 측 전제를 흔드는 발언은 상대 입론의 타당성에 의문을 제기하는 것이다.</div>
+<div class="warn"><strong>오답 함정</strong><br>① ‘데이터를 인간이 제공한다’는 비판을 공정성 문제로 보면 안 된다. 핵심은 AI의 독창성에 관한 주장 자체의 타당성이다.<br>② 논문의 출처·표본 수·표본 특성을 묻는 질문은 주장 내용의 타당성보다는 근거 자료의 신뢰성을 겨냥한다.<br>③ 반대 신문에 답할 때 단순히 자신의 의견을 반복하는 것과 적절한 근거를 들어 입론을 옹호하는 것은 구별해야 한다.<br>④ 찬성 측의 ‘인간 화가도 다른 작가의 작품을 보고 배운다’는 답변은 인간과 AI의 학습 과정을 유사하게 보려는 반박이지, 상대가 특정 관점을 편파적으로 옹호한다고 비판하는 발언이 아니다.</div>`;
+  html = html.replace(/<h2>문단·자료 흐름 확인<\/h2>[\s\S]*?<h2>풍부한 &lt;보기&gt;를 활용한 변형문제 10제<\/h2>/, middle+'\n<h2>풍부한 &lt;보기&gt;를 활용한 변형문제 10제</h2>');
+  html = html.replace(/EBS 교재 \d+번과 관련하여 /g,'').replace(/EBS 교재 \d+번의 /g,'');
+  fs.writeFileSync(target, html, 'utf8');
+  console.log('AI artist page source-grounded patch applied');
 }
 
-function replaceBlock(startMarker, endMarker, replacement, label) {
-  if (html.includes(replacement)) {
-    console.log(`${label}: already applied`);
-    return;
-  }
-  const start = html.indexOf(startMarker);
-  const end = html.indexOf(endMarker, start);
-  if (start < 0 || end < 0) {
-    throw new Error(`${label}: block marker not found`);
-  }
-  html = html.slice(0, start) + replacement + '\n' + html.slice(end);
-  console.log(`${label}: applied`);
-}
-
-html = html.replace('<!-- revision: 3 -->', '<!-- revision: 4 -->');
-
-const detailBlock = `<div class="tip"><strong>교재 문항 해설 — 원문 문제 없이 이해하기</strong><br><br><strong>01 · 발표 표현 전략｜정답 ②</strong><br>이 문항은 발표자가 어떤 말하기 방식과 표현 전략을 사용해 청중의 이해와 참여를 돕는지를 판단하는 문제이다. 원문 문제를 보지 않아도 핵심은 ‘구체적인 사례의 기능’을 파악하는 데 있다. 발표자는 후각의 특성을 추상적으로만 설명하지 않고, 된장찌개 냄새를 맡았을 때 어린 시절의 기억이나 감정이 떠오르는 사례, 향수 냄새에 계속 노출되면 처음보다 냄새가 약하게 느껴지는 사례, 배고플 때 맡는 라면 냄새와 오랫동안 라면만 먹은 사람이 맡는 라면 냄새가 다르게 느껴질 수 있다는 사례 등을 제시한다. 이 사례들은 각각 후각과 감정·기억의 관계, 후각 적응, 경험에 따른 냄새 지각의 차이를 생활 경험과 연결해 이해하도록 돕는다. 따라서 ‘발표 내용과 관련된 구체적 사례를 들어 청중의 이해를 돕는다’는 판단이 핵심이다.<br><br><strong>01의 오답을 가르는 기준</strong><br>발표 마지막에 분무기로 향을 뿌리는 행동은 비언어적 표현으로서 발표의 표현력을 높이고 청중의 몰입이나 체험을 돕는 기능은 할 수 있다. 그러나 이 발표는 어떤 주장에 동의하도록 설득하는 담화가 아니므로 이를 ‘전달 내용의 설득력을 강화한다’고 해석하면 안 된다. 또한 청중이 앞서 의문을 제기한 장면이 없으므로 ‘청중이 제기한 의문을 해소한다’는 판단도 맞지 않는다. 마지막 질문은 후각의 세 특징을 이해했는지 시험하는 질문이 아니라, 같은 향이 청중 각자에게 어떻게 느껴지는지를 묻는 반응 유도 질문이다. 도입에서도 냄새와 관련된 일상적 발화를 통해 관심을 환기하고 주제를 제시할 뿐, 발표 순서를 미리 안내하지 않는다.<br><br><strong>02 · 발표 내용 생성｜정답 ④</strong><br>이 문항은 발표 전에 세운 내용 구성 계획이 실제 발표에 반영되었는지를 확인하는 문제이다. 판단할 때에는 비슷한 소재가 등장했는지만 볼 것이 아니라, 계획에 포함된 구체적인 행위와 설명 방식까지 실제로 구현되었는지를 확인해야 한다. 발표에는 분자식은 같지만 삼차원 구조가 다른 입체 이성질체가 서로 다른 냄새를 낼 수 있다는 사례가 제시된다. 그러나 ‘냄새 분자를 화학적으로 분석한 자료’를 제시하지도 않고, 그런 분석 자료를 근거로 사람이 냄새를 지각하는 원리를 단계적인 인과 관계로 설명하지도 않는다. 따라서 입체 이성질체라는 소재가 등장했다는 이유만으로 해당 계획이 반영되었다고 볼 수 없으며, 이 계획이 실제 발표에 반영되지 않았다는 판단이 정답이 된다.<br><br><strong>02에서 실제로 반영된 계획</strong><br>도입에서는 냄새에 관한 일상적 발화를 제시하여 청중의 관심을 환기한다. 전개에서는 후각의 개념을 먼저 정의하고 후각의 독특한 특징을 세 가지로 항목화한다. 또한 시각·청각 정보가 시상을 거쳐 감각 피질로 전달되는 것과 후각 정보가 후각 피질로 바로 전달되는 것을 대조하여 후각의 전달 특징을 부각한다. 정리에서는 앞의 내용을 묶어 냄새가 분자 구조·농도와 관련된 물리적·객관적 자극이면서, 경험·상황·문화 등에 따라 달라지는 심리적·주관적 자극이라는 점을 강조한다. 즉 02번은 ‘계획의 핵심 조건이 실제 발표에서 모두 구현되었는가’를 세밀하게 확인하는 문제로 이해하면 된다.</div>
-<div class="warn"><strong>시험에서 자주 걸리는 오답 함정</strong><br>① 비언어적 표현이 등장했다고 해서 곧바로 ‘설득력 강화’로 연결하지 않는다. 발표 목적이 정보 전달인지 설득인지 먼저 확인해야 한다.<br>② 질문이 있다고 해서 모두 ‘이해 점검’은 아니다. 마지막 질문은 정답을 요구하거나 이해 정도를 확인하는 것이 아니라 같은 향에 대한 청중의 느낌과 반응을 이끌어 내는 질문이다.<br>③ 발표 계획 문제에서는 소재가 비슷하게 등장했다는 사실만으로 ‘계획이 반영되었다’고 판단하지 않는다. ‘자료를 활용한다’, ‘인과적으로 설명한다’처럼 계획에 붙은 구체적 조건까지 실제 발화에 구현되었는지를 확인해야 한다.<br>④ 도입에서 주제를 제시하는 것과 발표 순서를 안내하는 것은 다르다. 이 발표는 일상적 발화로 관심을 끈 뒤 주제를 밝히지만, 뒤에서 다룰 내용의 순서를 미리 나열하지 않는다.</div>`;
-
-replaceBlock(
-  '<div class="tip"><strong>EBS 교재 문항 핵심</strong>',
-  '<h2>풍부한 &lt;보기&gt;를 활용한 변형문제 10제</h2>',
-  detailBlock,
-  'expand EBS explanation'
-);
-
-replaceOnce(
-  '<h3>3. EBS 교재 01번과 관련하여 발표자의 말하기 방식을 이해한 것으로 가장 적절한 것은?</h3>',
-  '<h3>3. 발표자의 말하기 방식과 표현 전략을 이해한 것으로 가장 적절한 것은?</h3>',
-  'remove EBS number dependency from question 3'
-);
-replaceOnce(
-  '<strong>② 해설</strong> 정답. EBS 해설도 발표 내용과 관련된 사례를 제시함으로써 청중의 이해를 돕고 있다는 점을 정답 근거로 제시한다.',
-  '<strong>② 해설</strong> 정답. 된장찌개·향수·라면과 같은 구체적 사례는 후각의 특징과 냄새 지각의 차이를 청중이 자신의 경험과 연결해 이해하도록 돕는다.',
-  'make question 3 explanation self-contained'
-);
-replaceOnce(
-  '<h3>8. EBS 교재 02번의 발표 계획과 실제 발표의 관계를 설명한 것으로 가장 적절한 것은?</h3>',
-  '<h3>8. 발표 계획과 실제 발표의 관계를 설명한 것으로 가장 적절한 것은?</h3>',
-  'remove EBS number dependency from question 8'
-);
-replaceOnce(
-  '<strong>① 해설</strong> 정답. EBS 해설은 입체 이성질체 사례가 등장하더라도 화학 분석 자료를 활용해 냄새 지각 원리를 인과적으로 설명한 것은 아니므로 해당 계획이 반영되지 않았다고 판단한다.',
-  '<strong>① 해설</strong> 정답. 입체 이성질체 사례가 등장하더라도 화학 분석 자료를 활용해 냄새 지각 원리를 인과적으로 설명한 것은 아니다. 계획에 포함된 핵심 조건이 실제 발표에서 구현되지 않았으므로 해당 계획은 반영되지 않은 것으로 판단해야 한다.',
-  'make question 8 explanation self-contained'
-);
-
-fs.writeFileSync(target, html, 'utf8');
+patchSmellPage();
+patchAiArtistPage();
 console.log('hwajak source-grounded text patches complete');
