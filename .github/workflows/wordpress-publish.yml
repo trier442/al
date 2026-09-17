@@ -8,6 +8,7 @@ on:
       - "wordpress-content/images/**"
       - "scripts/standardize-hwajak-pages.mjs"
       - "scripts/fix-hwajak-pages.mjs"
+      - "scripts/apply-hwajak-text-patches.mjs"
       - "scripts/validate-hwajak-pages.mjs"
       - "scripts/lint-hwajak-language.mjs"
       - "scripts/hwajak-payload/**"
@@ -62,6 +63,9 @@ jobs:
             done
           fi
 
+      - name: 화법과 작문 원문 비수록형 해설 보정
+        run: node scripts/apply-hwajak-text-patches.mjs
+
       - name: 화법과 작문 구성 검증
         run: node scripts/validate-hwajak-pages.mjs
 
@@ -87,7 +91,7 @@ jobs:
             if printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-common2-pages|verify-common2-seo|inspect-common2-seo-capabilities|ensure-common2-meta-description-plugin|publish-wordpress)\.mjs|\.github/workflows/wordpress-publish\.yml)$'; then
               FILES=$(find wordpress-content -maxdepth 1 -type f \( -name 'bisang-park-common2-u*.html' -o -name 'bisang-park-common2-index.html' \) | sort -V | tr '\n' ' ')
               COMMON2=true
-            elif printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|scripts/hwajak-overrides/|wordpress-content/2027-suteuk-hwajak-)'; then
+            elif printf '%s\n' "$CHANGED" | grep -Eq '^(scripts/(standardize-hwajak-pages|fix-hwajak-pages|apply-hwajak-text-patches|validate-hwajak-pages|lint-hwajak-language)\.mjs|scripts/hwajak-payload/|scripts/hwajak-overrides/|wordpress-content/2027-suteuk-hwajak-)'; then
               FILES=$(find wordpress-content -maxdepth 1 -type f -name '2027-suteuk-hwajak-*.html' | sort | tr '\n' ' ')
             else
               FILES=$(git diff --name-only HEAD^ HEAD -- ':(glob)wordpress-content/**/*.html' | tr '\n' ' ')
