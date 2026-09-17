@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import dns from "node:dns";
+import { injectQuarterAd } from "./modukorean-quarter-ad.mjs";
 
 dns.setDefaultResultOrder("ipv4first");
 
@@ -222,7 +223,7 @@ async function publish(file) {
   assertEonmaePublishAllowed(file);
   const parsed = parseFile(file);
   const meta = parsed.meta;
-  const rawContent = stripEbsOriginalQuestions(sanitizeEditorialNotes(parsed.content));
+  const rawContent = injectQuarterAd(stripEbsOriginalQuestions(sanitizeEditorialNotes(parsed.content)));
   const endpoint = `${baseUrl}/wp-json/wp/v2/${meta.type}`;
   const existing = meta.post_id
     ? [{ id: meta.post_id }]
