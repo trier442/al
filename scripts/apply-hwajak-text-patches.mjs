@@ -1,3 +1,4 @@
+// Keep transformed questions and EBS explanations solvable without the copyrighted source problem text.
 import fs from 'node:fs';
 import path from 'node:path';
 
