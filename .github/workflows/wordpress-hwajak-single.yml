@@ -1,0 +1,95 @@
+name: WordPress 화작 단일 게시
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/hwajak-single/*.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wordpress-hwajak-single
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 화법과 작문 기본 원고 생성
+        run: node scripts/standardize-hwajak-pages.mjs
+
+      - name: 화법과 작문 문장 보정
+        run: node scripts/fix-hwajak-pages.mjs
+
+      - name: 개별 정밀 원고 반영
+        shell: bash
+        run: |
+          if [ -d scripts/hwajak-overrides ]; then
+            for OVERRIDE in scripts/hwajak-overrides/2027-suteuk-hwajak-*.html; do
+              [ -e "$OVERRIDE" ] || continue
+              cp "$OVERRIDE" "wordpress-content/$(basename "$OVERRIDE")"
+            done
+          fi
+
+      - name: 공통 원문 비수록형 해설 보정
+        run: node scripts/apply-hwajak-text-patches.mjs
+
+      - name: 이번 글 정밀 보정
+        shell: bash
+        run: |
+          CHANGED=$(git diff --name-only HEAD^ HEAD -- 'scripts/hwajak-single/*.mjs')
+          if [ -z "$CHANGED" ]; then
+            echo "변경된 화작 단일 보정 스크립트가 없습니다." >&2
+            exit 1
+          fi
+          for PATCH in $CHANGED; do
+            node "$PATCH"
+          done
+
+      - name: 화법과 작문 구성 검증
+        run: node scripts/validate-hwajak-pages.mjs
+
+      - name: 화법과 작문 언어 검증
+        run: node scripts/lint-hwajak-language.mjs
+
+      - name: 게시 대상 확인
+        id: files
+        shell: bash
+        run: |
+          FILES=""
+          CHANGED=$(git diff --name-only HEAD^ HEAD -- 'scripts/hwajak-single/*.mjs')
+          for PATCH in $CHANGED; do
+            BASE=$(basename "$PATCH" .mjs)
+            TARGET="wordpress-content/${BASE}.html"
+            if [ ! -f "$TARGET" ]; then
+              echo "게시 대상 파일이 없습니다: $TARGET" >&2
+              exit 1
+            fi
+            FILES="$FILES $TARGET"
+          done
+          FILES=$(printf '%s' "$FILES" | xargs)
+          echo "files=$FILES" >> "$GITHUB_OUTPUT"
+          echo "게시 대상: $(printf '%s' "$FILES" | wc -w)개 — $FILES"
+
+      - name: WordPress로 전송
+        shell: bash
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: "65000"
+        run: |
+          node scripts/publish-wordpress.mjs ${{ steps.files.outputs.files }}
+          echo "화작 단일 게시 완료"
