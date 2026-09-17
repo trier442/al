@@ -1,0 +1,40 @@
+name: 모두의 국어 글 1/4 광고 반영
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/modukorean-quarter-ad.mjs"
+      - "scripts/apply-quarter-ad-all-posts.mjs"
+      - ".github/workflows/wordpress-quarter-ad.yml"
+  schedule:
+    - cron: "17 19 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modukorean-quarter-ad
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 모든 공개 글 1/4 지점 광고 반영
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+          WP_REQUEST_TIMEOUT_MS: "65000"
+        run: node scripts/apply-quarter-ad-all-posts.mjs
