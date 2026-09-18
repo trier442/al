@@ -27,7 +27,7 @@ async function front(url){
   }
   return {status:0,error:last?.message||String(last)};
 }
-const ids=[240,245,...Array.from({length:25},(_,i)=>246+i),3256,3264,3265,3266,3341];
+const ids=[3265];
 for(const id of ids){
  const r=await j(base+"/wp-json/wp/v2/posts/"+id+"?context=edit");
  if(!r.ok){console.log("ID",id,"REST",r.status,r.data?.code||"",r.data?.message||r.error||"");continue;}
@@ -35,7 +35,7 @@ for(const id of ids){
  const f=await front(p.link);
  console.log("ID",id,JSON.stringify({status:p.status,slug:p.slug,title:p.title?.rendered,link:p.link,front:f}));
 }
-const searches=["학생회장 당선 연설","공유 자전거 관리 실태","건축물의 내진 설계","선택의 역설"];
+const searches=[];
 for(const q of searches){
  const r=await j(base+"/wp-json/wp/v2/posts?context=edit&per_page=20&search="+encodeURIComponent(q));
  if(!r.ok){console.log("SEARCH",q,"REST",r.status,r.data?.message||r.error||"");continue;}
