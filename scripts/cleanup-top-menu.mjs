@@ -35,23 +35,24 @@ if(hasClassic){
   if(!targets.length) throw new Error("primary 위치에 연결된 메뉴를 찾지 못했습니다.");
   let deleted=0;
   for(const menu of targets){
-    const arr=byMenu.get(menu.id)||[];
-    const top=arr.filter(x=>Number(x.parent||0)===0).sort((a,b)=>(a.menu_order??0)-(b.menu_order??0)||a.id-b.id);
-    console.log("before top menu",menu.id,top.map(x=>({id:x.id,title:plain(x.title?.raw||x.title?.rendered),url:x.url,order:x.menu_order})));
+    const arr=(byMenu.get(menu.id)||[]).sort((a,b)=>(a.menu_order??0)-(b.menu_order??0)||a.id-b.id);
     const seen=new Map();
-    for(const it of top){
+    console.log("before menu",menu.id,arr.map(x=>({id:x.id,parent:Number(x.parent||0),title:plain(x.title?.raw||x.title?.rendered),url:x.url,order:x.menu_order})));
+    for(const it of arr){
+      const parent=Number(it.parent||0);
       const title=plain(it.title?.raw||it.title?.rendered).replace(/\s+/g," ");
       const url=String(it.url||"").replace(/\/$/,"");
-      const key=(title+"|"+url).toLowerCase();
+      const key=(parent+"|"+title+"|"+url).toLowerCase();
       if(!seen.has(key)){seen.set(key,it.id);continue;}
       await req(`/wp-json/wp/v2/menu-items/${it.id}?force=true`,{method:"DELETE"});
       deleted++;
-      console.log("deleted duplicate top item", {id:it.id,title,url,kept:seen.get(key)});
+      console.log("deleted duplicate menu item",{id:it.id,parent,title,url,kept:seen.get(key)});
     }
   }
   console.log("deleted duplicates:",deleted);
   const after=await req("/wp-json/wp/v2/menu-items?per_page=100&context=edit&orderby=menu_order&order=asc");
-  console.log("remaining top:",after.filter(x=>Number(x.parent||0)===0 && (Array.isArray(x.menus)?x.menus.map(Number).includes(targets[0].id):Number(x.menus)===targets[0].id)).map(x=>({id:x.id,title:plain(x.title?.raw||x.title?.rendered),url:x.url,menus:x.menus,order:x.menu_order})));
+  const remaining=after.filter(x=>(Array.isArray(x.menus)?x.menus.map(Number).includes(targets[0].id):Number(x.menus)===targets[0].id));
+  console.log("remaining primary menu:",remaining.map(x=>({id:x.id,parent:Number(x.parent||0),title:plain(x.title?.raw||x.title?.rendered),url:x.url,menus:x.menus,order:x.menu_order})));
   process.exit(0);
 }
 
