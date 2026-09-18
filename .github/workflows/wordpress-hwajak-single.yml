@@ -59,11 +59,15 @@ jobs:
             node "$PATCH"
           done
 
-      - name: 화법과 작문 구성 검증
-        run: node scripts/validate-hwajak-pages.mjs
-
-      - name: 화법과 작문 언어 검증
-        run: node scripts/lint-hwajak-language.mjs
+      - name: 이번 글 구성·언어 검증
+        shell: bash
+        run: |
+          CHANGED=$(git diff --name-only HEAD^ HEAD -- 'scripts/hwajak-single/*.mjs')
+          for PATCH in $CHANGED; do
+            BASE=$(basename "$PATCH" .mjs)
+            TARGET="wordpress-content/${BASE}.html"
+            node scripts/validate-hwajak-single.mjs "$TARGET"
+          done
 
       - name: 게시 대상 확인
         id: files
