@@ -100,15 +100,28 @@ async function xmlrpcPublishPost(postId) {
     </struct></value></param>
   </params>
 </methodCall>`;
-  const response = await fetch(`${baseUrl}/xmlrpc.php`, {
-    method: "POST",
-    headers: { "Content-Type": "text/xml; charset=utf-8" },
-    body,
-  });
-  const text = await response.text();
-  if (!response.ok || /<fault>/.test(text) || !/<boolean>1<\/boolean>/.test(text)) {
-    throw new Error(`XML-RPC publish 실패: HTTP ${response.status} ${text.slice(0,500)}`);
+  let lastError;
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    try {
+      const response = await fetch(`${baseUrl}/xmlrpc.php`, {
+        method: "POST",
+        headers: { "Content-Type": "text/xml; charset=utf-8", "Connection": "close" },
+        body,
+        signal: AbortSignal.timeout(requestTimeoutMs),
+      });
+      const text = await response.text();
+      if (!response.ok || /<fault>/.test(text) || !/<boolean>1<\/boolean>/.test(text)) {
+        throw new Error(`XML-RPC publish 실패: HTTP ${response.status} ${text.slice(0,500)}`);
+      }
+      console.log(`XML-RPC publish 성공: post_id=${postId}, attempt=${attempt}`);
+      return;
+    } catch (error) {
+      lastError = error;
+      console.warn(`XML-RPC publish 재시도 ${attempt}/5: ${error.message}`);
+      if (attempt < 5) await new Promise(resolve => setTimeout(resolve, 1800 * attempt));
+    }
   }
+  throw lastError;
 }
 
 async function logAuthCapabilities() {
