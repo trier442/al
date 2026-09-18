@@ -1,0 +1,24 @@
+name: Diagnose live hwajak posts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/diagnose-hwajak-live.mjs'
+      - '.github/workflows/diagnose-hwajak-live.yml'
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check live WordPress posts
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/diagnose-hwajak-live.mjs
