@@ -177,3 +177,5 @@ fs.writeFileSync(target,html,'utf8');
 console.log('shared bicycle management presentation prep single-page patch complete');
 
 // republish modukorean 2026-09-18 2027-suteuk-hwajak-s04b.mjs
+
+// republish modukorean retry 2
