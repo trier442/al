@@ -58,3 +58,4 @@ if(routes["/wp/v2/navigation"]){
   throw new Error("Block navigation detected; automatic cleanup stopped to avoid unsafe block rewrite.");
 }
 throw new Error("No supported WordPress menu REST routes found.");
+// trigger 2026-09-18 top-menu cleanup
