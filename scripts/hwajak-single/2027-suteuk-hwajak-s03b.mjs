@@ -87,3 +87,5 @@ fs.writeFileSync(target,html,'utf8');
 console.log('eco packaging mock interview single-page patch complete');
 // republish after permalink/status fix
 // clean republish after stale draft deletion
+
+// republish after stale post_id fix
