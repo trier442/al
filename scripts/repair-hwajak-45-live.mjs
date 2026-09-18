@@ -139,3 +139,5 @@ for(const x of checks){
 }
 if(failed) throw new Error("4강·5강 live verification failed");
 console.log("REPAIR_OK");
+
+// rerun repair 2026-09-18 user reported 404
