@@ -346,7 +346,19 @@ async function publish(file) {
   if (meta.status === "publish" && verified.status !== "publish") {
     throw new Error(`게시 상태 검증 실패: post_id=${postId}, 요청=publish, 실제=${verified.status || "unknown"}`);
   }
-  console.log(`${isExisting ? "갱신" : "생성"}: ${verified.link || result.link} [${verified.status || result.status || meta.status}] post_id=${postId}`);
+  const publicLink = verified.link || result.link || "";
+  console.log(`${isExisting ? "갱신" : "생성"}: ${publicLink} [${verified.status || result.status || meta.status}] post_id=${postId}`);
+  console.log(`게시 확인 메타: id=${postId}, slug=${verified.slug || result.slug || meta.slug}, status=${verified.status || result.status || meta.status}, path=${publicLink ? new URL(publicLink).pathname + new URL(publicLink).search : ""}`);
+  if (publicLink && meta.status === "publish") {
+    try {
+      const publicRes = await fetch(publicLink, { redirect: "follow", signal: AbortSignal.timeout(30000) });
+      const finalUrl = new URL(publicRes.url);
+      console.log(`공개 URL 확인: HTTP ${publicRes.status} final=${finalUrl.pathname}${finalUrl.search}`);
+      if (!publicRes.ok) throw new Error(`공개 URL HTTP ${publicRes.status}`);
+    } catch (error) {
+      throw new Error(`게시물은 REST에 저장되었지만 공개 URL 확인 실패: ${error.message}`);
+    }
+  }
 
   const existingFeatured = Number(verified.featured_media || result.featured_media || existing[0]?.featured_media) || 0;
   const needsFeaturedImage = Boolean(meta.featured_image) && !existingFeatured && postId;
