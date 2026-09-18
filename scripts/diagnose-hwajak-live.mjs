@@ -41,3 +41,18 @@ for(const q of searches){
  if(!r.ok){console.log("SEARCH",q,"REST",r.status,r.data?.message||r.error||"");continue;}
  console.log("SEARCH",q,JSON.stringify(r.data.map(p=>({id:p.id,status:p.status,slug:p.slug,title:p.title?.rendered,link:p.link}))));
 }
+
+
+function xesc(s){return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");}
+async function xmlrpcPublish(id){
+  const body=`<?xml version="1.0"?><methodCall><methodName>wp.editPost</methodName><params><param><value><int>1</int></value></param><param><value><string>${xesc(process.env.WP_USERNAME)}</string></value></param><param><value><string>${xesc(process.env.WP_APP_PASSWORD.replace(/\\s/g,""))}</string></value></param><param><value><int>${id}</int></value></param><param><value><struct><member><name>post_status</name><value><string>publish</string></value></member></struct></value></param></params></methodCall>`;
+  const r=await fetch(base+"/xmlrpc.php",{method:"POST",headers:{"Content-Type":"text/xml","Connection":"close"},body,signal:AbortSignal.timeout(30000)});
+  const t=await r.text();
+  console.log("XMLRPC_PUBLISH",id,"HTTP",r.status,t.slice(0,600).replace(/\\s+/g," "));
+}
+await xmlrpcPublish(3265);
+const xr=await j(base+"/wp-json/wp/v2/posts/3265?context=edit");
+if(xr.ok){
+  const p=xr.data; const f=await front(p.link);
+  console.log("AFTER_XMLRPC_3265",JSON.stringify({status:p.status,slug:p.slug,title:p.title?.rendered,link:p.link,front:f}));
+}else console.log("AFTER_XMLRPC_3265_REST",xr.status,xr.data?.message||xr.error||"");
