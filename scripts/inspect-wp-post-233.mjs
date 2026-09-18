@@ -15,3 +15,4 @@ for(const url of [base+"/?p=233",base+"/2027-suteuk-hwajak-s03b/"]){
   const r=await fetch(url,{redirect:"follow"});
   console.log("public",JSON.stringify({requested:url.replace(base,"<site>"),status:r.status,final:r.url.replace(base,"<site>"),content_type:r.headers.get("content-type")}));
 }
+// trigger inspect
