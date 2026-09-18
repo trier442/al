@@ -292,3 +292,4 @@ if (g1) {
 }
 
 console.log("Header menu cleanup completed successfully.");
+// rerun cleanup after duplicate header menu screenshot 2026-09-18
