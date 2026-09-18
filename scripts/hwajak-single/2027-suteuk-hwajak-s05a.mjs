@@ -5,7 +5,8 @@ const target=path.join('wordpress-content','2027-suteuk-hwajak-s05a.html');
 if(!fs.existsSync(target)) throw new Error(`target not found: ${target}`);
 let html=fs.readFileSync(target,'utf8');
 
-html=html.replace(/<!-- post_id: \d+ -->/,'<!-- post_id: 0 -->');
+if (/<!-- post_id: \\d+ -->/.test(html)) html=html.replace(/<!-- post_id: \\d+ -->/,'<!-- post_id: 3265 -->');
+else html=html.replace(/<!-- revision: \\d+ -->/,m=>m+'\\n<!-- post_id: 3265 -->');
 html=html.replace(/<!-- revision: \d+ -->/,'<!-- revision: 3 -->');
 html=html.replace(/<!-- excerpt: [\s\S]*? -->/,'<!-- excerpt: 2027 수능특강 화법과 작문 화법 5강 전반 「건축물의 내진 설계」의 내진·면진·제진 구조 원리와 장단점, EBS 01~03번 판단 원리, 수능형 변형문제 10제를 원문 없이도 이해할 수 있도록 정리했습니다. -->');
 
