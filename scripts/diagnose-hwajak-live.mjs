@@ -50,9 +50,8 @@ async function xmlrpcPublish(id){
   const t=await r.text();
   console.log("XMLRPC_PUBLISH",id,"HTTP",r.status,t.slice(0,600).replace(/\\s+/g," "));
 }
-await xmlrpcPublish(3265);
-const xr=await j(base+"/wp-json/wp/v2/posts/3265?context=edit");
-if(xr.ok){
-  const p=xr.data; const f=await front(p.link);
-  console.log("AFTER_XMLRPC_3265",JSON.stringify({status:p.status,slug:p.slug,title:p.title?.rendered,link:p.link,front:f}));
-}else console.log("AFTER_XMLRPC_3265_REST",xr.status,xr.data?.message||xr.error||"");
+
+const plugins=await j(base+"/wp-json/wp/v2/plugins?context=edit&status=active&per_page=100");
+if(plugins.ok) console.log("ACTIVE_PLUGINS",JSON.stringify(plugins.data.map(p=>({plugin:p.plugin,status:p.status,name:p.name})))); else console.log("ACTIVE_PLUGINS_ERR",plugins.status,plugins.data?.message||plugins.error||"");
+const settings=await j(base+"/wp-json/wp/v2/settings");
+if(settings.ok) console.log("SETTINGS",JSON.stringify({title:settings.data.title,url:settings.data.url,timezone:settings.data.timezone,date_format:settings.data.date_format,time_format:settings.data.time_format})); else console.log("SETTINGS_ERR",settings.status,settings.data?.message||settings.error||"");
