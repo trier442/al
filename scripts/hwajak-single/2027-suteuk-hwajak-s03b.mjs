@@ -4,7 +4,7 @@ import path from 'node:path';
 const target=path.join('wordpress-content','2027-suteuk-hwajak-s03b.html');
 if(!fs.existsSync(target)) throw new Error(`target not found: ${target}`);
 let html=fs.readFileSync(target,'utf8');
-html=html.replace(/<!-- post_id: \\d+ -->/,'<!-- post_id: 0 -->');
+html=html.replace(/<!-- post_id: \d+ -->/,'<!-- post_id: 0 -->');
 
 const esc=(s='')=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const blank=(answer)=>`<button type="button" class="keyblank" aria-pressed="false" aria-label="핵심어 빈칸: 클릭하여 정답 보기"><span class="kb-mask">${'□'.repeat(Math.max(4,Math.min(12,[...answer].length)))}</span><span class="kb-answer" hidden>${esc(answer)}</span></button>`;
