@@ -84,3 +84,4 @@ html=html.slice(0,qs0)+qs+html.slice(end);
 html=html.replace(/EBS 교재 \d+번과 관련하여 /g,'').replace(/EBS 교재 \d+번의 /g,'');
 fs.writeFileSync(target,html,'utf8');
 console.log('eco packaging mock interview single-page patch complete');
+// republish after permalink/status fix
