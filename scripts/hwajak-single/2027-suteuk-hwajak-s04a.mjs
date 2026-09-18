@@ -5,7 +5,7 @@ const target=path.join('wordpress-content','2027-suteuk-hwajak-s04a.html');
 if(!fs.existsSync(target)) throw new Error(`target not found: ${target}`);
 let html=fs.readFileSync(target,'utf8');
 
-html=html.replace(/<!-- post_id: \d+ -->/,'<!-- post_id: 0 -->');
+html=html.replace(/<!-- post_id: \d+ -->/,'<!-- post_id: 240 -->');
 html=html.replace(/<!-- revision: \d+ -->/,'<!-- revision: 3 -->');
 html=html.replace(/<!-- excerpt: [\s\S]*? -->/,'<!-- excerpt: 2027 수능특강 화법과 작문 화법 4강 전반 「학생회장 당선 연설」의 전체 흐름, EBS 01~03번 판단 원리와 오답 근거, 클릭형 핵심 빈칸 15개, 출제 포인트 10개, 수능형 변형문제 10제를 원문 없이도 이해할 수 있도록 정리했습니다. -->');
 
