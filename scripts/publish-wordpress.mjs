@@ -287,6 +287,21 @@ async function publish(file) {
   if (!existing.length) {
     existing = await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit&status=any`);
   }
+  if (!existing.length && meta.type === "posts") {
+    const coreSearch = meta.title
+      .replace(/^\[[^\]]+\]\s*/, "")
+      .replace(/\s*해설\s*및\s*변형문제.*$/u, "")
+      .trim();
+    if (coreSearch) {
+      const candidates = await wpFetch(`${endpoint}?search=${encodeURIComponent(coreSearch)}&context=edit&status=any&per_page=20`);
+      const coreKey = coreSearch.replace(/\s+/g, "");
+      const matched = candidates.find(item => String(item?.title?.rendered || "").replace(/<[^>]+>/g, "").replace(/\s+/g, "").includes(coreKey));
+      if (matched) {
+        existing = [matched];
+        console.log(`제목 검색으로 기존 글 확인: post_id=${matched.id}, status=${matched.status}, search=${coreSearch}`);
+      }
+    }
+  }
 
   const isExisting = existing.length > 0;
   const target = isExisting ? `${endpoint}/${existing[0].id}` : endpoint;
