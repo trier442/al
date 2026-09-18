@@ -25,13 +25,16 @@ if(hasClassic){
   const items=await req("/wp-json/wp/v2/menu-items?per_page=100&context=edit&orderby=menu_order&order=asc");
   const byMenu=new Map();
   for(const it of items){
-    for(const mid of (it.menus||[])){
-      if(!byMenu.has(mid)) byMenu.set(mid,[]);
-      byMenu.get(mid).push(it);
+    const mids=Array.isArray(it.menus)?it.menus:[it.menus].filter(Boolean);
+    for(const mid of mids){
+      if(!byMenu.has(Number(mid))) byMenu.set(Number(mid),[]);
+      byMenu.get(Number(mid)).push(it);
     }
   }
+  const targets=menus.filter(m=>Array.isArray(m.locations)&&m.locations.includes("primary"));
+  if(!targets.length) throw new Error("primary 위치에 연결된 메뉴를 찾지 못했습니다.");
   let deleted=0;
-  for(const menu of menus){
+  for(const menu of targets){
     const arr=byMenu.get(menu.id)||[];
     const top=arr.filter(x=>Number(x.parent||0)===0).sort((a,b)=>(a.menu_order??0)-(b.menu_order??0)||a.id-b.id);
     console.log("before top menu",menu.id,top.map(x=>({id:x.id,title:plain(x.title?.raw||x.title?.rendered),url:x.url,order:x.menu_order})));
@@ -48,7 +51,7 @@ if(hasClassic){
   }
   console.log("deleted duplicates:",deleted);
   const after=await req("/wp-json/wp/v2/menu-items?per_page=100&context=edit&orderby=menu_order&order=asc");
-  console.log("remaining top:",after.filter(x=>Number(x.parent||0)===0).map(x=>({id:x.id,title:plain(x.title?.raw||x.title?.rendered),url:x.url,menus:x.menus,order:x.menu_order})));
+  console.log("remaining top:",after.filter(x=>Number(x.parent||0)===0 && (Array.isArray(x.menus)?x.menus.map(Number).includes(targets[0].id):Number(x.menus)===targets[0].id)).map(x=>({id:x.id,title:plain(x.title?.raw||x.title?.rendered),url:x.url,menus:x.menus,order:x.menu_order})));
   process.exit(0);
 }
 
