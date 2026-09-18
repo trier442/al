@@ -111,6 +111,8 @@ try{
     }
   }
 
+  await updatePost(240,path.join("wordpress-content","2027-suteuk-hwajak-s04a.html"),"2027-suteuk-hwajak-s04a");
+  await updatePost(245,path.join("wordpress-content","2027-suteuk-hwajak-s04b.html"),"2027-suteuk-hwajak-s04b");
   await updatePost(3265,path.join("wordpress-content","2027-suteuk-hwajak-s05a.html"),"2027-suteuk-hwajak-s05a");
   await updatePost(3266,path.join("wordpress-content","2027-suteuk-hwajak-s05b.html"),"2027-suteuk-hwajak-s05b");
 } finally {
