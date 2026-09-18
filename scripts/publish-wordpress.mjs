@@ -231,17 +231,15 @@ async function publish(file) {
 
   const isExisting = existing.length > 0;
   const target = isExisting ? `${endpoint}/${existing[0].id}` : endpoint;
-  const payload = meta.post_id
-    ? { content: rawContent }
-    : {
-        title: meta.title,
-        slug: meta.slug,
-        status: meta.status,
-        content: rawContent,
-      };
+  const payload = {
+    title: meta.title,
+    slug: meta.slug,
+    status: meta.status,
+    content: rawContent,
+  };
 
-  if (!meta.post_id && meta.excerpt) payload.excerpt = meta.excerpt;
-  if (!meta.post_id && meta.type === "posts" && meta.categories.length) payload.categories = meta.categories;
+  if (meta.excerpt) payload.excerpt = meta.excerpt;
+  if (meta.type === "posts" && meta.categories.length) payload.categories = meta.categories;
 
   const result = await wpFetch(target, {
     method: "POST",
