@@ -5,7 +5,7 @@ const target=path.join('wordpress-content','2027-suteuk-hwajak-s04b.html');
 if(!fs.existsSync(target)) throw new Error(`target not found: ${target}`);
 let html=fs.readFileSync(target,'utf8');
 
-html=html.replace(/<!-- post_id: \d+ -->/,'<!-- post_id: 0 -->');
+html=html.replace(/<!-- post_id: \d+ -->/,'<!-- post_id: 245 -->');
 html=html.replace(/<!-- revision: \d+ -->/,'<!-- revision: 3 -->');
 html=html.replace(/<!-- excerpt: [\s\S]*? -->/,'<!-- excerpt: 2027 수능특강 화법과 작문 화법 4강 후반 「공유 자전거 관리 실태 발표 준비」의 대화 맥락, 역할 분담, 조사 자료의 한계와 EBS 04~06번 판단 원리를 원문 없이도 이해하도록 정리하고 수능형 변형문제 10제를 수록했습니다. -->');
 
