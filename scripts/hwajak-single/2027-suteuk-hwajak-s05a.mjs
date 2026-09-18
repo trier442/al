@@ -176,3 +176,5 @@ fs.writeFileSync(target,html,'utf8');
 console.log('earthquake resistant building design single-page patch complete');
 
 // republish modukorean 2026-09-18 2027-suteuk-hwajak-s05a.mjs
+
+// title lookup retry 4
