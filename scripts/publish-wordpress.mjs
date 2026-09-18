@@ -38,31 +38,43 @@ const auth = "Basic " + Buffer.from(`${wpUsername}:${wpPassword}`).toString("bas
 const requestTimeoutMs = Math.max(10000, Number(process.env.WP_REQUEST_TIMEOUT_MS || 65000));
 
 async function wpFetch(url, options = {}) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(new Error(`WordPress 요청 제한 시간 ${requestTimeoutMs}ms 초과`)), requestTimeoutMs);
-  try {
-    const response = await fetch(url, {
-      ...options,
-      signal: options.signal || controller.signal,
-      headers: {
-        Authorization: auth,
-        "Connection": "close",
-        ...(options.headers || {}),
-      },
-    });
-    const text = await response.text();
-    let data;
-    try { data = text ? JSON.parse(text) : {}; } catch { data = { message: text }; }
-    if (!response.ok) {
-      const detail = data && !Array.isArray(data) && data.message
-        ? `${data.code ? `${data.code}: ` : ""}${data.message}`
-        : text.slice(0, 2000);
-      throw new Error(`WordPress ${response.status}: ${detail}`);
+  let lastError;
+  for (let attempt = 1; attempt <= 4; attempt++) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(new Error(`WordPress 요청 제한 시간 ${requestTimeoutMs}ms 초과`)), requestTimeoutMs);
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: options.signal || controller.signal,
+        headers: {
+          Authorization: auth,
+          "Connection": "close",
+          ...(options.headers || {}),
+        },
+      });
+      const text = await response.text();
+      let data;
+      try { data = text ? JSON.parse(text) : {}; } catch { data = { message: text }; }
+      if (!response.ok) {
+        const detail = data && !Array.isArray(data) && data.message
+          ? `${data.code ? `${data.code}: ` : ""}${data.message}`
+          : text.slice(0, 2000);
+        const error = new Error(`WordPress ${response.status}: ${detail}`);
+        error.status = response.status;
+        throw error;
+      }
+      return data;
+    } catch (error) {
+      lastError = error;
+      const status = Number(error?.status || 0);
+      if (status >= 400 && status < 500 && status !== 408 && status !== 429) throw error;
+      console.warn(`WordPress 요청 재시도 ${attempt}/4: ${error.message}`);
+      if (attempt < 4) await new Promise(resolve => setTimeout(resolve, 1500 * attempt));
+    } finally {
+      clearTimeout(timeout);
     }
-    return data;
-  } finally {
-    clearTimeout(timeout);
   }
+  throw lastError;
 }
 
 async function logAuthCapabilities() {
@@ -239,17 +251,17 @@ async function publish(file) {
     }
   }
   if (!existing.length) {
-    existing = await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit`);
+    existing = await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit&status=any`);
   }
 
   const isExisting = existing.length > 0;
   const target = isExisting ? `${endpoint}/${existing[0].id}` : endpoint;
   const payload = {
     title: meta.title,
-    slug: meta.slug,
     status: meta.status,
     content: rawContent,
   };
+  if (!isExisting) payload.slug = meta.slug;
 
   if (meta.excerpt) payload.excerpt = meta.excerpt;
   if (meta.type === "posts" && meta.categories.length) payload.categories = meta.categories;
@@ -261,9 +273,24 @@ async function publish(file) {
   });
 
   const postId = Number(result.id || existing[0]?.id) || 0;
-  console.log(`${isExisting ? "갱신" : "생성"}: ${result.link} [${meta.status}]`);
+  let verified = result;
+  if (postId && meta.status === "publish" && result.status !== "publish") {
+    console.warn(`첫 저장 결과가 ${result.status || "unknown"} 상태여서 publish 상태를 다시 요청합니다: post_id=${postId}`);
+    verified = await wpFetch(`${endpoint}/${postId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({ status: "publish" }),
+    });
+  }
+  if (postId) {
+    verified = await wpFetch(`${endpoint}/${postId}?context=edit`);
+  }
+  if (meta.status === "publish" && verified.status !== "publish") {
+    throw new Error(`게시 상태 검증 실패: post_id=${postId}, 요청=publish, 실제=${verified.status || "unknown"}`);
+  }
+  console.log(`${isExisting ? "갱신" : "생성"}: ${verified.link || result.link} [${verified.status || result.status || meta.status}] post_id=${postId}`);
 
-  const existingFeatured = Number(result.featured_media || existing[0]?.featured_media) || 0;
+  const existingFeatured = Number(verified.featured_media || result.featured_media || existing[0]?.featured_media) || 0;
   const needsFeaturedImage = Boolean(meta.featured_image) && !existingFeatured && postId;
   if (!needsFeaturedImage) return;
 
