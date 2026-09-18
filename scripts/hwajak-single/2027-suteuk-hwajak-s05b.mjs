@@ -179,3 +179,5 @@ console.log('choice paradox wise choice speech single-page patch complete');
 // republish modukorean 2026-09-18 2027-suteuk-hwajak-s05b.mjs
 
 // publish fallback retry 3
+
+// republish diagnostics 2026-09-18
