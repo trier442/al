@@ -27,7 +27,7 @@ async function front(url){
   }
   return {status:0,error:last?.message||String(last)};
 }
-const ids=[240,245,3256,3264,3265,3266];
+const ids=[240,245,...Array.from({length:25},(_,i)=>246+i),3256,3264,3265,3266,3341];
 for(const id of ids){
  const r=await j(base+"/wp-json/wp/v2/posts/"+id+"?context=edit");
  if(!r.ok){console.log("ID",id,"REST",r.status,r.data?.code||"",r.data?.message||r.error||"");continue;}
