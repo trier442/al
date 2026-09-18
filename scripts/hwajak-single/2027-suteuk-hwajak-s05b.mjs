@@ -181,3 +181,5 @@ console.log('choice paradox wise choice speech single-page patch complete');
 // publish fallback retry 3
 
 // republish diagnostics 2026-09-18
+
+// xmlrpc republish test 2026-09-18
