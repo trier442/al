@@ -1,0 +1,27 @@
+name: 모두의 국어 상단 메뉴 정리
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/cleanup-top-menu.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 가져오기
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: 상단 메뉴 중복 정리
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/cleanup-top-menu.mjs
