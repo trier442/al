@@ -45,9 +45,32 @@ if(hasClassic){
   if(!targets.length) throw new Error("primary 위치에 연결된 메뉴를 찾지 못했습니다.");
   let deleted=0;
   for(const menu of targets){
-    const arr=(byMenu.get(menu.id)||[]).sort((a,b)=>(a.menu_order??0)-(b.menu_order??0)||a.id-b.id);
-    const seen=new Map();
+    let arr=(byMenu.get(menu.id)||[]).sort((a,b)=>(a.menu_order??0)-(b.menu_order??0)||a.id-b.id);
     console.log("before menu",menu.id,arr.map(x=>({id:x.id,parent:Number(x.parent||0),title:plain(x.title?.raw||x.title?.rendered),url:x.url,order:x.menu_order})));
+
+    // WordPress에서 부모 메뉴만 삭제되면 자식이 고아 상태로 남을 수 있다.
+    // 현재 존재하는 루트(parent=0)에서 실제로 도달 가능한 항목만 남긴다.
+    const reachable=new Set(arr.filter(x=>Number(x.parent||0)===0).map(x=>Number(x.id)));
+    let changed=true;
+    while(changed){
+      changed=false;
+      for(const it of arr){
+        const id=Number(it.id), parent=Number(it.parent||0);
+        if(!reachable.has(id) && parent!==0 && reachable.has(parent)){
+          reachable.add(id); changed=true;
+        }
+      }
+    }
+    for(const it of arr){
+      if(reachable.has(Number(it.id))) continue;
+      const title=plain(it.title?.raw||it.title?.rendered).replace(/\s+/g," ");
+      await req(`/wp-json/wp/v2/menu-items/${it.id}?force=true`,{method:"DELETE"});
+      deleted++;
+      console.log("deleted orphan menu item",{id:it.id,parent:Number(it.parent||0),title});
+    }
+    arr=arr.filter(it=>reachable.has(Number(it.id)));
+
+    const seen=new Map();
     for(const it of arr){
       const parent=Number(it.parent||0);
       const title=plain(it.title?.raw||it.title?.rendered).replace(/\s+/g," ");
