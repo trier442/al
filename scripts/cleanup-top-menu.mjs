@@ -7,10 +7,20 @@ const base=process.env.WP_URL.replace(/\/$/,"");
 const auth="Basic "+Buffer.from(process.env.WP_USERNAME+":"+process.env.WP_APP_PASSWORD.replace(/\s/g,"")).toString("base64");
 
 async function req(route, options={}){
-  const r=await fetch(base+route,{...options,headers:{Authorization:auth,"Content-Type":"application/json; charset=utf-8",...(options.headers||{})}});
-  const t=await r.text(); let d; try{d=t?JSON.parse(t):{}}catch{d={raw:t}};
-  if(!r.ok) throw new Error(`${route} -> ${r.status} ${JSON.stringify(d).slice(0,1000)}`);
-  return d;
+  let last;
+  for(let attempt=1;attempt<=5;attempt++){
+    try{
+      const r=await fetch(base+route,{...options,headers:{Authorization:auth,"Content-Type":"application/json; charset=utf-8",...(options.headers||{})}});
+      const t=await r.text(); let d; try{d=t?JSON.parse(t):{}}catch{d={raw:t}};
+      if(!r.ok) throw new Error(`${route} -> ${r.status} ${JSON.stringify(d).slice(0,1000)}`);
+      return d;
+    }catch(e){
+      last=e;
+      console.warn("request retry",attempt,route,String(e?.message||e));
+      if(attempt<5) await new Promise(resolve=>setTimeout(resolve,1500*attempt));
+    }
+  }
+  throw last;
 }
 const plain=(v)=>String(v??"").replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&#8211;/g,"–").replace(/&#47;/g,"/").trim();
 
