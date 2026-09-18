@@ -225,9 +225,22 @@ async function publish(file) {
   const meta = parsed.meta;
   const rawContent = injectQuarterAd(stripEbsOriginalQuestions(sanitizeEditorialNotes(parsed.content)));
   const endpoint = `${baseUrl}/wp-json/wp/v2/${meta.type}`;
-  const existing = meta.post_id
-    ? [{ id: meta.post_id }]
-    : await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit`);
+  let existing = [];
+  if (meta.post_id) {
+    try {
+      const byId = await wpFetch(`${endpoint}/${meta.post_id}?context=edit`);
+      if (byId?.id) existing = [byId];
+    } catch (error) {
+      if (/WordPress 404:/.test(String(error?.message || error))) {
+        console.warn(`post_id=${meta.post_id}가 존재하지 않아 slug로 다시 찾습니다: ${meta.slug}`);
+      } else {
+        throw error;
+      }
+    }
+  }
+  if (!existing.length) {
+    existing = await wpFetch(`${endpoint}?slug=${encodeURIComponent(meta.slug)}&context=edit`);
+  }
 
   const isExisting = existing.length > 0;
   const target = isExisting ? `${endpoint}/${existing[0].id}` : endpoint;
