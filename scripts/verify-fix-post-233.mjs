@@ -18,3 +18,5 @@ if(current.status===200){
  const plain=await fetch(base+"/?p=233",{redirect:"manual"});
  console.log("public p233",plain.status,"location",plain.headers.get("location")||"");
 }
+
+// trigger verify
