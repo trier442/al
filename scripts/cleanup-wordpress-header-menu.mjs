@@ -1,3 +1,6 @@
+import dns from "node:dns";
+dns.setDefaultResultOrder("ipv4first");
+
 const required = ["WP_URL", "WP_USERNAME", "WP_APP_PASSWORD"];
 for (const key of required) {
   if (!process.env[key]) throw new Error(`${key} GitHub Secret이 없습니다.`);
@@ -7,20 +10,31 @@ const baseUrl = process.env.WP_URL.replace(/\/$/, "");
 const auth = "Basic " + Buffer.from(`${process.env.WP_USERNAME}:${process.env.WP_APP_PASSWORD.replace(/\s/g, "")}`).toString("base64");
 
 async function request(path, options = {}, { allow404 = false } = {}) {
-  const res = await fetch(`${baseUrl}${path}`, {
-    ...options,
-    headers: {
-      Authorization: auth,
-      "Content-Type": "application/json; charset=utf-8",
-      ...(options.headers || {}),
-    },
-  });
-  const text = await res.text();
-  let data;
-  try { data = text ? JSON.parse(text) : {}; } catch { data = { message: text }; }
-  if (allow404 && res.status === 404) return null;
-  if (!res.ok) throw new Error(`${res.status} ${path}: ${data?.message || text.slice(0, 1000)}`);
-  return data;
+  let lastError;
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    try {
+      const res = await fetch(`${baseUrl}${path}`, {
+        ...options,
+        signal: options.signal || AbortSignal.timeout(65000),
+        headers: {
+          Authorization: auth,
+          "Content-Type": "application/json; charset=utf-8",
+          ...(options.headers || {}),
+        },
+      });
+      const text = await res.text();
+      let data;
+      try { data = text ? JSON.parse(text) : {}; } catch { data = { message: text }; }
+      if (allow404 && res.status === 404) return null;
+      if (!res.ok) throw new Error(`${res.status} ${path}: ${data?.message || text.slice(0, 1000)}`);
+      return data;
+    } catch (error) {
+      lastError = error;
+      console.warn(`request retry ${attempt}/5 ${path}: ${error?.message || error}`);
+      if (attempt < 5) await new Promise(resolve => setTimeout(resolve, 1800 * attempt));
+    }
+  }
+  throw lastError;
 }
 
 function rawTitle(item) {
