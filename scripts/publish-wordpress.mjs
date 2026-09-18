@@ -77,6 +77,40 @@ async function wpFetch(url, options = {}) {
   throw lastError;
 }
 
+function xmlEscape(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+async function xmlrpcPublishPost(postId) {
+  const body = `<?xml version="1.0"?>
+<methodCall>
+  <methodName>wp.editPost</methodName>
+  <params>
+    <param><value><int>0</int></value></param>
+    <param><value><string>${xmlEscape(wpUsername)}</string></value></param>
+    <param><value><string>${xmlEscape(wpPassword)}</string></value></param>
+    <param><value><int>${Number(postId)}</int></value></param>
+    <param><value><struct>
+      <member><name>post_status</name><value><string>publish</string></value></member>
+    </struct></value></param>
+  </params>
+</methodCall>`;
+  const response = await fetch(`${baseUrl}/xmlrpc.php`, {
+    method: "POST",
+    headers: { "Content-Type": "text/xml; charset=utf-8" },
+    body,
+  });
+  const text = await response.text();
+  if (!response.ok || /<fault>/.test(text) || !/<boolean>1<\/boolean>/.test(text)) {
+    throw new Error(`XML-RPC publish 실패: HTTP ${response.status} ${text.slice(0,500)}`);
+  }
+}
+
 async function logAuthCapabilities() {
   try {
     const me = await wpFetch(`${baseUrl}/wp-json/wp/v2/users/me?context=edit`);
@@ -284,6 +318,15 @@ async function publish(file) {
   }
   if (postId) {
     verified = await wpFetch(`${endpoint}/${postId}?context=edit`);
+  }
+  if (meta.status === "publish" && verified.status !== "publish" && postId) {
+    console.warn(`REST publish가 ${verified.status || "unknown"} 상태를 유지하여 XML-RPC publish를 시도합니다: post_id=${postId}`);
+    try {
+      await xmlrpcPublishPost(postId);
+      verified = await wpFetch(`${endpoint}/${postId}?context=edit`);
+    } catch (error) {
+      console.warn(`XML-RPC publish 경고: ${error.message}`);
+    }
   }
   if (meta.status === "publish" && verified.status !== "publish") {
     throw new Error(`게시 상태 검증 실패: post_id=${postId}, 요청=publish, 실제=${verified.status || "unknown"}`);
