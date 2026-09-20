@@ -1,0 +1,42 @@
+name: Repair hwajak W04B live post
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/repair-hwajak-w04b-live.mjs'
+      - 'scripts/hwajak-single/2027-suteuk-hwajak-w04b.mjs'
+      - '.github/workflows/repair-hwajak-w04b-live.yml'
+  workflow_dispatch:
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build current hwajak source
+        run: |
+          node scripts/standardize-hwajak-pages.mjs
+          node scripts/fix-hwajak-pages.mjs
+          if [ -d scripts/hwajak-overrides ]; then
+            for OVERRIDE in scripts/hwajak-overrides/2027-suteuk-hwajak-*.html; do
+              [ -e "$OVERRIDE" ] || continue
+              cp "$OVERRIDE" "wordpress-content/$(basename "$OVERRIDE")"
+            done
+          fi
+          node scripts/apply-hwajak-text-patches.mjs
+          for PATCH in scripts/hwajak-single/*.mjs; do
+            [ -e "$PATCH" ] || continue
+            node "$PATCH"
+          done
+      - name: Validate W04B
+        run: node scripts/validate-hwajak-single.mjs wordpress-content/2027-suteuk-hwajak-w04b.html
+      - name: Repair WordPress publication
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/repair-hwajak-w04b-live.mjs
