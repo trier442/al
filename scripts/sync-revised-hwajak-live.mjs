@@ -125,7 +125,7 @@ try{
 
   const byId=new Map(posts.map(p=>[p.id,p]));
   const keepIds=new Set();
-  const now=Date.now();
+  const safeBase=Date.parse("2026-09-21T20:00:00+09:00");
 
   for(let i=0;i<pages.length;i++){
     const p=pages[i];
@@ -135,7 +135,7 @@ try{
       .sort((a,b)=>(a.slug===p.slug?-1:0)-(b.slug===p.slug?-1:0)||a.id-b.id);
     let chosen=candidates.find(x=>x.slug===p.slug)||candidates[0]||null;
 
-    const publishDate=new Date(now-(pages.length-i)*60000).toISOString().slice(0,19);
+    const publishDate=new Date(safeBase+i*60000+9*60*60*1000).toISOString().slice(0,19);
     const body={
       title:p.title,
       content:p.content,
@@ -182,7 +182,7 @@ try{
 
   let indexCandidates=currentPosts.filter(x=>x.slug===INDEX_SLUG || plain(x.title?.rendered||"")===INDEX_TITLE);
   let index=indexCandidates.find(x=>x.slug===INDEX_SLUG)||indexCandidates[0]||null;
-  const indexBody={title:INDEX_TITLE,slug:INDEX_SLUG,status:"publish",categories:[CATEGORY_ID],content:indexContent,excerpt:"2027 수능특강 화법과 작문에서 새로 검수·제작한 화법·작문 자료만 모아 보는 통합 목록입니다.",date:new Date(now+60000).toISOString().slice(0,19)};
+  const indexBody={title:INDEX_TITLE,slug:INDEX_SLUG,status:"publish",categories:[CATEGORY_ID],content:indexContent,excerpt:"2027 수능특강 화법과 작문에서 새로 검수·제작한 화법·작문 자료만 모아 보는 통합 목록입니다.",date:"2026-09-21T20:30:00"};
   if(index){
     index=await updatePost(index.id,indexBody);
     console.log("INDEX_UPDATED",index.id,index.slug,index.link);
