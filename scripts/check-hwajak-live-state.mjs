@@ -8,3 +8,5 @@ for(const status of ["publish","future","draft","pending","private","trash"]){
   console.log("STATE",status,JSON.stringify(rows.map(x=>({id:x.id,slug:x.slug,title:String(x.title?.rendered||"").replace(/<[^>]+>/g,""),date:x.date,status:x.status}))));
  }catch(e){console.log("STATE_FAIL",status,e.message)}
 }
+
+// state check after revised publish retry 2026-09-21T13:23Z
