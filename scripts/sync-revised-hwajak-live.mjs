@@ -125,7 +125,7 @@ try{
 
   const byId=new Map(posts.map(p=>[p.id,p]));
   const keepIds=new Set();
-  const safeBase=Date.parse("2026-09-21T20:00:00+09:00");
+  const safeBase=Date.parse("2026-09-20T00:00:00Z");
 
   for(let i=0;i<pages.length;i++){
     const p=pages[i];
@@ -182,7 +182,7 @@ try{
 
   let indexCandidates=currentPosts.filter(x=>x.slug===INDEX_SLUG || plain(x.title?.rendered||"")===INDEX_TITLE);
   let index=indexCandidates.find(x=>x.slug===INDEX_SLUG)||indexCandidates[0]||null;
-  const indexBody={title:INDEX_TITLE,slug:INDEX_SLUG,status:"publish",categories:[CATEGORY_ID],content:indexContent,excerpt:"2027 수능특강 화법과 작문에서 새로 검수·제작한 화법·작문 자료만 모아 보는 통합 목록입니다.",date:"2026-09-21T20:30:00"};
+  const indexBody={title:INDEX_TITLE,slug:INDEX_SLUG,status:"publish",categories:[CATEGORY_ID],content:indexContent,excerpt:"2027 수능특강 화법과 작문에서 새로 검수·제작한 화법·작문 자료만 모아 보는 통합 목록입니다.",date:"2026-09-20T10:00:00"};
   if(index){
     index=await updatePost(index.id,indexBody);
     console.log("INDEX_UPDATED",index.id,index.slug,index.link);
