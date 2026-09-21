@@ -22,3 +22,12 @@ try{
   }
   console.log("FRONT_CHECKS",JSON.stringify(checks));
 }catch(e){console.log("FRONT_CHECKS_FAIL",e.message)}
+
+try{
+  const settings=await req(base+"/wp-json/wp/v2/settings?context=edit");
+  console.log("FRONT_SETTINGS",JSON.stringify({show_on_front:settings.show_on_front,page_on_front:settings.page_on_front,page_for_posts:settings.page_for_posts,permalink_structure:settings.permalink_structure}));
+  if(settings.page_on_front){
+    const page=await req(base+"/wp-json/wp/v2/pages/"+settings.page_on_front+"?context=edit");
+    console.log("FRONT_PAGE",JSON.stringify({id:page.id,slug:page.slug,title:page.title?.raw||page.title?.rendered,content:(page.content?.raw||page.content?.rendered||"").slice(0,20000)}));
+  }
+}catch(e){console.log("FRONT_SETTINGS_FAIL",e.message)}
