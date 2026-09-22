@@ -27,16 +27,9 @@ function parseFile(file){
   const raw=fs.readFileSync(file,"utf8"),meta={};
   const pattern=/<!--\s*(title|slug|status|type|categories|revision|excerpt|featured_image|post_id)\s*:\s*(.*?)\s*-->/g;
   let m; while((m=pattern.exec(raw))) meta[m[1]]=m[2].trim();
-  return {file,title:meta.title||"",slug:meta.slug||path.basename(file,".html"),status:meta.status||"publish",type:meta.type||"post",excerpt:meta.excerpt||"",categories:(meta.categories||"").split(",").map(s=>Number(s.trim())).filter(n=>Number.isInteger(n)&&n>0),content:raw.replace(pattern,"").trim()};
+  return {file,title:meta.title||"",slug:meta.slug||path.basename(file,".html"),excerpt:meta.excerpt||"",categories:(meta.categories||"").split(",").map(s=>Number(s.trim())).filter(n=>Number.isInteger(n)&&n>0),content:raw.replace(pattern,"").trim()};
 }
 function plain(s=""){return String(s).replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&#8211;|&#8212;/g,"-").replace(/\s+/g," ").trim();}
-
-const sourceDir="wordpress-content";
-const sources=fs.readdirSync(sourceDir).filter(n=>/^2027-suteuk-hwajak-(?!index).*\.html$/.test(n)).sort().map(n=>parseFile(path.join(sourceDir,n)));
-const indexFile=path.join(sourceDir,"2027-suteuk-hwajak-index.html");
-if(fs.existsSync(indexFile)) sources.unshift(parseFile(indexFile));
-const canonical=new Set(sources.map(s=>s.slug));
-
 async function fetchAll(status){
   const out=[];
   for(let page=1;page<=30;page++){
@@ -52,54 +45,90 @@ async function fetchAll(status){
   }
   return out;
 }
-const all=[];
-for(const status of ["publish","draft","pending","private","future"]){
-  for(const row of await fetchAll(status)) if(!all.some(x=>x.id===row.id)) all.push(row);
+async function pluginStatus(plugin,status){
+  const {data}=await wp(base+"/wp-json/wp/v2/plugins/"+plugin,{method:"POST",headers:{"Content-Type":"application/json; charset=utf-8"},body:JSON.stringify({status})});
+  return data;
 }
-const legacy=all.filter(x=>{
-  const slug=String(x.slug||"");
-  const title=plain(x?.title?.rendered||"");
-  return slug.startsWith("2027-suteuk-hwajak-") || title.includes("2027 수능특강 화법과 작문");
-});
 
-const bySlug=new Map(legacy.map(x=>[x.slug,x]));
-let updated=0,created=0,trashed=0;
+const sourceDir="wordpress-content";
+const sources=fs.readdirSync(sourceDir).filter(n=>/^2027-suteuk-hwajak-(?!index).*\.html$/.test(n)).sort().map(n=>parseFile(path.join(sourceDir,n)));
+const indexFile=path.join(sourceDir,"2027-suteuk-hwajak-index.html");
+if(fs.existsSync(indexFile)) sources.unshift(parseFile(indexFile));
+const canonical=new Set(sources.map(s=>s.slug));
 
-for(const s of sources){
-  let chosen=bySlug.get(s.slug) || legacy.find(x=>plain(x?.title?.rendered||"")===plain(s.title) && x.status==="publish") || legacy.find(x=>plain(x?.title?.rendered||"")===plain(s.title));
-  const body={title:s.title,content:s.content,excerpt:s.excerpt,categories:s.categories,status:"publish",slug:s.slug};
-  let result;
-  if(chosen){
-    ({data:result}=await wp(base+"/wp-json/wp/v2/posts/"+chosen.id,{method:"POST",headers:{"Content-Type":"application/json; charset=utf-8"},body:JSON.stringify(body)}));
-    updated++;
-    chosen=result;
-  }else{
-    ({data:result}=await wp(base+"/wp-json/wp/v2/posts",{method:"POST",headers:{"Content-Type":"application/json; charset=utf-8"},body:JSON.stringify(body)}));
-    created++;
-    chosen=result;
+const pluginIds=["modu-hwajak-unit-editor/modu-hwajak-unit-editor","modu-hwajak-quality-rebuilder/modu-hwajak-quality-rebuilder"];
+const activeBefore=new Map();
+for(const id of pluginIds){
+  try{
+    const {data}=await wp(base+"/wp-json/wp/v2/plugins/"+id);
+    activeBefore.set(id,data.status==="active");
+    console.log("PLUGIN_BEFORE",id,data.status);
+  }catch(e){activeBefore.set(id,false);console.warn("PLUGIN_READ_FAIL",id,e.message);}
+}
+
+let updated=0,created=0,trashed=0,verified=0;
+try{
+  for(const id of pluginIds){
+    if(activeBefore.get(id)){
+      const x=await pluginStatus(id,"inactive");
+      console.log("PLUGIN_TEMP",id,x.status);
+    }
   }
-  bySlug.set(s.slug,chosen);
-  console.log("SYNCED",chosen.id,s.slug,chosen.status);
-}
 
-const refreshed=[];
-for(const status of ["publish","draft","pending","private","future"]){
-  for(const row of await fetchAll(status)) if(!refreshed.some(x=>x.id===row.id)) refreshed.push(row);
-}
-for(const x of refreshed){
-  const slug=String(x.slug||"");
-  const title=plain(x?.title?.rendered||"");
-  const is2027Hwajak=slug.startsWith("2027-suteuk-hwajak-") || title.includes("2027 수능특강 화법과 작문");
-  if(!is2027Hwajak || canonical.has(slug)) continue;
-  const {data:r}=await wp(base+"/wp-json/wp/v2/posts/"+x.id,{method:"POST",headers:{"Content-Type":"application/json; charset=utf-8"},body:JSON.stringify({status:"trash"})});
-  trashed++;
-  console.log("TRASHED_OLD",x.id,slug,plain(r?.title?.rendered||title));
-}
+  const all=[];
+  for(const status of ["publish","draft","pending","private","future"]){
+    for(const row of await fetchAll(status)) if(!all.some(x=>x.id===row.id)) all.push(row);
+  }
+  const legacy=all.filter(x=>{
+    const slug=String(x.slug||"");
+    const title=plain(x?.title?.rendered||"");
+    return slug.startsWith("2027-suteuk-hwajak-") || title.includes("2027 수능특강 화법과 작문");
+  });
+  const bySlug=new Map(legacy.map(x=>[x.slug,x]));
 
-const verify=[];
-for(const slug of canonical){
-  const {data}=await wp(base+`/wp-json/wp/v2/posts?context=edit&slug=${encodeURIComponent(slug)}&status=publish`);
-  if(!Array.isArray(data)||data.length!==1) throw new Error("canonical publish verify failed: "+slug+" count="+(Array.isArray(data)?data.length:"?"));
-  verify.push({id:data[0].id,slug:data[0].slug,link:data[0].link});
+  for(const s of sources){
+    let chosen=bySlug.get(s.slug) || legacy.find(x=>plain(x?.title?.rendered||"")===plain(s.title) && x.status==="publish") || legacy.find(x=>plain(x?.title?.rendered||"")===plain(s.title));
+    const body={title:s.title,content:s.content,excerpt:s.excerpt,categories:s.categories,status:"publish",slug:s.slug};
+    let result;
+    if(chosen){
+      ({data:result}=await wp(base+"/wp-json/wp/v2/posts/"+chosen.id,{method:"POST",headers:{"Content-Type":"application/json; charset=utf-8"},body:JSON.stringify(body)}));
+      updated++;
+    }else{
+      ({data:result}=await wp(base+"/wp-json/wp/v2/posts",{method:"POST",headers:{"Content-Type":"application/json; charset=utf-8"},body:JSON.stringify(body)}));
+      created++;
+    }
+    if(result.status!=="publish") throw new Error(`publish blocked for ${s.slug}: ${result.status}`);
+    bySlug.set(s.slug,result);
+    console.log("SYNCED",result.id,s.slug,result.status);
+  }
+
+  const refreshed=[];
+  for(const status of ["publish","draft","pending","private","future"]){
+    for(const row of await fetchAll(status)) if(!refreshed.some(x=>x.id===row.id)) refreshed.push(row);
+  }
+  for(const x of refreshed){
+    const slug=String(x.slug||"");
+    const title=plain(x?.title?.rendered||"");
+    const is2027Hwajak=slug.startsWith("2027-suteuk-hwajak-") || title.includes("2027 수능특강 화법과 작문");
+    if(!is2027Hwajak || canonical.has(slug)) continue;
+    await wp(base+"/wp-json/wp/v2/posts/"+x.id,{method:"DELETE"});
+    trashed++;
+    console.log("TRASHED_OLD",x.id,slug,title);
+  }
+
+  for(const slug of canonical){
+    const {data}=await wp(base+`/wp-json/wp/v2/posts?context=edit&slug=${encodeURIComponent(slug)}&status=publish`);
+    if(!Array.isArray(data)||data.length!==1) throw new Error("canonical publish verify failed: "+slug+" count="+(Array.isArray(data)?data.length:"?"));
+    verified++;
+  }
+} finally {
+  for(const id of pluginIds){
+    if(activeBefore.get(id)){
+      try{
+        const x=await pluginStatus(id,"active");
+        console.log("PLUGIN_RESTORED",id,x.status);
+      }catch(e){console.error("PLUGIN_RESTORE_FAIL",id,e.message);}
+    }
+  }
 }
-console.log("SYNC_HWJAK_ALL_OK",JSON.stringify({sources:sources.length,updated,created,trashed,verified:verify.length,index:verify.find(x=>x.slug==="2027-suteuk-hwajak-index")||null}));
+console.log("SYNC_HWJAK_ALL_OK",JSON.stringify({sources:sources.length,updated,created,trashed,verified}));
