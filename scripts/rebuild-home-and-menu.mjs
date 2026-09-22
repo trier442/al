@@ -82,9 +82,12 @@ const homeUpdated=await wp("/wp/v2/pages/9",{method:"POST",headers:{"Content-Typ
 
 // Create or reset clean primary menu
 let menus=await wp("/wp/v2/menus?search="+encodeURIComponent("모두의 국어")+"&per_page=50");
-let menu=Array.isArray(menus)&&menus.find(x=>["modu-main-nav","modu-reviewed-main"].includes(x.slug));
-if(!menu) menu=await wp("/wp/v2/menus",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:"모두의 국어 메인 내비게이션",slug:"modu-main-nav"})});
-else menu=await wp("/wp/v2/menus/"+menu.id,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:"모두의 국어 메인 내비게이션",slug:"modu-main-nav"})});
+let menu=Array.isArray(menus)&&(
+  menus.find(x=>x.slug==="modu-main-nav") ||
+  menus.find(x=>x.name==="모두의 국어 메인 내비게이션") ||
+  menus.find(x=>x.slug==="modu-reviewed-main")
+);
+if(!menu) menu=await wp("/wp/v2/menus",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:"모두의 국어 메인 메뉴 2026",slug:"modu-main-2026"})});
 const oldItems=await wp("/wp/v2/menu-items?menus="+menu.id+"&context=edit&per_page=100");
 if(Array.isArray(oldItems)) for(const x of oldItems) await wp("/wp/v2/menu-items/"+x.id+"?force=true",{method:"DELETE"});
 
