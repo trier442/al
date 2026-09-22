@@ -1,0 +1,19 @@
+name: Quick probe common1 links
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/quick-probe-common1.mjs'
+      - '.github/workflows/quick-probe-common1.yml'
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Probe
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+        run: node scripts/quick-probe-common1.mjs
