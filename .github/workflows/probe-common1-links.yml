@@ -1,0 +1,19 @@
+name: Probe common1 old links
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/probe-common1-links.mjs'
+      - '.github/workflows/probe-common1-links.yml'
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Probe
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+        run: node scripts/probe-common1-links.mjs
