@@ -1,0 +1,21 @@
+name: Inspect WordPress front page
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/inspect-front-page.mjs'
+      - '.github/workflows/inspect-front-page.yml'
+  workflow_dispatch:
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Inspect
+        env:
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: node scripts/inspect-front-page.mjs
